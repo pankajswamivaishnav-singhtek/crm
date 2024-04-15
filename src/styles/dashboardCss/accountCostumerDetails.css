@@ -1,0 +1,28 @@
+.account_view_details_main_container {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.account_view_details_Row {
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(229, 235, 249, 1);
+  box-shadow: 2px 3px 30px 0px rgba(64, 123, 255, 0.12);
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 1025px) {
+  .account_view_details_table {
+    padding-right: 40px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .account_view_details_table {
+    width: 100%;
+  }
+}
+
+.account_view_details_table td {
+  text-align: end !important;
+}

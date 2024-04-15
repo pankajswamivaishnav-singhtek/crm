@@ -1,0 +1,202 @@
+.sidebar_container_fluid {
+  max-height: calc(100vh - 7vh);
+  /* overflow-y: auto; */
+}
+.sidebar_container {
+  max-height: calc(100vh - 7vh);
+  /* overflow-y: auto; */
+}
+
+.dashboard_sidebar_main_div {
+  width: 270px;
+  opacity: 0px;
+  height: calc(100vh - 7vh);
+  overflow-y: auto;
+  /* overflow-x: hidden; */
+  background: linear-gradient(175.82deg, #7583ff 0%, #5869ff 100%);
+}
+
+.dashboard_sidebar_main_div::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard_sidebar_mainDiv {
+  height: calc(100vh - 7vh);
+  padding: 10%;
+}
+
+.sidebar_navItems {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 60px;
+  text-align: left;
+  color: rgba(215, 219, 255, 1);
+}
+
+.sidebar_navItem_icon {
+  cursor: pointer;
+}
+
+.sidebar_navItem_text {
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.sidebar_logout_btn {
+  width: 180px;
+  height: 50px;
+  gap: 0px;
+  border-radius: 7px;
+  opacity: 0px;
+  background: linear-gradient(93.49deg, #7c8aff 1.57%, #6777ff 103.21%);
+  /* margin: 17vh 0 0 -5%; */
+  margin: 4.4vh 0 0 -5%;
+}
+
+.sidebar_logout_icon {
+  cursor: pointer;
+  color: rgba(215, 219, 255, 1);
+}
+
+.sidebar_logout_text {
+  color: rgba(215, 219, 255, 1);
+  padding-left: 10px;
+}
+
+.sidebar_navItem_active {
+  color: white;
+}
+
+.sidebar_hamburger_icon {
+  color: rgba(215, 219, 255, 1);
+  width: 30px;
+  height: 30px;
+  border: 3px solid #5869ff;
+  border-radius: 50%;
+  background-color: white;
+  color: #5869ff;
+  margin-left: 200px;
+  cursor: pointer;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.dashboard_sidebar_main_div.shrink {
+  width: 60px; /* Adjust as needed */
+}
+.dashboard_sidebar_main_div.shrink .dashboard_sidebar_mainDiv {
+  padding: 30%;
+}
+.dashboard_sidebar_main_div.shrink .sidebar_navItem_text {
+  display: none;
+}
+
+.dashboard_sidebar_main_div.shrink .sidebar_hamburger_icon {
+  margin-left: 10px;
+}
+
+.sidebar_navItem_active .sidebar_navItem_text {
+  display: inline; /* Display text for active item */
+}
+
+.dashboard_sidebar_main_div .shrink .sidebar_shrink_logout_btn {
+  cursor: pointer;
+  margin: 10.3vh 0 2vh -5%;
+  color: rgba(215, 219, 255, 1);
+}
+
+.sidebar_navbar_mainDiv {
+  padding-right: 30px;
+}
+
+.sidebar_navbar_right_menu {
+  margin-top: 10vh;
+  width: 25px;
+  height: 25px;
+  color: white;
+}
+.sidebar_user_name {
+  width: 100px;
+}
+
+.dashboard_sidebar_main_div.shrink .sidebar_navbar_right_menu {
+  display: none;
+}
+.dashboard_sidebar_main_div.shrink .sidebar_navbar_icon {
+  display: none;
+}
+/* Show Hide Sidebar In small Screen */
+
+@media screen and (max-width: 768px) {
+  .sidebar_logout_btn {
+    margin: 12.8vh 0 0 -5%;
+  }
+  .sidebar_hide_smallScreen {
+    display: none;
+  }
+  .sidebar_display_smallScreen {
+    display: block;
+  }
+  /* .dashboard_sidebar_main_div.shrink,
+  .sidebar_navbar_mainDiv {
+    display: none;
+  } */
+
+  .dashboard_sidebar_main_div .shrink {
+    display: none;
+  }
+
+  .sidebar_hamburger_icon {
+    display: none;
+  }
+}
+@media screen and (max-width: 374px) {
+  .sidebar_logout_btn {
+    margin: 17vh 0 0 -5%;
+  }
+}
+
+/* For Extra Small Devices (Phones) */
+@media (max-width: 575.98px) {
+  .sidebar_navbar_mainDiv {
+    margin-top: -8vh;
+  }
+  .sidebar_logout_btn {
+    margin: 4.3vh 0 0vh -5%;
+  }
+  .dashboard_sidebar_main_div.shrink .sidebar_shrink_logout_btn {
+    margin: 24vh 0 2vh -5%;
+  }
+}
+
+/* For Small Devices (Phones) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+/* For Medium Devices (Tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sidebar_navbar_mainDiv {
+    margin-top: -8vh;
+  }
+  .sidebar_logout_btn {
+    margin: 4.3vh 0 0vh -5%;
+  }
+  .dashboard_sidebar_main_div.shrink .sidebar_shrink_logout_btn {
+    margin: 24vh 0 2vh -5%;
+  }
+}
+
+/* For Large Devices (Laptops/Desktops) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .sidebar_logout_btn {
+    margin: -5vh 0 0vh -5%;
+  }
+  .dashboard_sidebar_main_div.shrink .sidebar_shrink_logout_btn {
+    margin: 3.2vh 0 2vh -5%;
+  }
+}
+
+/* For Extra Large Devices (Large Desktops) */
+@media (min-width: 1200px) {
+}

@@ -1,0 +1,28 @@
+.otp-letter-input {
+  max-width: 50px;
+  height: 50px;
+  border: 1px solid #cbccd7;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.otp_text_in_otp_left_mainDiv {
+  font-family: Roboto;
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 47px;
+  text-align: center;
+  color: #1f1f1f;
+}
+
+#resend_otp_text {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.09px;
+  text-align: center;
+  padding-top: 20px;
+}
+.resend_otp_text_link {
+  color: #ff7006;
+}

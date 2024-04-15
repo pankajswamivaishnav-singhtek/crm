@@ -1,0 +1,230 @@
+.dashboard_main_container {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.dashboard_user_name {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(31, 31, 31, 1);
+  margin-bottom: -6px;
+}
+
+.dashboard_user_name2 {
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 400;
+  text-align: left;
+  color: rgba(114, 114, 114, 1);
+}
+
+.dashboard_row1 {
+  margin-top: 20px;
+}
+
+.dashboard_card_mainDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard_mainDiv_card {
+  width: 210px;
+  height: 140px;
+  margin-right: 10px;
+  padding-top: 1 0px;
+  /* box-shadow: 2px 3px 28px 0px rgba(105, 194, 229, 0.12); */
+}
+
+.dashboard_mainDiv_single_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.dashboard_card_icon_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1.5px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.dashboard_card_icon {
+  width: 36.91px;
+  height: 24.81px;
+}
+
+.dashboard_card_text {
+  margin-bottom: -3px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
+  color: rgba(88, 88, 88, 1);
+}
+
+.dashboard_card_number {
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+  text-align: center;
+  color: rgba(25, 42, 62, 1);
+}
+
+.dashboard_firstCard_icon {
+  color: rgba(105, 194, 229, 1);
+}
+
+.dashboard_mainDiv_firstCard {
+  background-color: rgba(186, 235, 255, 1);
+  border: 1px solid rgba(142, 212, 239, 1);
+}
+
+.dashboard_secondCard_icon {
+  color: rgba(43, 211, 106, 1);
+}
+
+.dashboard_mainDiv_secondCard {
+  background-color: rgba(200, 255, 220, 1);
+  border: 1px solid rgba(123, 220, 158, 1);
+}
+
+.dashboard_thirdCard_icon {
+  color: rgba(255, 112, 6, 1);
+}
+
+.dashboard_mainDiv_thirdCard {
+  background-color: rgba(255, 221, 211, 1);
+  border: 1px solid rgba(253, 189, 170, 1);
+}
+
+.dashboard_fourthCard_icon {
+  color: rgba(88, 105, 255, 1);
+}
+
+.dashboard_mainDiv_fourthCard {
+  background-color: rgba(229, 232, 255, 1);
+  border: 1px solid rgba(171, 195, 248, 1);
+}
+
+/* Dashboard Section 1 Table*/
+.dashboard_section1_table > h4 {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(31, 31, 31, 1);
+}
+
+.dashboard_section1_thead {
+  background-color: rgba(255, 241, 236, 1) !important;
+}
+
+.dashboard_table_mainDiv {
+  background-color: rgba(255, 255, 255, 1);
+  border-top: 1px solid rgba(229, 235, 249, 1);
+  border-radius: 10px;
+  box-shadow: 2px 3px 30px 0px rgba(64, 123, 255, 0.12);
+}
+
+.dashboard_table_main_heading {
+  padding: 15px 0px;
+}
+
+.dashboard_section1_tableHead_tr > th {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+  text-align: left;
+  color: rgba(31, 31, 31, 1);
+}
+
+.dashboard_section1_tableBody > tr > td {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 17.58px;
+  text-align: left;
+  color: rgba(115, 115, 115, 1);
+}
+
+.dashboard_section1_table_edit_button {
+  width: 38px;
+  height: 38px;
+  color: rgba(64, 123, 255, 1);
+  /* background-color: rgba(221, 232, 255, 1); */
+  cursor: pointer;
+}
+
+.dashboard_section1_table_editBtn {
+  color: rgba(255, 112, 6, 1);
+  margin-right: 10px;
+}
+.dashboard_section1_table_deleteBtn {
+  color: rgba(255, 112, 6, 1);
+  margin-right: 10px;
+}
+
+/* Section 2 */
+
+.dashboard_section2_chart_mainDiv {
+  text-align: center;
+}
+
+.dashboard_section2_chart_div {
+  height: 300px;
+  width: 300px;
+  position: relative;
+  display: inline-block;
+}
+
+.dashboard_section2_row2 {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(229, 235, 249, 1);
+  box-shadow: 2px 3px 30px 0px rgba(64, 123, 255, 0.12);
+  border-radius: 20px;
+}
+
+/* Section 3 */
+.dashboard_section3_main_container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Same Css For Every Dashboard Page */
+.Link-button {
+  text-decoration: none;
+  color: white;
+}
+
+@media screen and (max-width: 767px) {
+  /* Section2  */
+  .dashboard_section2_row2 {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  /* Section First */
+  .dashboard_mainDiv_card {
+    width: 170px;
+  }
+  .dashboard_card_mainDiv {
+    justify-content: flex-start;
+  }
+
+  .dashboard_sidebar_main_div.shrink .dashboard_card_mainDiv {
+    justify-content: center;
+  }
+}

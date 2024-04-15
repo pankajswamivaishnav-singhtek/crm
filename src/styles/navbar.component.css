@@ -1,0 +1,27 @@
+:root {
+  --navbar-height: 12.6vh;
+}
+
+.nav-link {
+  padding-top: 0; /* Remove top padding */
+  padding-bottom: 0; /* Remove bottom padding */
+}
+
+#navbars_main_div {
+  position: fixed;
+  width: 100vw;
+  height: 12.5vh;
+}
+
+.main-content {
+  padding-top: 12.5vh;
+}
+@media screen and (max-width: 768px) {
+  #second_navbar {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  #second_navbar_left_side {
+    float: left !important;
+  }
+}

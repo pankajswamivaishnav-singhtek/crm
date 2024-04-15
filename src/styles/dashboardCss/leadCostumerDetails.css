@@ -1,0 +1,122 @@
+.dashboard_leadView_details_heading {
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(54, 54, 54, 1);
+}
+
+.lead_costumer_details_firstRow_left_imgDiv {
+  width: 150px;
+  height: 150px;
+  border: 3px solid rgba(248, 201, 167, 1);
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.lead_costumer_details_firstRow_left_img {
+  height: 100%;
+  border-radius: 50%;
+}
+
+.lead_view_details_table_td {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: left;
+  color: rgba(31, 31, 31, 1);
+}
+
+.lead_view_details_costumer_table_th {
+  /* padding-right: 80px; */
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 19.92px;
+  text-align: left;
+  color: rgba(128, 128, 128, 1);
+}
+
+.lead_view_details_costumer_name_email {
+  width: 150px;
+  height: 150px;
+}
+
+.lead_view_details_costumer_name {
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 0px;
+  text-align: center;
+}
+
+.lead_view_details_costumer_email {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  color: rgba(116, 116, 116, 1);
+  text-align: center;
+}
+
+/* Row 2 */
+.dashboard_leadView_company_details_heading {
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+}
+
+/* Description */
+.lead_view_details_description {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  color: rgba(83, 83, 83, 1);
+}
+
+@media screen and (min-width: 1400px) {
+  .lead_view_details_costumer_table_th {
+    padding-right: 50px !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .lead_view_details_costumer_details {
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dashboard_leadView_details_heading {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .lead_costumer_details_firstRow_left_div {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+  }
+  .lead_view_details_costumer_name_email {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .lead_costumer_details_firstRow_left_imgDiv {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .lead_costumer_details_firstRow_left_imgDiv {
+    width: 110px;
+    height: 110px;
+  }
+}

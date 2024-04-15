@@ -1,0 +1,35 @@
+/* .login_left_container {
+  flex-direction: column;
+} */
+
+.login_left_mainDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_back_button {
+  width: 64px;
+  height: 64px;
+  margin: -140px 0 -40px 0;
+  gap: 0px;
+  border-radius: 32px;
+  opacity: 0.8px;
+  color: #ff6e3f;
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.login_forgot_password {
+  gap: 0px;
+  opacity: 0px;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 17.58px;
+  text-align: right;
+}
+
+.login_forgot_password_link {
+  color: #ff6e3f;
+}

@@ -1,0 +1,24 @@
+.forgot_left_mainDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media screen and (min-width: 769px) {
+  .forgot_email_form_control {
+    width: 400px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .forgot_email_form_control {
+    width: 220px;
+  }
+  .forgot_input_icons{
+    right: 4%;
+    top: 74%;
+}
+
+}
+

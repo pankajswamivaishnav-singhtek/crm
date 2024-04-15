@@ -1,0 +1,108 @@
+.dashboard_navbar_container_fluid {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.dashboard_navbar {
+  background-color: rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(195, 200, 243, 1);
+  border-radius: 0px 0px 25px 0px;
+  opacity: 0px;
+  position: fixed;
+  width: 100%;
+  height: 7vh;
+}
+
+.dashbaord_navbar_crm_text {
+  font-family: Roboto;
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 47px;
+  text-align: center;
+}
+
+.dashbaord_navbar_crm_text span {
+  color: rgba(255, 112, 6, 1);
+}
+
+.dashboard_navbar_dashboard_text {
+  font-family: Poppins;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+}
+
+.dashboard_navbar_notification_icon {
+  width: 54px;
+  height: 54px;
+  gap: 0px;
+  border: 1px;
+  opacity: 0px;
+  color: rgba(145, 155, 250, 1);
+}
+
+.dashboard_navbar_userImg {
+  margin-top: 5px;
+  width: 45px;
+  height: 45px;
+  border: 2px solid rgba(145, 155, 250, 1);
+  opacity: 0px;
+}
+
+.navbar_right_menu_img{
+  padding: 4px;
+}
+
+.dashboard_navbar_userName {
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 19.92px;
+  text-align: left;
+}
+
+.dashboard_navbar_panel {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
+.dashboard_navbar_user_admin_text {
+  padding-left: 10px;
+}
+
+.dashboard_navbar_drop_icon {
+  width: 30px;
+  height: 30px;
+  gap: 0px;
+  opacity: 0px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Sidebar Toggler */
+.sidebar_toggle_icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  opacity: 0px;
+  color: rgba(145, 155, 250, 1);
+}
+
+@media screen and (min-width: 769px) {
+  /* .dashboard_navbar {
+    height: 7vh;
+  } */
+
+  .dashbaord_navbar_crm_text {
+    padding-left: 20px;
+  }
+}
+
+@media screen and (max-width: 768px ) {
+  .dashboard_navbar {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}

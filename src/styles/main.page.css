@@ -1,0 +1,39 @@
+.left_dashboard_outlet {
+  margin-top: 7vh;
+  /* overflow-y: auto; */
+  height: calc(100vh - 7vh);
+}
+.right_dashboard_outlet {
+  width: 100%;
+  margin-top: 7vh;
+  padding: 1vh 1vh 0vh 1vh;
+  overflow-y: scroll;
+  height: calc(100vh - 7vh);
+  /* height: 100%; */
+  background-color: rgba(255, 255, 255, 1);
+}
+
+
+/* For Extra Small Devices (Phones) */
+@media (max-width: 575.98px) {
+  /* Your CSS styles for extra small devices go here */
+}
+
+/* For Small Devices (Phones) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Your CSS styles for small devices go here */
+}
+
+/* For Medium Devices (Tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Your CSS styles for medium devices go here */
+}
+
+/* For Large Devices (Laptops/Desktops) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+
+/* For Extra Large Devices (Large Desktops) */
+@media (min-width: 1200px) {
+  /* Your CSS styles for extra large devices go here */
+}

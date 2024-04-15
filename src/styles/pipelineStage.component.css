@@ -1,0 +1,23 @@
+:root {
+  --navbar-height: 12.6vh;
+}
+
+.pipeline_stage_mainDiv {
+  padding-top: 12.6vh;
+}
+.row-div {
+  height: calc(100vh - var(--navbar-height));
+}
+.pipeline_stage_mainDiv2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#pipeline_stage_div_icons {
+  cursor: pointer;
+  display: flex;
+}
+#pipeline_stage_div_text {
+  cursor: pointer;
+}
