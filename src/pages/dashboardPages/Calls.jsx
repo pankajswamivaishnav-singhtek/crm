@@ -1,21 +1,23 @@
 import React from "react";
+// CSS
+import "../../styles/dashboardCss/calls.css";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
+import { MdPermPhoneMsg, MdOutlinePhonePaused } from "react-icons/md";
 import LeadsRightSectionTable from "../../components/shared/LeadsRightSectionTable";
 // React Router Dom
-import { Link } from "react-router-dom";
-const Contact = () => {
+import { useNavigate } from "react-router-dom";
+
+const Calls = () => {
+  const navigate = useNavigate();
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
-        {/* Btn div */}
         <div className="dashboard_leads_btn_mainDiv">
           <div className="dashboard_leads_btns_div">
-            {/* <div className="dashboard_leads_print_btn">
-              <MdOutlineLocalPrintshop />
-            </div> */}
+           
             <div className="dashboard_leads_action_btn_div">
               <button
                 className="dashboard_section1_table_edit_button dropdown-toggle"
@@ -46,30 +48,57 @@ const Contact = () => {
               <button>Exports</button>
             </div>
             <div className="dashboard_leads_create_btn_div">
-              <button>
-                <Link className="dashboard_leads_create_link" to="/create-contact">
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Contact
-                </Link>
+              <button
+                className="dashboard_section1_table_edit_button dropdown-toggle remove_arrow_create_call_btn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <MdAdd /> Create call
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="editDeleteDropdown"
+                >
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        navigate("/schedule-call");
+                      }}
+                    >
+                      <MdPermPhoneMsg className="dashboard_section1_table_editBtn" />
+                      Schedule call
+                    </button>
+                  </li>
+
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        navigate("/log-call");
+                      }}
+                    >
+                      <MdOutlinePhonePaused className="dashboard_section1_table_deleteBtn" />
+                      Log call
+                    </button>
+                  </li>
+                </ul>
               </button>
             </div>
           </div>
         </div>
-        {/* Table Div */}
         <div className="dashboard_leads_table_div">
           <LeadsRightSectionTable
             tblHead={{
-              firstHead: "Company Name",
-              secondHead: "Email",
-              thirdHead: "Contact",
-              fourthHead: "Address",
+              firstHead: "Call Owner",
+              secondHead: "Call Type",
+              thirdHead: "Call Start Time",
+              fourthHead: "Call Duration",
+              fifthHead: "Number",
             }}
-            redirectLink="/contact-details"
+            redirectLink="/call-details"
+            data="7072345784"
           />
         </div>
-        {/* Pagination Div */}
         <div className="dashboard_leads_pagination_div">
           <nav aria-label="...">
             <ul className="pagination">
@@ -119,4 +148,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Calls;

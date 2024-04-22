@@ -1,6 +1,5 @@
 import React from "react";
 // React Icons
-import { MdOutlineLocalPrintshop } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
@@ -14,9 +13,6 @@ const LeadsRightSection = () => {
       <div className="dashboard_content_wrapper">
         <div className="dashboard_leads_btn_mainDiv">
           <div className="dashboard_leads_btns_div">
-            <div className="dashboard_leads_print_btn">
-              <MdOutlineLocalPrintshop />
-            </div>
             <div className="dashboard_leads_action_btn_div">
               <button
                 className="dashboard_section1_table_edit_button dropdown-toggle"
@@ -59,7 +55,15 @@ const LeadsRightSection = () => {
           </div>
         </div>
         <div className="dashboard_leads_table_div">
-        <LeadsRightSectionTable tblHead={{firstHead:"Lead Owner", secondHead:"First Name", thirdHead:"Lead Source", fourthHead:"Lead Status"}} redirectLink="/lead-details"/>
+          <LeadsRightSectionTable
+            tblHead={{
+              firstHead: "Lead Owner",
+              secondHead: "First Name",
+              thirdHead: "Lead Source",
+              fourthHead: "Lead Status",
+            }}
+            redirectLink="/lead-details"
+          />
         </div>
         <div className="dashboard_leads_pagination_div">
           <nav aria-label="...">

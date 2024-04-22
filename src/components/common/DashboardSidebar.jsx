@@ -11,9 +11,8 @@ import { LiaFileInvoiceSolid } from "react-icons/lia";
 import { LuPin } from "react-icons/lu";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { VscGraph } from "react-icons/vsc";
-import { FaRegNewspaper } from "react-icons/fa";
+import { TbPhonePlus } from "react-icons/tb";
 import { SiSimpleanalytics } from "react-icons/si";
-import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
 import { RiMenu4Line } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -73,9 +72,9 @@ const DashboardSidebar = ({ showSidebarSmallScreen }) => {
                   </li>
 
                   <li className="nav-item sidebar_navItems">
-                    <Link className="Link-button" to="/invoice">
+                    <Link className="Link-button" to="/deals">
                       <LiaFileInvoiceSolid className="sidebar_navItem_icon" />
-                      <span className="sidebar_navItem_text">Invoice</span>
+                      <span className="sidebar_navItem_text">Deals</span>
                     </Link>
                   </li>
                   <li className="nav-item sidebar_navItems">
@@ -91,21 +90,15 @@ const DashboardSidebar = ({ showSidebarSmallScreen }) => {
                     </Link>
                   </li>
                   <li className="nav-item sidebar_navItems">
-                    <Link className="Link-button" to="/report">
-                      <FaRegNewspaper className="sidebar_navItem_icon" />
-                      <span className="sidebar_navItem_text">Reporting</span>
+                    <Link className="Link-button" to="/calls">
+                      <TbPhonePlus className="sidebar_navItem_icon" />
+                      <span className="sidebar_navItem_text">Calls</span>
                     </Link>
                   </li>
                   <li className="nav-item sidebar_navItems">
-                    <Link className="Link-button" to="/analytics">
+                    <Link className="Link-button" to="/reports">
                       <SiSimpleanalytics className="sidebar_navItem_icon" />
-                      <span className="sidebar_navItem_text">Analytics</span>
-                    </Link>
-                  </li>
-                  <li className="nav-item sidebar_navItems">
-                    <Link className="Link-button" to="/setting">
-                      <IoSettingsOutline className="sidebar_navItem_icon" />
-                      <span className="sidebar_navItem_text">Settings</span>
+                      <span className="sidebar_navItem_text">Reports</span>
                     </Link>
                   </li>
                 </ul>

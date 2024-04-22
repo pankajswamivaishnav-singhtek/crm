@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.otp-letter-input::placeholder{
+  color: red;
+}
+
 .otp_text_in_otp_left_mainDiv {
   font-family: Roboto;
   font-size: 35px;

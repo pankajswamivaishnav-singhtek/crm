@@ -1,17 +1,16 @@
 import React from "react";
 // CSS
-import "../../styles/dashboardCss/contactCostumerDetails.css";
-const ContactCostumerDetails = () => {
+import "../../styles/dashboardCss/meetingDetails.css";
+const MeetingsViewDetails = () => {
   return (
-    <div className="container-fluid dashboard_create_lead_main_container">
-      {/* Company Details */}
+    <div className="account_view_details_Row">
       <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
-        Company Info
+        Meetings Information
       </h3>
       <div className="row">
         <div className="col-xl-12">
           <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
-            <div className="table-responsive">
+            <div className="table-responsive account_view_details_table">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -19,16 +18,16 @@ const ContactCostumerDetails = () => {
                       scope="row"
                       className="contact_view_details_costumer_table_th"
                     >
-                      Company Name
+                      Host
                     </th>
                     <td className="lead_view_details_table_td">
-                      Singhtek IT Jaipur
+                      Pankaj Swami Vaishnav
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive account_view_details_table">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -36,16 +35,14 @@ const ContactCostumerDetails = () => {
                       scope="row"
                       className="contact_view_details_costumer_table_th"
                     >
-                      Company Email
+                      Title
                     </th>
-                    <td className="lead_view_details_table_td">
-                      singhtek@gmail.com
-                    </td>
+                    <td className="lead_view_details_table_td">Seller</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive account_view_details_table">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -62,7 +59,7 @@ const ContactCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive account_view_details_table">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -70,11 +67,39 @@ const ContactCostumerDetails = () => {
                       scope="row"
                       className="contact_view_details_costumer_table_th"
                     >
-                      Company Contact
+                      Date
                     </th>
-                    <td className="lead_view_details_table_td">
-                      +917073272146
-                    </td>
+                    <td className="lead_view_details_table_td">12.11.2024</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="account_view_details_table d-d-xl-flex d-md-flex meetings_participants_div">
+              <div className="ms-1 me-xl-4">
+                <p className="contact_view_details_costumer_table_th meetings_participants_heading">
+                  Participants
+                </p>
+              </div>
+              <div className="participants_name lead_view_details_table_td">
+                <span className="me-2">Pankaj,</span>
+                <span className="me-2">Pankaj,</span>
+                <span className="me-2">Pankaj,</span>
+                <span className="me-2">Pankaj,</span>
+                <span className="me-2">Pankaj,</span>
+                <span className="me-2">Pankaj,</span>
+              </div>
+            </div>
+
+            {/* Empty Table */}
+            <div className="table-responsive account_view_details_table d-inline">
+              <table className="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="contact_view_details_costumer_table_th"
+                    ></th>
+                    <td className="lead_view_details_table_td"></td>
                   </tr>
                 </tbody>
               </table>
@@ -82,24 +107,8 @@ const ContactCostumerDetails = () => {
           </div>
         </div>
       </div>
-      {/* Description */}
-      <h4 className="my-2 mx-2 dashboard_leadView_company_details_heading">
-        Description
-      </h4>
-      <div className="row">
-        <div className="col-xl-12 my-1 mx-2">
-          <p className="lead_view_details_description">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad autem
-            delectus tempore quisquam! Libero nisi excepturi pariatur explicabo
-            consequatur nam labore earum animi corrupti impedit unde dolorum,
-            amet esse, facere eos eum distinctio voluptatem officiis nobis
-            beatae. Illum porro recusandae maxime earum laudantium animi
-            molestiae, error quibusdam nobis, dolor atque!
-          </p>
-        </div>
-      </div>
     </div>
   );
 };
 
-export default ContactCostumerDetails;
+export default MeetingsViewDetails;

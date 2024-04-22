@@ -3,28 +3,48 @@ import { Link } from "react-router-dom";
 // css
 import "../styles/signup.page.css";
 import "../styles/login.page.css";
+
 // React Icons
 import { HiOutlineMail } from "react-icons/hi";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
+// Formik
+import { useFormik } from "formik";
+import { loginFormSchema } from "../schema/FormValidation";
+
 // Imags
 import orLogin from "../images/orLogin.jpg";
+import loginImg from "../images/login_img.png";
 const Login = () => {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
-  const inputEvent = (event) => {
-    const { name, value } = event.target;
-    setData({ ...data, [name]: value });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(data);
-  };
+  // Form Handle & Validations
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
 
+      validationSchema: loginFormSchema,
+      onSubmit: (values, { resetForm }) => {
+        console.log("-----", values);
+        resetForm();
+        setShowToast(true);
+      },
+    });
+
+  // Toast
+  const [showToast, setShowToast] = useState(false);
+  // Function to hide the toast after 3 seconds
+  const hideToast = () => {
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
+  if (showToast) {
+    hideToast();
+  }
   return (
     <div className="container-fluid signup_body_div">
       <div className="row">
@@ -51,10 +71,15 @@ const Login = () => {
                         type="email"
                         className="form-control signup_email_form_control"
                         id="exampleFormControlInput1"
-                        placeholder="name@example.com"
                         name="email"
-                        value={data.email}
-                        onChange={inputEvent}
+                        placeholder={
+                          touched.email && errors.email
+                            ? errors.email
+                            : "email@example.com"
+                        }
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       <HiOutlineMail className="signup_input_icons" />
                     </div>
@@ -72,10 +97,15 @@ const Login = () => {
                         type="password"
                         className="form-control signup_email_form_control"
                         id="exampleFormControlInput1"
-                        placeholder="******"
+                        placeholder={
+                          touched.password && errors.password
+                            ? errors.password
+                            : "*****"
+                        }
                         name="password"
-                        value={data.password}
-                        onChange={inputEvent}
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                       <FaEyeSlash className="signup_input_icons" />
                     </div>
@@ -84,7 +114,6 @@ const Login = () => {
                         className="login_forgot_password_link"
                         to="/forgotpassword"
                       >
-                        {" "}
                         <p className="login_forgot_password">
                           Forgot Password?
                         </p>
@@ -125,13 +154,38 @@ const Login = () => {
                   </p>
                 </div>
               </form>
+              {/* Toast */}
+              {showToast && (
+                <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+                  <div
+                    className="toast show create_lead_toast"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                  >
+                    <div className="toast-header create_lead_toast_header">
+                      <strong className="me-auto">
+                        Form Submitted Successfully
+                      </strong>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        onClick={() => setShowToast(false)}
+                      />
+                    </div>
+                    <div className="toast-body">Sign In successfully.</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
         {/* Left Main End */}
         {/* Right Main Div */}
         <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
-          dd
+          <div className="signup_right_mainDiv">
+            <img src={loginImg} alt="signin_random_img" className="img-fluid" />
+          </div>
         </div>
       </div>
       {/* Right Main Div End*/}

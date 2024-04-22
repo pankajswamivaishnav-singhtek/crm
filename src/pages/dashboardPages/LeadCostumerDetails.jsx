@@ -26,8 +26,8 @@ const LeadCostumerDetails = () => {
         </div>
         <div className="col-xl-8 col-md-8">
           <div className="d-xl-flex d-md-flex justify-content-around justify-content-center align-items-center">
-            <div class="table-responsive">
-              <table class="table table-borderless">
+            <div className="table-responsive">
+              <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <th
@@ -59,8 +59,8 @@ const LeadCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div class="table-responsive">
-              <table class="table table-borderless">
+            <div className="table-responsive">
+              <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <th
@@ -102,8 +102,8 @@ const LeadCostumerDetails = () => {
       <div className="row">
         <div className="col-xl-12">
           <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center">
-            <div class="table-responsive">
-              <table class="table table-borderless">
+            <div className="table-responsive">
+              <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <th scope="row"  className="lead_view_details_costumer_table_th">Lead Owner</th>
@@ -120,8 +120,8 @@ const LeadCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div class="table-responsive">
-              <table class="table table-borderless">
+            <div className="table-responsive">
+              <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <th scope="row"  className="lead_view_details_costumer_table_th">Email</th>
@@ -138,8 +138,8 @@ const LeadCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div class="table-responsive">
-              <table class="table table-borderless">
+            <div className="table-responsive">
+              <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <th scope="row"  className="lead_view_details_costumer_table_th">Email</th>
@@ -156,8 +156,8 @@ const LeadCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div class="table-responsive">
-              <table class="table table-borderless">
+            <div className="table-responsive">
+              <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <th scope="row"  className="lead_view_details_costumer_table_th">Email</th>

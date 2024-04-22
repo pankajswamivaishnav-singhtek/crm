@@ -150,6 +150,33 @@
   .sidebar_hamburger_icon {
     display: none;
   }
+  /* ------------------------ */
+  /* Size 768 and under 768 sidebar is overlap */
+  .dashboard_sidebar_main_div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: 0.5s;
+    z-index: 1000; /* Set a higher z-index */
+  }
+
+  .sidebar_container_fluid {
+    position: relative;
+    z-index: 1; /* Ensure other content stays below the sidebar */
+  }
+
+  .sidebar_hide_smallScreen {
+    transform: translateX(-100%);
+  }
+
+  .sidebar_display_smallScreen {
+    transform: translateX(0);
+  }
 }
 @media screen and (max-width: 374px) {
   .sidebar_logout_btn {

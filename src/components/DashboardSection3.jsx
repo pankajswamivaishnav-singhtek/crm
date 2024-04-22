@@ -1,7 +1,5 @@
 import React from "react";
 // React Icons
-import { PiDotsThreeCircleVertical } from "react-icons/pi";
-import { BsPencil, BsTrash } from "react-icons/bs";
 const DashboardSection3 = () => {
   return (
     <div className="container-fluid dashboard_table_mainDiv table-responsive dashboard_section3_main_container">
@@ -9,7 +7,7 @@ const DashboardSection3 = () => {
         <div className="col dashboard_section1_table">
           <h4>My Meeting this month</h4>
         </div>
-        <div className="col dropdown" style={{ textAlign: "end" }}>
+        {/* <div className="col dropdown" style={{ textAlign: "end" }}>
           <PiDotsThreeCircleVertical
             className="dashboard_section1_table_edit_button dropdown-toggle"
             data-bs-toggle="dropdown"
@@ -28,7 +26,7 @@ const DashboardSection3 = () => {
               </button>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <table className="table">
         <thead>

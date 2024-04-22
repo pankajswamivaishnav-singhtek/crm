@@ -2,8 +2,7 @@ import React from "react";
 // Shared Component
 import DashboardSection2Table from "./shared/DashboardSection2Table";
 // React Icons
-import { PiDotsThreeCircleVertical } from "react-icons/pi";
-import { BsPencil, BsTrash } from "react-icons/bs";
+
 // Chart
 import DonutChart from "./shared/DonutChart";
 const DashboardSection2 = () => {
@@ -18,7 +17,7 @@ const DashboardSection2 = () => {
             <div className="col dashboard_section1_table">
               <h4>My Pipeline Deals By Stage</h4>
             </div>
-            <div className="col dropdown" style={{ textAlign: "end" }}>
+            {/* <div className="col dropdown" style={{ textAlign: "end" }}>
               <PiDotsThreeCircleVertical
                 className="dashboard_section1_table_edit_button dropdown-toggle"
                 data-bs-toggle="dropdown"
@@ -41,14 +40,14 @@ const DashboardSection2 = () => {
                   </button>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="dashboard_section2_chart_mainDiv">
           <div className="dashboard_section2_chart_div">
             <DonutChart
-              data={[30, 20, 10, 15, 25]}
-              labels={["Red", "Blue", "Yellow", "Green", "Purple"]}
+              data={[30, 20, 10, 10, 20, 10]}
+              labels={["Qualification", "Need Analysis", "Value", "Identify Decision Maker", "Proposal", "Negosition"]}
               height={50}
               width={50}
             />

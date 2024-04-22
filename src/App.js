@@ -5,14 +5,14 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 
 // React Router Dom
 import { BrowserRouter } from "react-router-dom";
-// Routes 
+// Routes
 import AllRoutes from "./routes/AllRoutes";
 const App = () => {
   return (
     <>
-    <BrowserRouter>
-      <AllRoutes />
-    </BrowserRouter>
+      <BrowserRouter>
+        <AllRoutes />
+      </BrowserRouter>
     </>
   );
 };

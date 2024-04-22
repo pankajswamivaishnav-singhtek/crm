@@ -1,7 +1,5 @@
 import React from "react";
 // React Icon
-import { IoSearchOutline } from "react-icons/io5";
-
 const FilterSidebar = ({
   filters,
   handleCheckboxChange,
@@ -12,7 +10,7 @@ const FilterSidebar = ({
       <div className="filter-sidebar-header">
         <h3>Filter Leads By</h3>
       </div>
-      <div className="search-container">
+      {/* <div className="search-container">
         <input
           type="text"
           placeholder="Search..."
@@ -21,19 +19,60 @@ const FilterSidebar = ({
         <span className="search-icon">
           <IoSearchOutline />
         </span>
+      </div> */}
+      {/* System Defined Filter */}
+      <div className="filter-container">
+        <h4>System Defined Filter</h4>
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="touchedFilter"
+            // checked={filters.leadName}
+            // onChange={() => handleCheckboxChange("leadName")}
+          />
+          <label className="form-check-label" htmlFor="touchedFilter">
+            Touched Records
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="untouchedFilter"
+            // checked={filters.company}
+            // onChange={() => handleCheckboxChange("company")}
+          />
+          <label className="form-check-label" htmlFor="untouchedFilter">
+            Untouched Records
+          </label>
+        </div>
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="recordActionFilter"
+            // checked={filters.phoneNumber}
+            // onChange={() => handleCheckboxChange("phoneNumber")}
+          />
+          <label className="form-check-label" htmlFor="recordActionFilter">
+            Record Action
+          </label>
+        </div>
       </div>
+      {/* Filter By Fields */}
       <div className="filter-container">
         <h4>Filter By Fields</h4>
         <div className="form-check">
           <input
             type="checkbox"
             className="form-check-input"
-            id="leadNameFilter"
+            id="cityFilter"
             // checked={filters.leadName}
             // onChange={() => handleCheckboxChange("leadName")}
           />
-          <label className="form-check-label" htmlFor="leadNameFilter">
-            Lead Name
+          <label className="form-check-label" htmlFor="cityFilter">
+            City
           </label>
         </div>
         <div className="form-check">
@@ -52,36 +91,24 @@ const FilterSidebar = ({
           <input
             type="checkbox"
             className="form-check-input"
-            id="phoneNumberFilter"
+            id="createdAtFilter"
             // checked={filters.phoneNumber}
             // onChange={() => handleCheckboxChange("phoneNumber")}
           />
-          <label className="form-check-label" htmlFor="phoneNumberFilter">
-            Phone Number
+          <label className="form-check-label" htmlFor="createdAtFilter">
+            Created At
           </label>
         </div>
         <div className="form-check">
           <input
             type="checkbox"
             className="form-check-input"
-            id="emailFilter"
+            id="leadOwnerFilter"
             // checked={filters.email}
             // onChange={() => handleCheckboxChange("email")}
           />
-          <label className="form-check-label" htmlFor="emailFilter">
-            Email
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="leadSourceFilter"
-            // checked={filters.leadSource}
-            // onChange={() => handleCheckboxChange("leadSource")}
-          />
-          <label className="form-check-label" htmlFor="leadSourceFilter">
-            Lead Source
+          <label className="form-check-label" htmlFor="leadOwnerFilter">
+            Lead Owner
           </label>
         </div>
       </div>

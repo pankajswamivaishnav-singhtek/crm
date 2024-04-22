@@ -1,13 +1,129 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+// React Router Dom
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 // CSS
 import "../../styles/component_css/common_css/dashboardNavbar.common.css";
 // React Icon
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
-  // const [showSidebarSmallScreen, setShowSidebarSmallScreen] = useState(false);
-  // className={` ${showSidebarSmallScreen ? "sidebar_display_smallScreen" : "sidebar_hide_smallScreen"}`}
+  // Page Name -----Start-------
+  const location = useLocation();
+  const [pageName, setPageName] = useState("");
+  const pathname = location.pathname;
+  useEffect(() => {
+    switch (pathname) {
+      case "/dashboard":
+        document.title = "Dashboard";
+        setPageName("Dashboard");
+        break;
+      case "/leads":
+        document.title = "Leads";
+        setPageName("Leads");
+        break;
+      case "/create-lead":
+        document.title = "Create Lead";
+        setPageName("Create Lead");
+        break;
+      case "/lead-details":
+        document.title = "Lead Details";
+        setPageName("Lead Details");
+        break;
+      case "/contact":
+        document.title = "Contact";
+        setPageName("Contact");
+        break;
+      case "/create-contact":
+        document.title = "Create Contact";
+        setPageName("Create Contact");
+        break;
+      case "/contact-details":
+        document.title = "Contact Details";
+        setPageName("Contact Details");
+        break;
+      case "/accounts":
+        document.title = "Accounts";
+        setPageName("Accounts");
+        break;
+      case "/create-account":
+        document.title = "Create Account";
+        setPageName("Create Account");
+        break;
+      case "/account-details":
+        document.title = "Account Details";
+        setPageName("Account Details");
+        break;
+      case "/deals":
+        document.title = "Deals";
+        setPageName("Deals");
+        break;
+      case "/create-deal":
+        document.title = "Create Deal";
+        setPageName("Create Deal");
+        break;
+      case "/deal-details":
+        document.title = "Deal Details";
+        setPageName("Deal Details");
+        break;
+      case "/tasks":
+        document.title = "Tasks";
+        setPageName("Tasks");
+        break;
+      case "/create-task":
+        document.title = "Create Task";
+        setPageName("Create Task");
+        break;
+      case "/task-details":
+        document.title = "Task Details";
+        setPageName("Task Details");
+        break;
+      case "/meetings":
+        document.title = "Meetings";
+        setPageName("Meetings");
+        break;
+      case "/create-meeting":
+        document.title = "Create Meeting";
+        setPageName("Create Meeting");
+        break;
+      case "/meetings-details":
+        document.title = "Meeting Details";
+        setPageName("Meeting Details");
+        break;
+      case "/calls":
+        document.title = "Calls";
+        setPageName("Calls");
+        break;
+      case "/create-call":
+        document.title = "Create Call";
+        setPageName("Create Call");
+        break;
+      case "/call-details":
+        document.title = "Call Details";
+        setPageName("Call Details");
+        break;
+      case "/reports":
+        document.title = "Reports";
+        setPageName("Reports");
+        break;
+      case "/create-report":
+        document.title = "Create Report";
+        setPageName("Create Report");
+        break;
+      case "/report-details":
+        document.title = "Report Details";
+        setPageName("Report Details");
+        break;
+      default:
+        document.title = "CRM - Singhsoft Product";
+        setPageName("Singhsoft Product");
+    }
+  }, [pathname]);
+
+  // Page Name Function End --------
   const sidebarState = () => {
     setShowSidebarSmallScreen(true);
     setIsSidebar((prev) => !prev);
@@ -39,7 +155,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                 aria-current="page"
                 href="#!"
               >
-                Dashboard
+                {pageName}
               </a>
             </li>
           </ul>
@@ -67,8 +183,28 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                   <span className="dashboard_navbar_panel">Admin Panel</span>
                 </div>
               </li>
-              <li className="nav-item align-content-center">
+              <li
+                className="nav-item align-content-center dropstart"
+                data-bs-toggle="dropdown"
+              >
                 <RiArrowDropDownLine className="dashboard_navbar_drop_icon" />
+                <ul className="dropdown-menu navbar_dropdown_menu">
+                  <Link className="text-decoration-none">
+                    <li>
+                      <a className="dropdown-item" href="#!">
+                        <CgProfile className="me-1 navbar_dropdown_icon"/> Update Profile
+                      </a>
+                    </li>
+                  </Link>
+                  <Link className="text-decoration-none">
+                    <li>
+                      <a className="dropdown-item" href="#!">
+                        <BiLogOutCircle className="me-2 navbar_dropdown_icon"/>
+                        Logout
+                      </a>
+                    </li>
+                  </Link>
+                </ul>
               </li>
             </ul>
           </div>

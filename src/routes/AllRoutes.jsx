@@ -27,11 +27,20 @@ import CreateTask from "../pages/dashboardPages/CreateTask";
 import TaskDetails from "../pages/dashboardPages/TaskDetails";
 import Meetings from "../pages/dashboardPages/Meetings";
 import CreateMeeting from "../pages/dashboardPages/CreateMeeting";
+import MeetingsViewDetails from "../pages/dashboardPages/MeetingsViewDetails";
+import Calls from "../pages/dashboardPages/Calls";
+import ScheduleCall from "../pages/dashboardPages/ScheduleCall";
+import LogCall from "../pages/dashboardPages/LogCall";
+import CallViewDetails from "../pages/dashboardPages/CallViewDetails";
+import Deals from "../pages/dashboardPages/Deals";
+import CreateDeal from "../pages/dashboardPages/CreateDeal";
+import Reports from "../pages/dashboardPages/Reports";
 
 const AllRoutes = () => {
   const [isSidebar, setIsSidebar] = useState(true);
   return (
     <Routes>
+      {/* Dashboard Routes */}
       <Route
         element={<Main isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
       >
@@ -51,6 +60,14 @@ const AllRoutes = () => {
         <Route path="/task-details" element={<TaskDetails />} />
         <Route path="/meetings" element={<Meetings />} />
         <Route path="/create-meeting" element={<CreateMeeting />} />
+        <Route path="/meetings-details" element={<MeetingsViewDetails />} />
+        <Route path="/calls" element={<Calls />} />
+        <Route path="/schedule-call" element={<ScheduleCall />} />
+        <Route path="/log-call" element={<LogCall />} />
+        <Route path="/call-details" element={<CallViewDetails />} />
+        <Route path="/deals" element={<Deals />} />
+        <Route path="/create-deal" element={<CreateDeal />} />
+        <Route path="/reports" element={<Reports />} />
       </Route>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<Signup />} />

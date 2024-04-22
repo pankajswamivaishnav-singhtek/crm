@@ -9,6 +9,9 @@
   background-image: url("../images/Vector2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* background-position: center; */
 }
 
@@ -56,15 +59,15 @@
 
 .signup_name_form_control::placeholder {
   font-family: Roboto;
-  font-size: 17px;
+  font-size: small;
   font-weight: 500;
   line-height: 19.92px;
-  color: #363636;
+  color: #808080;
 }
 
 .signup_name_icons {
   position: absolute;
-  right: 10px; /* Adjust the distance from the right */
+  right: 36px; /* Adjust the distance from the right */
   top: 70%;
   transform: translateY(-50%);
   width: 22px;
@@ -87,10 +90,10 @@
 
 .signup_email_form_control::placeholder {
   font-family: Roboto;
-  font-size: 17px;
+  font-size: small;
   font-weight: 500;
   line-height: 19.92px;
-  color: #363636;
+  color: #808080;
 }
 
 .signup_input_icons {
@@ -171,7 +174,7 @@
     flex-direction: column;
   }
   .signup_name_form_control {
-    width: 95%;
+    width: 95% !important;
   }
   .signup_name_icons {
     right: 11%;
@@ -179,6 +182,9 @@
   }
   .signup_email_form_control {
     width: 95%;
+  }
+  .signup_email_form_control::placeholder {
+    font-size: small;
   }
   .signup_input_icons {
     right: 11%;
@@ -193,6 +199,7 @@
   #signup_left_mainDiv {
     margin: 20px auto;
   }
+
 }
 @media screen and (max-width: 400px) {
   #signup_left_mainDiv {

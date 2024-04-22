@@ -48,8 +48,8 @@ const TaskDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -83,8 +83,8 @@ const TaskDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th

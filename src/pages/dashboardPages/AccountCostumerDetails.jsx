@@ -62,8 +62,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -110,8 +110,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -161,8 +161,8 @@ const AccountCostumerDetails = () => {
         <div className="row">
           <div className="col-xl-12">
             <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -178,8 +178,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -195,8 +195,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -212,8 +212,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -241,8 +241,8 @@ const AccountCostumerDetails = () => {
         <div className="row">
           <div className="col-xl-12">
             <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -258,8 +258,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -275,8 +275,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -292,8 +292,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -321,8 +321,8 @@ const AccountCostumerDetails = () => {
         <div className="row">
           <div className="col-xl-12">
             <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -338,8 +338,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -355,8 +355,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th
@@ -372,8 +372,8 @@ const AccountCostumerDetails = () => {
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive account_view_details_table">
-                <table class="table table-borderless">
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
                   <tbody>
                     <tr>
                       <th

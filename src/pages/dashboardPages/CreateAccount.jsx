@@ -201,7 +201,7 @@ const CreateAccount = () => {
               name="accountType"
             >
               <option value="">
-                {touched.aacountType && errors.accountType ? (
+                {touched.accountType && errors.accountType ? (
                   <p className="text-danger">{errors.accountType}</p>
                 ) : (
                   "Select Account Type"

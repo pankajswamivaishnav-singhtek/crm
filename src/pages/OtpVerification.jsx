@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // css
 import "../styles/signup.page.css";
 import "../styles/forgot.page.css";
@@ -8,22 +8,31 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 // React Router Dom
 import { Link } from "react-router-dom";
 
+// Formik
+import { useFormik } from "formik";
+import { otpVerificationSchema } from "../schema/FormValidation";
+
+// Images
+import otpImg from "../images/otp_img.png";
 const OtpVerification = () => {
-  const [data, setData] = useState({
-    digit1: "",
-    digit2: "",
-    digit3: "",
-    digit4: "",
-  });
-  const inputEvent = (event) => {
-    const { name, value } = event.target;
-    setData({ ...data, [name]: value });
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const finalOtp = data.digit1 + data.digit2 + data.digit3 + data.digit4;
-    console.log(finalOtp);
-  };
+  // Form Handle & Validations
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        digit1: "",
+        digit2: "",
+        digit3: "",
+        digit4: "",
+      },
+
+      validationSchema: otpVerificationSchema,
+      onSubmit: (values, { resetForm }) => {
+        const finalOtp =
+          values.digit1 + values.digit2 + values.digit3 + values.digit4;
+        console.log("-----", finalOtp);
+        resetForm();
+      },
+    });
 
   return (
     <div className="container-fluid signup_body_div">
@@ -46,36 +55,52 @@ const OtpVerification = () => {
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        placeholder={
+                          touched.digit1 && errors.digit1 ? errors.digit1 : null
+                        }
                         name="digit1"
-                        value={data.digit1}
-                        onChange={inputEvent}
+                        value={values.digit1}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                     </div>
                     <div className="col-3">
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        placeholder={
+                          touched.digit2 && errors.digit2 ? errors.digit2 : null
+                        }
                         name="digit2"
-                        value={data.digit2}
-                        onChange={inputEvent}
+                        value={values.digit2}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                     </div>
                     <div className="col-3">
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        placeholder={
+                          touched.digit3 && errors.digit3 ? errors.digit3 : null
+                        }
                         name="digit3"
-                        value={data.digit3}
-                        onChange={inputEvent}
+                        value={values.digit3}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                     </div>
                     <div className="col-3">
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        placeholder={
+                          touched.digit4 && errors.digit4 ? errors.digit4 : null
+                        }
                         name="digit4"
-                        value={data.digit4}
-                        onChange={inputEvent}
+                        value={values.digit4}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                     </div>
                   </div>
@@ -98,7 +123,9 @@ const OtpVerification = () => {
         {/* Left Main End */}
         {/* Right Main Div */}
         <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
-          dd
+          <div className="signup_right_mainDiv">
+            <img src={otpImg} alt="otp_img" className="img-fluid" />
+          </div>
         </div>
       </div>
       {/* Right Main Div End*/}

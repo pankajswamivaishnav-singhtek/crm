@@ -1,7 +1,7 @@
 import React from "react";
 // React Icons
-import { PiDotsThreeCircleVertical } from "react-icons/pi";
-import { BsPencil, BsTrash } from "react-icons/bs";
+// import { PiDotsThreeCircleVertical } from "react-icons/pi";
+// import { BsPencil, BsTrash } from "react-icons/bs";
 const DashboardSection1Table = () => {
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
@@ -9,7 +9,7 @@ const DashboardSection1Table = () => {
         <div className="col dashboard_section1_table">
           <h4>My Meeting this month</h4>
         </div>
-        <div className="col dropdown" style={{ textAlign: "end" }}>
+        {/* <div className="col dropdown" style={{ textAlign: "end" }}>
           <PiDotsThreeCircleVertical
             className="dashboard_section1_table_edit_button dropdown-toggle"
             data-bs-toggle="dropdown"
@@ -27,7 +27,7 @@ const DashboardSection1Table = () => {
               </button>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <table className="table">
         <thead>

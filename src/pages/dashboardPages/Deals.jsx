@@ -1,4 +1,6 @@
 import React from "react";
+// CSS
+import "../../styles/dashboardCss/calls.css";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -6,16 +8,14 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import LeadsRightSectionTable from "../../components/shared/LeadsRightSectionTable";
 // React Router Dom
 import { Link } from "react-router-dom";
-const Contact = () => {
+
+const Deals = () => {
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
         {/* Btn div */}
         <div className="dashboard_leads_btn_mainDiv">
           <div className="dashboard_leads_btns_div">
-            {/* <div className="dashboard_leads_print_btn">
-              <MdOutlineLocalPrintshop />
-            </div> */}
             <div className="dashboard_leads_action_btn_div">
               <button
                 className="dashboard_section1_table_edit_button dropdown-toggle"
@@ -47,29 +47,29 @@ const Contact = () => {
             </div>
             <div className="dashboard_leads_create_btn_div">
               <button>
-                <Link className="dashboard_leads_create_link" to="/create-contact">
+                <Link className="dashboard_leads_create_link" to="/create-deal">
                   <span>
                     <MdAdd />
                   </span>
-                  Create Contact
+                  Create Deal
                 </Link>
               </button>
             </div>
           </div>
         </div>
-        {/* Table Div */}
         <div className="dashboard_leads_table_div">
           <LeadsRightSectionTable
             tblHead={{
-              firstHead: "Company Name",
-              secondHead: "Email",
-              thirdHead: "Contact",
-              fourthHead: "Address",
+              firstHead: "Deal Owner",
+              secondHead: "Deal Name",
+              thirdHead: "Amount",
+              fourthHead: "Closing Date",
+              fifthHead: "Contact Name",
             }}
-            redirectLink="/contact-details"
+            redirectLink="/deal-details"
+            data="Pankaj Swmai Vaishnav"
           />
         </div>
-        {/* Pagination Div */}
         <div className="dashboard_leads_pagination_div">
           <nav aria-label="...">
             <ul className="pagination">
@@ -119,4 +119,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Deals;

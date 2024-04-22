@@ -49,7 +49,7 @@
   opacity: 0px;
 }
 
-.navbar_right_menu_img{
+.navbar_right_menu_img {
   padding: 4px;
 }
 
@@ -82,6 +82,14 @@
   margin-left: 5px;
 }
 
+.navbar_dropdown_menu {
+  margin-top: 60px !important;
+}
+
+.navbar_dropdown_icon {
+  color: rgba(88, 105, 255, 1);
+}
+
 /* Sidebar Toggler */
 .sidebar_toggle_icon {
   cursor: pointer;
@@ -101,7 +109,7 @@
   }
 }
 
-@media screen and (max-width: 768px ) {
+@media screen and (max-width: 768px) {
   .dashboard_navbar {
     background-color: rgba(255, 255, 255, 1);
   }
