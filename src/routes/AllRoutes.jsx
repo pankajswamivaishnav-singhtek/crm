@@ -35,6 +35,8 @@ import CallViewDetails from "../pages/dashboardPages/CallViewDetails";
 import Deals from "../pages/dashboardPages/Deals";
 import CreateDeal from "../pages/dashboardPages/CreateDeal";
 import Reports from "../pages/dashboardPages/Reports";
+// Validation Route
+import ValidateRoute from "./ValidateRoute";
 
 const AllRoutes = () => {
   const [isSidebar, setIsSidebar] = useState(true);
@@ -45,29 +47,190 @@ const AllRoutes = () => {
         element={<Main isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
       >
         <Route path="/dummy" element={<Dummy setIsSidebar={setIsSidebar} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/leads" element={<Leads />} />
-        <Route path="/create-lead" element={<CreateLead />} />
-        <Route path="/lead-details" element={<LeadCostumerDetails />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/create-contact" element={<CreateContact />} />
-        <Route path="/contact-details" element={<ContactCostumerDetails />} />
-        <Route path="/accounts" element={<Accounts />} />
-        <Route path="/create-account" element={<CreateAccount />} />
-        <Route path="/account-details" element={<AccountCostumerDetails />} />
-        <Route path="/tasks" element={<Task />} />
-        <Route path="/create-task" element={<CreateTask />} />
-        <Route path="/task-details" element={<TaskDetails />} />
-        <Route path="/meetings" element={<Meetings />} />
-        <Route path="/create-meeting" element={<CreateMeeting />} />
-        <Route path="/meetings-details" element={<MeetingsViewDetails />} />
-        <Route path="/calls" element={<Calls />} />
-        <Route path="/schedule-call" element={<ScheduleCall />} />
-        <Route path="/log-call" element={<LogCall />} />
-        <Route path="/call-details" element={<CallViewDetails />} />
-        <Route path="/deals" element={<Deals />} />
-        <Route path="/create-deal" element={<CreateDeal />} />
-        <Route path="/reports" element={<Reports />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ValidateRoute>
+              <Dashboard />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/leads"
+          element={
+            <ValidateRoute>
+              <Leads />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/create-lead"
+          element={
+            <ValidateRoute>
+              <CreateLead />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/lead-details"
+          element={
+            <ValidateRoute>
+              <LeadCostumerDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <ValidateRoute>
+              <Contact />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/create-contact"
+          element={
+            <ValidateRoute>
+              <CreateContact />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/contact-details"
+          element={
+            <ValidateRoute>
+              <ContactCostumerDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/accounts"
+          element={
+            <ValidateRoute>
+              <Accounts />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/create-account"
+          element={
+            <ValidateRoute>
+              <CreateAccount />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/account-details"
+          element={
+            <ValidateRoute>
+              <AccountCostumerDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            <ValidateRoute>
+              <Task />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/create-task"
+          element={
+            <ValidateRoute>
+              <CreateTask />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/task-details"
+          element={
+            <ValidateRoute>
+              <TaskDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/meetings"
+          element={
+            <ValidateRoute>
+              <Meetings />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/create-meeting"
+          element={
+            <ValidateRoute>
+              <CreateMeeting />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/meetings-details"
+          element={
+            <ValidateRoute>
+              <MeetingsViewDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/calls"
+          element={
+            <ValidateRoute>
+              <Calls />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/schedule-call"
+          element={
+            <ValidateRoute>
+              <ScheduleCall />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/log-call"
+          element={
+            <ValidateRoute>
+              <LogCall />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/call-details"
+          element={
+            <ValidateRoute>
+              <CallViewDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/deals"
+          element={
+            <ValidateRoute>
+              <Deals />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/create-deal"
+          element={
+            <ValidateRoute>
+              <CreateDeal />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <ValidateRoute>
+              <Reports />
+            </ValidateRoute>
+          }
+        />
       </Route>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<Signup />} />

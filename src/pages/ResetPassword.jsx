@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // css
 import "../styles/signup.page.css";
 import "../styles/login.page.css";
@@ -15,23 +15,43 @@ import { resetPasswordFormSchema } from "../schema/FormValidation";
 // Images
 import resetImg from "../images/reset_img.png";
 
+// Api Calling & Functions
+// import { resetPasswordValidate } from "../controller/fetchApi";
+import { resetPassword } from "../controller/fetchApi";
+
 const ResetPassword = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const uid = queryParams.get("uid");
+  console.log(uid);
+  // resetPasswordValidate(uid);
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
+        email: "",
         password: "",
         confirmPassword: "",
       },
 
       validationSchema: resetPasswordFormSchema,
-      onSubmit: (values, { resetForm }) => {
-        console.log("-----", values);
-        resetForm();
-        setShowToast(true);
+      onSubmit: async (values, { resetForm }) => {
+        try {
+          const setPasswordSuccessFully = await resetPassword(
+            values,
+            uid,
+            setShowToast
+          );
+          if (setPasswordSuccessFully) {
+            console.log(setPasswordSuccessFully, "Successfully set Password");
+            resetForm();
+          }
+        } catch (error) {
+          console.error("Error occurred while resetting password:", error);
+          // Handle error here, e.g., show error message to the user
+        }
       },
     });
-
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -59,6 +79,30 @@ const ResetPassword = () => {
                   Reset Password
                 </p>
                 <div className="formGroup">
+                  {/*Email*/}
+                  <div className="signup_input_div">
+                    <div className="mb-3 position-relative">
+                      <label
+                        htmlFor="exampleFormControlInput1"
+                        className="form-label signup_div_input"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control signup_email_form_control reset_password_form_control"
+                        id="exampleFormControlInput1"
+                        placeholder={
+                          touched.email && errors.email ? errors.email : "*****"
+                        }
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <FaEyeSlash className="signup_input_icons" />
+                    </div>
+                  </div>
                   {/*Password */}
                   <div className="signup_input_div">
                     <div className="mb-3 position-relative">
@@ -120,7 +164,7 @@ const ResetPassword = () => {
                 </div>
               </form>
               {/* Toast */}
-              {showToast && (
+              {showToast.message && (
                 <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
                   <div
                     className="toast show create_lead_toast"
@@ -130,17 +174,17 @@ const ResetPassword = () => {
                   >
                     <div className="toast-header create_lead_toast_header">
                       <strong className="me-auto">
-                        Form Submitted Successfully
+                        {showToast.success ? "Success" : "Error"}
                       </strong>
                       <button
                         type="button"
                         className="btn-close"
-                        onClick={() => setShowToast(false)}
+                        onClick={() =>
+                          setShowToast({ success: false, message: "" })
+                        }
                       />
                     </div>
-                    <div className="toast-body">
-                      Update Password successfully.
-                    </div>
+                    <div className="toast-body">{showToast.message}</div>
                   </div>
                 </div>
               )}

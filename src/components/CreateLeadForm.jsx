@@ -11,10 +11,15 @@ import { BsBuildingsFill } from "react-icons/bs";
 import { FaTreeCity } from "react-icons/fa6";
 import { FaLandmarkFlag } from "react-icons/fa6";
 import { registerSchema } from "../schema/FormValidation";
+// Controller Api Methods
+import { createLead } from "../controller/fetchApi";
 
 const CreateLeadForm = () => {
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const uid = userIdTokenData?.data?.userId;
+
   // Toast
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
@@ -50,10 +55,20 @@ const CreateLeadForm = () => {
       },
 
       validationSchema: registerSchema,
-      onSubmit: (values, { resetForm }) => {
+      onSubmit: async (values, { resetForm }) => {
         console.log("-----", values);
-        resetForm();
-        setShowToast(true);
+        try {
+          const registerSuccessFully = await createLead(
+            values,
+            uid,
+            setShowToast
+          );
+          if (registerSuccessFully) {
+            resetForm();
+          }
+        } catch (error) {
+          console.log("Found Error", error);
+        }
       },
     });
 
@@ -402,7 +417,7 @@ const CreateLeadForm = () => {
         </div>
       </form>
       {/* Toast */}
-      {showToast && (
+      {showToast.message && (
         <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
           <div
             className="toast show create_lead_toast"
@@ -415,12 +430,10 @@ const CreateLeadForm = () => {
               <button
                 type="button"
                 className="btn-close"
-                onClick={() => setShowToast(false)}
+                onClick={() => setShowToast({ success: false, message: "" })}
               />
             </div>
-            <div className="toast-body">
-              Your lead has been created successfully.
-            </div>
+            <div className="toast-body">{showToast.message}</div>
           </div>
         </div>
       )}

@@ -14,20 +14,35 @@ import { forgotPasswordFormSchema } from "../schema/FormValidation";
 
 // Images
 import forgotPasswordImg from "../images/forgot_password.png";
+
+// Api Calls And Functions
+import { forgotPassword } from "../controller/fetchApi";
+
 const ForgotPassword = () => {
+  const [loader, setLoader] = useState(false);
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
         email: "",
-        password: "",
       },
 
       validationSchema: forgotPasswordFormSchema,
-      onSubmit: (values, { resetForm }) => {
-        console.log("-----", values);
-        resetForm();
-        setShowToast(true);
+      onSubmit: async (values, { resetForm }) => {
+        try {
+          console.log("-----", values);
+          setLoader(true);
+          const sentEmailSuccessFully = await forgotPassword(
+            values.email,
+            setShowToast
+          );
+          if (sentEmailSuccessFully) {
+            resetForm();
+            setLoader(false);
+          }
+        } catch (error) {
+          setLoader(false);
+        }
       },
     });
 
@@ -58,31 +73,42 @@ const ForgotPassword = () => {
                 </p>
                 <div className="formGroup">
                   {/* Email */}
-                  <div className="signup_input_div">
-                    <div className="mb-3 position-relative">
-                      <label
-                        htmlFor="exampleFormControlInput1"
-                        className="form-label signup_div_input"
-                      >
-                        Email address
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control signup_email_form_control forgot_email_form_control"
-                        id="exampleFormControlInput1"
-                        name="email"
-                        placeholder={
-                          touched.email && errors.email
-                            ? errors.email
-                            : "email@example.com"
-                        }
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      <HiOutlineMail className="signup_input_icons forgot_input_icons" />
+                  {loader ? (
+                    <p className="signup_div_input">
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Loading...
+                    </p>
+                  ) : (
+                    <div className="signup_input_div">
+                      <div className="mb-3 position-relative">
+                        <label
+                          htmlFor="exampleFormControlInput1"
+                          className="form-label signup_div_input"
+                        >
+                          Email address
+                        </label>
+                        <input
+                          type="email"
+                          className="form-control signup_email_form_control forgot_email_form_control"
+                          id="exampleFormControlInput1"
+                          name="email"
+                          placeholder={
+                            touched.email && errors.email
+                              ? errors.email
+                              : "email@example.com"
+                          }
+                          value={values.email}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <HiOutlineMail className="signup_input_icons forgot_input_icons" />
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
                 {/* Submit Button */}
                 <div className="signup_submit_div">
@@ -92,7 +118,7 @@ const ForgotPassword = () => {
                 </div>
               </form>
               {/* Toast */}
-              {showToast && (
+              {showToast.message && (
                 <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
                   <div
                     className="toast show create_lead_toast"
@@ -102,15 +128,17 @@ const ForgotPassword = () => {
                   >
                     <div className="toast-header create_lead_toast_header">
                       <strong className="me-auto">
-                        Form Submitted Successfully
+                        {showToast.success ? "Success" : "Error"}
                       </strong>
                       <button
                         type="button"
                         className="btn-close"
-                        onClick={() => setShowToast(false)}
+                        onClick={() =>
+                          setShowToast({ success: false, message: "" })
+                        }
                       />
                     </div>
-                    <div className="toast-body">Otp Send successfully.</div>
+                    <div className="toast-body">{showToast.message}</div>
                   </div>
                 </div>
               )}

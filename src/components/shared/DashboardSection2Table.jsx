@@ -1,112 +1,54 @@
-import React from "react";
-// React Icons
+import React, { useEffect, useState } from "react";
+
+// Controller Api's --js data
+import { monthlyTask } from "../../controller/fetchApi";
 
 const DashboardSection2Table = () => {
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const uid = userIdTokenData?.data?.userId;
+  const [monthlyTaskData, setMonthlyTaskData] = useState([]);
+  useEffect(() => {
+    monthlyTask(uid).then((res) => {
+      setMonthlyTaskData(res);
+    });
+  }, [uid]);
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
       <div className="row dashboard_table_main_heading">
         <div className="col dashboard_section1_table">
           <h4>My Open Task This Month</h4>
         </div>
-        {/* <div className="col dropdown" style={{ textAlign: "end" }}>
-          <PiDotsThreeCircleVertical
-            className="dashboard_section1_table_edit_button dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          />
-          <ul className="dropdown-menu" aria-labelledby="editDeleteDropdown">
-            <li>
-              <button className="dropdown-item">
-                <BsPencil className="dashboard_section1_table_editBtn" /> Edit
-              </button>
-            </li>
-            <li>
-              <button className="dropdown-item">
-                <BsTrash className="dashboard_section1_table_deleteBtn" />{" "}
-                Delete
-              </button>
-            </li>
-          </ul>
-        </div> */}
       </div>
-      <table className="table">
-        <thead>
-          <tr className="table-danger dashboard_section1_tableHead_tr">
-            <th scope="col">Contact Name</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Related</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody className="dashboard_section1_tableBody">
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Mark Otto</td>
-            <td>@mdo</td>
-            <td>April 1, 2024</td>
-            <td>10:00 AM</td>
-            <td>10:00 AM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-            <td>2:00 PM</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="dashboard_section2_table_mainDiv">
+        <table className="table">
+          <thead>
+            <tr className="table-danger dashboard_section1_tableHead_tr">
+              <th scope="col">Contact Name</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Due Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody className="dashboard_section1_tableBody">
+            {monthlyTaskData && monthlyTaskData.length > 0 ? (
+              monthlyTaskData.map((deal, index) => (
+                <tr key={index}>
+                  <td>{deal.contact}</td>
+                  <td>{deal.subject}</td>
+                  <td>{deal.priority}</td>
+                  <td>{deal.dueDate}</td>
+                  <td>{deal.status}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No Open Task This Month</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

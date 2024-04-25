@@ -228,3 +228,31 @@
     justify-content: center;
   }
 }
+
+@media screen and (min-width: 1401px) {
+  /* Section 1 */
+  .dashboard_section1_mainDiv {
+    max-height: 24vh;
+    overflow-y: auto;
+  }
+  .dashboard_section1_mainDiv::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+    background: transparent; /* Optional: Set scrollbar background */
+  }
+  .dashboard_section2_table_mainDiv {
+    max-height: 32vh;
+    overflow-y: auto;
+  }
+  .dashboard_section2_table_mainDiv::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+    background: transparent;
+  }
+  .dashboard_section3_table_mainDiv {
+    max-height: 25vh;
+    overflow-y: auto;
+  }
+  .dashboard_section3_table_mainDiv::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+    background: transparent;
+  }
+}

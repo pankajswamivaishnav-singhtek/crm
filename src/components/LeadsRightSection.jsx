@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -6,8 +6,18 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import LeadsRightSectionTable from "./shared/LeadsRightSectionTable";
 // React Router Dom
 import { Link } from "react-router-dom";
-
+// Controllers Api Methods
+import { getAllLead } from "../controller/fetchApi";
 const LeadsRightSection = () => {
+  let pageNo = 0;
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const uid = userIdTokenData?.data?.userId;
+  const [getAllLeadData, setAllLeadsData] = useState([]);
+  useEffect(() => {
+    getAllLead(uid, pageNo).then((res) => {
+      setAllLeadsData(res);
+    });
+  }, [uid, pageNo]);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
@@ -61,8 +71,11 @@ const LeadsRightSection = () => {
               secondHead: "First Name",
               thirdHead: "Lead Source",
               fourthHead: "Lead Status",
+
             }}
             redirectLink="/lead-details"
+            getAllLeadData={getAllLeadData}
+            tableName="leadsTable"
           />
         </div>
         <div className="dashboard_leads_pagination_div">
@@ -103,7 +116,7 @@ const LeadsRightSection = () => {
               </li>
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a className="page-link" href="#!">
-                  <IoIosArrowForward />
+                  <IoIosArrowForward className="btn_IoIosArrowForward" />
                 </a>
               </li>
             </ul>

@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Shared Component
 import DashboardSection2Table from "./shared/DashboardSection2Table";
-// React Icons
 
 // Chart
 import DonutChart from "./shared/DonutChart";
+
+// Controllers Api Method
+import { pipelineDeals } from "../controller/fetchApi";
+
 const DashboardSection2 = () => {
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const uid = userIdTokenData?.data?.userId;
+  const [pipelineDealsData, setPipelineDealsData] = useState([]);
+  useEffect(() => {
+    pipelineDeals(uid).then((res) => {
+      setPipelineDealsData(res);
+    });
+  }, [uid]);
+  // Create a function to get the data array
+  const getDataArray = () => {
+    if (
+      !pipelineDealsData ||
+      pipelineDealsData.length === 0 ||
+      pipelineDealsData === null
+    ) {
+      return [0, 0, 0, 0, 0, 0, 0, 0];
+    }
+    return pipelineDealsData.map((deal) => deal.dealCount);
+  };
   return (
     <div className="row dashboard_row1">
       <div className="col-xl-8 col-md-8">
@@ -46,8 +68,18 @@ const DashboardSection2 = () => {
         <div className="dashboard_section2_chart_mainDiv">
           <div className="dashboard_section2_chart_div">
             <DonutChart
-              data={[30, 20, 10, 10, 20, 10]}
-              labels={["Qualification", "Need Analysis", "Value", "Identify Decision Maker", "Proposal", "Negosition"]}
+              data={getDataArray()}
+              // data={[]}
+              labels={[
+                "Qualification",
+                "Need Analysis",
+                "Value",
+                "Identify Decision Maker",
+                "Proposal",
+                "Negosition",
+                "Won",
+                "Lost",
+              ]}
               height={50}
               width={50}
             />

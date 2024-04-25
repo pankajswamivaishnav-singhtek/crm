@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // css
 import "../styles/signup.page.css";
 import "../styles/login.page.css";
@@ -17,25 +17,15 @@ import { loginFormSchema } from "../schema/FormValidation";
 // Imags
 import orLogin from "../images/orLogin.jpg";
 import loginImg from "../images/login_img.png";
-const Login = () => {
-  // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        email: "",
-        password: "",
-      },
 
-      validationSchema: loginFormSchema,
-      onSubmit: (values, { resetForm }) => {
-        console.log("-----", values);
-        resetForm();
-        setShowToast(true);
-      },
-    });
+// Api Call & Function
+import { loginUser } from "../controller/fetchApi";
+
+const Login = () => {
+  const navigate = useNavigate();
 
   // Toast
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
@@ -45,6 +35,28 @@ const Login = () => {
   if (showToast) {
     hideToast();
   }
+
+  // Form Handle & Validations
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+
+      validationSchema: loginFormSchema,
+      onSubmit: async (values, { resetForm }) => {
+        console.log("-----", values);
+        const loginSuccessFully = await loginUser(values, setShowToast);
+        if (loginSuccessFully) {
+          console.log(loginSuccessFully, "Successfully logged in");
+          navigate("/dashboard");
+        }
+        resetForm();
+        // setShowToast(true);
+      },
+    });
+
   return (
     <div className="container-fluid signup_body_div">
       <div className="row">
@@ -155,7 +167,7 @@ const Login = () => {
                 </div>
               </form>
               {/* Toast */}
-              {showToast && (
+              {showToast.message && (
                 <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
                   <div
                     className="toast show create_lead_toast"
@@ -165,15 +177,19 @@ const Login = () => {
                   >
                     <div className="toast-header create_lead_toast_header">
                       <strong className="me-auto">
-                        Form Submitted Successfully
+                        {showToast.success ? "Success" : "Error"}
                       </strong>
                       <button
                         type="button"
                         className="btn-close"
-                        onClick={() => setShowToast(false)}
+                        // onClick={() => setShowToast(false)}
+                        onClick={() =>
+                          setShowToast({ success: false, message: "" })
+                        }
                       />
                     </div>
-                    <div className="toast-body">Sign In successfully.</div>
+                    {/* <div className="toast-body">Sign In successfully.</div> */}
+                    <div className="toast-body">{showToast.message}</div>
                   </div>
                 </div>
               )}

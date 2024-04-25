@@ -11,11 +11,16 @@ import { FiPhone } from "react-icons/fi";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 // React Router Dom
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Imags
 import orLogin from "../images/orLogin.jpg";
 import signupImg from "../images/signup_img.png";
+// Import Api Function
+import { signupUser } from "../controller/fetchApi";
+
 const Signup = () => {
+  const navigate = useNavigate();
+
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -29,13 +34,15 @@ const Signup = () => {
       },
 
       validationSchema: signupFormSchema,
-      onSubmit: (values, { resetForm }) => {
+      onSubmit: async (values, { resetForm }) => {
         console.log("-----", values);
+        const signupSuccessFully = await signupUser(values, setShowToast);
+        if (signupSuccessFully) {
+          navigate("/dashboard");
+        }
         resetForm();
-        setShowToast(true);
       },
     });
-
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -47,6 +54,7 @@ const Signup = () => {
   if (showToast) {
     hideToast();
   }
+
   return (
     <>
       <div className="container-fluid signup_body_div">
@@ -249,7 +257,7 @@ const Signup = () => {
                   </div>
                 </form>
                 {/* Toast */}
-                {showToast && (
+                {showToast.message && (
                   <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
                     <div
                       className="toast show create_lead_toast"
@@ -259,15 +267,18 @@ const Signup = () => {
                     >
                       <div className="toast-header create_lead_toast_header">
                         <strong className="me-auto">
-                          Form Submitted Successfully
+                          {/* Form Submitted Successfully */}
+                          {showToast.success ? "Success" : "Error"}
                         </strong>
                         <button
                           type="button"
                           className="btn-close"
-                          onClick={() => setShowToast(false)}
+                          onClick={() =>
+                            setShowToast({ success: false, message: "" })
+                          }
                         />
                       </div>
-                      <div className="toast-body">Sign up successfully.</div>
+                      <div className="toast-body">{showToast.message}</div>
                     </div>
                   </div>
                 )}

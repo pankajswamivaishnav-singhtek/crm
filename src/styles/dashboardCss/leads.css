@@ -248,3 +248,11 @@ input[type="text"] {
     line-height: auto;
   }
 }
+
+@media screen and (min-width: 1401px) {
+  .LeadRightSectionTable_body {
+    max-height: 75vh !important;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+}

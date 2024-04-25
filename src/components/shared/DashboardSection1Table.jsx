@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // React Icons
 // import { PiDotsThreeCircleVertical } from "react-icons/pi";
 // import { BsPencil, BsTrash } from "react-icons/bs";
+
+// Controller Api's --js data
+import { monthlyMeetings } from "../../controller/fetchApi";
+
 const DashboardSection1Table = () => {
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const uid = userIdTokenData?.data?.userId;
+  const [monthlyMeetingsData, setMonthlyMeetingsData] = useState([]);
+  useEffect(() => {
+    monthlyMeetings(uid).then((res) => {
+      setMonthlyMeetingsData(res);
+    });
+  }, [uid]);
+
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
       <div className="row dashboard_table_main_heading">
@@ -29,54 +42,34 @@ const DashboardSection1Table = () => {
           </ul>
         </div> */}
       </div>
-      <table className="table">
-        <thead>
-          <tr className="table-danger dashboard_section1_tableHead_tr">
-            <th scope="col">Title</th>
-            <th scope="col">Contact Name</th>
-            <th scope="col">Related</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-          </tr>
-        </thead>
-        <tbody className="dashboard_section1_tableBody">
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Mark Otto</td>
-            <td>@mdo</td>
-            <td>April 1, 2024</td>
-            <td>10:00 AM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-          </tr>
-          <tr>
-            <td>My Meeting this month</td>
-            <td>Jacob Thornton</td>
-            <td>@fat</td>
-            <td>April 5, 2024</td>
-            <td>2:00 PM</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="dashboard_section1_mainDiv">
+        <table className="table ">
+          <thead>
+            <tr className="table-danger dashboard_section1_tableHead_tr">
+              <th scope="col">Title</th>
+              <th scope="col">Related</th>
+              <th scope="col">Date</th>
+              <th scope="col">Location</th>
+            </tr>
+          </thead>
+          <tbody className="dashboard_section1_tableBody">
+            {monthlyMeetingsData && monthlyMeetingsData.length > 0 ? (
+              monthlyMeetingsData?.map((meeting, index) => (
+                <tr key={index}>
+                  <td>{meeting.title}</td>
+                  <td>{meeting.relatedTo}</td>
+                  <td>{meeting.date}</td>
+                  <td>{meeting.location}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No Meetings found This Month</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

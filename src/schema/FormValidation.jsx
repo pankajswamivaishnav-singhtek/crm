@@ -24,6 +24,7 @@ export const forgotPasswordFormSchema = Yup.object({
 
 // Reset Password Form Schema
 export const resetPasswordFormSchema = Yup.object({
+  email: Yup.string().required("Email is required"),
   password: Yup.string().required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")

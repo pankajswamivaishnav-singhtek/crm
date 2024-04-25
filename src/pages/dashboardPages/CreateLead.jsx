@@ -41,7 +41,7 @@ const CreateLead = () => {
       </div>
       {/* Form */}
       <div className="create_leads_form_div">
-        <CreateLeadForm/>
+        <CreateLeadForm />
       </div>
     </div>
   );

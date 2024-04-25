@@ -7,7 +7,6 @@ import DashboardSection1 from "../../components/DashboardSection1";
 import DashboardSection2 from "../../components/DashboardSection2";
 import DashboardSection3 from "../../components/DashboardSection3";
 const Dashboard = () => {
-
   return (
     <div className="dashboard_main_container container-fluid">
       <div className="dashboard_username_div">

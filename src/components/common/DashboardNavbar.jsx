@@ -10,6 +10,9 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOutCircle } from "react-icons/bi";
 
+// Controller Api
+import { logoutUser } from "../../controller/fetchApi";
+
 const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Page Name -----Start-------
   const location = useLocation();
@@ -129,6 +132,13 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
     setIsSidebar((prev) => !prev);
   };
 
+  // Logout User
+  const logoutUserSubmit = () => {
+    logoutUser();
+    localStorage.clear();
+    window.location.href = "/login";
+  };
+
   return (
     <nav className="navbar navbar-expand-lg  dashboard_navbar">
       <div className="container-fluid dashboard_navbar_container_fluid">
@@ -192,14 +202,19 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                   <Link className="text-decoration-none">
                     <li>
                       <a className="dropdown-item" href="#!">
-                        <CgProfile className="me-1 navbar_dropdown_icon"/> Update Profile
+                        <CgProfile className="me-1 navbar_dropdown_icon" />{" "}
+                        Update Profile
                       </a>
                     </li>
                   </Link>
                   <Link className="text-decoration-none">
                     <li>
-                      <a className="dropdown-item" href="#!">
-                        <BiLogOutCircle className="me-2 navbar_dropdown_icon"/>
+                      <a
+                        className="dropdown-item"
+                        href="#!"
+                        onClick={logoutUserSubmit}
+                      >
+                        <BiLogOutCircle className="me-2 navbar_dropdown_icon" />
                         Logout
                       </a>
                     </li>
