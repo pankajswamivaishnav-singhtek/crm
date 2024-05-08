@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -10,12 +10,12 @@ import { BsCurrencyRupee } from "react-icons/bs";
 import { BsBuildingsFill } from "react-icons/bs";
 import { FaTreeCity } from "react-icons/fa6";
 import { FaLandmarkFlag } from "react-icons/fa6";
-import { registerSchema } from "../schema/FormValidation";
+import { updateRegisterSchema } from "../schema/FormValidation";
 // Controller Api Methods
-import { createLead } from "../controller/fetchApi";
-const CreateLeadForm = () => {
+import { updateSingleLead } from "../controller/fetchApi";
+// import Context
+const CreateUpdateForm = ({ leadCostumerId, defaultValue }) => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -25,55 +25,80 @@ const CreateLeadForm = () => {
       setShowToast(false);
     }, 3000);
   };
+
   if (showToast) {
     hideToast();
   }
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        leadOwner: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        mobileNumber: "",
-        secondaryMobileNumber: "",
-        leadSource: "",
-        leadStatus: "",
-        annualRevenue: "",
-        companyName: "",
-        companyEmail: "",
-        companyContact: "",
-        secondaryContact: "",
-        city: "",
-        district: "",
-        state: "",
-        country: "",
-        description: "",
-      },
+  const formik = useFormik({
+    initialValues: {
+      leadOwner: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobileNumber: "",
+      secondaryMobileNumber: "",
+      leadSource: "",
+      leadStatus: "",
+      annualRevenue: "",
+      companyName: "",
+      companyEmail: "",
+      companyContact: "",
+      secondaryContact: "",
+      city: "",
+      district: "",
+      state: "",
+      country: "",
+      description: "",
+    },
 
-      validationSchema: registerSchema,
-      onSubmit: async (values, { resetForm }) => {
-        console.log("-----", values);
-        try {
-          const registerSuccessFully = await createLead(
-            values,
-            uid,
-            setShowToast,
-            tokenId
-          );
-
-          if (registerSuccessFully) {
-            resetForm();
-          }
-        } catch (error) {
-          console.log("Found Error", error);
+    validationSchema: updateRegisterSchema,
+    onSubmit: async (values, { resetForm }) => {
+      console.log("-----", values);
+      try {
+        const updateSuccessFully = await updateSingleLead(
+          values,
+          leadCostumerId,
+          setShowToast,
+          tokenId
+        );
+        if (updateSuccessFully) {
+          resetForm();
         }
-      },
-    });
+      } catch (error) {
+        console.log("Found Error", error);
+      }
+    },
+  });
+  useEffect(() => {
+    if (defaultValue) {
+      formik.setValues({
+        ...formik.values,
+        leadOwner: defaultValue.leadOwner || "",
+        firstName: defaultValue.firstName || "",
+        lastName: defaultValue.lastName || "",
+        email: defaultValue.email || "",
+        mobileNumber: defaultValue.mobile || "",
+        secondaryMobileNumber: defaultValue.secondaryMobile || "",
+        leadSource: defaultValue.leadSource || "",
+        leadStatus: defaultValue.leadStatus || "",
+        annualRevenue: defaultValue.annualRevenue || "",
+        companyName: defaultValue.companyName || "",
+        companyEmail: defaultValue.companyEmail || "",
+        companyContact: defaultValue.companyContact || "",
+        secondaryContact: defaultValue.secondaryContact || "",
+        city: defaultValue.city || "",
+        district: defaultValue.district || "",
+        state: defaultValue.state || "",
+        country: defaultValue.country || "",
+        description: defaultValue.description || "",
+        // set other fields similarly
+      });
+    }
+  }, [defaultValue]);
   return (
     <div className="create_lead_form_main_div">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         {/* User Information */}
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
@@ -82,12 +107,14 @@ const CreateLeadForm = () => {
               type="text"
               id="leadOwner"
               className="form-control create_lead_form_input"
-              value={values.leadOwner}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.leadOwner}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="leadOwner"
               placeholder={
-                touched.leadOwner && errors.leadOwner ? errors.leadOwner : null
+                formik.touched.leadOwner && formik.errors.leadOwner
+                  ? formik.errors.leadOwner
+                  : null
               }
             />
             <MdAdminPanelSettings className="create_lead_input_icon" />
@@ -98,12 +125,14 @@ const CreateLeadForm = () => {
               type="text"
               id="firstName"
               className="form-control create_lead_form_input"
-              value={values.firstName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="firstName"
               placeholder={
-                touched.firstName && errors.firstName ? errors.firstName : null
+                formik.touched.firstName && formik.errors.firstName
+                  ? formik.errors.firstName
+                  : null
               }
             />
             <FaUserTie className="create_lead_input_icon" />
@@ -114,12 +143,14 @@ const CreateLeadForm = () => {
               type="text"
               id="lastName"
               className="form-control create_lead_form_input"
-              value={values.lastName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="lastName"
               placeholder={
-                touched.lastName && errors.lastName ? errors.lastName : null
+                formik.touched.lastName && formik.errors.lastName
+                  ? formik.errors.lastName
+                  : null
               }
             />
             <FaUserTie className="create_lead_input_icon" />
@@ -130,11 +161,15 @@ const CreateLeadForm = () => {
               type="email"
               id="email"
               className="form-control create_lead_form_input"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="email"
-              placeholder={touched.email && errors.email ? errors.email : null}
+              placeholder={
+                formik.touched.email && formik.errors.email
+                  ? formik.errors.email
+                  : null
+              }
             />
             <MdEmail className="create_lead_input_icon" />
           </div>
@@ -144,13 +179,13 @@ const CreateLeadForm = () => {
               type="tel"
               id="mobileNumber"
               className="form-control create_lead_form_input"
-              value={values.mobileNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.mobileNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="mobileNumber"
               placeholder={
-                touched.mobileNumber && errors.mobileNumber
-                  ? errors.mobileNumber
+                formik.touched.mobileNumber && formik.errors.mobileNumber
+                  ? formik.errors.mobileNumber
                   : null
               }
             />
@@ -164,13 +199,14 @@ const CreateLeadForm = () => {
               type="tel"
               id="secondaryMobileNumber"
               className="form-control create_lead_form_input"
-              value={values.secondaryMobileNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.secondaryMobileNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="secondaryMobileNumber"
               placeholder={
-                touched.secondaryMobileNumber && errors.secondaryMobileNumber
-                  ? errors.secondaryMobileNumber
+                formik.touched.secondaryMobileNumber &&
+                formik.errors.secondaryMobileNumber
+                  ? formik.errors.secondaryMobileNumber
                   : null
               }
             />
@@ -181,14 +217,14 @@ const CreateLeadForm = () => {
             <select
               id="leadSource"
               className="form-control"
-              value={values.leadSource}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.leadSource}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="leadSource"
             >
               <option value="">
-                {touched.leadSource && errors.leadSource ? (
-                  <p className="text-danger">{errors.leadSource}</p>
+                {formik.touched.leadSource && formik.errors.leadSource ? (
+                  <p className="text-danger">{formik.errors.leadSource}</p>
                 ) : (
                   "Select Lead Source"
                 )}
@@ -207,14 +243,14 @@ const CreateLeadForm = () => {
             <select
               id="leadStatus"
               className="form-control"
-              value={values.leadStatus}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.leadStatus}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="leadStatus"
             >
               <option value="">
-                {touched.leadStatus && errors.leadStatus ? (
-                  <p className="text-danger">{errors.leadStatus}</p>
+                {formik.touched.leadStatus && formik.errors.leadStatus ? (
+                  <p className="text-danger">{formik.errors.leadStatus}</p>
                 ) : (
                   "Select Lead Status"
                 )}
@@ -237,13 +273,13 @@ const CreateLeadForm = () => {
               type="tel"
               id="annualRevenue"
               className="form-control create_lead_form_input"
-              value={values.annualRevenue}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.annualRevenue}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="annualRevenue"
               placeholder={
-                touched.annualRevenue && errors.annualRevenue
-                  ? errors.annualRevenue
+                formik.touched.annualRevenue && formik.errors.annualRevenue
+                  ? formik.errors.annualRevenue
                   : null
               }
             />
@@ -255,13 +291,13 @@ const CreateLeadForm = () => {
               type="text"
               id="companyName"
               className="form-control create_lead_form_input"
-              value={values.companyName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.companyName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="companyName"
               placeholder={
-                touched.companyName && errors.companyName
-                  ? errors.companyName
+                formik.touched.companyName && formik.errors.companyName
+                  ? formik.errors.companyName
                   : null
               }
             />
@@ -273,13 +309,13 @@ const CreateLeadForm = () => {
               type="email"
               id="companyEmail"
               className="form-control create_lead_form_input"
-              value={values.companyEmail}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.companyEmail}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="companyEmail"
               placeholder={
-                touched.companyEmail && errors.companyEmail
-                  ? errors.companyEmail
+                formik.touched.companyEmail && formik.errors.companyEmail
+                  ? formik.errors.companyEmail
                   : null
               }
             />
@@ -291,13 +327,13 @@ const CreateLeadForm = () => {
               type="tel"
               id="companyContact"
               className="form-control create_lead_form_input"
-              value={values.companyContact}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.companyContact}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="companyContact"
               placeholder={
-                touched.companyContact && errors.companyContact
-                  ? errors.companyContact
+                formik.touched.companyContact && formik.errors.companyContact
+                  ? formik.errors.companyContact
                   : null
               }
             />
@@ -309,13 +345,14 @@ const CreateLeadForm = () => {
               type="tel"
               id="secondaryContact"
               className="form-control create_lead_form_input"
-              value={values.secondaryContact}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.secondaryContact}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="secondaryContact"
               placeholder={
-                touched.secondaryContact && errors.secondaryContact
-                  ? errors.secondaryContact
+                formik.touched.secondaryContact &&
+                formik.errors.secondaryContact
+                  ? formik.errors.secondaryContact
                   : null
               }
             />
@@ -327,11 +364,15 @@ const CreateLeadForm = () => {
               type="text"
               id="city"
               className="form-control create_lead_form_input"
-              value={values.city}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.city}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="city"
-              placeholder={touched.city && errors.city ? errors.city : null}
+              placeholder={
+                formik.touched.city && formik.errors.city
+                  ? formik.errors.city
+                  : null
+              }
             />
             <FaTreeCity className="create_lead_input_icon" />
           </div>
@@ -341,12 +382,14 @@ const CreateLeadForm = () => {
               type="text"
               id="district"
               className="form-control create_lead_form_input"
-              value={values.district}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.district}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="district"
               placeholder={
-                touched.district && errors.district ? errors.district : null
+                formik.touched.district && formik.errors.district
+                  ? formik.errors.district
+                  : null
               }
             />
             <FaTreeCity className="create_lead_input_icon" />
@@ -357,11 +400,15 @@ const CreateLeadForm = () => {
               type="text"
               id="state"
               className="form-control create_lead_form_input"
-              value={values.state}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.state}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="state"
-              placeholder={touched.state && errors.state ? errors.state : null}
+              placeholder={
+                formik.touched.state && formik.errors.state
+                  ? formik.errors.state
+                  : null
+              }
             />
             <FaTreeCity className="create_lead_input_icon" />
           </div>
@@ -371,12 +418,14 @@ const CreateLeadForm = () => {
               type="text"
               id="country"
               className="form-control create_lead_form_input"
-              value={values.country}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.country}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="country"
               placeholder={
-                touched.country && errors.country ? errors.country : null
+                formik.touched.country && formik.errors.country
+                  ? formik.errors.country
+                  : null
               }
             />
             <FaLandmarkFlag className="create_lead_input_icon" />
@@ -395,14 +444,14 @@ const CreateLeadForm = () => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="description"
               rows="3"
               placeholder={
-                touched.description && errors.description
-                  ? errors.description
+                formik.touched.description && formik.errors.description
+                  ? formik.errors.description
                   : null
               }
             ></textarea>
@@ -440,4 +489,4 @@ const CreateLeadForm = () => {
   );
 };
 
-export default CreateLeadForm;
+export default CreateUpdateForm;

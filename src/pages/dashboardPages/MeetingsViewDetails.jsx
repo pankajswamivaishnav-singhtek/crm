@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // CSS
 import "../../styles/dashboardCss/meetingDetails.css";
+import { getSingleMeeting } from "../../controller/fetchApi";
 const MeetingsViewDetails = () => {
+  const [getSingleMeetingData, setSingleMeetingData] = useState([]);
+  const meetId = JSON.parse(localStorage.getItem("meetId"));
+  const userTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userTokenData?.data?.token;
+  useEffect(() => {
+    getSingleMeeting(meetId, tokenId).then((res) => {
+      setSingleMeetingData(res);
+    });
+  }, [meetId, tokenId]);
+  console.log("Get single meeting data", getSingleMeetingData);
   return (
     <div className="account_view_details_Row">
       <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
@@ -21,7 +32,7 @@ const MeetingsViewDetails = () => {
                       Host
                     </th>
                     <td className="lead_view_details_table_td">
-                      Pankaj Swami Vaishnav
+                      {getSingleMeetingData.host}
                     </td>
                   </tr>
                 </tbody>
@@ -37,7 +48,9 @@ const MeetingsViewDetails = () => {
                     >
                       Title
                     </th>
-                    <td className="lead_view_details_table_td">Seller</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleMeetingData.title}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -53,7 +66,7 @@ const MeetingsViewDetails = () => {
                       Address
                     </th>
                     <td className="lead_view_details_table_td">
-                      Ajmer Road Jaipur
+                      {getSingleMeetingData.location}
                     </td>
                   </tr>
                 </tbody>
@@ -81,12 +94,9 @@ const MeetingsViewDetails = () => {
                 </p>
               </div>
               <div className="participants_name lead_view_details_table_td">
-                <span className="me-2">Pankaj,</span>
-                <span className="me-2">Pankaj,</span>
-                <span className="me-2">Pankaj,</span>
-                <span className="me-2">Pankaj,</span>
-                <span className="me-2">Pankaj,</span>
-                <span className="me-2">Pankaj,</span>
+                {getSingleMeetingData.participants?.map((email) => {
+                  return <span className="me-2">{email},</span>;
+                })}
               </div>
             </div>
 

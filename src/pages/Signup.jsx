@@ -27,6 +27,7 @@ const Signup = () => {
       initialValues: {
         firstName: "",
         lastName: "",
+        userName: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -115,6 +116,32 @@ const Signup = () => {
                           onBlur={handleBlur}
                         />
                         <LuUserCircle className="signup_name_icons" />
+                      </div>
+                    </div>
+                    {/* UserName */}
+                    <div className="signup_input_div ">
+                      <div className="mb-3 position-relative">
+                        <label
+                          htmlFor="exampleFormControlInput1"
+                          className="form-label signup_div_input"
+                        >
+                          Username
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control signup_email_form_control userName_input_signup"
+                          id="exampleFormControlInput1"
+                          name="userName"
+                          placeholder={
+                            touched.userName && errors.userName
+                              ? errors.userName
+                              : "Johndoe123"
+                          }
+                          value={values.userName}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <HiOutlineMail className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Email */}

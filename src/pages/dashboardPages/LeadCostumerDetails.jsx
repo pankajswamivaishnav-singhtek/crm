@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // CSS
 import "../../styles/dashboardCss/leadCostumerDetails.css";
+// Controllers Api Methods
+import { getSingleLead } from "../../controller/fetchApi";
 const LeadCostumerDetails = () => {
+  const userIdTokenData = JSON.parse(localStorage.getItem("leadId"));
+  const leadId = userIdTokenData;
+  const userTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userTokenData?.data?.token;
+  const [getSingleLeadData, setSingleLeadData] = useState([]);
+  useEffect(() => {
+    getSingleLead(leadId, tokenId).then((res) => {
+      setSingleLeadData(res);
+    });
+  }, [leadId, tokenId]);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <h2 className="my-3 mx-2 dashboard_leadView_details_heading">
@@ -19,8 +31,12 @@ const LeadCostumerDetails = () => {
               />
             </div>
             <div className="lead_view_details_costumer_name_email">
-              <p className="lead_view_details_costumer_name">Name</p>
-              <p className="lead_view_details_costumer_email">example@.com</p>
+              <p className="lead_view_details_costumer_name">
+                {getSingleLeadData.firstName}
+              </p>
+              <p className="lead_view_details_costumer_email">
+                {getSingleLeadData.email}
+              </p>
             </div>
           </div>
         </div>
@@ -36,7 +52,9 @@ const LeadCostumerDetails = () => {
                     >
                       Lead Owner
                     </th>
-                    <td className="lead_view_details_table_td">Rajkumar</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.leadOwner}
+                    </td>
                   </tr>
                   <tr>
                     <th
@@ -45,7 +63,9 @@ const LeadCostumerDetails = () => {
                     >
                       Mobile Number
                     </th>
-                    <td className="lead_view_details_table_td">7073272134</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.mobile}
+                    </td>
                   </tr>
                   <tr>
                     <th
@@ -54,7 +74,9 @@ const LeadCostumerDetails = () => {
                     >
                       Lead Status
                     </th>
-                    <td className="lead_view_details_table_td">Contacted</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.leadStatus}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -69,16 +91,20 @@ const LeadCostumerDetails = () => {
                     >
                       Email
                     </th>
-                    <td className="lead_view_details_table_td">Example@.com</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.email}
+                    </td>
                   </tr>
                   <tr>
                     <th
                       scope="row"
                       className="lead_view_details_costumer_table_th"
                     >
-                      Phone Number
+                      Phone
                     </th>
-                    <td className="lead_view_details_table_td">7073272134</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.secondaryMobile}
+                    </td>
                   </tr>
                   <tr>
                     <th
@@ -87,7 +113,9 @@ const LeadCostumerDetails = () => {
                     >
                       Lead Source
                     </th>
-                    <td className="lead_view_details_table_td">Contacted</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.leadSource}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -106,52 +134,37 @@ const LeadCostumerDetails = () => {
               <table className="table table-borderless">
                 <tbody>
                   <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Lead Owner</th>
-                    <td className="lead_view_details_table_td">Rajkumar</td>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Annual Revenue
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.annualRevenue}
+                    </td>
                   </tr>
                   <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Mobile Number</th>
-                    <td className="lead_view_details_table_td">7073272134</td>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Company Contact
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.companyContact}
+                    </td>
                   </tr>
                   <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Lead Status</th>
-                    <td className="lead_view_details_table_td">Contacted</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="table-responsive">
-              <table className="table table-borderless">
-                <tbody>
-                  <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Email</th>
-                    <td className="lead_view_details_table_td">Example@.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Phone Number</th>
-                    <td className="lead_view_details_table_td">7073272134</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Lead Source</th>
-                    <td className="lead_view_details_table_td">Contacted</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="table-responsive">
-              <table className="table table-borderless">
-                <tbody>
-                  <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Email</th>
-                    <td className="lead_view_details_table_td">Example@.com</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Phone Number</th>
-                    <td className="lead_view_details_table_td">7073272134</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Lead Source</th>
-                    <td className="lead_view_details_table_td">Contacted</td>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      District
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.district}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -160,16 +173,76 @@ const LeadCostumerDetails = () => {
               <table className="table table-borderless">
                 <tbody>
                   <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Email</th>
-                    <td className="lead_view_details_table_td">Example@.com</td>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Company Name
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.companyName}
+                    </td>
                   </tr>
                   <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Phone Number</th>
-                    <td className="lead_view_details_table_td">7073272134</td>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Secondary Contact
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.secondaryContact}
+                    </td>
                   </tr>
                   <tr>
-                    <th scope="row"  className="lead_view_details_costumer_table_th">Lead Source</th>
-                    <td className="lead_view_details_table_td">Contacted</td>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      State
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.state}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="table-responsive">
+              <table className="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Company Email
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.companyEmail}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      City
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.city}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Country
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData.country}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -184,12 +257,7 @@ const LeadCostumerDetails = () => {
       <div className="row">
         <div className="col-xl-12 my-1 mx-2">
           <p className="lead_view_details_description">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad autem
-            delectus tempore quisquam! Libero nisi excepturi pariatur explicabo
-            consequatur nam labore earum animi corrupti impedit unde dolorum,
-            amet esse, facere eos eum distinctio voluptatem officiis nobis
-            beatae. Illum porro recusandae maxime earum laudantium animi
-            molestiae, error quibusdam nobis, dolor atque!
+            {getSingleLeadData.description}
           </p>
         </div>
       </div>

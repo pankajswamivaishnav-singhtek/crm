@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { MdEmail } from "react-icons/md";
@@ -9,8 +9,8 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 // CSS
 import "../../styles/dashboardCss/createTask.css";
 // Controller Methods
-import { createTask } from "../../controller/fetchApi";
-const CreateTask = () => {
+import { updateTask } from "../../controller/fetchApi";
+const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
   // Toast
   const [showToast, setShowToast] = useState(false);
   const hideToast = () => {
@@ -23,48 +23,63 @@ const CreateTask = () => {
   }
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        taskOwner: "",
-        taskSubject: "",
-        dueDate: "",
-        contact: "",
-        status: "",
-        priority: "",
-        description: "",
-        accountType: "",
-        reminderDateTime: "",
-      },
+  const formik = useFormik({
+    initialValues: {
+      taskOwner: "",
+      taskSubject: "",
+      dueDate: "",
+      contact: "",
+      status: "",
+      priority: "",
+      description: "",
+      accountType: "",
+      reminderDateTime: "",
+    },
 
-      validationSchema: TaskFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        try {
-          console.log("-----", values);
-          const createTaskSuccessfully = await createTask(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createTaskSuccessfully) {
-            resetForm();
-          }
-        } catch (error) {}
-      },
-    });
+    validationSchema: TaskFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const updateTaskSuccessfully = await updateTask(
+          taskCostumerId,
+          values,
+          setShowToast,
+          tokenId
+        );
+        onUpdateSuccess();
+        if (updateTaskSuccessfully) {
+          resetForm();
+        }
+      } catch (error) {}
+    },
+  });
 
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
+  useEffect(() => {
+    if (defaultValue) {
+      formik.setValues({
+        ...formik.values,
+        taskOwner: defaultValue.taskOwner,
+        dueDate: defaultValue.dueDate,
+        contact: defaultValue.contact,
+        taskSubject: defaultValue.subject,
+        priority: defaultValue.priority,
+        status: defaultValue.status,
+        reminderDateTime: defaultValue.reminder,
+        accountType: defaultValue.accountType,
+        description: defaultValue.description,
+        // set other fields similarly
+      });
+    }
+  }, [defaultValue]);
 
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="row">
           <p className="create_lead_section2_company_info mt-3">
             Company Details
@@ -75,12 +90,14 @@ const CreateTask = () => {
               type="text"
               id="taskOwner"
               className="form-control create_lead_form_input"
-              value={values.companyName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.taskOwner}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="taskOwner"
               placeholder={
-                touched.taskOwner && errors.taskOwner ? errors.taskOwner : null
+                formik.touched.taskOwner && formik.errors.taskOwner
+                  ? formik.errors.taskOwner
+                  : null
               }
             />
             <BsBuildingsFill className="create_lead_input_icon" />
@@ -91,13 +108,13 @@ const CreateTask = () => {
               type="text"
               id="taskSubject"
               className="form-control create_lead_form_input"
-              value={values.companyEmail}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.taskSubject}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="taskSubject"
               placeholder={
-                touched.taskSubject && errors.taskSubject
-                  ? errors.taskSubject
+                formik.touched.taskSubject && formik.errors.taskSubject
+                  ? formik.errors.taskSubject
                   : null
               }
             />
@@ -109,12 +126,14 @@ const CreateTask = () => {
               type="date"
               id="dueDate"
               className="form-control create_lead_form_input"
-              value={values.dueDate}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.dueDate}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="dueDate"
               placeholder={
-                touched.dueDate && errors.dueDate ? errors.dueDate : null
+                formik.touched.dueDate && formik.errors.dueDate
+                  ? formik.errors.dueDate
+                  : null
               }
             />
           </div>
@@ -124,12 +143,14 @@ const CreateTask = () => {
               type="tel"
               id="contact"
               className="form-control create_lead_form_input"
-              value={values.contact}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.contact}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="contact"
               placeholder={
-                touched.contact && errors.contact ? errors.contact : null
+                formik.touched.contact && formik.errors.contact
+                  ? formik.errors.contact
+                  : null
               }
             />
             <FaTreeCity className="create_lead_input_icon" />
@@ -139,14 +160,14 @@ const CreateTask = () => {
             <select
               id="accountType"
               className="form-control"
-              value={values.accountType}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountType}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountType"
             >
               <option value="">
-                {touched.accountType && errors.accountType ? (
-                  <p className="text-danger">{errors.accountType}</p>
+                {formik.touched.accountType && formik.errors.accountType ? (
+                  <p className="text-danger">{formik.errors.accountType}</p>
                 ) : (
                   "Select Account Type"
                 )}
@@ -163,14 +184,14 @@ const CreateTask = () => {
             <select
               id="status"
               className="form-control"
-              value={values.status}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.status}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="status"
             >
               <option value="">
-                {touched.status && errors.status ? (
-                  <p className="text-danger">{errors.status}</p>
+                {formik.touched.status && formik.errors.status ? (
+                  <p className="text-danger">{formik.errors.status}</p>
                 ) : (
                   "Select Status"
                 )}
@@ -188,14 +209,14 @@ const CreateTask = () => {
             <select
               id="priority"
               className="form-control"
-              value={values.priority}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.priority}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="priority"
             >
               <option value="">
-                {touched.priority && errors.priority ? (
-                  <p className="text-danger">{errors.priority}</p>
+                {formik.touched.priority && formik.errors.priority ? (
+                  <p className="text-danger">{formik.errors.priority}</p>
                 ) : (
                   "Priority"
                 )}
@@ -231,9 +252,9 @@ const CreateTask = () => {
                     type="datetime-local"
                     id="reminderDateTime"
                     name="reminderDateTime"
-                    value={values.dateTime}
+                    value={formik.values.dateTime}
                     // onChange={(e) => setDateTime(e.target.value)}
-                    onChange={handleChange}
+                    onChange={formik.handleChange}
                     // value={reminderTime}
                     // onBlur={handleDateTimeChange}
                   />
@@ -254,14 +275,14 @@ const CreateTask = () => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="description"
               rows="3"
               placeholder={
-                touched.description && errors.description
-                  ? errors.description
+                formik.touched.description && formik.errors.description
+                  ? formik.errors.description
                   : null
               }
             ></textarea>
@@ -270,7 +291,7 @@ const CreateTask = () => {
         {/* Submit Button */}
         <div className="text-center">
           <button className="create_lead_form_submitBtn" type="submit">
-            Submit
+            Update
           </button>
         </div>
       </form>
@@ -299,4 +320,4 @@ const CreateTask = () => {
   );
 };
 
-export default CreateTask;
+export default UpdateTask;

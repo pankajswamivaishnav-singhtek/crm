@@ -106,6 +106,10 @@
   opacity: 0px;
 }
 
+.userName_input_signup {
+  width: 100%important;
+}
+
 .signup_submit_button {
   color: #ffffff;
   width: 166px;
@@ -199,7 +203,6 @@
   #signup_left_mainDiv {
     margin: 20px auto;
   }
-
 }
 @media screen and (max-width: 400px) {
   #signup_left_mainDiv {

@@ -8,14 +8,16 @@ import { MdAdd } from "react-icons/md";
 import { MeetingFormSchema } from "../../schema/FormValidation";
 // CSS
 import "../../styles/dashboardCss/createMeeting.css";
-import { getAllContact, createMeeting } from "../../controller/fetchApi";
-const CreateMeeting = () => {
+import { getAllContact, updateMeeting } from "../../controller/fetchApi";
+const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
   // For Particiapnts
   const [getAllContactData, setAllContactData] = useState([]);
   // Get Uid and Tokenid Who Saved In Cookie
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
+  const meetId = JSON.parse(localStorage.getItem("meetId"));
+  //   Get Contact Data for Set participants
   useEffect(() => {
     (async () => {
       try {
@@ -26,7 +28,7 @@ const CreateMeeting = () => {
         console.log(error);
       }
     })();
-  }, [uid, tokenId]);
+  }, [uid, meetId, tokenId]);
 
   // Toast
   const [showToast, setShowToast] = useState(false);
@@ -42,15 +44,7 @@ const CreateMeeting = () => {
   }
 
   // Form Handle & Validations
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: {
       host: "",
       title: "",
@@ -63,12 +57,13 @@ const CreateMeeting = () => {
 
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await createMeeting(
-          uid,
+        const response = await updateMeeting(
+          meetId,
           values,
           setShowToast,
           tokenId
         );
+        onUpdateSuccess();
         if (response) {
           resetForm();
         }
@@ -79,21 +74,41 @@ const CreateMeeting = () => {
     },
   });
 
+  useEffect(() => {
+    if (defaultValue) {
+      formik.setValues({
+        ...formik.values,
+        title: defaultValue.title,
+        address: defaultValue.location,
+        fromTime: defaultValue.fromTime,
+        host: defaultValue.host,
+        participants: defaultValue.participants,
+        relatedTo: defaultValue.relatedTo,
+        repeatStatus: defaultValue.repeatStatus,
+        description: defaultValue.description,
+        date: defaultValue.date,
+        // set other fields similarly
+      });
+    }
+  }, [defaultValue]);
   // Function to handle checkbox toggle
   const handleCheckboxToggle = (email) => {
-    const index = values.participants.indexOf(email);
+    const index = formik.formik.values.participants.indexOf(email);
     if (index === -1) {
-      setFieldValue("participants", [...values.participants, email]);
+      formik.setFieldValue("participants", [
+        ...formik.formik.values.participants,
+        email,
+      ]);
     } else {
-      const newParticipants = [...values.participants];
+      const newParticipants = [...formik.formik.values.participants];
       newParticipants.splice(index, 1);
-      setFieldValue("participants", newParticipants);
+      formik.setFieldValue("participants", newParticipants);
     }
   };
 
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="host">Host</label>
@@ -101,11 +116,15 @@ const CreateMeeting = () => {
               type="text"
               id="host"
               className="form-control create_lead_form_input"
-              value={values.host}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.host}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="host"
-              placeholder={touched.host && errors.host ? errors.host : null}
+              placeholder={
+                formik.touched.host && formik.errors.host
+                  ? formik.errors.host
+                  : null
+              }
             />
             <FaChalkboardUser className="create_lead_input_icon" />
           </div>
@@ -115,11 +134,15 @@ const CreateMeeting = () => {
               type="text"
               id="title"
               className="form-control create_lead_form_input"
-              value={values.title}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.title}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="title"
-              placeholder={touched.title && errors.title ? errors.title : null}
+              placeholder={
+                formik.touched.title && formik.errors.title
+                  ? formik.errors.title
+                  : null
+              }
             />
             <MdOutlineSubtitles className="create_lead_input_icon" />
           </div>
@@ -129,12 +152,14 @@ const CreateMeeting = () => {
               type="text"
               id="address"
               className="form-control create_lead_form_input"
-              value={values.address}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="address"
               placeholder={
-                touched.address && errors.address ? errors.address : null
+                formik.touched.address && formik.errors.address
+                  ? formik.errors.address
+                  : null
               }
             />
             <IoLocationOutline className="create_lead_input_icon" />
@@ -143,16 +168,18 @@ const CreateMeeting = () => {
             <label htmlFor="date">
               Date &nbsp;
               <small className="text-danger">
-                {touched.date && errors.date ? errors.date : null}
+                {formik.touched.date && formik.errors.date
+                  ? formik.errors.date
+                  : null}
               </small>
             </label>
             <input
               type="date"
               id="date"
               className="form-control create_lead_form_input"
-              value={values.date}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.date}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="date"
             />
           </div>
@@ -177,9 +204,11 @@ const CreateMeeting = () => {
                     id={option.id}
                     className="form-check-input"
                     value={option.companyEmail}
-                    // checked={values.participants.includes(option.id)}
+                    // checked={formik.values.participants.includes(option.id)}
                     // onChange={() => handleCheckboxToggle(option.id)}
-                    checked={values.participants.includes(option.companyEmail)}
+                    checked={formik?.values?.participants?.includes(
+                      option.companyEmail
+                    )}
                     onChange={() => handleCheckboxToggle(option.companyEmail)}
                   />
                   <label htmlFor={option.value} className="form-check-label">
@@ -202,14 +231,14 @@ const CreateMeeting = () => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="description"
               rows="3"
               placeholder={
-                touched.description && errors.description
-                  ? errors.description
+                formik.touched.description && formik.errors.description
+                  ? formik.errors.description
                   : null
               }
             ></textarea>
@@ -218,7 +247,7 @@ const CreateMeeting = () => {
         {/* Submit Button */}
         <div className="text-center">
           <button className="create_lead_form_submitBtn" type="submit">
-            Submit
+            Update
           </button>
         </div>
       </form>
@@ -247,4 +276,4 @@ const CreateMeeting = () => {
   );
 };
 
-export default CreateMeeting;
+export default UpdateMeeting;

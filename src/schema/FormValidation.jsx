@@ -5,6 +5,7 @@ export const signupFormSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
+  userName: Yup.string().required("Username is required"),
   password: Yup.string().required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -47,9 +48,32 @@ export const otpVerificationSchema = Yup.object().shape({
     .matches(/^[0-9]{1}$/, "Digit 4 must be a single digit"),
 });
 
-
 // Register Schema Vallidation
 export const registerSchema = Yup.object({
+  leadOwner: Yup.string().required("Lead Owner is required"),
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  mobileNumber: Yup.string().required("Mobile Number is required"),
+  secondaryMobileNumber: Yup.string(),
+  leadSource: Yup.string().required("Lead Source is required"),
+  leadStatus: Yup.string().required("Lead Status is required"),
+  annualRevenue: Yup.number().required("Annual Revenue is required"),
+  companyName: Yup.string().required("Company Name is required"),
+  companyEmail: Yup.string()
+    .email("Invalid email")
+    .required("Company Email is required"),
+  companyContact: Yup.string(),
+  secondaryContact: Yup.string(),
+  city: Yup.string().required("City is required"),
+  district: Yup.string().required("District is required"),
+  state: Yup.string().required("State is required"),
+  country: Yup.string().required("Country is required"),
+  description: Yup.string(),
+});
+
+// Update Schema validation
+export const updateRegisterSchema = Yup.object({
   leadOwner: Yup.string().required("Lead Owner is required"),
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
@@ -118,7 +142,7 @@ export const TaskFormSchema = Yup.object({
   description: Yup.string().required("Task Description is required"),
   priority: Yup.string().required("Task Priority is required"),
   status: Yup.string().required("Status is required"),
-  dueDate: Yup.string().required("Due Date is required"),
+  dueDate: Yup.date().required("Due Date is required"),
   contact: Yup.number().required("Contact is required and must be a number"),
   accountType: Yup.string().required("Account Type is required"),
 });

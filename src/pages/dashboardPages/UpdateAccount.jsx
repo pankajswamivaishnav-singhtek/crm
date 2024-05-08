@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -9,9 +9,14 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { BsBuildingsFill } from "react-icons/bs";
 import { accountFormSchema } from "../../schema/FormValidation";
+
 // Controller Api Methods
-import { createAccount } from "../../controller/fetchApi";
-const CreateAccount = () => {
+import { updateSingleAccount } from "../../controller/fetchApi";
+const UpdateAccount = ({
+  accountCostumerId,
+  defaultValue,
+  onUpdateSuccess,
+}) => {
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -25,60 +30,90 @@ const CreateAccount = () => {
   }
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
+  const accountId = JSON.parse(localStorage.getItem("accountId"));
   const tokenId = userIdTokenData?.data?.token;
-
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        accountOwner: "",
-        accountName: "",
-        accountSite: "",
-        parentAccount: "",
-        accountNumber: "",
-        aadharNumber: "",
-        panCardNumber: "",
-        accountType: "",
-        industry: "",
-        annualRevenue: "",
-        address: "",
-        billingAddress: "",
-        billingCity: "",
-        billingState: "",
-        billingCode: "",
-        shippingStreet: "",
-        shippingCity: "",
-        shippingState: "",
-        shippingCode: "",
-        shippingAddress: "",
-        dateOfIssue: new Date(Date.now()), // for date
-        dateOfBilling: new Date(Date.now()),
-        dateOfShipment: new Date(Date.now()),
-        description: "",
-      },
-      validationSchema: accountFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        console.log("Value", values);
-        try {
-          console.log("Enter Account Function");
-          const createSuccessfully = await createAccount(
-            values,
-            uid,
-            setShowToast,
-            tokenId
-          );
-          if (createSuccessfully) {
-            resetForm();
-          }
-        } catch (error) {
-          console.log("Did Not Create Account", error);
+  const formik = useFormik({
+    initialValues: {
+      accountOwner: "",
+      accountName: "",
+      accountSite: "",
+      parentAccount: "",
+      accountNumber: "",
+      aadharNumber: "",
+      panCardNumber: "",
+      accountType: "",
+      industry: "",
+      annualRevenue: "",
+      address: "",
+      billingAddress: "",
+      billingCity: "",
+      billingState: "",
+      billingCode: "",
+      shippingStreet: "",
+      shippingCity: "",
+      shippingState: "",
+      shippingCode: "",
+      shippingAddress: "",
+      dateOfIssue: new Date(Date.now()), // for date
+      dateOfBilling: new Date(Date.now()),
+      dateOfShipment: new Date(Date.now()),
+      description: "",
+    },
+    validationSchema: accountFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      console.log("Value", values);
+      try {
+        const updateSuccessFully = await updateSingleAccount(
+          values,
+          accountId,
+          setShowToast,
+          tokenId
+        );
+        onUpdateSuccess();
+        if (updateSuccessFully) {
+          resetForm();
         }
-      },
-    });
+      } catch (error) {
+        console.log("Did Not Create Account", error);
+      }
+    },
+  });
+  useEffect(() => {
+    if (defaultValue) {
+      formik.setValues({
+        ...formik.values,
+        accountOwner: defaultValue.accountOwner,
+        accountName: defaultValue.accountName,
+        accountSite: defaultValue.accountSite,
+        parentAccount: defaultValue.parentAccount,
+        accountNumber: defaultValue.accountNumber,
+        aadharNumber: defaultValue.aadharCard,
+        panCardNumber: defaultValue.panCard,
+        accountType: defaultValue.accountType,
+        industry: defaultValue.industry,
+        annualRevenue: defaultValue.annualRevenue,
+        address: defaultValue.addressInformation,
+        billingAddress: defaultValue.billingAddress,
+        billingCity: defaultValue.billingCity,
+        billingState: defaultValue.billingState,
+        billingCode: defaultValue.billingCode,
+        shippingStreet: defaultValue.shippingStreet,
+        shippingCity: defaultValue.shippingCity,
+        shippingState: defaultValue.shippingState,
+        shippingCode: defaultValue.shippingCode,
+        shippingAddress: defaultValue.shippingAddress,
+        dateOfIssue: defaultValue.dateOfIssue,
+        dateOfBilling: defaultValue.dateOfBilling,
+        dateOfShipment: defaultValue.dateOfShipment,
+        description: defaultValue.dealDescription,
+        // set other fields similarly
+      });
+    }
+  }, [defaultValue]);
   return (
     <div className="create_lead_form_main_div">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         {/* User Account Information */}
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
@@ -87,13 +122,13 @@ const CreateAccount = () => {
               type="text"
               id="accountOwner"
               className="form-control create_lead_form_input"
-              value={values.accountOwner}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountOwner}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountOwner"
               placeholder={
-                touched.accountOwner && errors.accountOwner
-                  ? errors.accountOwner
+                formik.touched.accountOwner && formik.errors.accountOwner
+                  ? formik.errors.accountOwner
                   : null
               }
             />
@@ -105,13 +140,13 @@ const CreateAccount = () => {
               type="text"
               id="accountName"
               className="form-control create_lead_form_input"
-              value={values.accountName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountName"
               placeholder={
-                touched.accountName && errors.accountName
-                  ? errors.accountName
+                formik.touched.accountName && formik.errors.accountName
+                  ? formik.errors.accountName
                   : null
               }
             />
@@ -123,13 +158,13 @@ const CreateAccount = () => {
               type="text"
               id="accountSite"
               className="form-control create_lead_form_input"
-              value={values.accountSite}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountSite}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountSite"
               placeholder={
-                touched.accountSite && errors.accountSite
-                  ? errors.accountSite
+                formik.touched.accountSite && formik.errors.accountSite
+                  ? formik.errors.accountSite
                   : null
               }
             />
@@ -141,13 +176,13 @@ const CreateAccount = () => {
               type="text"
               id="parentAccount"
               className="form-control create_lead_form_input"
-              value={values.parentAccount}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.parentAccount}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="parentAccount"
               placeholder={
-                touched.parentAccount && errors.parentAccount
-                  ? errors.parentAccount
+                formik.touched.parentAccount && formik.errors.parentAccount
+                  ? formik.errors.parentAccount
                   : null
               }
             />
@@ -159,13 +194,13 @@ const CreateAccount = () => {
               type="tel"
               id="accountNumber"
               className="form-control create_lead_form_input"
-              value={values.accountNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountNumber"
               placeholder={
-                touched.accountNumber && errors.accountNumber
-                  ? errors.accountNumber
+                formik.touched.accountNumber && formik.errors.accountNumber
+                  ? formik.errors.accountNumber
                   : null
               }
             />
@@ -177,13 +212,13 @@ const CreateAccount = () => {
               type="tel"
               id="aadharNumber"
               className="form-control create_lead_form_input"
-              value={values.aadharNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.aadharNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="aadharNumber"
               placeholder={
-                touched.aadharNumber && errors.aadharNumber
-                  ? errors.aadharNumber
+                formik.touched.aadharNumber && formik.errors.aadharNumber
+                  ? formik.errors.aadharNumber
                   : null
               }
             />
@@ -195,13 +230,13 @@ const CreateAccount = () => {
               type="text"
               id="panCardNumber"
               className="form-control create_lead_form_input"
-              value={values.panCardNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.panCardNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="panCardNumber"
               placeholder={
-                touched.panCardNumber && errors.panCardNumber
-                  ? errors.panCardNumber
+                formik.touched.panCardNumber && formik.errors.panCardNumber
+                  ? formik.errors.panCardNumber
                   : null
               }
             />
@@ -212,14 +247,14 @@ const CreateAccount = () => {
             <select
               id="accountType"
               className="form-control"
-              value={values.accountType}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountType}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountType"
             >
               <option value="">
-                {touched.accountType && errors.accountType ? (
-                  <p className="text-danger">{errors.accountType}</p>
+                {formik.touched.accountType && formik.errors.accountType ? (
+                  <p className="text-danger">{formik.errors.accountType}</p>
                 ) : (
                   "Select Account Type"
                 )}
@@ -236,14 +271,14 @@ const CreateAccount = () => {
             <select
               id="industry"
               className="form-control"
-              value={values.industry}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.industry}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="industry"
             >
               <option value="">
-                {touched.industry && errors.industry ? (
-                  <p className="text-danger">{errors.industry}</p>
+                {formik.touched.industry && formik.errors.industry ? (
+                  <p className="text-danger">{formik.errors.industry}</p>
                 ) : (
                   "Select Industry"
                 )}
@@ -262,13 +297,13 @@ const CreateAccount = () => {
               type="tel"
               id="annualRevenue"
               className="form-control create_lead_form_input"
-              value={values.annualRevenue}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.annualRevenue}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="annualRevenue"
               placeholder={
-                touched.annualRevenue && errors.annualRevenue
-                  ? errors.annualRevenue
+                formik.touched.annualRevenue && formik.errors.annualRevenue
+                  ? formik.errors.annualRevenue
                   : null
               }
             />
@@ -280,12 +315,14 @@ const CreateAccount = () => {
               type="text"
               id="address"
               className="form-control create_lead_form_input"
-              value={values.address}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="address"
               placeholder={
-                touched.address && errors.address ? errors.address : null
+                formik.touched.address && formik.errors.address
+                  ? formik.errors.address
+                  : null
               }
             />
             <MdAdminPanelSettings className="create_lead_input_icon" />
@@ -302,13 +339,13 @@ const CreateAccount = () => {
               type="text"
               id="billingAddress"
               className="form-control create_lead_form_input"
-              value={values.billingAddress}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.billingAddress}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="billingAddress"
               placeholder={
-                touched.billingAddress && errors.billingAddress
-                  ? errors.billingAddress
+                formik.touched.billingAddress && formik.errors.billingAddress
+                  ? formik.errors.billingAddress
                   : null
               }
             />
@@ -320,13 +357,13 @@ const CreateAccount = () => {
               type="text"
               id="billingCity"
               className="form-control create_lead_form_input"
-              value={values.billingCity}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.billingCity}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="billingCity"
               placeholder={
-                touched.billingCity && errors.billingCity
-                  ? errors.billingCity
+                formik.touched.billingCity && formik.errors.billingCity
+                  ? formik.errors.billingCity
                   : null
               }
             />
@@ -338,13 +375,13 @@ const CreateAccount = () => {
               type="text"
               id="billingState"
               className="form-control create_lead_form_input"
-              value={values.billingState}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.billingState}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="billingState"
               placeholder={
-                touched.billingState && errors.billingState
-                  ? errors.billingState
+                formik.touched.billingState && formik.errors.billingState
+                  ? formik.errors.billingState
                   : null
               }
             />
@@ -356,13 +393,13 @@ const CreateAccount = () => {
               type="tel"
               id="billingCode"
               className="form-control create_lead_form_input"
-              value={values.billingCode}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.billingCode}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="billingCode"
               placeholder={
-                touched.billingCode && errors.billingCode
-                  ? errors.billingCode
+                formik.touched.billingCode && formik.errors.billingCode
+                  ? formik.errors.billingCode
                   : null
               }
             />
@@ -380,13 +417,13 @@ const CreateAccount = () => {
               type="text"
               id="shippingStreet"
               className="form-control create_lead_form_input"
-              value={values.shippingStreet}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.shippingStreet}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="shippingStreet"
               placeholder={
-                touched.shippingStreet && errors.shippingStreet
-                  ? errors.shippingStreet
+                formik.touched.shippingStreet && formik.errors.shippingStreet
+                  ? formik.errors.shippingStreet
                   : null
               }
             />
@@ -398,13 +435,13 @@ const CreateAccount = () => {
               type="text"
               id="shippingCity"
               className="form-control create_lead_form_input"
-              value={values.shippingCity}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.shippingCity}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="shippingCity"
               placeholder={
-                touched.shippingCity && errors.shippingCity
-                  ? errors.shippingCity
+                formik.touched.shippingCity && formik.errors.shippingCity
+                  ? formik.errors.shippingCity
                   : null
               }
             />
@@ -416,13 +453,13 @@ const CreateAccount = () => {
               type="text"
               id="shippingState"
               className="form-control create_lead_form_input"
-              value={values.shippingState}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.shippingState}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="shippingState"
               placeholder={
-                touched.shippingState && errors.shippingState
-                  ? errors.shippingState
+                formik.touched.shippingState && formik.errors.shippingState
+                  ? formik.errors.shippingState
                   : null
               }
             />
@@ -434,13 +471,13 @@ const CreateAccount = () => {
               type="tel"
               id="shippingCode"
               className="form-control create_lead_form_input"
-              value={values.shippingCode}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.shippingCode}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="shippingCode"
               placeholder={
-                touched.shippingCode && errors.shippingCode
-                  ? errors.shippingCode
+                formik.touched.shippingCode && formik.errors.shippingCode
+                  ? formik.errors.shippingCode
                   : null
               }
             />
@@ -452,13 +489,13 @@ const CreateAccount = () => {
               type="text"
               id="shippingAddress"
               className="form-control create_lead_form_input"
-              value={values.shippingAddress}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.shippingAddress}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="shippingAddress"
               placeholder={
-                touched.shippingAddress && errors.shippingAddress
-                  ? errors.shippingAddress
+                formik.touched.shippingAddress && formik.errors.shippingAddress
+                  ? formik.errors.shippingAddress
                   : null
               }
             />
@@ -474,13 +511,13 @@ const CreateAccount = () => {
               type="date"
               id="dateOfIssue"
               className="form-control create_lead_form_input"
-              value={values.dateOfIssue}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.dateOfIssue}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="dateOfIssue"
               placeholder={
-                touched.dateOfIssue && errors.dateOfIssue
-                  ? errors.dateOfIssue
+                formik.touched.dateOfIssue && formik.errors.dateOfIssue
+                  ? formik.errors.dateOfIssue
                   : null
               }
             />
@@ -492,13 +529,13 @@ const CreateAccount = () => {
               type="date"
               id="dateOfBilling"
               className="form-control create_lead_form_input"
-              value={values.dateOfBilling}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.dateOfBilling}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="dateOfBilling"
               placeholder={
-                touched.dateOfBilling && errors.dateOfBilling
-                  ? errors.dateOfBilling
+                formik.touched.dateOfBilling && formik.errors.dateOfBilling
+                  ? formik.errors.dateOfBilling
                   : null
               }
             />
@@ -510,13 +547,13 @@ const CreateAccount = () => {
               type="date"
               id="dateOfShipment"
               className="form-control create_lead_form_input"
-              value={values.dateOfShipment}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.dateOfShipment}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="dateOfShipment"
               placeholder={
-                touched.dateOfShipment && errors.dateOfShipment
-                  ? errors.dateOfShipment
+                formik.touched.dateOfShipment && formik.errors.dateOfShipment
+                  ? formik.errors.dateOfShipment
                   : null
               }
             />
@@ -536,14 +573,14 @@ const CreateAccount = () => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="description"
               rows="3"
               placeholder={
-                touched.description && errors.description
-                  ? errors.description
+                formik.touched.description && formik.errors.description
+                  ? formik.errors.description
                   : null
               }
             ></textarea>
@@ -552,7 +589,7 @@ const CreateAccount = () => {
         {/* Submit Button */}
         <div className="text-center mb-2">
           <button className="create_lead_form_submitBtn" type="submit">
-            Submit
+            Update
           </button>
         </div>
       </form>
@@ -581,4 +618,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default UpdateAccount;

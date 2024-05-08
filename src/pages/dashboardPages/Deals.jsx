@@ -1,15 +1,121 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 // CSS
 import "../../styles/dashboardCss/calls.css";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
-import LeadsRightSectionTable from "../../components/shared/LeadsRightSectionTable";
+import { MdOutlineUploadFile } from "react-icons/md";
+import { TbFileDownload } from "react-icons/tb";
 // React Router Dom
 import { Link } from "react-router-dom";
-
+// Components
+import DealsTable from "../../components/DealsTable";
+import UpdateDeal from "./UpdateDeal";
+// Controller Methods Api
+import {
+  getAllDeal,
+  deleteDeals,
+  getSingleDeal,
+  downloadDeal,
+  uploadDeals,
+} from "../../controller/fetchApi";
 const Deals = () => {
+  // Start Toast -------
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
+  const hideToast = () => {
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
+
+  if (showToast) {
+    hideToast();
+  }
+  const [dealCostumerId, setDealCostumerId] = useState([]);
+  
+  // User Id And Token ----
+  const [pageNo, setPageNo] = useState(0);
+  const [getAllDealsData, setAllDealsData] = useState([]);
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const dealId = JSON.parse(localStorage.getItem("dealId"));
+  const tokenId = userIdTokenData?.data?.token;
+  //  Get All Data ----
+  const getAllDeals = useCallback(async () => {
+    try {
+      const res = await getAllDeal(pageNo, tokenId);
+      setAllDealsData(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId, pageNo, setAllDealsData]);
+  // Update Deals Start--------
+  const [defaultValue, setDefaultValue] = useState([]); // Get Single Deal Data Which Fullfill Field Value
+  const handleUpdateDeal = async () => {
+    try {
+      const singDealResult = await getSingleDeal(dealId, tokenId);
+      if (singDealResult) {
+        setDefaultValue(singDealResult);
+      } else {
+        setDefaultValue([]);
+      }
+    } catch (error) {
+      console.log("LeadRightSection SingleDeal :", error);
+      setDefaultValue([]);
+    }
+  };
+  const handleUpdateSuccess = async () => {
+    try {
+      await getAllDeals();
+    } catch (error) {
+      console.log("Error fetching updated data", error);
+    }
+  };
+  // Download Account Api
+  const handleDownloadDeals = async () => {
+    try {
+      await downloadDeal(setShowToast, tokenId);
+    } catch (error) {
+      console.log("Error downloading account", error);
+    }
+  };
+  // Delete Deals Start ----
+  const handleDeleteDeals = async (dealCostumerId) => {
+    try {
+      await deleteDeals(dealCostumerId, setShowToast, tokenId);
+      if (deleteDeals) {
+        getAllDeals();
+        console.log("delete Successfully Deals", deleteDeals);
+      }
+    } catch (error) {
+      const errorMessage = error.message;
+      console.log("Error deleting Deals", errorMessage);
+    }
+  };
+  // Handle Upload File start ----
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (event) => {
+    console.log("Selected ");
+    setSelectedFile(event.target.files[0]);
+  };
+  const handleUploadDeals = async () => {
+    console.log("Start handle leads");
+    if (selectedFile) {
+      console.log("file selected: " + selectedFile);
+      try {
+        await uploadDeals(selectedFile, setShowToast, tokenId);
+      } catch (error) {
+        console.log("LeadRightSection Failed Uploading:", error);
+      }
+    }
+  };
+  // Handle Next Page ---
+  const handleNextPageClick = () => {
+    setPageNo(pageNo + 1); // Increment page number
+  };
+  useEffect(() => {
+    getAllDeals();
+  }, [getAllDeals]);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
@@ -27,23 +133,43 @@ const Deals = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li>
-                    <button className="dropdown-item">
+                  <li data-bs-toggle="modal" data-bs-target="#updateDealModal">
+                    <button
+                      className="dropdown-item"
+                      onClick={() => handleUpdateDeal()}
+                    >
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
                     </button>
                   </li>
                   <li>
-                    <button className="dropdown-item">
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        handleDeleteDeals(dealCostumerId);
+                      }}
+                    >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
                     </button>
                   </li>
+                  <li data-bs-toggle="modal" data-bs-target="#fileUploadModal">
+                    <button className="dropdown-item">
+                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                      Upload Deals
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => handleDownloadDeals()}
+                    >
+                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                      Download Deals
+                    </button>
+                  </li>
                 </ul>
               </button>
-            </div>
-            <div className="dashboard_leads_export_btn_div">
-              <button>Exports</button>
             </div>
             <div className="dashboard_leads_create_btn_div">
               <button>
@@ -57,8 +183,9 @@ const Deals = () => {
             </div>
           </div>
         </div>
+        {/* Table Div */}
         <div className="dashboard_leads_table_div">
-          <LeadsRightSectionTable
+          <DealsTable
             tblHead={{
               firstHead: "Deal Owner",
               secondHead: "Deal Name",
@@ -67,53 +194,174 @@ const Deals = () => {
               fifthHead: "Contact Name",
             }}
             redirectLink="/deal-details"
-            data="Pankaj Swmai Vaishnav"
+            getAllDealsData={getAllDealsData}
+            dealCostumerId={dealCostumerId}
+            setDealCostumerId={setDealCostumerId}
           />
         </div>
+        {/* Pagination Div */}
         <div className="dashboard_leads_pagination_div">
           <nav aria-label="...">
             <ul className="pagination">
-              <li className="page-item disabled dashboard_leads_pagination_pageItem">
-                <a className="page-link" href="#!">
+              {/* Previous page button */}
+              <li className="page-item dashboard_leads_pagination_pageItem">
+                <a
+                  className="page-link"
+                  href="#!"
+                  onClick={() => setPageNo(pageNo - 1)}
+                >
                   <IoIosArrowBack />
                 </a>
               </li>
+
+              {/* Render page numbers */}
+              {Array.from({ length: 5 }, (_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${
+                    index + 1 === pageNo ? "active" : ""
+                  } dashboard_leads_pagination_pageItem`}
+                >
+                  <a
+                    className="page-link"
+                    href="#!"
+                    onClick={() => setPageNo(index + 1)}
+                  >
+                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                  </a>
+                </li>
+              ))}
               <li className="page-item dashboard_leads_pagination_pageItem">
-                <a className="page-link" href="#!">
-                  01
-                </a>
-              </li>
-              <li
-                className="page-item active dashboard_leads_pagination_pageItem"
-                aria-current="page"
-              >
-                <a className="page-link" href="#!">
-                  02
-                </a>
-              </li>
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a className="page-link" href="#!">
-                  03
-                </a>
-              </li>
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a className="page-link" href="#!">
-                  04
-                </a>
-              </li>
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a className="page-link" href="#!">
-                  05
-                </a>
-              </li>
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a className="page-link" href="#!">
-                  <IoIosArrowForward />
+                <a
+                  className="page-link"
+                  href="#!"
+                  onClick={handleNextPageClick}
+                >
+                  <IoIosArrowForward className="btn_IoIosArrowForward" />
                 </a>
               </li>
             </ul>
           </nav>
         </div>
+        {/* File Upload Modal */}
+        <>
+          <div
+            className="modal fade"
+            id="fileUploadModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex={-1}
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header w-100">
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div className="modal-body">
+                  <form>
+                    <label
+                      htmlFor="exampleFormControlFile1"
+                      className="form-label"
+                    >
+                      Choose file
+                    </label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="exampleFormControlFile1"
+                      onChange={handleFileChange}
+                    />
+                  </form>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    onClick={handleUploadDeals}
+                  >
+                    Upload
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+        {/*Update Deal Modal */}
+        <>
+          <div
+            className="modal fade modal-xl"
+            id="updateDealModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex={-1}
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header w-100">
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div className="modal-body">
+                  <UpdateDeal
+                    dealCostumerId={dealCostumerId}
+                    defaultValue={defaultValue}
+                    onUpdateSuccess={handleUpdateSuccess}
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+        {/* Toast */}
+        {showToast.message && (
+          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+            <div
+              className="toast show create_lead_toast"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div className="toast-header create_lead_toast_header">
+                <strong className="me-auto">Form Submitted Successfully</strong>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowToast({ success: false, message: "" })}
+                />
+              </div>
+              <div className="toast-body">{showToast.message}</div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,24 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
-import leadIdContext from "../../pages/LeadIdContext";
 
-const LeadsRightSectionTable = ({
+const DealsTable = ({
   tblHead,
   redirectLink,
-  getAllLeadData,
-  data,
+  getAllDealsData,
+  dealCostumerId,
+  setDealCostumerId,
 }) => {
   // Get leadCostumerId From LeadSection Table for delete Data From Table
-  const { leadCostumerId, setLeadCostumerId } = useContext(leadIdContext) || []; //--- here used empty array because when id is undefined when do not cause error
 
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
   const handleCheckboxChange = (leadId) => {
-    const isSelected = leadCostumerId.includes(leadId);
+    const isSelected = dealCostumerId.includes(leadId);
     if (isSelected) {
-      setLeadCostumerId(leadCostumerId.filter((id) => id !== leadId));
+      setDealCostumerId(dealCostumerId.filter((id) => id !== leadId));
     } else {
-      setLeadCostumerId([...leadCostumerId, leadId]);
+      setDealCostumerId([...dealCostumerId, leadId]);
     }
   };
   // Handle Single Check Box For Single Updateion And Id get and send End    ------
@@ -26,11 +25,11 @@ const LeadsRightSectionTable = ({
   const handleMasterCheckboxChange = (event) => {
     console.log("Master checkbox clicked");
     const isChecked = event.target.checked;
-    const allLeadIds = getAllLeadData?.content?.map((data) => data.id) || [];
+    const allLeadIds = getAllDealsData?.content?.map((data) => data.id) || [];
     if (isChecked) {
-      setLeadCostumerId(allLeadIds);
+      setDealCostumerId(allLeadIds);
     } else {
-      setLeadCostumerId([]);
+      setDealCostumerId([]);
     }
   };
   // Handle Master Checkbox Change End   -----
@@ -58,11 +57,11 @@ const LeadsRightSectionTable = ({
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllLeadData && getAllLeadData.content ? (
-              getAllLeadData?.content?.map((data) => (
+            {getAllDealsData && getAllDealsData?.content?.length > 0 ? (
+              getAllDealsData?.content?.map((data) => (
                 <tr
                   key={data.id}
-                  onClick={() => localStorage.setItem("leadId", data.id)}
+                  onClick={() => localStorage.setItem("dealId", data.id)}
                 >
                   <td>
                     <input
@@ -71,30 +70,39 @@ const LeadsRightSectionTable = ({
                       defaultValue=""
                       id="flexCheckIndeterminate"
                       onChange={() => handleCheckboxChange(data.id)}
-                      checked={leadCostumerId?.includes(data.id)}
+                      checked={dealCostumerId?.includes(data.id)}
                     />
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadOwner}
+                      {data.dealOwner}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.firstName}
+                      {data.dealName}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadSource}
+                      {data.amount}
                     </Link>
                   </td>
-                  <td>{data.leadStatus}</td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.closingDate}
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.contactName}
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Lead Data At this Time</td>
+                <td colSpan="5">No Deals Data At this Time</td>
               </tr>
             )}
           </tbody>
@@ -104,4 +112,4 @@ const LeadsRightSectionTable = ({
   );
 };
 
-export default LeadsRightSectionTable;
+export default DealsTable;

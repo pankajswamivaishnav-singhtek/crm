@@ -1,36 +1,33 @@
-import React, { useContext } from "react";
+import React from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
-import leadIdContext from "../../pages/LeadIdContext";
 
-const LeadsRightSectionTable = ({
+const TaskTables = ({
   tblHead,
   redirectLink,
-  getAllLeadData,
+  getAllTaskData,
+  taskCostumerId,
+  setTaskCostumerId,
   data,
 }) => {
-  // Get leadCostumerId From LeadSection Table for delete Data From Table
-  const { leadCostumerId, setLeadCostumerId } = useContext(leadIdContext) || []; //--- here used empty array because when id is undefined when do not cause error
-
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
-  const handleCheckboxChange = (leadId) => {
-    const isSelected = leadCostumerId.includes(leadId);
+  const handleCheckboxChange = (taskId) => {
+    const isSelected = taskCostumerId.includes(taskId);
     if (isSelected) {
-      setLeadCostumerId(leadCostumerId.filter((id) => id !== leadId));
+      setTaskCostumerId(taskCostumerId.filter((id) => id !== taskId));
     } else {
-      setLeadCostumerId([...leadCostumerId, leadId]);
+      setTaskCostumerId([...taskCostumerId, taskId]);
     }
   };
   // Handle Single Check Box For Single Updateion And Id get and send End    ------
   // Handle Master Checkbox Change Start -----
   const handleMasterCheckboxChange = (event) => {
-    console.log("Master checkbox clicked");
     const isChecked = event.target.checked;
-    const allLeadIds = getAllLeadData?.content?.map((data) => data.id) || [];
+    const allLeadIds = getAllTaskData?.content?.map((data) => data.id) || [];
     if (isChecked) {
-      setLeadCostumerId(allLeadIds);
+      setTaskCostumerId(allLeadIds);
     } else {
-      setLeadCostumerId([]);
+      setTaskCostumerId([]);
     }
   };
   // Handle Master Checkbox Change End   -----
@@ -58,11 +55,11 @@ const LeadsRightSectionTable = ({
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllLeadData && getAllLeadData.content ? (
-              getAllLeadData?.content?.map((data) => (
+            {getAllTaskData && getAllTaskData?.content?.length > 0 ? (
+              getAllTaskData?.content?.map((data) => (
                 <tr
                   key={data.id}
-                  onClick={() => localStorage.setItem("leadId", data.id)}
+                  onClick={() => localStorage.setItem("taskId", data.id)}
                 >
                   <td>
                     <input
@@ -71,25 +68,34 @@ const LeadsRightSectionTable = ({
                       defaultValue=""
                       id="flexCheckIndeterminate"
                       onChange={() => handleCheckboxChange(data.id)}
-                      checked={leadCostumerId?.includes(data.id)}
+                      checked={taskCostumerId?.includes(data.id)}
                     />
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadOwner}
+                      {data.taskOwner}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.firstName}
+                      {data.dueDate}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadSource}
+                      {data.contact}
                     </Link>
                   </td>
-                  <td>{data.leadStatus}</td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.subject}
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.status}
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
@@ -104,4 +110,4 @@ const LeadsRightSectionTable = ({
   );
 };
 
-export default LeadsRightSectionTable;
+export default TaskTables;

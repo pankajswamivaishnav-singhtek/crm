@@ -1,12 +1,32 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+// Controller Method & Api
+import { getSingleTask } from "../../controller/fetchApi";
 const TaskDetails = () => {
+  // TOkein Id & User Id
+  const [getSingleTaskData, setSingleTaskData] = useState([]);
+  const taskId = JSON.parse(localStorage.getItem("taskId"));
+  const userTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userTokenData?.data?.token;
+  useEffect(() => {
+    getSingleTask(taskId, tokenId).then((res) => {
+      setSingleTaskData(res);
+    });
+  }, [taskId, tokenId]);
+  // Date Time Understndable Formate In reminder
+  const date = new Date(getSingleTaskData?.reminder);
+  const month = date.toLocaleString("default", { month: "long" });
+  const day = date.toLocaleString("default", { day: "2-digit" });
+  const year = date.toLocaleString("default", { year: "numeric" });
+  const time = date.toLocaleString("default", { hour: "2-digit" });
+  const min = date.toLocaleString("default", { minute: "2-digit" });
+  const reminder = `${day} ${month} ${year} || ${time}:${min}Min`;
+
   return (
     <div className="container-fluid account_view_details_main_container">
-      {/* Account Information */}
+      {/* Task Information */}
       <div className="account_view_details_Row">
         <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
-          Account Information
+          Task Information
         </h3>
         <div className="row">
           <div className="col-xl-12">
@@ -22,7 +42,7 @@ const TaskDetails = () => {
                         Task Owner
                       </th>
                       <td className="lead_view_details_table_td">
-                        Pankaj Swami Vaishnav
+                        {getSingleTaskData?.taskOwner}
                       </td>
                     </tr>
                     <tr>
@@ -33,7 +53,7 @@ const TaskDetails = () => {
                         Contact
                       </th>
                       <td className="lead_view_details_table_td">
-                        70724574658
+                        {getSingleTaskData?.contact}
                       </td>
                     </tr>
                     <tr>
@@ -43,7 +63,9 @@ const TaskDetails = () => {
                       >
                         Priority
                       </th>
-                      <td className="lead_view_details_table_td">High</td>
+                      <td className="lead_view_details_table_td">
+                        {getSingleTaskData?.priority}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -59,7 +81,7 @@ const TaskDetails = () => {
                         Subject
                       </th>
                       <td className="lead_view_details_table_td">
-                        HDFC Finance
+                        {getSingleTaskData?.subject}
                       </td>
                     </tr>
                     <tr>
@@ -69,7 +91,9 @@ const TaskDetails = () => {
                       >
                         Account Type
                       </th>
-                      <td className="lead_view_details_table_td">Merge</td>
+                      <td className="lead_view_details_table_td">
+                        {getSingleTaskData?.accountType}
+                      </td>
                     </tr>
                     <tr>
                       <th
@@ -78,7 +102,7 @@ const TaskDetails = () => {
                       >
                         Reminder
                       </th>
-                      <td className="lead_view_details_table_td">4:30PM</td>
+                      <td className="lead_view_details_table_td">{reminder}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -93,7 +117,9 @@ const TaskDetails = () => {
                       >
                         Due Date
                       </th>
-                      <td className="lead_view_details_table_td">15.03.2024</td>
+                      <td className="lead_view_details_table_td">
+                        {getSingleTaskData?.dueDate}
+                      </td>
                     </tr>
                     <tr>
                       <th
@@ -103,10 +129,9 @@ const TaskDetails = () => {
                         Status
                       </th>
                       <td className="lead_view_details_table_td">
-                        In Progress
+                        {getSingleTaskData?.status}
                       </td>
                     </tr>
-                    <tr></tr>
                   </tbody>
                 </table>
               </div>
@@ -120,12 +145,7 @@ const TaskDetails = () => {
         <div className="row">
           <div className="col-xl-12 my-1 mx-2">
             <p className="lead_view_details_description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad autem
-              delectus tempore quisquam! Libero nisi excepturi pariatur
-              explicabo consequatur nam labore earum animi corrupti impedit unde
-              dolorum, amet esse, facere eos eum distinctio voluptatem officiis
-              nobis beatae. Illum porro recusandae maxime earum laudantium animi
-              molestiae, error quibusdam nobis, dolor atque!
+              {getSingleTaskData?.description}
             </p>
           </div>
         </div>

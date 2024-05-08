@@ -5,16 +5,17 @@ import React, { useEffect, useState } from "react";
 
 // Controller Api's --js data
 import { monthlyMeetings } from "../../controller/fetchApi";
-
+// Token
 const DashboardSection1Table = () => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
+  const tokenId = userIdTokenData?.data?.token;
   const [monthlyMeetingsData, setMonthlyMeetingsData] = useState([]);
   useEffect(() => {
-    monthlyMeetings(uid).then((res) => {
+    monthlyMeetings(uid, tokenId).then((res) => {
       setMonthlyMeetingsData(res);
     });
-  }, [uid]);
+  }, [uid, tokenId]);
 
   return (
     <div className="container dashboard_table_mainDiv table-responsive">

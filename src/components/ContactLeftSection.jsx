@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 // CSS
 import "../styles/component_css/leadsLeftSection.css";
 // React Icon
-const FilterSidebar = ({ setFilterData }) => {
+const ContactLeftSection = ({ setFilterData }) => {
   // Form Handle & Validations
   const { values, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -120,4 +120,4 @@ const FilterSidebar = ({ setFilterData }) => {
   );
 };
 
-export default FilterSidebar;
+export default ContactLeftSection;

@@ -6,10 +6,11 @@ import { FaPhone } from "react-icons/fa6";
 import { BsBuildingsFill } from "react-icons/bs";
 import { FaTreeCity } from "react-icons/fa6";
 import { ContactFormSchema } from "../../schema/FormValidation";
-// import { FaBullseye } from "react-icons/fa";
+// Controllers Methods
+import { createContact } from "../../controller/fetchApi";
 const CreateContact = () => {
   // Toast
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
@@ -19,6 +20,11 @@ const CreateContact = () => {
   if (showToast) {
     hideToast();
   }
+
+  // Get TokenId and Uid
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const uid = userIdTokenData?.data?.userId;
+  const tokenId = userIdTokenData?.data?.token;
 
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -32,10 +38,20 @@ const CreateContact = () => {
       },
 
       validationSchema: ContactFormSchema,
-      onSubmit: (values, { resetForm }) => {
-        console.log("-----", values);
-        resetForm();
-        setShowToast(true);
+      onSubmit: async (values, { resetForm }) => {
+        try {
+          const response = await createContact(
+            values,
+            uid,
+            setShowToast,
+            tokenId
+          );
+          if (response) {
+            resetForm();
+          }
+        } catch (error) {
+          console.log("Did Not Create Contact",error);
+        }
       },
     });
 
@@ -163,11 +179,11 @@ const CreateContact = () => {
               <button
                 type="button"
                 className="btn-close"
-                onClick={() => setShowToast(false)}
+                onClick={() => setShowToast({ success: false, message: "" })}
               />
             </div>
             <div className="toast-body">
-              Your Contact has been created successfully.
+            {showToast.message}
             </div>
           </div>
         </div>

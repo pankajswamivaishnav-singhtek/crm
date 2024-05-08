@@ -5,13 +5,13 @@ import { monthlyClosingDeals } from "../controller/fetchApi";
 const DashboardSection3 = () => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
+  const tokenId = userIdTokenData?.data?.token;
   const [monthlyClosingDealsData, setMonthlyClosingDealsData] = useState([]);
-  // console.log("ye rha deal", monthlyClosingDealsData);
   useEffect(() => {
-    monthlyClosingDeals(uid).then((res) => {
+    monthlyClosingDeals(uid, tokenId).then((res) => {
       setMonthlyClosingDealsData(res);
     });
-  }, [uid]);
+  }, [uid, tokenId]);
   return (
     <div className="container-fluid dashboard_table_mainDiv table-responsive dashboard_section3_main_container">
       <div className="row dashboard_table_main_heading">

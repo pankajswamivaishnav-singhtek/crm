@@ -6,12 +6,13 @@ import { monthlyTask } from "../../controller/fetchApi";
 const DashboardSection2Table = () => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
+  const tokenId = userIdTokenData?.data?.token;
   const [monthlyTaskData, setMonthlyTaskData] = useState([]);
   useEffect(() => {
-    monthlyTask(uid).then((res) => {
+    monthlyTask(uid, tokenId).then((res) => {
       setMonthlyTaskData(res);
     });
-  }, [uid]);
+  }, [uid, tokenId]);
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
       <div className="row dashboard_table_main_heading">

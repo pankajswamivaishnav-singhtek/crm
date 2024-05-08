@@ -6,6 +6,8 @@ import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdPermPhoneMsg, MdOutlinePhonePaused } from "react-icons/md";
+import { MdOutlineUploadFile } from "react-icons/md";
+import { TbFileDownload } from "react-icons/tb";
 import LeadsRightSectionTable from "../../components/shared/LeadsRightSectionTable";
 // React Router Dom
 import { useNavigate } from "react-router-dom";
@@ -17,7 +19,6 @@ const Calls = () => {
       <div className="dashboard_content_wrapper">
         <div className="dashboard_leads_btn_mainDiv">
           <div className="dashboard_leads_btns_div">
-           
             <div className="dashboard_leads_action_btn_div">
               <button
                 className="dashboard_section1_table_edit_button dropdown-toggle"
@@ -41,11 +42,20 @@ const Calls = () => {
                       Delete
                     </button>
                   </li>
+                  <li>
+                    <button className="dropdown-item">
+                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                      Upload Calls
+                    </button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item">
+                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                      Download Calls
+                    </button>
+                  </li>
                 </ul>
               </button>
-            </div>
-            <div className="dashboard_leads_export_btn_div">
-              <button>Exports</button>
             </div>
             <div className="dashboard_leads_create_btn_div">
               <button

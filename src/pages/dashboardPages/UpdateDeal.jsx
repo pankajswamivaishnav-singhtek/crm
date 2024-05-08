@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { MdAdminPanelSettings } from "react-icons/md";
@@ -8,8 +8,8 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 // Schema
 import { DealFormSchema } from "../../schema/FormValidation";
 // Controller Methods & Api
-import { createDeal } from "../../controller/fetchApi";
-const CreateDeal = () => {
+import { updateDeal } from "../../controller/fetchApi";
+const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -23,46 +23,66 @@ const CreateDeal = () => {
   }
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
+  const dealId = JSON.parse(localStorage.getItem("dealId"));
   const tokenId = userIdTokenData?.data?.token;
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        dealOwner: "",
-        dealName: "",
-        ammount: "",
-        closingDate: "",
-        accountName: "",
-        stage: "",
-        type: "",
-        nextStep: "",
-        expectedRevenue: "",
-        leadSource: "",
-        campaignSource: "",
-        contactName: "",
-      },
+  const formik = useFormik({
+    initialValues: {
+      dealOwner: "",
+      dealName: "",
+      ammount: "",
+      closingDate: "",
+      accountName: "",
+      stage: "",
+      type: "",
+      nextStep: "",
+      expectedRevenue: "",
+      leadSource: "",
+      campaignSource: "",
+      contactName: "",
+    },
 
-      validationSchema: DealFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        try {
-          const createdDealSuccessfully = await createDeal(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createdDealSuccessfully) {
-            resetForm();
-          }
-        } catch (error) {
-          console.log("Found Error", error);
+    validationSchema: DealFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const updatedDealSuccessFully = await updateDeal(
+          dealId,
+          values,
+          setShowToast,
+          tokenId
+        );
+        onUpdateSuccess();
+        if (updatedDealSuccessFully) {
+          resetForm();
         }
-      },
-    });
+      } catch (error) {
+        console.log("Found Error", error);
+      }
+    },
+  });
+  useEffect(() => {
+    if (defaultValue) {
+      formik.setValues({
+        ...formik.values,
+        dealOwner: defaultValue.dealOwner,
+        dealName: defaultValue.dealName,
+        accountName: defaultValue.accountName,
+        type: defaultValue.type,
+        leadSource: defaultValue.leadSource,
+        contactName: defaultValue.contactName,
+        ammount: defaultValue.amount,
+        nextStep: defaultValue.nextStep,
+        stage: defaultValue.stage,
+        expectedRevenue: defaultValue.expectedRevenue,
+        campaignSource: defaultValue.campaignSource,
+        description: defaultValue.description,
+        closingDate: defaultValue.closingDate,
+      });
+    }
+  }, [defaultValue]);
   return (
     <div className="create_lead_form_main_div">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         {/* User Account Information */}
         <div className="row">
           <p className="create_lead_section2_company_info">Deal Information</p>
@@ -72,12 +92,14 @@ const CreateDeal = () => {
               type="text"
               id="dealOwner"
               className="form-control create_lead_form_input"
-              value={values.dealOwner}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.dealOwner}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="dealOwner"
               placeholder={
-                touched.dealOwner && errors.dealOwner ? errors.dealOwner : null
+                formik.touched.dealOwner && formik.errors.dealOwner
+                  ? formik.errors.dealOwner
+                  : null
               }
             />
             <MdAdminPanelSettings className="create_lead_input_icon" />
@@ -88,12 +110,14 @@ const CreateDeal = () => {
               type="text"
               id="dealName"
               className="form-control create_lead_form_input"
-              value={values.dealName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.dealName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="dealName"
               placeholder={
-                touched.dealName && errors.dealName ? errors.dealName : null
+                formik.touched.dealName && formik.errors.dealName
+                  ? formik.errors.dealName
+                  : null
               }
             />
             <FaUserTie className="create_lead_input_icon" />
@@ -104,12 +128,14 @@ const CreateDeal = () => {
               type="text"
               id="ammount"
               className="form-control create_lead_form_input"
-              value={values.ammount}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.ammount}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="ammount"
               placeholder={
-                touched.ammount && errors.ammount ? errors.ammount : null
+                formik.touched.ammount && formik.errors.ammount
+                  ? formik.errors.ammount
+                  : null
               }
             />
             <FaUserTie className="create_lead_input_icon" />
@@ -120,13 +146,13 @@ const CreateDeal = () => {
               type="date"
               id="closingDate"
               className="form-control create_lead_form_input"
-              value={values.closingDate}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.closingDate}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="closingDate"
               placeholder={
-                touched.closingDate && errors.closingDate
-                  ? errors.closingDate
+                formik.touched.closingDate && formik.errors.closingDate
+                  ? formik.errors.closingDate
                   : null
               }
             />
@@ -137,13 +163,13 @@ const CreateDeal = () => {
               type="tel"
               id="accountName"
               className="form-control create_lead_form_input"
-              value={values.accountName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.accountName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="accountName"
               placeholder={
-                touched.accountName && errors.accountName
-                  ? errors.accountName
+                formik.touched.accountName && formik.errors.accountName
+                  ? formik.errors.accountName
                   : null
               }
             />
@@ -154,14 +180,14 @@ const CreateDeal = () => {
             <select
               id="stage"
               className="form-control"
-              value={values.stage}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.stage}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="stage"
             >
               <option value="">
-                {touched.stage && errors.stage ? (
-                  <p className="text-danger">{errors.stage}</p>
+                {formik.touched.stage && formik.errors.stage ? (
+                  <p className="text-danger">{formik.errors.stage}</p>
                 ) : (
                   "Qualification"
                 )}
@@ -186,14 +212,14 @@ const CreateDeal = () => {
             <select
               id="type"
               className="form-control"
-              value={values.type}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.type}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="type"
             >
               <option value="">
-                {touched.type && errors.type ? (
-                  <p className="text-danger">{errors.type}</p>
+                {formik.touched.type && formik.errors.type ? (
+                  <p className="text-danger">{formik.errors.type}</p>
                 ) : (
                   "Qualification"
                 )}
@@ -209,12 +235,14 @@ const CreateDeal = () => {
               type="text"
               id="nextStep"
               className="form-control create_lead_form_input"
-              value={values.nextStep}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.nextStep}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="nextStep"
               placeholder={
-                touched.nextStep && errors.nextStep ? errors.nextStep : null
+                formik.touched.nextStep && formik.errors.nextStep
+                  ? formik.errors.nextStep
+                  : null
               }
             />
             <FaPhone className="create_lead_input_icon" />
@@ -225,13 +253,13 @@ const CreateDeal = () => {
               type="text"
               id="expectedRevenue"
               className="form-control create_lead_form_input"
-              value={values.expectedRevenue}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.expectedRevenue}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="expectedRevenue"
               placeholder={
-                touched.expectedRevenue && errors.expectedRevenue
-                  ? errors.expectedRevenue
+                formik.touched.expectedRevenue && formik.errors.expectedRevenue
+                  ? formik.errors.expectedRevenue
                   : null
               }
             />
@@ -242,14 +270,14 @@ const CreateDeal = () => {
             <select
               id="leadSource"
               className="form-control"
-              value={values.leadSource}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.leadSource}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="leadSource"
             >
               <option value="">
-                {touched.leadSource && errors.leadSource ? (
-                  <p className="text-danger">{errors.leadSource}</p>
+                {formik.touched.leadSource && formik.errors.leadSource ? (
+                  <p className="text-danger">{formik.errors.leadSource}</p>
                 ) : (
                   "Select Source"
                 )}
@@ -268,13 +296,13 @@ const CreateDeal = () => {
               type="text"
               id="campaignSource"
               className="form-control create_lead_form_input"
-              value={values.campaignSource}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.campaignSource}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="campaignSource"
               placeholder={
-                touched.campaignSource && errors.campaignSource
-                  ? errors.campaignSource
+                formik.touched.campaignSource && formik.errors.campaignSource
+                  ? formik.errors.campaignSource
                   : null
               }
             />
@@ -286,13 +314,13 @@ const CreateDeal = () => {
               type="text"
               id="contactName"
               className="form-control create_lead_form_input"
-              value={values.contactName}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.contactName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="contactName"
               placeholder={
-                touched.contactName && errors.contactName
-                  ? errors.contactName
+                formik.touched.contactName && formik.errors.contactName
+                  ? formik.errors.contactName
                   : null
               }
             />
@@ -314,14 +342,14 @@ const CreateDeal = () => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="description"
               rows="3"
               placeholder={
-                touched.description && errors.description
-                  ? errors.description
+                formik.touched.description && formik.errors.description
+                  ? formik.errors.description
                   : null
               }
             ></textarea>
@@ -359,4 +387,4 @@ const CreateDeal = () => {
   );
 };
 
-export default CreateDeal;
+export default UpdateDeal;

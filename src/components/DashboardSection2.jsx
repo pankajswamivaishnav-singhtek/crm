@@ -11,19 +11,41 @@ import { pipelineDeals } from "../controller/fetchApi";
 const DashboardSection2 = () => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
+  const tokenId = userIdTokenData?.data?.token;
   const [pipelineDealsData, setPipelineDealsData] = useState([]);
   useEffect(() => {
-    pipelineDeals(uid).then((res) => {
-      setPipelineDealsData(res);
-    });
-  }, [uid]);
-  // Create a function to get the data array
+    // (async () => {
+    //   try {
+    //     // pipelineDeals(uid, tokenId).then((res) => {
+    //     //   setPipelineDealsData(res || null);
+    //     // });
+    //     let result = await pipelineDeals(uid, tokenId);
+    //     if (result === null || result === undefined) {
+    //       setPipelineDealsData(null);
+    //     } else {
+    //       setPipelineDealsData(result);
+    //     }
+    //   } catch (error) {
+    //     setPipelineDealsData(null);
+    //   }
+    // })();
+
+    (async () => {
+      try {
+        const result = await pipelineDeals(uid, tokenId);
+        if (result === null || result === undefined) {
+          setPipelineDealsData();
+        } else {
+          setPipelineDealsData(result);
+        }
+      } catch (error) {
+        console.error("Error fetching pipeline deals:", error);
+        setPipelineDealsData();
+      }
+    })();
+  }, [uid, tokenId]);
   const getDataArray = () => {
-    if (
-      !pipelineDealsData ||
-      pipelineDealsData.length === 0 ||
-      pipelineDealsData === null
-    ) {
+    if (!pipelineDealsData || !Array.isArray(pipelineDealsData)) {
       return [0, 0, 0, 0, 0, 0, 0, 0];
     }
     return pipelineDealsData.map((deal) => deal.dealCount);
@@ -39,30 +61,6 @@ const DashboardSection2 = () => {
             <div className="col dashboard_section1_table">
               <h4>My Pipeline Deals By Stage</h4>
             </div>
-            {/* <div className="col dropdown" style={{ textAlign: "end" }}>
-              <PiDotsThreeCircleVertical
-                className="dashboard_section1_table_edit_button dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              />
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="editDeleteDropdown"
-              >
-                <li>
-                  <button className="dropdown-item">
-                    <BsPencil className="dashboard_section1_table_editBtn" />{" "}
-                    Edit
-                  </button>
-                </li>
-                <li>
-                  <button className="dropdown-item">
-                    <BsTrash className="dashboard_section1_table_deleteBtn" />{" "}
-                    Delete
-                  </button>
-                </li>
-              </ul>
-            </div> */}
           </div>
         </div>
         <div className="dashboard_section2_chart_mainDiv">

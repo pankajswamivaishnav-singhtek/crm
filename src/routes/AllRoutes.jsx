@@ -35,8 +35,11 @@ import CallViewDetails from "../pages/dashboardPages/CallViewDetails";
 import Deals from "../pages/dashboardPages/Deals";
 import CreateDeal from "../pages/dashboardPages/CreateDeal";
 import Reports from "../pages/dashboardPages/Reports";
+import UpdateLead from "../pages/dashboardPages/UpdateLead";
+
 // Validation Route
 import ValidateRoute from "./ValidateRoute";
+import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 
 const AllRoutes = () => {
   const [isSidebar, setIsSidebar] = useState(true);
@@ -68,6 +71,14 @@ const AllRoutes = () => {
           element={
             <ValidateRoute>
               <CreateLead />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/update-lead"
+          element={
+            <ValidateRoute>
+              <UpdateLead />
             </ValidateRoute>
           }
         />
@@ -220,6 +231,14 @@ const AllRoutes = () => {
           element={
             <ValidateRoute>
               <CreateDeal />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/deal-details"
+          element={
+            <ValidateRoute>
+              <DealsCostumerDetails />
             </ValidateRoute>
           }
         />

@@ -1,24 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
-import leadIdContext from "../../pages/LeadIdContext";
 
-const LeadsRightSectionTable = ({
+const MeetingTable = ({
   tblHead,
   redirectLink,
-  getAllLeadData,
+  getAllMeetingData,
+  meetCostumerId,
+  setMeetCostumerId,
   data,
 }) => {
-  // Get leadCostumerId From LeadSection Table for delete Data From Table
-  const { leadCostumerId, setLeadCostumerId } = useContext(leadIdContext) || []; //--- here used empty array because when id is undefined when do not cause error
-
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
-  const handleCheckboxChange = (leadId) => {
-    const isSelected = leadCostumerId.includes(leadId);
+  const handleCheckboxChange = (dealId) => {
+    const isSelected = meetCostumerId.includes(dealId);
     if (isSelected) {
-      setLeadCostumerId(leadCostumerId.filter((id) => id !== leadId));
+      setMeetCostumerId(meetCostumerId.filter((id) => id !== dealId));
     } else {
-      setLeadCostumerId([...leadCostumerId, leadId]);
+      setMeetCostumerId([...meetCostumerId, dealId]);
     }
   };
   // Handle Single Check Box For Single Updateion And Id get and send End    ------
@@ -26,11 +24,11 @@ const LeadsRightSectionTable = ({
   const handleMasterCheckboxChange = (event) => {
     console.log("Master checkbox clicked");
     const isChecked = event.target.checked;
-    const allLeadIds = getAllLeadData?.content?.map((data) => data.id) || [];
+    const allLeadIds = getAllMeetingData?.content?.map((data) => data.id) || [];
     if (isChecked) {
-      setLeadCostumerId(allLeadIds);
+      setMeetCostumerId(allLeadIds);
     } else {
-      setLeadCostumerId([]);
+      setMeetCostumerId([]);
     }
   };
   // Handle Master Checkbox Change End   -----
@@ -54,15 +52,14 @@ const LeadsRightSectionTable = ({
               <th scope="col">{tblHead.secondHead}</th>
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
-              <th scope="col">{tblHead.fifthHead}</th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllLeadData && getAllLeadData.content ? (
-              getAllLeadData?.content?.map((data) => (
+            {getAllMeetingData && getAllMeetingData?.content?.length > 0 ? (
+              getAllMeetingData?.content?.map((data) => (
                 <tr
                   key={data.id}
-                  onClick={() => localStorage.setItem("leadId", data.id)}
+                  onClick={() => localStorage.setItem("meetId", data.id)}
                 >
                   <td>
                     <input
@@ -71,30 +68,34 @@ const LeadsRightSectionTable = ({
                       defaultValue=""
                       id="flexCheckIndeterminate"
                       onChange={() => handleCheckboxChange(data.id)}
-                      checked={leadCostumerId?.includes(data.id)}
+                      checked={meetCostumerId?.includes(data.id)}
                     />
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadOwner}
+                      {data.title}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.firstName}
+                      {data.host}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadSource}
+                      {data.date}
                     </Link>
                   </td>
-                  <td>{data.leadStatus}</td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.location}
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Lead Data At this Time</td>
+                <td colSpan="5">No Meeting Data At this Time</td>
               </tr>
             )}
           </tbody>
@@ -104,4 +105,4 @@ const LeadsRightSectionTable = ({
   );
 };
 
-export default LeadsRightSectionTable;
+export default MeetingTable;

@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // CSS
 import "../../styles/dashboardCss/accountCostumerDetails.css";
+// Controller Api Methods
+import { getSingleAccount } from "../../controller/fetchApi";
 const AccountCostumerDetails = () => {
+  const [getSingleAccountData, setSingleAccountData] = useState([]);
+  const accountId = JSON.parse(localStorage.getItem("accountId"));
+  const userTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userTokenData?.data?.token;
+  useEffect(() => {
+    getSingleAccount(accountId, tokenId).then((res) => {
+      setSingleAccountData(res);
+    });
+  }, [accountId, tokenId]);
   return (
     <div className="container-fluid account_view_details_main_container">
       {/* Account Information */}
@@ -23,7 +34,7 @@ const AccountCostumerDetails = () => {
                         Account Owner
                       </th>
                       <td className="lead_view_details_table_td">
-                        Pankaj Swami Vaishnav
+                        {getSingleAccountData?.accountOwner}
                       </td>
                     </tr>
                     <tr>
@@ -34,7 +45,7 @@ const AccountCostumerDetails = () => {
                         Parent Account
                       </th>
                       <td className="lead_view_details_table_td">
-                        Au Small Finance Bank
+                        {getSingleAccountData?.parentAccount}
                       </td>
                     </tr>
                     <tr>
@@ -45,7 +56,7 @@ const AccountCostumerDetails = () => {
                         Pan Card
                       </th>
                       <td className="lead_view_details_table_td">
-                        CQHPV516745
+                        {getSingleAccountData?.panCard}
                       </td>
                     </tr>
                     <tr>
@@ -56,7 +67,7 @@ const AccountCostumerDetails = () => {
                         Annual Revenue
                       </th>
                       <td className="lead_view_details_table_td">
-                        Singhtek IT Jaipur
+                        {getSingleAccountData?.annualRevenue}
                       </td>
                     </tr>
                   </tbody>
@@ -73,7 +84,7 @@ const AccountCostumerDetails = () => {
                         Account Name
                       </th>
                       <td className="lead_view_details_table_td">
-                        HDFC Finance
+                        {getSingleAccountData?.accountName}
                       </td>
                     </tr>
                     <tr>
@@ -84,7 +95,7 @@ const AccountCostumerDetails = () => {
                         Account Number
                       </th>
                       <td className="lead_view_details_table_td">
-                        734012584652
+                        {getSingleAccountData?.accountNumber}
                       </td>
                     </tr>
                     <tr>
@@ -94,17 +105,8 @@ const AccountCostumerDetails = () => {
                       >
                         Account Type
                       </th>
-                      <td className="lead_view_details_table_td">Merge</td>
-                    </tr>
-                    <tr>
-                      <th
-                        scope="row"
-                        className="contact_view_details_costumer_table_th"
-                      >
-                        Account Information
-                      </th>
                       <td className="lead_view_details_table_td">
-                        singhtek@gmail.com
+                        {getSingleAccountData?.accountType}
                       </td>
                     </tr>
                   </tbody>
@@ -121,7 +123,7 @@ const AccountCostumerDetails = () => {
                         Account Site
                       </th>
                       <td className="lead_view_details_table_td">
-                        www.website.com
+                        {getSingleAccountData?.accountSite}
                       </td>
                     </tr>
                     <tr>
@@ -132,7 +134,7 @@ const AccountCostumerDetails = () => {
                         Aadhar Card
                       </th>
                       <td className="lead_view_details_table_td">
-                        976341602585
+                        {getSingleAccountData?.aadharCard}
                       </td>
                     </tr>
                     <tr>
@@ -143,7 +145,7 @@ const AccountCostumerDetails = () => {
                         Industry
                       </th>
                       <td className="lead_view_details_table_td">
-                        ASP (Application Service Provider)
+                        {getSingleAccountData?.industry}
                       </td>
                     </tr>
                   </tbody>
@@ -169,10 +171,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Name
+                        Billing Address
                       </th>
                       <td className="lead_view_details_table_td">
-                        Singhtek IT Jaipur
+                        {getSingleAccountData?.billingAddress}
                       </td>
                     </tr>
                   </tbody>
@@ -186,10 +188,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Email
+                        Billing City
                       </th>
                       <td className="lead_view_details_table_td">
-                        singhtek@gmail.com
+                        {getSingleAccountData?.billingCity}
                       </td>
                     </tr>
                   </tbody>
@@ -203,10 +205,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Address
+                        Billing State
                       </th>
                       <td className="lead_view_details_table_td">
-                        Ajmer Road Jaipur
+                        {getSingleAccountData?.billingState}
                       </td>
                     </tr>
                   </tbody>
@@ -220,10 +222,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Contact
+                        Billing Code
                       </th>
                       <td className="lead_view_details_table_td">
-                        +917073272146
+                        {getSingleAccountData?.billingCode}
                       </td>
                     </tr>
                   </tbody>
@@ -249,10 +251,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Name
+                        Shipping Street
                       </th>
                       <td className="lead_view_details_table_td">
-                        Singhtek IT Jaipur
+                        {getSingleAccountData?.shippingStreet}
                       </td>
                     </tr>
                   </tbody>
@@ -266,10 +268,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Email
+                        Shipping City
                       </th>
                       <td className="lead_view_details_table_td">
-                        singhtek@gmail.com
+                        {getSingleAccountData.shippingCity}
                       </td>
                     </tr>
                   </tbody>
@@ -283,10 +285,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Address
+                        Shipping State
                       </th>
                       <td className="lead_view_details_table_td">
-                        Ajmer Road Jaipur
+                        {getSingleAccountData?.shippingState}
                       </td>
                     </tr>
                   </tbody>
@@ -300,10 +302,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Contact
+                        Shipping Code
                       </th>
                       <td className="lead_view_details_table_td">
-                        +917073272146
+                        {getSingleAccountData?.shippingCode}
                       </td>
                     </tr>
                   </tbody>
@@ -329,10 +331,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Name
+                        Date Of Issue
                       </th>
                       <td className="lead_view_details_table_td">
-                        Singhtek IT Jaipur
+                        {getSingleAccountData?.dateOfIssue}
                       </td>
                     </tr>
                   </tbody>
@@ -346,10 +348,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Email
+                        Date Of Billing
                       </th>
                       <td className="lead_view_details_table_td">
-                        singhtek@gmail.com
+                        {getSingleAccountData?.dateOfBilling}
                       </td>
                     </tr>
                   </tbody>
@@ -363,10 +365,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Address
+                        Date Of Shipment
                       </th>
                       <td className="lead_view_details_table_td">
-                        Ajmer Road Jaipur
+                        {getSingleAccountData?.dateOfShipment}
                       </td>
                     </tr>
                   </tbody>
@@ -380,10 +382,10 @@ const AccountCostumerDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Company Contact
+                        Deal Description
                       </th>
                       <td className="lead_view_details_table_td">
-                        +917073272146
+                        {getSingleAccountData?.dealDescription}
                       </td>
                     </tr>
                   </tbody>
