@@ -1,0 +1,24 @@
+.report_lead_genrated_first_table_btn {
+  background-color: rgba(255, 237, 223, 1);
+  border: 1px solid rgba(250, 171, 112, 1);
+  color: rgba(255, 112, 6, 1);
+}
+.report_lead_genrated_first_table_btn:hover {
+  border: 1px solid rgba(250, 171, 112, 1);
+  color: rgba(255, 112, 6, 1);
+}
+.report_lead_genrated_first_table_btn:active,
+.report_lead_genrated_first_table_btn:focus {
+  background-color: rgba(255, 237, 223, 1);
+  border: 1px solid rgba(250, 171, 112, 1);
+  color: rgba(255, 112, 6, 1);
+}
+.report_lead_genrated_first_table_dropdown_item {
+  color: rgba(255, 112, 6, 1);
+}
+.report_lead_genrated_first_table_dropdown {
+  border: 1px solid rgba(170, 192, 241, 1);
+}
+.report_call_done_first_table_lineChart {
+  height: 40vh;
+}

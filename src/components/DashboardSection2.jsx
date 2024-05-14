@@ -50,6 +50,7 @@ const DashboardSection2 = () => {
     }
     return pipelineDealsData.map((deal) => deal.dealCount);
   };
+  console.log("get data array:", getDataArray());
   return (
     <div className="row dashboard_row1">
       <div className="col-xl-8 col-md-8">
@@ -69,7 +70,6 @@ const DashboardSection2 = () => {
               data={getDataArray()}
               // data={[]}
               labels={[
-                "Qualification",
                 "Need Analysis",
                 "Value",
                 "Identify Decision Maker",

@@ -22,7 +22,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
     (async () => {
       try {
         getAllContact(uid, tokenId).then((res) => {
-          setAllContactData(res.content);
+          setAllContactData(res?.content);
         });
       } catch (error) {
         console.log(error);

@@ -9,10 +9,10 @@ import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOutCircle } from "react-icons/bi";
-
+// Components
+import UpdateProfile from "../../pages/UpdateProfile";
 // Controller Api
 import { logoutUser } from "../../controller/fetchApi";
-
 const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Page Name -----Start-------
   const location = useLocation();
@@ -100,6 +100,14 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         document.title = "Calls";
         setPageName("Calls");
         break;
+      case "/call-logs":
+        document.title = "Log Calls";
+        setPageName("Log Calls");
+        break;
+      case "/call-schedule":
+        document.title = "Schedule Calls";
+        setPageName("Schedule Calls");
+        break;
       case "/create-call":
         document.title = "Create Call";
         setPageName("Create Call");
@@ -142,9 +150,12 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   return (
     <nav className="navbar navbar-expand-lg  dashboard_navbar">
       <div className="container-fluid dashboard_navbar_container_fluid">
-        <a className="navbar-brand dashbaord_navbar_crm_text" href="#!">
+        <Link
+          className="navbar-brand dashbaord_navbar_crm_text"
+          to="/dashboard"
+        >
           CR<span>M</span>
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -200,9 +211,12 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                 <RiArrowDropDownLine className="dashboard_navbar_drop_icon" />
                 <ul className="dropdown-menu navbar_dropdown_menu">
                   <Link className="text-decoration-none">
-                    <li>
-                      <a className="dropdown-item" href="#!">
-                        <CgProfile className="me-1 navbar_dropdown_icon" />{" "}
+                    <li
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateProfileModal"
+                    >
+                      <a className="dropdown-item" href="/#">
+                        <CgProfile className="me-1 navbar_dropdown_icon" />
                         Update Profile
                       </a>
                     </li>
@@ -225,6 +239,43 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
           </div>
         </div>
       </div>
+      {/*Update Profile  Modal */}
+      <>
+        <div
+          className="modal fade modal-xl update_profile_modal"
+          id="updateProfileModal"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex={-1}
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header w-100">
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
+              </div>
+              <div className="modal-body">
+                <UpdateProfile />
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
     </nav>
   );
 };

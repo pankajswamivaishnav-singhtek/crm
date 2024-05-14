@@ -46,7 +46,7 @@ const Meetings = () => {
       console.log(error);
     }
   }, [tokenId, pageNo, setAllMeetingData]);
-  // Handle Delete Account Api
+  // Handle Delete Meeting Api
   const handleDeleteMeetings = async (meetCostumerId) => {
     try {
       await deleteMeetings(meetCostumerId, setShowToast, tokenId);
@@ -58,7 +58,7 @@ const Meetings = () => {
       console.log("Error deleting Single Account", errorMessage);
     }
   };
-  // Update Deals Start--------
+  // Update Meeting Start--------
   const [defaultValue, setDefaultValue] = useState([]); // Get Single Deal Data Which Fullfill Field Value
   const handleUpdateMeet = async () => {
     try {
@@ -97,7 +97,7 @@ const Meetings = () => {
       }
     }
   };
-  // Download Account Api
+  // Download Meeting Api
   const handleDownloadMeetings = async () => {
     try {
       await downloadMeetings(setShowToast, tokenId);

@@ -1,22 +1,20 @@
 import React from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
-
-const MeetingTable = ({
+const LogCallTable = ({
   tblHead,
   redirectLink,
-  getAllMeetingData,
-  meetCostumerId,
-  setMeetCostumerId,
-  data,
+  getAllLogCallData,
+  logCallCostumerId,
+  setLogCallCostumerId,
 }) => {
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
-  const handleCheckboxChange = (meetId) => {
-    const isSelected = meetCostumerId.includes(meetId);
+  const handleCheckboxChange = (callId) => {
+    const isSelected = logCallCostumerId.includes(callId);
     if (isSelected) {
-      setMeetCostumerId(meetCostumerId.filter((id) => id !== meetId));
+      setLogCallCostumerId(logCallCostumerId.filter((id) => id !== callId));
     } else {
-      setMeetCostumerId([...meetCostumerId, meetId]);
+      setLogCallCostumerId([...logCallCostumerId, callId]);
     }
   };
   // Handle Single Check Box For Single Updateion And Id get and send End    ------
@@ -24,11 +22,11 @@ const MeetingTable = ({
   const handleMasterCheckboxChange = (event) => {
     console.log("Master checkbox clicked");
     const isChecked = event.target.checked;
-    const allmeetIds = getAllMeetingData?.content?.map((data) => data.id) || [];
+    const allCallIds = getAllLogCallData?.content?.map((data) => data.id) || [];
     if (isChecked) {
-      setMeetCostumerId(allmeetIds);
+      setLogCallCostumerId(allCallIds);
     } else {
-      setMeetCostumerId([]);
+      setLogCallCostumerId([]);
     }
   };
   // Handle Master Checkbox Change End   -----
@@ -52,14 +50,15 @@ const MeetingTable = ({
               <th scope="col">{tblHead.secondHead}</th>
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
+              <th scope="col">{tblHead.fifthHead}</th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllMeetingData && getAllMeetingData?.content?.length > 0 ? (
-              getAllMeetingData?.content?.map((data) => (
+            {getAllLogCallData && getAllLogCallData?.content ? (
+              getAllLogCallData?.content?.map((data) => (
                 <tr
                   key={data.id}
-                  onClick={() => localStorage.setItem("meetId", data.id)}
+                  onClick={() => localStorage.setItem("logCallId", data.id)}
                 >
                   <td>
                     <input
@@ -68,34 +67,39 @@ const MeetingTable = ({
                       defaultValue=""
                       id="flexCheckIndeterminate"
                       onChange={() => handleCheckboxChange(data.id)}
-                      checked={meetCostumerId?.includes(data.id)}
+                      checked={logCallCostumerId?.includes(data.id)}
                     />
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.title}
+                      {data.subject}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.host}
+                      {data.callType}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.date}
+                      {data.callStartTime}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.location}
+                      {data.callDuration}
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.callStatus}
                     </Link>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Meeting Data At this Time</td>
+                <td colSpan="5">There are no Log calls at the moment.</td>
               </tr>
             )}
           </tbody>
@@ -105,4 +109,4 @@ const MeetingTable = ({
   );
 };
 
-export default MeetingTable;
+export default LogCallTable;

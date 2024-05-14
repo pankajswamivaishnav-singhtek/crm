@@ -59,7 +59,6 @@ const CreateAccount = () => {
       },
       validationSchema: accountFormSchema,
       onSubmit: async (values, { resetForm }) => {
-        console.log("Value", values);
         try {
           console.log("Enter Account Function");
           const createSuccessfully = await createAccount(

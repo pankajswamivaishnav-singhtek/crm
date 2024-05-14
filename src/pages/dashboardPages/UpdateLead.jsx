@@ -1,7 +1,7 @@
 import React from "react";
 // Component
 import CreateUpdateForm from "../../components/CreateUpdateForm";
-const UpdateLead = ({ leadCostumerId, defaultValue }) => {
+const UpdateLead = ({ leadCostumerId, defaultValue, getLeadsData }) => {
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       {/* Form */}
@@ -9,6 +9,7 @@ const UpdateLead = ({ leadCostumerId, defaultValue }) => {
         <CreateUpdateForm
           leadCostumerId={leadCostumerId}
           defaultValue={defaultValue}
+          getLeadsData = {getLeadsData}
         />
       </div>
     </div>

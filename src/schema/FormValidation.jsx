@@ -107,7 +107,7 @@ export const ContactFormSchema = Yup.object({
   description: Yup.string(),
 });
 
-// Acoount Schema Validation
+// Account Schema Validation
 export const accountFormSchema = Yup.object({
   accountOwner: Yup.string().required("Account Owner is required"),
   accountName: Yup.string().required("Account Name is required"),
@@ -186,7 +186,7 @@ export const LogCallSchema = Yup.object({
 export const DealFormSchema = Yup.object({
   dealOwner: Yup.string().required("Deal Owner is required"),
   dealName: Yup.string().required("Deal Name is required"),
-  ammount: Yup.string().required("Amount is required"),
+  amount: Yup.string().required("Amount is required"),
   closingDate: "",
   accountName: Yup.string().required("Account Name is required"),
   stage: Yup.string().required("Stage is required"),

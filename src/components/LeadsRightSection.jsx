@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -41,15 +41,48 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   const userLeadIdData = JSON.parse(localStorage.getItem("leadId"));
   const leadId = userLeadIdData;
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   const [getAllLeadData, setAllLeadsData] = useState([]);
+
+  //  Get All Leads Data
+  const getLeadsData = useCallback(async () => {
+    const filter = {
+      page: pageNo,
+      city: filterData?.cityName,
+      company: filterData?.companyName,
+      createdAt: filterData?.date,
+      leadOwner: filterData?.leadOwnerName,
+      leadType: filterData?.verified
+        ? "verified"
+        : filterData?.unverified
+        ? "unverified"
+        : "unverified",
+    };
+    try {
+      getAllLeadByFilter(filter, tokenId).then((res) => {
+        setAllLeadsData(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [
+    filterData?.cityName,
+    filterData?.companyName,
+    filterData?.date,
+    filterData?.leadOwnerName,
+    filterData?.verified,
+    tokenId,
+    filterData?.unverified,
+    pageNo,
+    setAllLeadsData,
+  ]);
 
   // Delete Api Start---------------
   const handleDeleteLead = async (leadCostumerId) => {
     try {
       await deleteLeads(leadCostumerId, setShowToast, tokenId);
       if (deleteLeads) {
+        getLeadsData();
         console.log("delete Successfully LeadRightSection", deleteLeads);
       }
     } catch (error) {
@@ -57,7 +90,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
       console.log("Error deleting LeadRightSection", errorMessage);
     }
   };
-  // Delete Api End---------------
 
   // Update Btn Click Action Start--------
   const [defaultValue, setDefaultValue] = useState([]);
@@ -65,6 +97,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
     try {
       const singleLeadResult = await getSingleLead(leadId, tokenId);
       if (singleLeadResult) {
+        getLeadsData();
         setDefaultValue(singleLeadResult);
       } else {
         setDefaultValue([]);
@@ -74,17 +107,18 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
       setDefaultValue([]);
     }
   };
-  // Update Btn Click Action End ---------
 
   //  Verifyleads Function Start -----
   const handleVerifyLeads = async (leadId) => {
     try {
       await verifyLeads(leadId, setShowToast, tokenId);
+      if (verifyLeads) {
+        getLeadsData();
+      }
     } catch (error) {
       console.log("LeadRightSection SingleLead :", error);
     }
   };
-  //  Verifyleads Function End   -----
 
   // Handle Download Api ------
   const handleDownloadLeads = async () => {
@@ -94,7 +128,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
       console.log("LeadRightSection Failed Downloaded:", error);
     }
   };
-  // Handle Download Api End -----
 
   // Handle Upload File start ----
   const [selectedFile, setSelectedFile] = useState(null);
@@ -108,51 +141,23 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
       console.log("file selected: " + selectedFile);
       try {
         await uploadLeads(selectedFile, setShowToast, tokenId);
+        if (uploadLeads) {
+          getLeadsData();
+        }
       } catch (error) {
         console.log("LeadRightSection Failed Uploading:", error);
       }
     }
   };
-  // Handle Upload File End -----
-  useEffect(() => {
-    (async () => {
-      const filter = {
-        // user: uid,
-        page: pageNo,
-        city: filterData?.cityName,
-        company: filterData?.companyName,
-        createdAt: filterData?.date,
-        leadOwner: filterData?.leadOwnerName,
-        leadType: filterData?.verified
-          ? "verified"
-          : filterData?.unverified
-          ? "unverified"
-          : "unverified",
-      };
-      try {
-        getAllLeadByFilter(filter, tokenId).then((res) => {
-          setAllLeadsData(res);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [
-    uid,
-    pageNo,
-    tokenId,
-    filterData?.cityName,
-    filterData?.companyName,
-    filterData?.leadOwnerName,
-    filterData?.date,
-    filterData?.verified,
-    filterData?.unverified,
-  ]);
 
   // Handle Next Page
   const handleNextPageClick = () => {
     setPageNo(pageNo + 1); // Increment page number
   };
+
+  useEffect(() => {
+    getLeadsData();
+  }, [getLeadsData]);
 
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
@@ -180,7 +185,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <li data-bs-toggle="modal" data-bs-target="#updateLeadModal">
                     <button
                       className="dropdown-item"
                       onClick={() => {
@@ -206,6 +211,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                       Upload Leads
                     </button>
                   </li>
+
                   <li>
                     <button
                       className="dropdown-item"
@@ -294,7 +300,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
         <>
           <div
             className="modal fade modal-xl"
-            id="staticBackdrop"
+            id="updateLeadModal"
             data-bs-backdrop="static"
             data-bs-keyboard="false"
             tabIndex={-1}
@@ -315,6 +321,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                   <UpdateLead
                     leadCostumerId={leadCostumerId}
                     defaultValue={defaultValue}
+                    getLeadsData={getLeadsData}
                   />
                 </div>
                 <div className="modal-footer">
@@ -324,9 +331,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Understood
                   </button>
                 </div>
               </div>

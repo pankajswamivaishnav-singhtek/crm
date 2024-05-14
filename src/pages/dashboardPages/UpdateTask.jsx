@@ -41,6 +41,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
     validationSchema: TaskFormSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
+        console.log("Chal gya task ", values);
         const updateTaskSuccessfully = await updateTask(
           taskCostumerId,
           values,

@@ -8,19 +8,19 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdPermPhoneMsg, MdOutlinePhonePaused } from "react-icons/md";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
-import ScheduleCallTable from "../../components/ScheduleCallTable";
+import LogCallTable from "../../components/LogCallTable";
 // React Router Dom
 import { useNavigate } from "react-router-dom";
-// Controller Methods
+// Controller Method
 import {
-  getAllScheduleCall,
-  deleteScheduleCall,
-  downloadScheduleCalls,
-  uploadScheduleCalls,
-  getSingleScheduleCall,
+  getAllLogCall,
+  deleteLogCall,
+  downloadLogCalls,
+  uploadLogCalls,
+  getSingleLogCall
 } from "../../controller/fetchApi";
-import UpdateScheduleCall from "./UpdateScheduleCall";
-const Calls = () => {
+import UpdateLogCall from "./UpdateLogCall";
+const CallLogs = () => {
   // Start Toast -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
@@ -35,45 +35,41 @@ const Calls = () => {
   const navigate = useNavigate();
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
-  const [scheduleCallCostumerId, setScheduleCallCostumerId] = useState([]);
-  const [getAllScheduleCallData, setAllScheduleCallData] = useState([]);
+  const [logCallCostumerId, setLogCallCostumerId] = useState([]);
+  const [getAllLogCallData, setAllLogCallData] = useState([]);
   // Get Uid and Tokenid Who Saved In Cookie
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
+  const logCallId = JSON.parse(localStorage.getItem("logCallId"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
-
   //  Get All Schedule Call Data
-  const getScheduleCallData = useCallback(async () => {
+  const getLogCallData = useCallback(async () => {
     try {
-      const res = await getAllScheduleCall(pageNo, tokenId);
-      setAllScheduleCallData(res);
+      const res = await getAllLogCall(pageNo, tokenId);
+      setAllLogCallData(res);
     } catch (error) {
       console.log(error);
     }
-  }, [tokenId, pageNo, setAllScheduleCallData]);
-  // Handle Delete Schedule Call Api
-  const handleDeleteScheduleCall = async (scheduleCallCostumerId) => {
+  }, [tokenId, pageNo, setAllLogCallData]);
+  // Handle Delete Account Api
+  const handleDeleteLogCall = async (logCallCostumerId) => {
     try {
-      await deleteScheduleCall(scheduleCallCostumerId, setShowToast, tokenId);
-      if (deleteScheduleCall) {
-        getScheduleCallData();
-        console.log(
-          "delete Successfully schedule call.jsx",
-          deleteScheduleCall
-        );
+      await deleteLogCall(logCallCostumerId, setShowToast, tokenId);
+      if (deleteLogCall) {
+        getLogCallData();
+        console.log("delete Successfully Log Call", getLogCallData);
       }
     } catch (error) {
       const errorMessage = error.message;
       console.log("Error deleting Single Account", errorMessage);
     }
   };
-  // Download Schedule Call Api
-  const handleDownloadScheduleCalls = async () => {
+  // Download Log Call Api
+  const handleDownloadLogCalls = async () => {
     try {
-      await downloadScheduleCalls(setShowToast, tokenId);
+      await downloadLogCalls(setShowToast, tokenId);
     } catch (error) {
-      console.log("Error downloading Schedule Call", error);
+      console.log("Error downloading Log Call", error);
     }
   };
   // Handle Upload File start ----
@@ -82,28 +78,28 @@ const Calls = () => {
     console.log("Selected ");
     setSelectedFile(event.target.files[0]);
   };
-  const handleUploadScheduleCalls = async () => {
-    console.log("Start handle leads");
+  const handleUploadLogCalls = async () => {
+    console.log("Start handle Log Calls");
     if (selectedFile) {
       console.log("file selected: " + selectedFile);
       try {
-        await uploadScheduleCalls(selectedFile, setShowToast, tokenId);
-        getScheduleCallData();
+        await uploadLogCalls(selectedFile, setShowToast, tokenId);
+        getLogCallData();
       } catch (error) {
-        console.log("Upload Schedule Calls Failed Uploading:", error);
+        console.log("Upload Log Calls Failed Uploading:", error);
       }
     }
   };
   // Update ScheDule Call Start--------
   const [defaultValue, setDefaultValue] = useState([]); // Get Single Deal Data Which Fullfill Field Value
-  const handleUpdateScheduleCall = async () => {
+  const handleUpdateLogCall = async () => {
     try {
-      const singScheduleCallResult = await getSingleScheduleCall(
-        scheduleCallId,
+      const singLogCallResult = await getSingleLogCall(
+        logCallId,
         tokenId
       );
-      if (singScheduleCallResult) {
-        setDefaultValue(singScheduleCallResult);
+      if (singLogCallResult) {
+        setDefaultValue(singLogCallResult);
       } else {
         setDefaultValue([]);
       }
@@ -114,7 +110,7 @@ const Calls = () => {
   };
   const handleUpdateSuccess = async () => {
     try {
-      await getScheduleCallData();
+      await getLogCallData();
     } catch (error) {
       console.log("Error fetching updated data", error);
     }
@@ -124,13 +120,13 @@ const Calls = () => {
     setPageNo(pageNo + 1); // Increment page number
   };
   useEffect(() => {
-    getScheduleCallData();
-  }, [getScheduleCallData]);
-  console.log("defaultValue", defaultValue);
+    getLogCallData();
+  }, [getLogCallData]);
+
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
-        {/* Btn */}
+        {/* Btn Div */}
         <div className="dashboard_leads_btn_mainDiv">
           <div className="dashboard_leads_btns_div">
             <div className="dashboard_leads_action_btn_div">
@@ -144,14 +140,9 @@ const Calls = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateScheduleCallModal"
-                  >
-                    <button
-                      className="dropdown-item"
-                      onClick={() => handleUpdateScheduleCall()}
-                    >
+                  <li data-bs-toggle="modal"
+                    data-bs-target="#updateLogCallModal">
+                    <button className="dropdown-item"  onClick={() => handleUpdateLogCall()}>
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
                     </button>
@@ -159,9 +150,7 @@ const Calls = () => {
                   <li>
                     <button
                       className="dropdown-item"
-                      onClick={() =>
-                        handleDeleteScheduleCall(scheduleCallCostumerId)
-                      }
+                      onClick={() => handleDeleteLogCall(logCallCostumerId)}
                     >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
@@ -180,7 +169,7 @@ const Calls = () => {
                   <li>
                     <button
                       className="dropdown-item"
-                      onClick={() => handleDownloadScheduleCalls()}
+                      onClick={() => handleDownloadLogCalls()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Calls
@@ -228,20 +217,19 @@ const Calls = () => {
             </div>
           </div>
         </div>
-        {/* Table */}
         <div className="dashboard_leads_table_div">
-          <ScheduleCallTable
+          <LogCallTable
             tblHead={{
-              firstHead: "Call Owner",
-              secondHead: "Call Type",
-              thirdHead: "Call Start Time",
-              fourthHead: "Call Status",
-              fifthHead: "Call Purpose",
+              firstHead: "Subject",
+              secondHead: "Call Purpose",
+              thirdHead: "Call Type",
+              fourthHead: "Call Result",
+              fifthHead: "Status",
             }}
-            redirectLink="/schedule-call-details"
-            getAllScheduleCallData={getAllScheduleCallData}
-            scheduleCallCostumerId={scheduleCallCostumerId}
-            setScheduleCallCostumerId={setScheduleCallCostumerId}
+            redirectLink="/log-call-details"
+            getAllLogCallData={getAllLogCallData}
+            logCallCostumerId={logCallCostumerId}
+            setLogCallCostumerId={setLogCallCostumerId}
           />
         </div>
         {/* Pagination Div */}
@@ -336,7 +324,7 @@ const Calls = () => {
                   <button
                     type="submit"
                     className="btn btn-primary"
-                    onClick={handleUploadScheduleCalls}
+                    onClick={handleUploadLogCalls}
                   >
                     Upload
                   </button>
@@ -345,11 +333,11 @@ const Calls = () => {
             </div>
           </div>
         </>
-        {/*Update Deal Modal */}
-        <>
+         {/*Update Deal Modal */}
+         <>
           <div
             className="modal fade modal-xl"
-            id="updateScheduleCallModal"
+            id="updateLogCallModal"
             data-bs-backdrop="static"
             data-bs-keyboard="false"
             tabIndex={-1}
@@ -367,8 +355,8 @@ const Calls = () => {
                   />
                 </div>
                 <div className="modal-body">
-                  <UpdateScheduleCall
-                    scheduleCallCostumerId={scheduleCallCostumerId}
+                  <UpdateLogCall
+                    logCallCostumerId={logCallCostumerId}
                     defaultValue={defaultValue}
                     onUpdateSuccess={handleUpdateSuccess}
                   />
@@ -412,4 +400,4 @@ const Calls = () => {
   );
 };
 
-export default Calls;
+export default CallLogs;

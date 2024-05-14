@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../../styles/component_css/common_css/dashboardSidebar.common.css";
-
 // React Router Dom
 import { Link } from "react-router-dom";
 // React Icons
@@ -16,13 +15,21 @@ import { SiSimpleanalytics } from "react-icons/si";
 import { MdOutlineLogout } from "react-icons/md";
 import { RiMenu4Line } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
-
+// Controller Api
+import { logoutUser } from "../../controller/fetchApi";
 const DashboardSidebar = ({ showSidebarSmallScreen }) => {
+  // Logout User
+  const logoutUserSubmit = () => {
+    logoutUser();
+    localStorage.clear();
+    window.location.href = "/login";
+  };
+  // Shrink Sidebar
   const [shrinkSidebar, setShrinkSidebar] = useState(false);
-
   const toggleSidebar = () => {
     setShrinkSidebar(!shrinkSidebar);
   };
+
   return (
     <>
       {/* <div className="dashboard_sidebar_main_div"> */}
@@ -89,12 +96,36 @@ const DashboardSidebar = ({ showSidebarSmallScreen }) => {
                       <span className="sidebar_navItem_text">Meetings</span>
                     </Link>
                   </li>
-                  <li className="nav-item sidebar_navItems">
+                  {/* <li className="nav-item sidebar_navItems">
                     <Link className="Link-button" to="/calls">
                       <TbPhonePlus className="sidebar_navItem_icon" />
                       <span className="sidebar_navItem_text">Calls</span>
                     </Link>
+                  </li> */}
+                  <li className="nav-item sidebar_navItems dropdown">
+                    <Link
+                      className="Link-button"
+                      to="/calls"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <TbPhonePlus className="sidebar_navItem_icon" />
+                      <span className="sidebar_navItem_text">Calls</span>
+                    </Link>
+                    <ul className="dropdown-menu dashboard_sidebar_navItem_dropDown">
+                      <li>
+                        <Link className="dropdown-item" to="/call-schedule">
+                          Schedule Call
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item" to="/call-logs">
+                          Log Call
+                        </Link>
+                      </li>
+                    </ul>
                   </li>
+
                   <li className="nav-item sidebar_navItems">
                     <Link className="Link-button" to="/reports">
                       <SiSimpleanalytics className="sidebar_navItem_icon" />
@@ -122,13 +153,19 @@ const DashboardSidebar = ({ showSidebarSmallScreen }) => {
                 </div>
                 {/* Log Out Button */}
                 {!shrinkSidebar && (
-                  <button className="sidebar_logout_btn btn">
+                  <button
+                    className="sidebar_logout_btn btn"
+                    onClick={logoutUserSubmit}
+                  >
                     <MdOutlineLogout className="sidebar_logout_icon" />
                     <span className="sidebar_logout_text">Log Out</span>
                   </button>
                 )}
                 {shrinkSidebar && (
-                  <MdOutlineLogout className="sidebar_shrink_logout_btn" />
+                  <MdOutlineLogout
+                    className="sidebar_shrink_logout_btn"
+                    onClick={logoutUserSubmit}
+                  />
                 )}
               </div>
             </div>

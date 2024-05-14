@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-// controller Methods
-import { getSingleScheduleCall } from "../../controller/fetchApi";
-const CallViewDetails = () => {
-  const [getSingleScheduleCallData, setSingleScheduleCallData] = useState([]);
-  const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
+import React, {useState, useEffect} from "react";
+// controller methods
+import { getSingleLogCall } from "../../controller/fetchApi";
+const LogCallViewDetails = () => {
+  const [getSingleLogCallData, setSingleLogCallData] = useState([]);
+  const logCallId = JSON.parse(localStorage.getItem("logCallId"));
   const userTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userTokenData?.data?.token;
   useEffect(() => {
-    getSingleScheduleCall(scheduleCallId, tokenId).then((res) => {
-      setSingleScheduleCallData(res);
+    getSingleLogCall(logCallId, tokenId).then((res) => {
+      setSingleLogCallData(res);
     });
-  }, [scheduleCallId, tokenId]);
+  }, [logCallId, tokenId]);
   return (
     <div className="container-fluid account_view_details_main_container">
       {/* Billing Information */}
       <div className="account_view_details_Row">
         <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
-          Schedule Call Information
+          Log Call Information
         </h3>
         <div className="row">
           <div className="col-xl-12">
@@ -32,7 +32,7 @@ const CallViewDetails = () => {
                         Call To
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callTo}
+                       {getSingleLogCallData?.callTo}
                       </td>
                     </tr>
                   </tbody>
@@ -49,7 +49,7 @@ const CallViewDetails = () => {
                         Related To
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.relatedTo}
+                        {getSingleLogCallData?.relatedTo}
                       </td>
                     </tr>
                   </tbody>
@@ -66,7 +66,7 @@ const CallViewDetails = () => {
                         Call Type
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callType}
+                       {getSingleLogCallData?.callType}
                       </td>
                     </tr>
                   </tbody>
@@ -83,7 +83,7 @@ const CallViewDetails = () => {
                         Call Status
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callStatus}
+                       {getSingleLogCallData?.callStatus}
                       </td>
                     </tr>
                   </tbody>
@@ -100,7 +100,7 @@ const CallViewDetails = () => {
                         Call Start Time
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callStartTime}
+                        {getSingleLogCallData?.callStartTime}
                       </td>
                     </tr>
                   </tbody>
@@ -114,10 +114,10 @@ const CallViewDetails = () => {
                         scope="row"
                         className="contact_view_details_costumer_table_th"
                       >
-                        Call Owner
+                        Call Duration
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callOwner}
+                       {getSingleLogCallData?.callDuration}
                       </td>
                     </tr>
                   </tbody>
@@ -134,31 +134,12 @@ const CallViewDetails = () => {
                         Subject
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.subject}
+                       {getSingleLogCallData?.subject}
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="table-responsive account_view_details_table">
-                <table className="table table-borderless">
-                  <tbody>
-                    <tr>
-                      <th
-                        scope="row"
-                        className="contact_view_details_costumer_table_th"
-                      >
-                        reminder
-                      </th>
-                      <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.reminder}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              {/* Extra But Do not delete kyuki ye table ka arrangement shi rk paa rha hai*/}
-              <div className="table-responsive account_view_details_table"></div>
             </div>
           </div>
         </div>
@@ -182,7 +163,7 @@ const CallViewDetails = () => {
                         Call Purpose
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callPurpose}
+                        Singhtek IT Jaipur
                       </td>
                     </tr>
                   </tbody>
@@ -199,15 +180,41 @@ const CallViewDetails = () => {
                         Call Agenda
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callAgenda}
+                        +917073272146
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              {/* don not delete */}
-              <div className="table-responsive account_view_details_table"></div>
+              <div className="table-responsive account_view_details_table">
+                <table className="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <th
+                        scope="row"
+                        className="contact_view_details_costumer_table_th"
+                      >
+                        Call Result
+                      </th>
+                      <td className="lead_view_details_table_td">
+                        +917073272146
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+          </div>
+        </div>
+        {/* Description */}
+        <h4 className="my-2 mx-2 dashboard_leadView_company_details_heading">
+          Description
+        </h4>
+        <div className="row">
+          <div className="col-xl-12 my-1 mx-2">
+            <p className="lead_view_details_description">
+            {getSingleLogCallData?.description}
+            </p>
           </div>
         </div>
       </div>
@@ -215,4 +222,4 @@ const CallViewDetails = () => {
   );
 };
 
-export default CallViewDetails;
+export default LogCallViewDetails;

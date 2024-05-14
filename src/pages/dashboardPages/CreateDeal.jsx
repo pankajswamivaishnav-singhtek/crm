@@ -31,7 +31,7 @@ const CreateDeal = () => {
       initialValues: {
         dealOwner: "",
         dealName: "",
-        ammount: "",
+        amount: "",
         closingDate: "",
         accountName: "",
         stage: "",
@@ -46,13 +46,8 @@ const CreateDeal = () => {
       validationSchema: DealFormSchema,
       onSubmit: async (values, { resetForm }) => {
         try {
-          const createdDealSuccessfully = await createDeal(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createdDealSuccessfully) {
+          await createDeal(uid, values, setShowToast, tokenId);
+          if (createDeal) {
             resetForm();
           }
         } catch (error) {
@@ -99,17 +94,17 @@ const CreateDeal = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="ammount">Amount</label>
+            <label htmlFor="amount">Amount</label>
             <input
               type="text"
-              id="ammount"
+              id="amount"
               className="form-control create_lead_form_input"
-              value={values.ammount}
+              value={values.amount}
               onChange={handleChange}
               onBlur={handleBlur}
-              name="ammount"
+              name="amount"
               placeholder={
-                touched.ammount && errors.ammount ? errors.ammount : null
+                touched.amount && errors.amount ? errors.amount : null
               }
             />
             <FaUserTie className="create_lead_input_icon" />

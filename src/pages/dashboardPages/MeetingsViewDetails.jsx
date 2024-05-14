@@ -32,7 +32,7 @@ const MeetingsViewDetails = () => {
                       Host
                     </th>
                     <td className="lead_view_details_table_td">
-                      {getSingleMeetingData.host}
+                      {getSingleMeetingData?.host}
                     </td>
                   </tr>
                 </tbody>
@@ -49,7 +49,7 @@ const MeetingsViewDetails = () => {
                       Title
                     </th>
                     <td className="lead_view_details_table_td">
-                      {getSingleMeetingData.title}
+                      {getSingleMeetingData?.title}
                     </td>
                   </tr>
                 </tbody>
@@ -66,7 +66,7 @@ const MeetingsViewDetails = () => {
                       Address
                     </th>
                     <td className="lead_view_details_table_td">
-                      {getSingleMeetingData.location}
+                      {getSingleMeetingData?.location}
                     </td>
                   </tr>
                 </tbody>
@@ -82,7 +82,7 @@ const MeetingsViewDetails = () => {
                     >
                       Date
                     </th>
-                    <td className="lead_view_details_table_td">12.11.2024</td>
+                    <td className="lead_view_details_table_td">{getSingleMeetingData?.date}</td>
                   </tr>
                 </tbody>
               </table>
@@ -94,7 +94,7 @@ const MeetingsViewDetails = () => {
                 </p>
               </div>
               <div className="participants_name lead_view_details_table_td">
-                {getSingleMeetingData.participants?.map((email) => {
+                {getSingleMeetingData?.participants?.map((email) => {
                   return <span className="me-2">{email},</span>;
                 })}
               </div>

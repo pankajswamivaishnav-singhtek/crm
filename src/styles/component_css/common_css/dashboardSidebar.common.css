@@ -34,6 +34,16 @@
   color: rgba(215, 219, 255, 1);
 }
 
+.dashboard_sidebar_navItem_dropDown {
+  line-height: 20px;
+  background: linear-gradient(175.82deg, #7583ff 0%, #5869ff 100%);
+}
+.dashboard_sidebar_navItem_dropDown > li > a {
+  color: rgba(215, 219, 255, 1);
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+}
 .sidebar_navItem_icon {
   cursor: pointer;
 }
@@ -99,7 +109,11 @@
 .sidebar_navItem_active .sidebar_navItem_text {
   display: inline; /* Display text for active item */
 }
-
+.sidebar_shrink_logout_btn {
+  cursor: pointer;
+  color:  rgba(215, 219, 255, 1);
+  font-size: larger;
+}
 .dashboard_sidebar_main_div .shrink .sidebar_shrink_logout_btn {
   cursor: pointer;
   margin: 10.3vh 0 2vh -5%;
@@ -126,6 +140,7 @@
 .dashboard_sidebar_main_div.shrink .sidebar_navbar_icon {
   display: none;
 }
+
 /* Show Hide Sidebar In small Screen */
 
 @media screen and (max-width: 768px) {

@@ -55,7 +55,7 @@ const AccountTable = ({
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllAccountData && getAllAccountData?.content ? (
+            {getAllAccountData && getAllAccountData?.content?.length > 0 ? (
               getAllAccountData?.content?.map((data) => (
                 <tr
                   key={data.id}
@@ -100,7 +100,7 @@ const AccountTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Lead Data At this Time</td>
+                <td colSpan="5">No Account Data At this Time</td>
               </tr>
             )}
           </tbody>

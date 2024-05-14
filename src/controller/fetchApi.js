@@ -1,4 +1,5 @@
 import {
+  // Dashboard & Singup Api
   SIGNUP_USER,
   LOGIN_USER,
   LOGOUT_USER,
@@ -9,6 +10,8 @@ import {
   MONTHLY_TASK_URL,
   MONTHLY_CLOSING_DEALS_URL,
   PIPELINE_DEALS_URL,
+  GET_CURRENT_USER_URL,
+  UPDATE_PROFILE_URL,
   // Leads Url
   CREATE_LEAD_URL,
   GET_SINGLE_LEAD_URL,
@@ -23,6 +26,7 @@ import {
   GET_ALL_CONTACT_URL,
   DELETE_CONTACT_URL,
   DOWNLOAD_CONTACT_URL,
+  GET_CONTACTS_URL,
   // Accounts Url
   CREATE_ACCOUNTS_URL,
   GET_ALL_ACCOUNT_URL,
@@ -54,6 +58,21 @@ import {
   UPDATE_MEETINGS_URL,
   DOWNLOAD_MEETING_URL,
   UPLOAD_MEETING_URL,
+  // Call Url
+  CREATE_LOG_CALL_URL,
+  CREATE_SCHEDULE_CALL_URL,
+  GET_ALL_SCHEDULE_CALL_URL,
+  GET_ALL_LOG_CALL_URL,
+  GET_SINGLE_SCHEDULE_CALL_URL,
+  GET_SINGLE_LOG_CALL_URL,
+  DELETE_SCHEDULE_URL,
+  LOG_CALL_DELETE_URL,
+  UPLOAD_SCHEDULE_CALL_URL,
+  UPLOAD_LOG_CALL_URL,
+  DOWNLOAD_SCHEDULE_CALL_URL,
+  DOWNLOAD_LOG_CALL_URL,
+  UPDATE_SCHEDULE_CALL_URL,
+  UPDATE_LOG_CALL_URL,
 } from "../constants/Constant";
 import axios from "axios";
 
@@ -163,6 +182,30 @@ export const resetPassword = async (userData, uid, setShowToast) => {
   }
 };
 
+// Update Profile
+export const updateProfile = async (tokenId, setShowToast, profileData) => {
+  try {
+    const response = await axios.put(UPDATE_PROFILE_URL, profileData, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Profile Updated." });
+      return response;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    if (error.response.status === 403) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Please Select Lead" });
+    }
+    console.log("Did not lead", error);
+  }
+};
+
 // --------------Dashboard Configuration Api -------------
 
 // Meeting This Month Get Api
@@ -237,6 +280,7 @@ export const pipelineDeals = async (uid, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
+    console.log("Pipeline Data APi", response);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -249,6 +293,23 @@ export const pipelineDeals = async (uid, tokenId) => {
     return message;
   }
 };
+
+export const getCurrentUser = async function (tokenId) {
+  try {
+    const response = await axios.get(GET_CURRENT_USER_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    const finalResponse = response?.data?.data;
+    return finalResponse;
+  } catch (error) {
+    const message = error?.response?.data;
+    return message;
+  }
+};
+
+// ********* Leads Page Api **********
 
 // Create Lead Api
 export const createLead = async (userData, uid, setShowToast, tokenId) => {
@@ -484,6 +545,8 @@ export const uploadLeads = async (file, setShowToast, tokenId) => {
   }
 };
 
+// ************* Conatatcs Api ****************
+
 // Create Contact Post Api
 export const createContact = async (
   contactData,
@@ -513,20 +576,45 @@ export const createContact = async (
     );
     if (response) {
       // Show success message in toast
-      setShowToast({ success: true, message: "Create Lead Successfully." });
+      setShowToast({ success: true, message: "Create Contact Successfully." });
     }
   } catch (error) {}
 };
 
 //Get All Contact get Api
-export const getAllContact = async (uid, tokenId) => {
+export const getAllContact = async (pageNo, tokenId) => {
   try {
+    console.log("Get All Data ENTER", tokenId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
     };
-    const response = await axios.get(GET_ALL_CONTACT_URL + uid, config);
+    const response = await axios.get(GET_ALL_CONTACT_URL + pageNo, config);
+    const finalResponse = response?.data?.data;
+    console.log("Get All Contact ata in Api", finalResponse);
+    if (finalResponse) {
+      return finalResponse;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    return message;
+  }
+};
+
+//Get All Contact get Api without pagination
+export const getContacts = async (tokenId) => {
+  try {
+    console.log("Get All Data ENTER", tokenId);
+    let config = {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    };
+    const response = await axios.get(GET_CONTACTS_URL, config);
+    console.log("get All Contacts", response);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -570,7 +658,7 @@ export const downloadContacts = async (uid, setShowToast, tokenId) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "leads.xlsx");
+      link.setAttribute("download", "contacts.xlsx");
       document.body.appendChild(link);
       link.click();
       // Show success message in toast
@@ -691,13 +779,13 @@ export const downloadAccount = async (uid, setShowToast, tokenId) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", "leads.xlsx");
+      link.setAttribute("download", "accounts.xlsx");
       document.body.appendChild(link);
       link.click();
       // Set Success Message
       setShowToast({
         success: true,
-        message: "Create Account Successfully.",
+        message: "Download Successfully.",
       });
     }
   } catch (error) {
@@ -763,7 +851,7 @@ export const createDeal = async (uid, dealData, setShowToast, tokenId) => {
         type: dealData.type,
         leadSource: dealData.leadSource,
         contactName: dealData.contactName,
-        amount: dealData.ammount,
+        amount: dealData.amount,
         nextStep: dealData.nextStep,
         stage: dealData.stage,
         expectedRevenue: dealData.expectedRevenue,
@@ -816,7 +904,6 @@ export const getSingleDeal = async (dealId, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("SINGLE LEAD DAta", response);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -1081,24 +1168,19 @@ export const updateTask = async (taskId, taskData, setShowToast, tokenId) => {
 // ********* Meetings Api********** //
 
 // Create Meetings
-export const createMeeting = async (
-  uid,
-  meetingData,
-  setShowToast,
-  tokenId
-) => {
+export const createMeeting = async (uid, callData, setShowToast, tokenId) => {
   try {
     const response = await axios.post(
       CREATE_MEETING_URL,
       {
-        title: meetingData.title,
-        location: meetingData.address,
-        fromTime: meetingData.fromTime,
-        host: meetingData.host,
-        participants: meetingData.participants,
-        relatedTo: meetingData.relatedTo,
-        description: meetingData.description,
-        date: meetingData.date,
+        title: callData.title,
+        location: callData.address,
+        fromTime: callData.fromTime,
+        host: callData.host,
+        participants: callData.participants,
+        relatedTo: callData.relatedTo,
+        description: callData.description,
+        date: callData.date,
         user: {
           id: uid,
         },
@@ -1113,7 +1195,10 @@ export const createMeeting = async (
       // Show success message in toast
       setShowToast({ success: true, message: "Create Meeting Successfully." });
     }
-  } catch (error) {}
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
 };
 
 // Get All Meetings
@@ -1237,6 +1322,351 @@ export const uploadMeetings = async (file, setShowToast, tokenId) => {
     console.log("upload success", response);
     if (response) {
       setShowToast({ success: true, message: "Upload Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// ************* Calls Api ************
+
+// Create Log Call
+export const createLogCall = async (uid, callData, setShowToast, tokenId) => {
+  try {
+    console.log("Enter Create Call", callData);
+    const response = await axios.post(
+      CREATE_LOG_CALL_URL,
+      {
+        callTo: callData.callTo,
+        relatedTo: callData.relatedTo,
+        callType: callData.callType,
+        callStatus: callData.callStatus,
+        callStartTime: callData.callStartTime,
+        callDuration: callData.callDuration,
+        callPurpose: callData.callPurpose,
+        callAgenda: callData.callAgenda,
+        subject: callData.subject,
+        callResult: callData.callResult,
+        description: callData.description,
+        user: {
+          id: uid,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    if (response) {
+      console.log("Mil gya response", response);
+      // Show success message in toast
+      setShowToast({ success: true, message: "Create Log Call Successfully." });
+    }
+  } catch (error) {}
+};
+
+// Create Schedule call
+export const createScheduleCall = async (
+  uid,
+  callData,
+  setShowToast,
+  tokenId
+) => {
+  try {
+    console.log("Enter Create Call", callData);
+    const response = await axios.post(
+      CREATE_SCHEDULE_CALL_URL,
+      {
+        callTo: callData.callTo,
+        relatedTo: callData.relatedTo,
+        callType: callData.callType,
+        callStatus: callData.callStatus,
+        callStartTime: callData.callStartTime,
+        callOwner: callData.callOwner,
+        subject: callData.subject,
+        reminder: callData.reminder,
+        callPurpose: callData.callPurpose,
+        callAgenda: callData.callAgenda,
+        user: {
+          id: uid,
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    if (response) {
+      console.log("Mil gya response", response);
+      // Show success message in toast
+      setShowToast({ success: true, message: "Create Log Call Successfully." });
+    }
+  } catch (error) {}
+};
+
+// Get All Schedul Call
+export const getAllScheduleCall = async (pageNo, tokenId) => {
+  try {
+    const response = await axios.get(
+      GET_ALL_SCHEDULE_CALL_URL + `page=` + pageNo,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    const finalResponse = response?.data?.data;
+    if (finalResponse) {
+      return finalResponse;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Get All Log Call
+export const getAllLogCall = async (pageNo, tokenId) => {
+  try {
+    const response = await axios.get(GET_ALL_LOG_CALL_URL + `page=` + pageNo, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    const finalResponse = response?.data?.data;
+    if (finalResponse) {
+      return finalResponse;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Get Single Schedule Call
+export const getSingleScheduleCall = async (callId, tokenId) => {
+  try {
+    const response = await axios.get(GET_SINGLE_SCHEDULE_CALL_URL + callId, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    const finalResponse = response?.data?.data;
+    if (finalResponse) {
+      return finalResponse;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Get Single lOG Call
+export const getSingleLogCall = async (callId, tokenId) => {
+  try {
+    const response = await axios.get(GET_SINGLE_LOG_CALL_URL + callId, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    const finalResponse = response?.data?.data;
+    if (finalResponse) {
+      return finalResponse;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Delete Schedule Call
+export const deleteScheduleCall = async (callId, setShowToast, tokenId) => {
+  try {
+    const response = await axios.delete(DELETE_SCHEDULE_URL + [callId], {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Delete Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Delete Log Call
+export const deleteLogCall = async (callId, setShowToast, tokenId) => {
+  try {
+    const response = await axios.delete(LOG_CALL_DELETE_URL + [callId], {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Delete Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Upload Schedule Call
+export const uploadScheduleCalls = async (file, setShowToast, tokenId) => {
+  try {
+    console.log("Enter upload leads", file);
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(UPLOAD_SCHEDULE_CALL_URL, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("upload success", response);
+    if (response) {
+      setShowToast({ success: true, message: "Upload Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+// Upload Schedule Call
+export const uploadLogCalls = async (file, setShowToast, tokenId) => {
+  try {
+    console.log("Enter upload leads", file);
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(UPLOAD_LOG_CALL_URL, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("upload success", response);
+    if (response) {
+      setShowToast({ success: true, message: "Upload Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Download Schedule Call
+export const downloadScheduleCalls = async (setShowToast, tokenId) => {
+  try {
+    const response = await axios.get(DOWNLOAD_SCHEDULE_CALL_URL, {
+      responseType: "arraybuffer",
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response) {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Schedule Calls.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      // Set Success Message
+      setShowToast({
+        success: true,
+        message: "Downloaded Schedule Calls",
+      });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Download Log Call Url
+export const downloadLogCalls = async (setShowToast, tokenId) => {
+  try {
+    console.log("Enter");
+    const response = await axios.get(DOWNLOAD_LOG_CALL_URL, {
+      responseType: "arraybuffer",
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response) {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Log Calls.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      // Set Success Message
+      setShowToast({
+        success: true,
+        message: "Downloaded Log Calls",
+      });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Update Schedule Call
+export const updateScheduleCall = async (
+  scheduleCallId,
+  callData,
+  setShowToast,
+  tokenId
+) => {
+  try {
+    console.log("Enter Update Task", callData);
+    const response = await axios.put(
+      UPDATE_SCHEDULE_CALL_URL + scheduleCallId,
+      callData,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    if (response) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Update Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Update Log Call
+export const updateLogCall = async (
+  logCallId,
+  callData,
+  setShowToast,
+  tokenId
+) => {
+  try {
+    console.log("Enter Update Task", callData);
+    const response = await axios.put(
+      UPDATE_LOG_CALL_URL + logCallId,
+      callData,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    if (response) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Update Successfully." });
     }
   } catch (error) {
     const message = error?.response?.data;

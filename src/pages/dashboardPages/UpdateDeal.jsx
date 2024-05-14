@@ -30,7 +30,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
     initialValues: {
       dealOwner: "",
       dealName: "",
-      ammount: "",
+      amount: "",
       closingDate: "",
       accountName: "",
       stage: "",
@@ -45,14 +45,10 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
     validationSchema: DealFormSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        const updatedDealSuccessFully = await updateDeal(
-          dealId,
-          values,
-          setShowToast,
-          tokenId
-        );
-        onUpdateSuccess();
-        if (updatedDealSuccessFully) {
+        await updateDeal(dealId, values, setShowToast, tokenId);
+
+        if (updateDeal) {
+          onUpdateSuccess();
           resetForm();
         }
       } catch (error) {
@@ -70,7 +66,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
         type: defaultValue.type,
         leadSource: defaultValue.leadSource,
         contactName: defaultValue.contactName,
-        ammount: defaultValue.amount,
+        amount: defaultValue.amount,
         nextStep: defaultValue.nextStep,
         stage: defaultValue.stage,
         expectedRevenue: defaultValue.expectedRevenue,
@@ -123,18 +119,18 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="ammount">Amount</label>
+            <label htmlFor="amount">Amount</label>
             <input
               type="text"
-              id="ammount"
+              id="amount"
               className="form-control create_lead_form_input"
-              value={formik.values.ammount}
+              value={formik.values.amount}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              name="ammount"
+              name="amount"
               placeholder={
-                formik.touched.ammount && formik.errors.ammount
-                  ? formik.errors.ammount
+                formik.touched.amount && formik.errors.amount
+                  ? formik.errors.amount
                   : null
               }
             />
@@ -358,7 +354,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
         {/* Submit Button */}
         <div className="text-center mb-2">
           <button className="create_lead_form_submitBtn" type="submit">
-            Submit
+            Update
           </button>
         </div>
       </form>

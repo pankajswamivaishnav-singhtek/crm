@@ -33,7 +33,7 @@ const Deals = () => {
     hideToast();
   }
   const [dealCostumerId, setDealCostumerId] = useState([]);
-  
+
   // User Id And Token ----
   const [pageNo, setPageNo] = useState(0);
   const [getAllDealsData, setAllDealsData] = useState([]);
@@ -104,6 +104,9 @@ const Deals = () => {
       console.log("file selected: " + selectedFile);
       try {
         await uploadDeals(selectedFile, setShowToast, tokenId);
+        if (uploadDeals) {
+          getAllDeals();
+        }
       } catch (error) {
         console.log("LeadRightSection Failed Uploading:", error);
       }

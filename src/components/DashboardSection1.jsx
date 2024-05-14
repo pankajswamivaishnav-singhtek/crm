@@ -2,14 +2,14 @@ import React from "react";
 
 // React Icons
 import { SiGoogleadmob } from "react-icons/si";
-import { MdDoNotTouch } from "react-icons/md";
+import { MdTask } from "react-icons/md";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { FaHandshakeSimple } from "react-icons/fa6";
 
 // Import Shared Component
 import DashboardSection1Table from "./shared/DashboardSection1Table";
 // import DashboardSection2Table from "./shared/DashboardSection2Table";
-const DashboardSection1 = () => {
+const DashboardSection1 = ({ getCurrentUserData }) => {
   return (
     <div className="row dashboard_row1">
       {/* Cards */}
@@ -24,7 +24,7 @@ const DashboardSection1 = () => {
                 }
               </div>
               <p className="dashboard_card_text">My Open Deals</p>
-              <p className="dashboard_card_number">20</p>
+              <p className="dashboard_card_number">{getCurrentUserData?.totalDeal}</p>
             </div>
           </div>
           {/* Second Card */}
@@ -36,7 +36,7 @@ const DashboardSection1 = () => {
                 }
               </div>
               <p className="dashboard_card_text">My Leads</p>
-              <p className="dashboard_card_number">20</p>
+              <p className="dashboard_card_number">{getCurrentUserData?.totalLead}</p>
             </div>
           </div>
           {/* Third Card */}
@@ -44,11 +44,13 @@ const DashboardSection1 = () => {
             <div className="dashboard_mainDiv_single_card">
               <div className="dashboard_card_icon_div">
                 {
-                  <MdDoNotTouch className="dashboard_card_icon dashboard_thirdCard_icon" />
+                  <MdTask className="dashboard_card_icon dashboard_thirdCard_icon" />
                 }
               </div>
-              <p className="dashboard_card_text">My Untouched Deals</p>
-              <p className="dashboard_card_number">20</p>
+              <p className="dashboard_card_text">My Task</p>
+              <p className="dashboard_card_number">
+                {getCurrentUserData?.totalTask}
+              </p>
             </div>
           </div>
           {/* Fourth Card */}
@@ -60,7 +62,9 @@ const DashboardSection1 = () => {
                 }
               </div>
               <p className="dashboard_card_text">My Calls Today</p>
-              <p className="dashboard_card_number">20</p>
+              <p className="dashboard_card_number">
+                {getCurrentUserData?.totalCall}
+              </p>
             </div>
           </div>
         </div>

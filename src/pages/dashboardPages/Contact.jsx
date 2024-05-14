@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -28,27 +28,32 @@ const Contact = () => {
   }
 
   // Set Contact Costumer Id in main Conntact.jsx
+  const [pageNo, setPageNo] = useState(0);
   const [contactCostumerId, setContactCostumerId] = useState([]);
   const [getAllContactData, setAllContactData] = useState([]);
   // Get Uid and Tokenid Who Saved In Cookie
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
-  useEffect(() => {
-    (async () => {
-      try {
-        getAllContact(uid, tokenId).then((res) => {
-          setAllContactData(res);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [uid, tokenId]);
+
+  //  Get All Leads Data
+  const getContactsData = useCallback(async () => {
+    try {
+     await getAllContact(pageNo, tokenId).then((res) => {
+        setAllContactData(res);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [pageNo, tokenId]);
+
   // Delete Contact Api Start---------------
   const handleDeleteContact = async (contactCostumerId) => {
     try {
       await deleteContact(contactCostumerId, setShowToast, tokenId);
+      if (deleteContact) {
+        getContactsData();
+      }
     } catch (error) {
       console.log("Did Not Delete Found Error", error);
     }
@@ -63,10 +68,12 @@ const Contact = () => {
     }
   };
   // Handle Next Page
-  const [pageNo, setPageNo] = useState(0);
   const handleNextPageClick = () => {
     setPageNo(pageNo + 1); // Increment page number
   };
+  useEffect(() => {
+    getContactsData();
+  }, [getContactsData]);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
@@ -100,10 +107,11 @@ const Contact = () => {
                     </button>
                   </li>
                   <li>
-                    <button className="dropdown-item"  onClick={() => handleDowloadContacts()}>
-                      <TbFileDownload
-                        className="dashboard_section1_table_deleteBtn"
-                      />
+                    <button
+                      className="dropdown-item"
+                      onClick={() => handleDowloadContacts()}
+                    >
+                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Contacts
                     </button>
                   </li>

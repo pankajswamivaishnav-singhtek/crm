@@ -1,22 +1,22 @@
 import React from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
-
-const MeetingTable = ({
+const ScheduleCallTable = ({
   tblHead,
   redirectLink,
-  getAllMeetingData,
-  meetCostumerId,
-  setMeetCostumerId,
-  data,
+  getAllScheduleCallData,
+  scheduleCallCostumerId,
+  setScheduleCallCostumerId,
 }) => {
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
-  const handleCheckboxChange = (meetId) => {
-    const isSelected = meetCostumerId.includes(meetId);
+  const handleCheckboxChange = (callId) => {
+    const isSelected = scheduleCallCostumerId.includes(callId);
     if (isSelected) {
-      setMeetCostumerId(meetCostumerId.filter((id) => id !== meetId));
+      setScheduleCallCostumerId(
+        scheduleCallCostumerId.filter((id) => id !== callId)
+      );
     } else {
-      setMeetCostumerId([...meetCostumerId, meetId]);
+      setScheduleCallCostumerId([...scheduleCallCostumerId, callId]);
     }
   };
   // Handle Single Check Box For Single Updateion And Id get and send End    ------
@@ -24,11 +24,12 @@ const MeetingTable = ({
   const handleMasterCheckboxChange = (event) => {
     console.log("Master checkbox clicked");
     const isChecked = event.target.checked;
-    const allmeetIds = getAllMeetingData?.content?.map((data) => data.id) || [];
+    const allCallIds =
+      getAllScheduleCallData?.content?.map((data) => data.id) || [];
     if (isChecked) {
-      setMeetCostumerId(allmeetIds);
+      setScheduleCallCostumerId(allCallIds);
     } else {
-      setMeetCostumerId([]);
+      setScheduleCallCostumerId([]);
     }
   };
   // Handle Master Checkbox Change End   -----
@@ -52,14 +53,15 @@ const MeetingTable = ({
               <th scope="col">{tblHead.secondHead}</th>
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
+              <th scope="col">{tblHead.fifthHead}</th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllMeetingData && getAllMeetingData?.content?.length > 0 ? (
-              getAllMeetingData?.content?.map((data) => (
+            {getAllScheduleCallData && getAllScheduleCallData?.content ? (
+              getAllScheduleCallData?.content?.map((data) => (
                 <tr
                   key={data.id}
-                  onClick={() => localStorage.setItem("meetId", data.id)}
+                  onClick={() => localStorage.setItem("scheduleCallId", data.id)}
                 >
                   <td>
                     <input
@@ -68,34 +70,39 @@ const MeetingTable = ({
                       defaultValue=""
                       id="flexCheckIndeterminate"
                       onChange={() => handleCheckboxChange(data.id)}
-                      checked={meetCostumerId?.includes(data.id)}
+                      checked={scheduleCallCostumerId?.includes(data.id)}
                     />
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.title}
+                      {data.callOwner}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.host}
+                      {data.callType}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.date}
+                      {data.callStartTime}
                     </Link>
                   </td>
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
-                      {data.location}
+                      {data.callStatus}
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.callPurpose}
                     </Link>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Meeting Data At this Time</td>
+                <td colSpan="5">There are no scheduled calls at the moment.</td>
               </tr>
             )}
           </tbody>
@@ -105,4 +112,4 @@ const MeetingTable = ({
   );
 };
 
-export default MeetingTable;
+export default ScheduleCallTable;

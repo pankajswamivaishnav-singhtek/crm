@@ -7,11 +7,13 @@ export const LOGOUT_USER = `${BASE_URL}/user/logout`;
 export const FORGOT_PASSWORD = `${BASE_URL}/auth/forgotPassword`;
 export const RESET_PASSWORD_VALIDATE = `${BASE_URL}/auth/validate-reset-link?uid=`;
 export const RESET_PASSWORD = `${BASE_URL}/auth/resetPassword?uid=`;
+export const UPDATE_PROFILE_URL = `${BASE_URL}/user/updateProfile`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
 export const MONTHLY_CLOSING_DEALS_URL = `${BASE_URL}/deals/dealClosingThisMonth?userId=`;
 export const PIPELINE_DEALS_URL = `${BASE_URL}/deals/countOfDealByStage?userId=`;
+export const GET_CURRENT_USER_URL = `${BASE_URL}/dashboard/getCurrentUser`;
 // Leads Configuration Url
 export const CREATE_LEAD_URL = `${BASE_URL}/leadInfo/saveLeadInfo`;
 export const GET_ALL_LEAD_URL = `${BASE_URL}/leadInfo/getAllLeads?userId=`;
@@ -24,8 +26,9 @@ export const DOWNLOAD_LEADS_URL = `${BASE_URL}/leadInfo/downloadLeads`;
 export const UPLOAD_LEADS_URL = `${BASE_URL}/leadInfo/uploadLead`;
 // Contact Congiguration url
 export const CREATE_CONTACT_URL = `${BASE_URL}/contact/saveContact`;
-export const GET_ALL_CONTACT_URL = `${BASE_URL}/contact/getAllContact?userId=`;
+export const GET_ALL_CONTACT_URL = `${BASE_URL}/contact/getAllContact?page=`;
 export const DELETE_CONTACT_URL = `${BASE_URL}/contact/deleteMultipleByContactId?contactId=`;
+export const GET_CONTACTS_URL = `${BASE_URL}/contact/getContacts`;
 export const DOWNLOAD_CONTACT_URL = `${BASE_URL}/contact/downloadContacts?userId=`;
 // Account Configuration Url
 export const CREATE_ACCOUNTS_URL = `${BASE_URL}/account/createAccount`;
@@ -41,7 +44,7 @@ export const GET_sINGLE_DEAL_URL = `${BASE_URL}/deals/getDealById?dealId=`;
 export const DELETE_DEALS_URL = `${BASE_URL}/deals/deleteMultipleByDealId?dealsId=`;
 export const UPDATE_SINGLE_DEAL_URL = `${BASE_URL}/deals/updateDealById?dealId=`;
 export const DOWNLOAD_DEAL_URL = `${BASE_URL}/deals/downloadDeals`;
-export const UPLOAD_DEAL_URL = `${BASE_URL}/deals/uploaDeal`;
+export const UPLOAD_DEAL_URL = `${BASE_URL}/deals/uploadDeal`;
 // Task Configuration Url
 export const CREATE_TASK_URL = `${BASE_URL}/tasks/addTask`;
 export const GET_ALL_TASK_URL = `${BASE_URL}/tasks/getAllTasks?`;
@@ -58,3 +61,18 @@ export const UPDATE_MEETINGS_URL = `${BASE_URL}/meet/updateMeeting?meetingId=`;
 export const SINGLE_MEETINGS_URL = `${BASE_URL}/meet/getMeetingById?meetingId=`;
 export const DOWNLOAD_MEETING_URL = `${BASE_URL}/meet/downloadMeetings`;
 export const UPLOAD_MEETING_URL = `${BASE_URL}/meet/uploadMeeting`;
+// Call Configuration Url
+export const CREATE_SCHEDULE_CALL_URL = `${BASE_URL}/call/addCall`;
+export const CREATE_LOG_CALL_URL = `${BASE_URL}/callLog/createCallLog`;
+export const GET_ALL_SCHEDULE_CALL_URL = `${BASE_URL}/call/getAllScheduleCall?`;
+export const GET_ALL_LOG_CALL_URL = `${BASE_URL}/callLog/getAllCallLog?`;
+export const GET_SINGLE_SCHEDULE_CALL_URL = `${BASE_URL}/call/getCallById?callId=`;
+export const GET_SINGLE_LOG_CALL_URL = `${BASE_URL}/callLog/getCallLogById?callLogId=`;
+export const DELETE_SCHEDULE_URL = `${BASE_URL}/call/deleteMultipleCall?callsId=`;
+export const LOG_CALL_DELETE_URL = `${BASE_URL}/callLog/deleteMultipleCallLog?callLogsId=`;
+export const UPLOAD_SCHEDULE_CALL_URL = `${BASE_URL}/call/uploadCalls`;
+export const UPLOAD_LOG_CALL_URL = `${BASE_URL}/callLog/uploadCallLogs`;
+export const DOWNLOAD_SCHEDULE_CALL_URL = `${BASE_URL}/call/downloadCallsInfo`;
+export const DOWNLOAD_LOG_CALL_URL = `${BASE_URL}/callLog/downloadCallLog`;
+export const UPDATE_SCHEDULE_CALL_URL = `${BASE_URL}/call/updateCall?callId=`;
+export const UPDATE_LOG_CALL_URL = `${BASE_URL}/callLog/updateCallLog?callLogId=`;

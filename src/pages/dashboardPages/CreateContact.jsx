@@ -40,17 +40,12 @@ const CreateContact = () => {
       validationSchema: ContactFormSchema,
       onSubmit: async (values, { resetForm }) => {
         try {
-          const response = await createContact(
-            values,
-            uid,
-            setShowToast,
-            tokenId
-          );
-          if (response) {
+          await createContact(values, uid, setShowToast, tokenId);
+          if (createContact) {
             resetForm();
           }
         } catch (error) {
-          console.log("Did Not Create Contact",error);
+          console.log("Did Not Create Contact", error);
         }
       },
     });
@@ -182,9 +177,7 @@ const CreateContact = () => {
                 onClick={() => setShowToast({ success: false, message: "" })}
               />
             </div>
-            <div className="toast-body">
-            {showToast.message}
-            </div>
+            <div className="toast-body">{showToast.message}</div>
           </div>
         </div>
       )}

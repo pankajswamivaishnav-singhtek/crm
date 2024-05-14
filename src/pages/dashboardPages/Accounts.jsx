@@ -21,7 +21,6 @@ import { Link } from "react-router-dom";
 const Accounts = () => {
   // Start Toast -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-  // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
       setShowToast(false);
@@ -82,7 +81,6 @@ const Accounts = () => {
       console.log("Error fetching updated data", error);
     }
   };
-  // Update Btn Click Action End ---------
   // Handle Delete Account Api
   const handleDeleteAccount = async (accountCostumerId) => {
     try {

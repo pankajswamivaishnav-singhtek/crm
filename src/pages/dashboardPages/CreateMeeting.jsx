@@ -8,7 +8,7 @@ import { MdAdd } from "react-icons/md";
 import { MeetingFormSchema } from "../../schema/FormValidation";
 // CSS
 import "../../styles/dashboardCss/createMeeting.css";
-import { getAllContact, createMeeting } from "../../controller/fetchApi";
+import { getContacts, createMeeting } from "../../controller/fetchApi";
 const CreateMeeting = () => {
   // For Particiapnts
   const [getAllContactData, setAllContactData] = useState([]);
@@ -19,14 +19,14 @@ const CreateMeeting = () => {
   useEffect(() => {
     (async () => {
       try {
-        getAllContact(uid, tokenId).then((res) => {
-          setAllContactData(res.content);
+        await getContacts(tokenId).then((res) => {
+          setAllContactData(res);
         });
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [uid, tokenId]);
+  }, [tokenId]);
 
   // Toast
   const [showToast, setShowToast] = useState(false);
@@ -90,7 +90,7 @@ const CreateMeeting = () => {
       setFieldValue("participants", newParticipants);
     }
   };
-
+  console.log("getAllContact Data", getAllContactData);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>

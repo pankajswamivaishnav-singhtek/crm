@@ -14,7 +14,7 @@ import { updateRegisterSchema } from "../schema/FormValidation";
 // Controller Api Methods
 import { updateSingleLead } from "../controller/fetchApi";
 // import Context
-const CreateUpdateForm = ({ leadCostumerId, defaultValue }) => {
+const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
   // Toast
@@ -56,13 +56,9 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue }) => {
     onSubmit: async (values, { resetForm }) => {
       console.log("-----", values);
       try {
-        const updateSuccessFully = await updateSingleLead(
-          values,
-          leadCostumerId,
-          setShowToast,
-          tokenId
-        );
-        if (updateSuccessFully) {
+        await updateSingleLead(values, leadCostumerId, setShowToast, tokenId);
+        if (updateSingleLead) {
+          getLeadsData();
           resetForm();
         }
       } catch (error) {
@@ -460,7 +456,7 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue }) => {
         {/* Submit Button */}
         <div className="text-center">
           <button className="create_lead_form_submitBtn" type="submit">
-            Submit
+            Update
           </button>
         </div>
       </form>

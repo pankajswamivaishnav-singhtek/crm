@@ -44,13 +44,8 @@ const CreateTask = () => {
       onSubmit: async (values, { resetForm }) => {
         try {
           console.log("-----", values);
-          const createTaskSuccessfully = await createTask(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createTaskSuccessfully) {
+          await createTask(uid, values, setShowToast, tokenId);
+          if (createTask) {
             resetForm();
           }
         } catch (error) {}

@@ -31,7 +31,9 @@ import MeetingsViewDetails from "../pages/dashboardPages/MeetingsViewDetails";
 import Calls from "../pages/dashboardPages/Calls";
 import ScheduleCall from "../pages/dashboardPages/ScheduleCall";
 import LogCall from "../pages/dashboardPages/LogCall";
+import CallLogs from "../pages/dashboardPages/CallLogs";
 import CallViewDetails from "../pages/dashboardPages/CallViewDetails";
+import LogCallViewDetails from "../pages/dashboardPages/LogCallViewDetails";
 import Deals from "../pages/dashboardPages/Deals";
 import CreateDeal from "../pages/dashboardPages/CreateDeal";
 import Reports from "../pages/dashboardPages/Reports";
@@ -40,6 +42,7 @@ import UpdateLead from "../pages/dashboardPages/UpdateLead";
 // Validation Route
 import ValidateRoute from "./ValidateRoute";
 import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
+import UpdateProfile from "../pages/UpdateProfile";
 
 const AllRoutes = () => {
   const [isSidebar, setIsSidebar] = useState(true);
@@ -187,7 +190,7 @@ const AllRoutes = () => {
           }
         />
         <Route
-          path="/calls"
+          path="/call-schedule"
           element={
             <ValidateRoute>
               <Calls />
@@ -211,10 +214,26 @@ const AllRoutes = () => {
           }
         />
         <Route
-          path="/call-details"
+          path="/call-logs"
+          element={
+            <ValidateRoute>
+              <CallLogs />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/schedule-call-details"
           element={
             <ValidateRoute>
               <CallViewDetails />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/log-call-details"
+          element={
+            <ValidateRoute>
+              <LogCallViewDetails />
             </ValidateRoute>
           }
         />
@@ -257,6 +276,7 @@ const AllRoutes = () => {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/otpverification" element={<OtpVerification />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
+      <Route path="/update-profile" element={<UpdateProfile />} />
     </Routes>
   );
 };

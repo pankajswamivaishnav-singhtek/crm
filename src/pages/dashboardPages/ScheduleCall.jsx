@@ -7,6 +7,12 @@ import { MdOutlineBook } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { ScheduleCallSchema } from "../../schema/FormValidation";
 import { TfiAgenda } from "react-icons/tfi";
+// Controller Api Methods
+import { createScheduleCall } from "../../controller/fetchApi";
+// Get TokenId and Uid
+const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+const uid = userIdTokenData?.data?.userId;
+const tokenId = userIdTokenData?.data?.token;
 
 const ScheduleCall = () => {
   // Toast
@@ -36,10 +42,21 @@ const ScheduleCall = () => {
         callAgenda: "",
       },
       validationSchema: ScheduleCallSchema,
-      onSubmit: (values, { resetForm }) => {
-        console.log("-----", values);
-        resetForm();
-        setShowToast(true);
+      onSubmit: async (values, { resetForm }) => {
+        try {
+          console.log("-----", values);
+          const createSuccessfully = await createScheduleCall(
+            uid,
+            values,
+            setShowToast,
+            tokenId
+          );
+          if (createSuccessfully) {
+            resetForm();
+          }
+        } catch (error) {
+          console.log("Did Not Create Account", error);
+        }
       },
     });
   return (
@@ -117,9 +134,9 @@ const ScheduleCall = () => {
                   "Call type "
                 )}
               </option>
-              <option value="account">outbound</option>
-              <option value="deal">inbound</option>
-              <option value="project">missed</option>
+              <option value="outbound">outbound</option>
+              <option value="inbound">inbound</option>
+              <option value="missed">missed</option>
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
@@ -207,10 +224,10 @@ const ScheduleCall = () => {
                   "None"
                 )}
               </option>
-              <option value="account">5 Minute Before</option>
-              <option value="deal">10 Minute Before</option>
-              <option value="project">15 Minute Before</option>
-              <option value="quote">30 Minute Before</option>
+              <option value="5">5 Minute Before</option>
+              <option value="10">10 Minute Before</option>
+              <option value="15">15 Minute Before</option>
+              <option value="30">30 Minute Before</option>
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
@@ -273,7 +290,7 @@ const ScheduleCall = () => {
         </div>
       </form>
       {/* Toast */}
-      {showToast && (
+      {showToast.message && (
         <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
           <div
             className="toast show create_lead_toast"
@@ -286,10 +303,10 @@ const ScheduleCall = () => {
               <button
                 type="button"
                 className="btn-close"
-                onClick={() => setShowToast(false)}
+                onClick={() => setShowToast({ success: false, message: "" })}
               />
             </div>
-            <div className="toast-body">Your Call Scheduled successfully.</div>
+            <div className="toast-body">{showToast.message}</div>
           </div>
         </div>
       )}

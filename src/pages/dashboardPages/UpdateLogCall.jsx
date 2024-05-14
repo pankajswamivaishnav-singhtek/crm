@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { HiOutlinePhoneOutgoing } from "react-icons/hi";
@@ -9,8 +9,8 @@ import { GiDuration } from "react-icons/gi";
 // Schema
 import { LogCallSchema } from "../../schema/FormValidation";
 // Controller Api Methods
-import { createLogCall } from "../../controller/fetchApi";
-const LogCall = () => {
+import { updateLogCall } from "../../controller/fetchApi";
+const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
@@ -23,44 +23,64 @@ const LogCall = () => {
   }
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const logCallId = JSON.parse(localStorage.getItem("logCallId"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        callTo: "",
-        relatedTo: "",
-        callType: "",
-        callStatus: "",
-        callStartTime: "",
-        callDuration: "",
-        subject: "",
-        callPurpose: "",
-        callAgenda: "",
-        callResult: "",
-      },
-      validationSchema: LogCallSchema,
-      onSubmit: async (values, { resetForm }) => {
-        try {
-          console.log("-----", values);
-          const createSuccessfully = await createLogCall(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createSuccessfully) {
-            resetForm();
-          }
-        } catch (error) {
-          console.log("Did Not Create Account", error);
+  const formik = useFormik({
+    initialValues: {
+      callTo: "",
+      relatedTo: "",
+      callType: "",
+      callStatus: "",
+      callStartTime: "",
+      callDuration: "",
+      subject: "",
+      callPurpose: "",
+      callAgenda: "",
+      callResult: "",
+    },
+    validationSchema: LogCallSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        console.log("-----", values);
+        const updateSuccessfully = await updateLogCall(
+          logCallId,
+          values,
+          setShowToast,
+          tokenId
+        );
+        onUpdateSuccess();
+        if (updateSuccessfully) {
+          resetForm();
         }
-      },
-    });
+      } catch (error) {
+        console.log("Did Not Update ", error);
+      }
+    },
+  });
+  useEffect(() => {
+    if (defaultValue) {
+      formik.setValues({
+        ...formik.values,
+        callTo: defaultValue.callTo,
+        relatedTo: defaultValue.relatedTo,
+        callType: defaultValue.callType,
+        callStatus: defaultValue.callStatus,
+        callStartTime: defaultValue.callStartTime,
+        callDuration: defaultValue.callDuration,
+        callPurpose: defaultValue.callPurpose,
+        callAgenda: defaultValue.callAgenda,
+        subject: defaultValue.subject,
+        callResult: defaultValue.callResult,
+        description: defaultValue.description,
+        // set other fields similarly
+      });
+    }
+  }, [defaultValue]);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         {/* User Account Information */}
         <div className="row">
           <p className="create_lead_section2_company_info">Call Information</p>
@@ -69,14 +89,14 @@ const LogCall = () => {
             <select
               id="callTo"
               className="form-control"
-              value={values.callTo}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callTo}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callTo"
             >
               <option value="">
-                {touched.callTo && errors.callTo ? (
-                  <p className="text-danger">{errors.callTo}</p>
+                {formik.touched.callTo && formik.errors.callTo ? (
+                  <p className="text-danger">{formik.errors.callTo}</p>
                 ) : (
                   "Select call to "
                 )}
@@ -91,14 +111,14 @@ const LogCall = () => {
             <select
               id="relatedTo"
               className="form-control"
-              value={values.relatedTo}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.relatedTo}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="relatedTo"
             >
               <option value="">
-                {touched.relatedTo && errors.relatedTo ? (
-                  <p className="text-danger">{errors.relatedTo}</p>
+                {formik.touched.relatedTo && formik.errors.relatedTo ? (
+                  <p className="text-danger">{formik.errors.relatedTo}</p>
                 ) : (
                   "Related to "
                 )}
@@ -121,14 +141,14 @@ const LogCall = () => {
             <select
               id="callType"
               className="form-control"
-              value={values.callType}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callType}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callType"
             >
               <option value="">
-                {touched.callType && errors.callType ? (
-                  <p className="text-danger">{errors.callType}</p>
+                {formik.touched.callType && formik.errors.callType ? (
+                  <p className="text-danger">{formik.errors.callType}</p>
                 ) : (
                   "Call type "
                 )}
@@ -145,13 +165,13 @@ const LogCall = () => {
               type="text"
               id="callStatus"
               className="form-control create_lead_form_input"
-              value={values.callStatus}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callStatus}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callStatus"
               placeholder={
-                touched.callStatus && errors.callStatus
-                  ? errors.callStatus
+                formik.touched.callStatus && formik.errors.callStatus
+                  ? formik.errors.callStatus
                   : null
               }
             />
@@ -163,13 +183,13 @@ const LogCall = () => {
               type="datetime-local"
               id="callStartTime"
               className="form-control create_lead_form_input"
-              value={values.callStartTime}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callStartTime}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callStartTime"
               placeholder={
-                touched.callStartTime && errors.callStartTime
-                  ? errors.callStartTime
+                formik.touched.callStartTime && formik.errors.callStartTime
+                  ? formik.errors.callStartTime
                   : null
               }
             />
@@ -180,13 +200,13 @@ const LogCall = () => {
               type="text"
               id="callDuration"
               className="form-control create_lead_form_input"
-              value={values.callDuration}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callDuration}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callDuration"
               placeholder={
-                touched.callDuration && errors.callDuration
-                  ? errors.callDuration
+                formik.touched.callDuration && formik.errors.callDuration
+                  ? formik.errors.callDuration
                   : null
               }
             />
@@ -198,12 +218,14 @@ const LogCall = () => {
               type="subject"
               id="subject"
               className="form-control create_lead_form_input"
-              value={values.subject}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.subject}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="subject"
               placeholder={
-                touched.subject && errors.subject ? errors.subject : null
+                formik.touched.subject && formik.errors.subject
+                  ? formik.errors.subject
+                  : null
               }
             />
             <MdOutlineBook className="create_lead_input_icon" />
@@ -219,14 +241,14 @@ const LogCall = () => {
             <select
               id="callPurpose"
               className="form-control"
-              value={values.callPurpose}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callPurpose}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callPurpose"
             >
               <option value="">
-                {touched.callPurpose && errors.callPurpose ? (
-                  <p className="text-danger">{errors.callPurpose}</p>
+                {formik.touched.callPurpose && formik.errors.callPurpose ? (
+                  <p className="text-danger">{formik.errors.callPurpose}</p>
                 ) : (
                   "None"
                 )}
@@ -246,13 +268,13 @@ const LogCall = () => {
               type="text"
               id="callAgenda"
               className="form-control create_lead_form_input"
-              value={values.callAgenda}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callAgenda}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callAgenda"
               placeholder={
-                touched.callAgenda && errors.callAgenda
-                  ? errors.callAgenda
+                formik.touched.callAgenda && formik.errors.callAgenda
+                  ? formik.errors.callAgenda
                   : null
               }
             />
@@ -263,14 +285,14 @@ const LogCall = () => {
             <select
               id="callResult"
               className="form-control"
-              value={values.callResult}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.callResult}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="callResult"
             >
               <option value="">
-                {touched.callResult && errors.callResult ? (
-                  <p className="text-danger">{errors.callResult}</p>
+                {formik.touched.callResult && formik.errors.callResult ? (
+                  <p className="text-danger">{formik.errors.callResult}</p>
                 ) : (
                   "Result Type "
                 )}
@@ -297,14 +319,14 @@ const LogCall = () => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={values.description}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              value={formik.values.description}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="description"
               rows="3"
               placeholder={
-                touched.description && errors.description
-                  ? errors.description
+                formik.touched.description && formik.errors.description
+                  ? formik.errors.description
                   : null
               }
             ></textarea>
@@ -342,4 +364,4 @@ const LogCall = () => {
   );
 };
 
-export default LogCall;
+export default UpdateLogCall;
