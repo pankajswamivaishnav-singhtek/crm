@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/updateProfile.css";
 // Formik
 import { useFormik } from "formik";
-import { signupFormSchema } from "../schema/FormValidation";
-// React Router Dom
-// import { Link, useNavigate } from "react-router-dom";
-const UpdateProfile = () => {
+import { updateProfileFormSchema } from "../schema/FormValidation";
+import { updateProfile, uploadUserImg } from "../controller/fetchApi";
+const UpdateProfile = ({ getCurrentUserData }) => {
   // Form Handle & Validations
   const formik = useFormik({
     initialValues: {
@@ -18,15 +17,17 @@ const UpdateProfile = () => {
       phone: "",
     },
 
-    validationSchema: signupFormSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log("-----", values);
-      resetForm();
+    validationSchema: updateProfileFormSchema,
+    onSubmit: async (values) => {
+      try {
+        await updateProfile(tokenId, setShowToast, values);
+      } catch (error) {
+        console.log("Did Not Update Profile", error);
+      }
     },
   });
-  // Toast
+  // Toast Handling
   const [showToast, setShowToast] = useState(false);
-  // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
       setShowToast(false);
@@ -35,9 +36,44 @@ const UpdateProfile = () => {
   if (showToast) {
     hideToast();
   }
+
+  // Get Current User Details
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
+  // Handle Upload Image start ----
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  const handleUploadImg = async () => {
+    if (selectedFile) {
+      console.log("file selected: " + selectedFile);
+      try {
+        await uploadUserImg(selectedFile, setShowToast, tokenId);
+        if (uploadUserImg) {
+          // getUser();
+        }
+      } catch (error) {
+        console.log("Image Failed Uploading:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Update Profile
+    if (getCurrentUserData) {
+      formik.setValues({
+        ...formik.values,
+        firstName: getCurrentUserData.firstName,
+        lastName: getCurrentUserData.lastName,
+        userName: getCurrentUserData.userName,
+        email: getCurrentUserData.email,
+        phone: getCurrentUserData.mobile,
+      });
+    }
+  }, [getCurrentUserData]);
   return (
     <div className="container-xl px-4 mt-4">
-      {/* Account page navigation*/}
       <nav className="nav nav-borders">
         <a className="nav-link active ms-0" href="#!">
           Profile
@@ -54,15 +90,30 @@ const UpdateProfile = () => {
               {/* Profile picture image*/}
               <img
                 className="img-account-profile rounded-circle mb-2"
-                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                // src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                src={
+                  getCurrentUserData?.image
+                    ? `http://192.168.1.5:8080${getCurrentUserData?.image}`
+                    : "http://bootdey.com/img/Content/avatar/avatar1.png"
+                }
                 alt=""
               />
-              {/* Profile picture help block*/}
-              <div className="small font-italic text-muted mb-4">
-                JPG or PNG no larger than 5 MB
+              <div className="mb-3">
+                {/* File input */}
+                <input
+                  type="file"
+                  className="form-control"
+                  id="profilePicture"
+                  accept=".jpg, .png"
+                  onChange={handleFileChange}
+                />
               </div>
               {/* Profile picture upload button*/}
-              <button className="btn btn-primary" type="button">
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={handleUploadImg}
+              >
                 Upload new image
               </button>
             </div>
@@ -236,6 +287,30 @@ const UpdateProfile = () => {
           </div>
         </div>
       </div>
+      {/* Toast */}
+      {showToast.message && (
+        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+          <div
+            className="toast show create_lead_toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header create_lead_toast_header">
+              <strong className="me-auto">
+                {/* Form Submitted Successfully */}
+                {showToast.success ? "Success" : "Error"}
+              </strong>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowToast({ success: false, message: "" })}
+              />
+            </div>
+            <div className="toast-body">{showToast.message}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,56 @@
 .dashboard_main_container {
   background-color: rgba(255, 255, 255, 1);
+  padding: 15px 15px;
+  border-radius: 12px;
+}
+
+/* Text Color Status */
+.status-not-started {
+  color: rgb(151, 84, 6) !important;
+}
+
+.status-success {
+  background-color: rgb(11, 97, 211);
+}
+
+.status-completed {
+  color: rgb(7, 128, 37) !important;
+}
+.status-waiting-for-input {
+  color: rgb(161, 179, 5) !important;
+}
+.status-deffered {
+  color: rgb(5, 189, 221) !important;
+}
+.status-in-progress {
+  color: rgb(224, 43, 11) !important;
+}
+
+/* Text Color Stage */
+
+.stage-lost {
+  color: #5869ff !important;
+}
+.stage-need-analysis {
+  color: rgba(222, 83, 250, 0.644) !important;
+}
+.stage-value-proposition {
+  color: rgb(201, 181, 8) !important;
+}
+
+.stage-identify-decision-maker {
+  color: #69c2e5 !important;
+}
+
+.negotitation {
+  color: #ff7006 !important;
+}
+.stage-proposal {
+  color: #c062b0 !important;
+}
+.stage-won {
+  
+  color: #2ec282 !important;
 }
 
 .dashboard_user_name {
@@ -200,6 +251,7 @@
 .dashboard_section3_main_container {
   margin-top: 20px;
   margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 /* Same Css For Every Dashboard Page */
@@ -235,6 +287,15 @@
     max-height: 24vh;
     overflow-y: auto;
   }
+  .dashboard_section1_mainDiv table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .dashboard_section1_mainDiv thead {
+    position: sticky;
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure thead is above tbody */
+  }
   .dashboard_section1_mainDiv::-webkit-scrollbar {
     width: 0; /* Remove scrollbar width */
     background: transparent; /* Optional: Set scrollbar background */
@@ -243,6 +304,15 @@
     max-height: 32vh;
     overflow-y: auto;
   }
+  .dashboard_section2_table_mainDiv table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .dashboard_section2_table_mainDiv thead {
+    position: sticky;
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure thead is above tbody */
+  }
   .dashboard_section2_table_mainDiv::-webkit-scrollbar {
     width: 0; /* Remove scrollbar width */
     background: transparent;
@@ -250,6 +320,15 @@
   .dashboard_section3_table_mainDiv {
     max-height: 25vh;
     overflow-y: auto;
+  }
+  .dashboard_section3_table_mainDiv table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  .dashboard_section3_table_mainDiv thead {
+    position: sticky;
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure thead is above tbody */
   }
   .dashboard_section3_table_mainDiv::-webkit-scrollbar {
     width: 0; /* Remove scrollbar width */

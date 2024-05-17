@@ -100,7 +100,7 @@ const AccountTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Account Data At this Time</td>
+                <td colSpan="6">No Account Data At this Time</td>
               </tr>
             )}
           </tbody>

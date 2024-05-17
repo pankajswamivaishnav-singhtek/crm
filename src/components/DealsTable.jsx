@@ -9,30 +9,28 @@ const DealsTable = ({
   dealCostumerId,
   setDealCostumerId,
 }) => {
-  // Get leadCostumerId From LeadSection Table for delete Data From Table
 
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
-  const handleCheckboxChange = (leadId) => {
-    const isSelected = dealCostumerId.includes(leadId);
+  const handleCheckboxChange = (dealId) => {
+    const isSelected = dealCostumerId.includes(dealId);
     if (isSelected) {
-      setDealCostumerId(dealCostumerId.filter((id) => id !== leadId));
+      setDealCostumerId(dealCostumerId.filter((id) => id !== dealId));
     } else {
-      setDealCostumerId([...dealCostumerId, leadId]);
+      setDealCostumerId([...dealCostumerId, dealId]);
     }
   };
-  // Handle Single Check Box For Single Updateion And Id get and send End    ------
+ 
   // Handle Master Checkbox Change Start -----
   const handleMasterCheckboxChange = (event) => {
-    console.log("Master checkbox clicked");
     const isChecked = event.target.checked;
-    const allLeadIds = getAllDealsData?.content?.map((data) => data.id) || [];
+    const allDealIds = getAllDealsData?.content?.map((data) => data.id) || [];
     if (isChecked) {
-      setDealCostumerId(allLeadIds);
+      setDealCostumerId(allDealIds);
     } else {
       setDealCostumerId([]);
     }
   };
-  // Handle Master Checkbox Change End   -----
+
   return (
     <div className="container-fluid table-responsive">
       <div className="row dashboard_table_main_heading"></div>
@@ -54,6 +52,7 @@ const DealsTable = ({
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
               <th scope="col">{tblHead.fifthHead}</th>
+              <th scope="col">{tblHead.sixthHead}</th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -98,11 +97,16 @@ const DealsTable = ({
                       {data.contactName}
                     </Link>
                   </td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      {data.stage}
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Deals Data At this Time</td>
+                <td colSpan="7">No Deals Data At this Time</td>
               </tr>
             )}
           </tbody>

@@ -8,6 +8,8 @@ export const FORGOT_PASSWORD = `${BASE_URL}/auth/forgotPassword`;
 export const RESET_PASSWORD_VALIDATE = `${BASE_URL}/auth/validate-reset-link?uid=`;
 export const RESET_PASSWORD = `${BASE_URL}/auth/resetPassword?uid=`;
 export const UPDATE_PROFILE_URL = `${BASE_URL}/user/updateProfile`;
+export const UPLOAD_USER_IMG_URL = `${BASE_URL}/user/uploadUserImage`;
+export const GET_IMG_URL = `${BASE_URL}/profile/getUserImage`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
@@ -76,3 +78,5 @@ export const DOWNLOAD_SCHEDULE_CALL_URL = `${BASE_URL}/call/downloadCallsInfo`;
 export const DOWNLOAD_LOG_CALL_URL = `${BASE_URL}/callLog/downloadCallLog`;
 export const UPDATE_SCHEDULE_CALL_URL = `${BASE_URL}/call/updateCall?callId=`;
 export const UPDATE_LOG_CALL_URL = `${BASE_URL}/callLog/updateCallLog?callLogId=`;
+// Report Configuration Url
+export const GET_GENRATED_LEADS_URL = `${BASE_URL}/report/getLeadReport?leadBy=`;

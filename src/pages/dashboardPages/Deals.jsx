@@ -43,12 +43,13 @@ const Deals = () => {
   //  Get All Data ----
   const getAllDeals = useCallback(async () => {
     try {
-      const res = await getAllDeal(pageNo, tokenId);
-      setAllDealsData(res);
+      await getAllDeal(pageNo, tokenId).then((res) => {
+        setAllDealsData(res);
+      });
     } catch (error) {
       console.log(error);
     }
-  }, [tokenId, pageNo, setAllDealsData]);
+  }, [pageNo, tokenId]);
   // Update Deals Start--------
   const [defaultValue, setDefaultValue] = useState([]); // Get Single Deal Data Which Fullfill Field Value
   const handleUpdateDeal = async () => {
@@ -85,7 +86,7 @@ const Deals = () => {
       await deleteDeals(dealCostumerId, setShowToast, tokenId);
       if (deleteDeals) {
         getAllDeals();
-        console.log("delete Successfully Deals", deleteDeals);
+        setDealCostumerId([]);
       }
     } catch (error) {
       const errorMessage = error.message;
@@ -195,6 +196,7 @@ const Deals = () => {
               thirdHead: "Amount",
               fourthHead: "Closing Date",
               fifthHead: "Contact Name",
+              sixthHead: "Stage",
             }}
             redirectLink="/deal-details"
             getAllDealsData={getAllDealsData}
@@ -211,29 +213,32 @@ const Deals = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() => setPageNo(pageNo - 1)}
+                  onClick={() =>
+                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
+                  }
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 5 }, (_, index) => (
+              {Array.from({ length: 6 }, (_, index) => (
                 <li
                   key={index}
                   className={`page-item ${
-                    index + 1 === pageNo ? "active" : ""
+                    index === pageNo ? "active" : ""
                   } dashboard_leads_pagination_pageItem`}
                 >
                   <a
                     className="page-link"
                     href="#!"
-                    onClick={() => setPageNo(index + 1)}
+                    onClick={() => setPageNo(index)}
                   >
                     {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </a>
                 </li>
               ))}
+
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"

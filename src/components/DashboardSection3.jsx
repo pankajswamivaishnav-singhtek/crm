@@ -12,6 +12,27 @@ const DashboardSection3 = () => {
       setMonthlyClosingDealsData(res);
     });
   }, [uid, tokenId]);
+  // Function to return the class name based on Stage
+  const getStatusClassName = (stage) => {
+    switch (stage.toLowerCase()) {
+      case "won":
+        return "stage-won";
+      case "proposal":
+        return "stage-proposal";
+      case "identify-decision-maker":
+        return "stage-identify-decision-maker";
+      case "value-proposition":
+        return "stage-value-proposition";
+      case "need-analysis":
+        return "stage-need-analysis	";
+      case "negotitation":
+        return "stage-negotitation	";
+      case "lost":
+        return "stage-lost";
+      default:
+        return "";
+    }
+  };
   return (
     <div className="container-fluid dashboard_table_mainDiv table-responsive dashboard_section3_main_container">
       <div className="row dashboard_table_main_heading">
@@ -39,7 +60,9 @@ const DashboardSection3 = () => {
                   <td>{meeting.contactName}</td>
                   <td>{meeting.dealName}</td>
                   <td>{meeting.accountName}</td>
-                  <td>{meeting.stage}</td>
+                  <td className={getStatusClassName(meeting.stage)}>
+                    {meeting.stage}
+                  </td>
                   <td>{meeting.closingDate}</td>
                 </tr>
               ))

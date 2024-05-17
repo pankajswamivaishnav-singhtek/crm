@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 // React Router Dom
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -12,13 +12,41 @@ import { BiLogOutCircle } from "react-icons/bi";
 // Components
 import UpdateProfile from "../../pages/UpdateProfile";
 // Controller Api
-import { logoutUser } from "../../controller/fetchApi";
+import { logoutUser, getCurrentUser } from "../../controller/fetchApi";
 const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Page Name -----Start-------
   const location = useLocation();
   const [pageName, setPageName] = useState("");
   const pathname = location.pathname;
+
+  // Page Name Function End --------
+  const sidebarState = () => {
+    setShowSidebarSmallScreen(true);
+    setIsSidebar((prev) => !prev);
+  };
+
+  // Logout User
+  const logoutUserSubmit = () => {
+    logoutUser();
+    localStorage.clear();
+    window.location.href = "/login";
+  };
+  // Get Current User Details
+  const [getCurrentUserData, setCurrentUserData] = useState();
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
+
+  //  Get Current User Data
+  const getUser = useCallback(async () => {
+    try {
+      const res = await getCurrentUser(tokenId);
+      setCurrentUserData(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId, setCurrentUserData]);
   useEffect(() => {
+    getUser();
     switch (pathname) {
       case "/dashboard":
         document.title = "Dashboard";
@@ -132,20 +160,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         document.title = "CRM - Singhsoft Product";
         setPageName("Singhsoft Product");
     }
-  }, [pathname]);
-
-  // Page Name Function End --------
-  const sidebarState = () => {
-    setShowSidebarSmallScreen(true);
-    setIsSidebar((prev) => !prev);
-  };
-
-  // Logout User
-  const logoutUserSubmit = () => {
-    logoutUser();
-    localStorage.clear();
-    window.location.href = "/login";
-  };
+  }, [getUser, pathname]);
 
   return (
     <nav className="navbar navbar-expand-lg  dashboard_navbar">
@@ -199,7 +214,9 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
               </li>
               <li className="nav-item">
                 <div className="dashboard_navbar_user_admin_text">
-                  <span className="dashboard_navbar_userName">John Doe</span>
+                  <span className="dashboard_navbar_userName">
+                    {getCurrentUserData?.fullName}
+                  </span>
                   <br />
                   <span className="dashboard_navbar_panel">Admin Panel</span>
                 </div>
@@ -225,7 +242,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                     <li>
                       <a
                         className="dropdown-item"
-                        href="#!"
+                        href="/signin"
                         onClick={logoutUserSubmit}
                       >
                         <BiLogOutCircle className="me-2 navbar_dropdown_icon" />
@@ -261,7 +278,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                 />
               </div>
               <div className="modal-body">
-                <UpdateProfile />
+                <UpdateProfile getCurrentUserData={getCurrentUserData} />
               </div>
               <div className="modal-footer">
                 <button

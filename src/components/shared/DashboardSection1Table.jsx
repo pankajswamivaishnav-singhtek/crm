@@ -46,9 +46,9 @@ const DashboardSection1Table = () => {
       <div className="dashboard_section1_mainDiv">
         <table className="table ">
           <thead>
-            <tr className="table-danger dashboard_section1_tableHead_tr">
+            <tr className="dashboard_section1_tableHead_tr table-danger">
               <th scope="col">Title</th>
-              <th scope="col">Related</th>
+              <th scope="col">Host</th>
               <th scope="col">Date</th>
               <th scope="col">Location</th>
             </tr>
@@ -58,7 +58,7 @@ const DashboardSection1Table = () => {
               monthlyMeetingsData?.map((meeting, index) => (
                 <tr key={index}>
                   <td>{meeting.title}</td>
-                  <td>{meeting.relatedTo}</td>
+                  <td>{meeting.host}</td>
                   <td>{meeting.date}</td>
                   <td>{meeting.location}</td>
                 </tr>

@@ -56,11 +56,11 @@ const CreateDeal = () => {
       },
     });
   return (
-    <div className="create_lead_form_main_div">
+    <div className="create_lead_form_main_div dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
         {/* User Account Information */}
         <div className="row">
-          <p className="create_lead_section2_company_info">Deal Information</p>
+          <p className="create_lead_section2_company_info ">Deal Information</p>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="dealOwner">Deal Owner</label>
             <input

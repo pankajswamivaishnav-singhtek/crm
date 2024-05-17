@@ -12,7 +12,6 @@
   opacity: 0px;
   height: calc(100vh - 7vh);
   overflow-y: auto;
-  /* overflow-x: hidden; */
   background: linear-gradient(175.82deg, #7583ff 0%, #5869ff 100%);
 }
 
@@ -80,13 +79,13 @@
 
 .sidebar_hamburger_icon {
   color: rgba(215, 219, 255, 1);
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border: 3px solid #5869ff;
   border-radius: 50%;
   background-color: white;
   color: #5869ff;
-  margin-left: 200px;
+  margin-left: 220px;
   cursor: pointer;
   gap: 0px;
   opacity: 0px;
@@ -103,7 +102,7 @@
 }
 
 .dashboard_sidebar_main_div.shrink .sidebar_hamburger_icon {
-  margin-left: 10px;
+  margin-left: 18px;
 }
 
 .sidebar_navItem_active .sidebar_navItem_text {
@@ -111,7 +110,7 @@
 }
 .sidebar_shrink_logout_btn {
   cursor: pointer;
-  color:  rgba(215, 219, 255, 1);
+  color: rgba(215, 219, 255, 1);
   font-size: larger;
 }
 .dashboard_sidebar_main_div .shrink .sidebar_shrink_logout_btn {

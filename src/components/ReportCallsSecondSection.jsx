@@ -33,7 +33,7 @@ const ReportCallsSecondSection = () => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Dropdown link
+          Calls Data
         </Link>
         <ul className="dropdown-menu report_lead_genrated_first_table_dropdown">
           <li>

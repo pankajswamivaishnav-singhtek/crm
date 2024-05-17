@@ -12,6 +12,7 @@ import {
   PIPELINE_DEALS_URL,
   GET_CURRENT_USER_URL,
   UPDATE_PROFILE_URL,
+  UPLOAD_USER_IMG_URL,
   // Leads Url
   CREATE_LEAD_URL,
   GET_SINGLE_LEAD_URL,
@@ -73,6 +74,8 @@ import {
   DOWNLOAD_LOG_CALL_URL,
   UPDATE_SCHEDULE_CALL_URL,
   UPDATE_LOG_CALL_URL,
+  // Report Url
+  GET_GENRATED_LEADS_URL,
 } from "../constants/Constant";
 import axios from "axios";
 
@@ -135,6 +138,28 @@ export const logoutUser = async () => {
   }
 };
 
+// Upload User Img
+export const uploadUserImg = async (file, setShowToast, tokenId) => {
+  try {
+    console.log("Enter upload Images");
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await axios.post(UPLOAD_USER_IMG_URL, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("upload success", response);
+    if (response) {
+      setShowToast({ success: true, message: "Upload Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
 // Forgot Password Api
 export const forgotPassword = async (email, setShowToast) => {
   try {
@@ -185,11 +210,25 @@ export const resetPassword = async (userData, uid, setShowToast) => {
 // Update Profile
 export const updateProfile = async (tokenId, setShowToast, profileData) => {
   try {
-    const response = await axios.put(UPDATE_PROFILE_URL, profileData, {
-      headers: {
-        Authorization: `Bearer ${tokenId}`,
+    console.log("Enter In Update Profile---------", profileData);
+    const response = await axios.put(
+      UPDATE_PROFILE_URL,
+      {
+        firstName: profileData.firstName,
+        lastName: profileData.lastName,
+        userName: profileData.userName,
+        email: profileData.email,
+        password: profileData.password,
+        confirmPassword: profileData.confirmPassword,
+        mobile: profileData.phone,
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    console.log("response ", response);
     if (response) {
       // Show success message in toast
       setShowToast({ success: true, message: "Profile Updated." });
@@ -200,7 +239,7 @@ export const updateProfile = async (tokenId, setShowToast, profileData) => {
   } catch (error) {
     if (error.response.status === 403) {
       // Show success message in toast
-      setShowToast({ success: true, message: "Please Select Lead" });
+      setShowToast({ success: true, message: "Not Updated" });
     }
     console.log("Did not lead", error);
   }
@@ -280,7 +319,6 @@ export const pipelineDeals = async (uid, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("Pipeline Data APi", response);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -294,6 +332,7 @@ export const pipelineDeals = async (uid, tokenId) => {
   }
 };
 
+// Get Current User Api
 export const getCurrentUser = async function (tokenId) {
   try {
     const response = await axios.get(GET_CURRENT_USER_URL, {
@@ -302,6 +341,7 @@ export const getCurrentUser = async function (tokenId) {
       },
     });
     const finalResponse = response?.data?.data;
+
     return finalResponse;
   } catch (error) {
     const message = error?.response?.data;
@@ -425,14 +465,13 @@ export const verifyLeads = async (leadId, setShowToast, tokenId) => {
 // Delete Leads
 export const deleteLeads = async (leadId, setShowToast, tokenId) => {
   try {
-    console.log("Entering deleteLeads");
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
     };
     const response = await axios.delete(DELETE_LEADS_URL + [leadId], config);
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -635,7 +674,7 @@ export const deleteContact = async (contactId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -802,7 +841,7 @@ export const deleteAccount = async (accountId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -923,7 +962,7 @@ export const deleteDeals = async (dealId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -1068,7 +1107,7 @@ export const deleteTasks = async (taskId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -1227,7 +1266,7 @@ export const deleteMeetings = async (meetId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -1490,7 +1529,7 @@ export const deleteScheduleCall = async (callId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -1508,7 +1547,7 @@ export const deleteLogCall = async (callId, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    if (response) {
+    if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
     }
@@ -1667,6 +1706,24 @@ export const updateLogCall = async (
     if (response) {
       // Show success message in toast
       setShowToast({ success: true, message: "Update Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// ************** Report Page Api *****************
+export const getGenratedLeads = async (tokenId, leadBy) => {
+  try {
+    const response = await axios.get(GET_GENRATED_LEADS_URL + leadBy, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("data", response)
+    if (response?.data?.status === 200) {
+      return response?.data?.data;
     }
   } catch (error) {
     const message = error?.response?.data;

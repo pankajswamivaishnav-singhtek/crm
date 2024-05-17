@@ -29,7 +29,7 @@ const Dashboard = () => {
     <div className="dashboard_main_container container-fluid">
       <div className="dashboard_username_div">
         <p className="dashboard_user_name">{`Welcome ${getCurrentUserData?.fullName}`}</p>
-        <p className="dashboard_user_name2">{`Welcome ${getCurrentUserData?.userName}`}</p>
+        <p className="dashboard_user_name2">{`username ${getCurrentUserData?.userName}`}</p>
       </div>
       <div className="dashboard_main_div">
         <DashboardSection1 getCurrentUserData={getCurrentUserData} />

@@ -8,7 +8,6 @@ const TaskTables = ({
   getAllTaskData,
   taskCostumerId,
   setTaskCostumerId,
-  data,
 }) => {
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
   const handleCheckboxChange = (taskId) => {
@@ -100,7 +99,7 @@ const TaskTables = ({
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Lead Data At this Time</td>
+                <td colSpan="6">No Task At this Time</td>
               </tr>
             )}
           </tbody>

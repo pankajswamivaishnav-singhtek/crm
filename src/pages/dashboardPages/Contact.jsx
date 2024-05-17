@@ -39,7 +39,7 @@ const Contact = () => {
   //  Get All Leads Data
   const getContactsData = useCallback(async () => {
     try {
-     await getAllContact(pageNo, tokenId).then((res) => {
+      await getAllContact(pageNo, tokenId).then((res) => {
         setAllContactData(res);
       });
     } catch (error) {
@@ -159,14 +159,16 @@ const Contact = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() => setPageNo(pageNo - 1)}
+                  onClick={() =>
+                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
+                  }
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 5 }, (_, index) => (
+              {/* {Array.from({ length: 5 }, (_, index) => (
                 <li
                   key={index}
                   className={`page-item ${
@@ -181,7 +183,24 @@ const Contact = () => {
                     {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </a>
                 </li>
+              ))} */}
+              {Array.from({ length: 6 }, (_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${
+                    index === pageNo ? "active" : ""
+                  } dashboard_leads_pagination_pageItem`}
+                >
+                  <a
+                    className="page-link"
+                    href="#!"
+                    onClick={() => setPageNo(index)}
+                  >
+                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                  </a>
+                </li>
               ))}
+
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"

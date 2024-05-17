@@ -160,7 +160,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   }, [getLeadsData]);
 
   return (
-    <div className="conatiner-fluid dashboard_rightLeads_main_container">
+    <div className="conatiner-fluid dashboard_rightLeads_main_containers">
       <div className="dashboard_content_wrapper">
         {/* Btn Div */}
         <div className="dashboard_leads_btn_mainDiv">
@@ -268,22 +268,39 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 5 }, (_, index) => (
+              {Array.from({ length: 6 }, (_, index) => (
                 <li
                   key={index}
                   className={`page-item ${
-                    index + 1 === pageNo ? "active" : ""
+                    index === pageNo ? "active" : ""
                   } dashboard_leads_pagination_pageItem`}
                 >
                   <a
                     className="page-link"
                     href="#!"
-                    onClick={() => setPageNo(index + 1)}
+                    onClick={() => setPageNo(index)}
                   >
                     {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </a>
                 </li>
               ))}
+
+              {/* {Array.from({ length: 6 }, (_, index) => (
+                <li
+                  key={index}
+                  className={`page-item ${
+                    index === pageNo ? "active" : ""
+                  } dashboard_leads_pagination_pageItem`}
+                >
+                  <a
+                    className="page-link"
+                    href="#!"
+                    onClick={() => setPageNo(index)}
+                  >
+                    {index < 10 ? `0${index}` : index}
+                  </a>
+                </li>
+              ))} */}
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"

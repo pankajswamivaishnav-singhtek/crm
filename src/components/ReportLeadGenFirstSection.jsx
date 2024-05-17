@@ -1,28 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReportLineChart from "./shared/ReportLineChart";
-const ReportLeadGenFirstSection = () => {
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+const ReportLeadGenFirstSection = ({ getGenratedLeadsData, setLeadBy }) => {
+  const [selectedValue, setSelectedValue] = useState("month");
+  setLeadBy(selectedValue);
+  const handleItemClick = (value) => {
+    setLeadBy(value);
+    setSelectedValue(value);
+  };
+
+  const labels =
+    selectedValue === "year"
+      ? [2024, 2025, 2026, 2027, 2028, 2029, 2030]
+      : [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
   const data = {
     labels: labels,
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
+    datasets:
+      selectedValue === "year"
+        ? [
+            {
+              label: "Total Leads",
+              data: [2024, 2025, 2026, 2027, 2028, 2029, 2030]?.map(
+                (year) => getGenratedLeadsData?.[year] || 0
+              ),
+              fill: false,
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+            },
+          ]
+        : // If "Month" is selected, prepare dataset for months
+          [
+            {
+              label: "Total Leads",
+              data: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ].map((month) => getGenratedLeadsData?.[month] || 0),
+              fill: false,
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+            },
+          ],
   };
+
   return (
     <div>
       <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading float-start">
@@ -36,13 +79,14 @@ const ReportLeadGenFirstSection = () => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Dropdown link
+          Lead Data
         </Link>
         <ul className="dropdown-menu report_lead_genrated_first_table_dropdown">
           <li>
             <Link
               className="dropdown-item report_lead_genrated_first_table_dropdown_item"
               href="#!"
+              onClick={() => handleItemClick("month")}
             >
               Month
             </Link>
@@ -51,6 +95,7 @@ const ReportLeadGenFirstSection = () => {
             <Link
               className="dropdown-item report_lead_genrated_first_table_dropdown_item"
               href="#!"
+              onClick={() => handleItemClick("year")}
             >
               Year
             </Link>

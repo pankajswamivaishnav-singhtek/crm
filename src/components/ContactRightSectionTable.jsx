@@ -9,7 +9,6 @@ const ContactRightSectionTable = ({
   getAllContactData,
   contactCostumerId,
   setContactCostumerId,
-  data,
 }) => {
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
   const handleCheckboxChange = (contactId) => {
@@ -20,7 +19,6 @@ const ContactRightSectionTable = ({
       setContactCostumerId([...contactCostumerId, contactId]);
     }
   };
-  // Handle Single Check Box For Single Updateion And Id get and send End    ------
   // Handle Master Checkbox Change Start -----
   const handleMasterCheckboxChange = (event) => {
     const isChecked = event.target.checked;
@@ -33,7 +31,6 @@ const ContactRightSectionTable = ({
       setContactCostumerId([]);
     }
   };
-  // Handle Master Checkbox Change End   -----
   return (
     <div className="container-fluid table-responsive">
       <div className="row dashboard_table_main_heading"></div>
@@ -98,7 +95,7 @@ const ContactRightSectionTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Contact Data At this Time</td>
+                <td colSpan="6">No Contact Data At this Time</td>
               </tr>
             )}
           </tbody>

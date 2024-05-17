@@ -87,6 +87,7 @@ const Accounts = () => {
       await deleteAccount(accountCostumerId, setShowToast, tokenId);
       if (deleteAccount) {
         getAccountData();
+        setAccountCostumerId([]);
         console.log("delete Successfully LeadRightSection", deleteAccount);
       }
     } catch (error) {
@@ -200,29 +201,32 @@ const Accounts = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() => setPageNo(pageNo - 1)}
+                  onClick={() =>
+                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
+                  }
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 5 }, (_, index) => (
+              {Array.from({ length: 6 }, (_, index) => (
                 <li
                   key={index}
                   className={`page-item ${
-                    index + 1 === pageNo ? "active" : ""
+                    index === pageNo ? "active" : ""
                   } dashboard_leads_pagination_pageItem`}
                 >
                   <a
                     className="page-link"
                     href="#!"
-                    onClick={() => setPageNo(index + 1)}
+                    onClick={() => setPageNo(index)}
                   >
                     {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </a>
                 </li>
               ))}
+
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"

@@ -10,9 +10,8 @@
   overflow-y: scroll;
   height: calc(100vh - 7vh);
   /* height: 100%; */
-  background-color: rgb(240, 231, 231);
+  background-color: #f8f8ff;
 }
-
 
 /* For Extra Small Devices (Phones) */
 @media (max-width: 575.98px) {

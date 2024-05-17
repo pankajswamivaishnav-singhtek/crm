@@ -14,22 +14,6 @@ const DashboardSection2 = () => {
   const tokenId = userIdTokenData?.data?.token;
   const [pipelineDealsData, setPipelineDealsData] = useState([]);
   useEffect(() => {
-    // (async () => {
-    //   try {
-    //     // pipelineDeals(uid, tokenId).then((res) => {
-    //     //   setPipelineDealsData(res || null);
-    //     // });
-    //     let result = await pipelineDeals(uid, tokenId);
-    //     if (result === null || result === undefined) {
-    //       setPipelineDealsData(null);
-    //     } else {
-    //       setPipelineDealsData(result);
-    //     }
-    //   } catch (error) {
-    //     setPipelineDealsData(null);
-    //   }
-    // })();
-
     (async () => {
       try {
         const result = await pipelineDeals(uid, tokenId);
@@ -46,11 +30,11 @@ const DashboardSection2 = () => {
   }, [uid, tokenId]);
   const getDataArray = () => {
     if (!pipelineDealsData || !Array.isArray(pipelineDealsData)) {
-      return [0, 0, 0, 0, 0, 0, 0, 0];
+      return [0, 0, 0, 0, 0, 0, 0];
     }
     return pipelineDealsData.map((deal) => deal.dealCount);
   };
-  console.log("get data array:", getDataArray());
+  
   return (
     <div className="row dashboard_row1">
       <div className="col-xl-8 col-md-8">
@@ -68,7 +52,6 @@ const DashboardSection2 = () => {
           <div className="dashboard_section2_chart_div">
             <DonutChart
               data={getDataArray()}
-              // data={[]}
               labels={[
                 "Need Analysis",
                 "Value",

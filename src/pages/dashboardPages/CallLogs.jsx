@@ -17,7 +17,7 @@ import {
   deleteLogCall,
   downloadLogCalls,
   uploadLogCalls,
-  getSingleLogCall
+  getSingleLogCall,
 } from "../../controller/fetchApi";
 import UpdateLogCall from "./UpdateLogCall";
 const CallLogs = () => {
@@ -57,7 +57,7 @@ const CallLogs = () => {
       await deleteLogCall(logCallCostumerId, setShowToast, tokenId);
       if (deleteLogCall) {
         getLogCallData();
-        console.log("delete Successfully Log Call", getLogCallData);
+        setLogCallCostumerId([]);
       }
     } catch (error) {
       const errorMessage = error.message;
@@ -94,10 +94,7 @@ const CallLogs = () => {
   const [defaultValue, setDefaultValue] = useState([]); // Get Single Deal Data Which Fullfill Field Value
   const handleUpdateLogCall = async () => {
     try {
-      const singLogCallResult = await getSingleLogCall(
-        logCallId,
-        tokenId
-      );
+      const singLogCallResult = await getSingleLogCall(logCallId, tokenId);
       if (singLogCallResult) {
         setDefaultValue(singLogCallResult);
       } else {
@@ -140,9 +137,14 @@ const CallLogs = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li data-bs-toggle="modal"
-                    data-bs-target="#updateLogCallModal">
-                    <button className="dropdown-item"  onClick={() => handleUpdateLogCall()}>
+                  <li
+                    data-bs-toggle="modal"
+                    data-bs-target="#updateLogCallModal"
+                  >
+                    <button
+                      className="dropdown-item"
+                      onClick={() => handleUpdateLogCall()}
+                    >
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
                     </button>
@@ -241,29 +243,32 @@ const CallLogs = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() => setPageNo(pageNo - 1)}
+                  onClick={() =>
+                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
+                  }
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 5 }, (_, index) => (
+              {Array.from({ length: 6 }, (_, index) => (
                 <li
                   key={index}
                   className={`page-item ${
-                    index + 1 === pageNo ? "active" : ""
+                    index === pageNo ? "active" : ""
                   } dashboard_leads_pagination_pageItem`}
                 >
                   <a
                     className="page-link"
                     href="#!"
-                    onClick={() => setPageNo(index + 1)}
+                    onClick={() => setPageNo(index)}
                   >
                     {index + 1 < 10 ? `0${index + 1}` : index + 1}
                   </a>
                 </li>
               ))}
+
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"
@@ -333,8 +338,8 @@ const CallLogs = () => {
             </div>
           </div>
         </>
-         {/*Update Deal Modal */}
-         <>
+        {/*Update Deal Modal */}
+        <>
           <div
             className="modal fade modal-xl"
             id="updateLogCallModal"

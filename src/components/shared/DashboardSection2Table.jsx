@@ -13,6 +13,25 @@ const DashboardSection2Table = () => {
       setMonthlyTaskData(res);
     });
   }, [uid, tokenId]);
+  // Function to return the class name based on status
+  const getStatusClassName = (status) => {
+    switch (status.toLowerCase()) {
+      case "not-started":
+        return "status-not-started";
+      case "success":
+        return "status-success";
+      case "in-progress":
+        return "status-in-progress";
+      case "deffered":
+        return "status-deffered";
+      case "waiting-for-input":
+        return "status-waiting-for-input";
+      case "completed":
+        return "status-completed";
+      default:
+        return "";
+    }
+  };
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
       <div className="row dashboard_table_main_heading">
@@ -39,7 +58,9 @@ const DashboardSection2Table = () => {
                   <td>{deal.subject}</td>
                   <td>{deal.priority}</td>
                   <td>{deal.dueDate}</td>
-                  <td>{deal.status}</td>
+                  <td className={getStatusClassName(deal.status)}>
+                    {deal.status}
+                  </td>
                 </tr>
               ))
             ) : (

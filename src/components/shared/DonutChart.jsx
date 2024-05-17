@@ -6,7 +6,6 @@ const DonutChart = ({ data, labels }) => {
   for (let i = 0; i < data.length; i++) {
     donutDataArray[i] = data[i];
   }
-  console.log("Array: " + donutDataArray);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
   useEffect(() => {
@@ -23,30 +22,31 @@ const DonutChart = ({ data, labels }) => {
           {
             label: "Data",
             data: [
-              donutDataArray[6],
-              donutDataArray[5],  //Lost to compition
-              donutDataArray[4],  // IdentityFy Descision Maker
-              donutDataArray[3], //Proposal
-              donutDataArray[2], //negosiation
-              donutDataArray[1], //Won Data
-              donutDataArray[0], //Lost Data
+              donutDataArray[2],
+              donutDataArray[3], //Lost to compition
+              donutDataArray[4], // IdentityFy Descision Maker
+              donutDataArray[1], //Proposal
+              donutDataArray[6], //need Analysis
+              donutDataArray[0], //Purposoal Data
+              donutDataArray[5], //Won Data
             ],
             backgroundColor: [
-              "rgba(54, 162, 235, 0.5)",
-              "rgba(255, 206, 86, 0.5)",
-              "rgba(75, 192, 192, 0.5)",
-              "rgba(153, 102, 255, 0.5)",
-              "rgba(0, 255, 255)", //Negosiation
-              "green", //Green
-              "red", //Lost 
+              "rgba(222, 83, 250, 0.644)", //need analysis
+              "rgba(255, 206, 86, 0.5)", //Value
+              "#69C2E5", // IdentityFy Descision Maker
+              "#c062b0", //purposal
+              "#FF7006", //Negosiation
+              "#2ec282", //Green
+              "#5869FF", //Lost
             ],
             borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(30, 177, 226)",
+              "rgba(222, 83, 250, 0.644)",
+              "rgba(255, 206, 86, 0.5)",
+              "#69C2E5", // IdentityFy Descision Maker
+              "#c062b0", //purposal
+              "#FF7006", //Negosiation
+              "#2ec282", //Green
+              "#5869FF", //Lost
             ],
             borderWidth: 1,
           },
