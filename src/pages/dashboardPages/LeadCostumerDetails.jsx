@@ -4,6 +4,7 @@ import "../../styles/dashboardCss/leadCostumerDetails.css";
 // Controllers Api Methods
 import { getSingleLead } from "../../controller/fetchApi";
 const LeadCostumerDetails = () => {
+  // Get TokenID & UserUd & LeadId
   const userIdTokenData = JSON.parse(localStorage.getItem("leadId"));
   const leadId = userIdTokenData;
   const userTokenData = JSON.parse(localStorage.getItem("user"));

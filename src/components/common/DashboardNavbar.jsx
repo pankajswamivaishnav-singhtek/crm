@@ -45,6 +45,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
       console.log(error);
     }
   }, [tokenId, setCurrentUserData]);
+
   useEffect(() => {
     getUser();
     switch (pathname) {
@@ -174,17 +175,12 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         <button
           className="navbar-toggler"
           type="button"
-          // data-bs-toggle="collapse"
-          // data-bs-target="#navbarSupportedContent"
-          // aria-controls="navbarSupportedContent"
-          // aria-expanded="false"
-          // aria-label="Toggle navigation"
           onClick={sidebarState}
         >
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-right-menu-mannual">
             <li className="nav-item">
               <a
                 className="nav-link active dashboard_navbar_dashboard_text"
@@ -198,7 +194,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
           {/* Right Menu  */}
           <div className="ms-auto">
             <ul className="navbar-nav mb-2 mb-lg-0">
-              <li className="nav-item">
+              <li className="nav-item nav-item-notification">
                 <a className="nav-link" href="#!">
                   <IoNotificationsCircleOutline className="dashboard_navbar_notification_icon" />
                 </a>

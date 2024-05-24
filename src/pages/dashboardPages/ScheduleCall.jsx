@@ -66,7 +66,9 @@ const ScheduleCall = () => {
         <div className="row">
           <p className="create_lead_section2_company_info">Call Information</p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callTo">Call To</label>
+            <label htmlFor="callTo">
+              Call To <span className="required_sign">*</span>
+            </label>
             <select
               id="callTo"
               className="form-control"
@@ -88,7 +90,9 @@ const ScheduleCall = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="relatedTo">Related To</label>
+            <label htmlFor="relatedTo">
+              Related To <span className="required_sign">*</span>
+            </label>
             <select
               id="relatedTo"
               className="form-control"
@@ -118,7 +122,9 @@ const ScheduleCall = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callType">Call Type</label>
+            <label htmlFor="callType">
+              Call Type <span className="required_sign">*</span>
+            </label>
             <select
               id="callType"
               className="form-control"
@@ -141,7 +147,9 @@ const ScheduleCall = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callStatus">Outgoing Call Status</label>
+            <label htmlFor="callStatus">
+              Outgoing Call Status <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="callStatus"
@@ -159,7 +167,9 @@ const ScheduleCall = () => {
             <HiOutlinePhoneOutgoing className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callStartTime">Call Start Time</label>
+            <label htmlFor="callStartTime">
+              Call Start Time <span className="required_sign">*</span>
+            </label>
             <input
               type="datetime-local"
               id="callStartTime"
@@ -176,7 +186,9 @@ const ScheduleCall = () => {
             />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callOwner">Call Owner</label>
+            <label htmlFor="callOwner">
+              Call Owner <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="callOwner"
@@ -192,7 +204,9 @@ const ScheduleCall = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountNumber">Subject</label>
+            <label htmlFor="accountNumber">
+              Subject <span className="required_sign">*</span>
+            </label>
             <input
               type="subject"
               id="subject"
@@ -208,7 +222,9 @@ const ScheduleCall = () => {
             <MdOutlineBook className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="reminder">Reminder</label>
+            <label htmlFor="reminder">
+              Reminder <span className="required_sign">*</span>
+            </label>
             <select
               id="reminder"
               className="form-control"
@@ -238,7 +254,9 @@ const ScheduleCall = () => {
             Purpose Of Outgoing Call
           </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callPurpose">Call Purpose</label>
+            <label htmlFor="callPurpose">
+              Call Purpose <span className="required_sign">*</span>
+            </label>
             <select
               id="callPurpose"
               className="form-control"
@@ -264,7 +282,9 @@ const ScheduleCall = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callAgenda">Call Agenda</label>
+            <label htmlFor="callAgenda">
+              Call Agenda <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="callAgenda"

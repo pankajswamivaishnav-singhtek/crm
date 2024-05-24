@@ -65,7 +65,7 @@ const DashboardSection1Table = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Meetings found This Month</td>
+                <td colSpan="4">No Meetings found This Month</td>
               </tr>
             )}
           </tbody>

@@ -4,6 +4,7 @@ import "../../styles/dashboardCss/accountCostumerDetails.css";
 // Controller Api Methods
 import { getSingleAccount } from "../../controller/fetchApi";
 const AccountCostumerDetails = () => {
+  // Get AccountId & TokenId
   const [getSingleAccountData, setSingleAccountData] = useState([]);
   const accountId = JSON.parse(localStorage.getItem("accountId"));
   const userTokenData = JSON.parse(localStorage.getItem("user"));

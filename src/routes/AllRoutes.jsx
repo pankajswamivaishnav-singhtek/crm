@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // React Router Dom
 import { Routes, Route } from "react-router-dom";
 import ResetPassword from "../pages/ResetPassword";
 
 // Pages
-import Home from "../pages/Home";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -45,7 +44,19 @@ import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 import UpdateProfile from "../pages/UpdateProfile";
 
 const AllRoutes = () => {
-  const [isSidebar, setIsSidebar] = useState(true);
+  const [isSidebar, setIsSidebar] = useState(window.innerWidth > 425);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSidebar(window.innerWidth > 425);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Routes>
       {/* Dashboard Routes */}
@@ -270,7 +281,7 @@ const AllRoutes = () => {
           }
         />
       </Route>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />

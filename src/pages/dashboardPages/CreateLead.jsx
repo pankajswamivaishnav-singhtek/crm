@@ -39,7 +39,7 @@ const CreateLead = () => {
           </div>
         </div>
       </div>
-      {/* Form */}
+      {/* Create Lead Form Component */}
       <div className="create_leads_form_div">
         <CreateLeadForm />
       </div>

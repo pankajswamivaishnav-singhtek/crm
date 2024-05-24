@@ -62,7 +62,7 @@ const CreateDeal = () => {
         <div className="row">
           <p className="create_lead_section2_company_info ">Deal Information</p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="dealOwner">Deal Owner</label>
+            <label htmlFor="dealOwner">Deal Owner <span className="required_sign">*</span></label>
             <input
               type="text"
               id="dealOwner"
@@ -78,7 +78,7 @@ const CreateDeal = () => {
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="dealName">Deal Name</label>
+            <label htmlFor="dealName">Deal Name <span className="required_sign">*</span></label>
             <input
               type="text"
               id="dealName"
@@ -94,7 +94,7 @@ const CreateDeal = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="amount">Amount</label>
+            <label htmlFor="amount">Amount <span className="required_sign">*</span></label>
             <input
               type="text"
               id="amount"
@@ -110,7 +110,7 @@ const CreateDeal = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="closingDate">Closing Date</label>
+            <label htmlFor="closingDate">Closing Date <span className="required_sign">*</span></label>
             <input
               type="date"
               id="closingDate"
@@ -127,7 +127,7 @@ const CreateDeal = () => {
             />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountName">Account Name</label>
+            <label htmlFor="accountName">Account Name <span className="required_sign">*</span></label>
             <input
               type="tel"
               id="accountName"
@@ -145,7 +145,7 @@ const CreateDeal = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="stage">Stage</label>
+            <label htmlFor="stage">Stage <span className="required_sign">*</span></label>
             <select
               id="stage"
               className="form-control"
@@ -177,7 +177,7 @@ const CreateDeal = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="type">Type</label>
+            <label htmlFor="type">Type <span className="required_sign">*</span></label>
             <select
               id="type"
               className="form-control"
@@ -199,7 +199,7 @@ const CreateDeal = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="nextStep">Next Step</label>
+            <label htmlFor="nextStep">Next Step <span className="required_sign">*</span></label>
             <input
               type="text"
               id="nextStep"
@@ -215,7 +215,7 @@ const CreateDeal = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="expectedRevenue">Expected Revenue</label>
+            <label htmlFor="expectedRevenue">Expected Revenue <span className="required_sign">*</span></label>
             <input
               type="text"
               id="expectedRevenue"
@@ -233,7 +233,7 @@ const CreateDeal = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="leadSource">Lead Source</label>
+            <label htmlFor="leadSource">Lead Source <span className="required_sign">*</span></label>
             <select
               id="leadSource"
               className="form-control"
@@ -258,7 +258,7 @@ const CreateDeal = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="campaignSource">Campaign Source</label>
+            <label htmlFor="campaignSource">Campaign Source <span className="required_sign">*</span></label>
             <input
               type="text"
               id="campaignSource"
@@ -276,7 +276,7 @@ const CreateDeal = () => {
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="contactName">Contact Name</label>
+            <label htmlFor="contactName">Contact Name <span className="required_sign">*</span></label>
             <input
               type="text"
               id="contactName"

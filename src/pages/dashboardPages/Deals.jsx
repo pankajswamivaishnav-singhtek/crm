@@ -72,7 +72,7 @@ const Deals = () => {
       console.log("Error fetching updated data", error);
     }
   };
-  // Download Account Api
+  // Download Deals Api
   const handleDownloadDeals = async () => {
     try {
       await downloadDeal(setShowToast, tokenId);
@@ -113,10 +113,37 @@ const Deals = () => {
       }
     }
   };
-  // Handle Next Page ---
+  // Pagination Function ------
+  const [pageRangeStart, setPageRangeStart] = useState(0);
+  const totalPages = getAllDealsData?.totalPages || 6;
+  const pagesToShow = 6;
   const handleNextPageClick = () => {
-    setPageNo(pageNo + 1); // Increment page number
+    const newPageNo = pageNo + 1;
+    if (newPageNo < totalPages) {
+      setPageNo(newPageNo);
+      if (newPageNo >= pageRangeStart + pagesToShow) {
+        setPageRangeStart(pageRangeStart + pagesToShow);
+      }
+    }
   };
+  const handlePreviousPageClick = () => {
+    const newPageNo = pageNo - 1;
+    if (newPageNo >= 0) {
+      setPageNo(newPageNo);
+      if (newPageNo < pageRangeStart) {
+        setPageRangeStart(pageRangeStart - pagesToShow);
+      }
+    }
+  };
+  const handlePageClick = (index) => {
+    setPageNo(index);
+    if (index >= pageRangeStart + pagesToShow) {
+      setPageRangeStart(pageRangeStart + pagesToShow);
+    } else if (index < pageRangeStart) {
+      setPageRangeStart(pageRangeStart - pagesToShow);
+    }
+  };
+
   useEffect(() => {
     getAllDeals();
   }, [getAllDeals]);
@@ -213,32 +240,38 @@ const Deals = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() =>
-                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
-                  }
+                  onClick={handlePreviousPageClick}
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 6 }, (_, index) => (
-                <li
-                  key={index}
-                  className={`page-item ${
-                    index === pageNo ? "active" : ""
-                  } dashboard_leads_pagination_pageItem`}
-                >
-                  <a
-                    className="page-link"
-                    href="#!"
-                    onClick={() => setPageNo(index)}
-                  >
-                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                  </a>
-                </li>
-              ))}
+              {Array.from({ length: pagesToShow }, (_, index) => {
+                const pageIndex = pageRangeStart + index;
+                return (
+                  pageIndex < totalPages && (
+                    <li
+                      key={pageIndex}
+                      className={`page-item ${
+                        pageIndex === pageNo ? "active" : ""
+                      } dashboard_leads_pagination_pageItem`}
+                    >
+                      <a
+                        className="page-link"
+                        href="#!"
+                        onClick={() => handlePageClick(pageIndex)}
+                      >
+                        {pageIndex + 1 < 10
+                          ? `0${pageIndex + 1}`
+                          : pageIndex + 1}
+                      </a>
+                    </li>
+                  )
+                );
+              })}
 
+              {/* Next page button */}
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"

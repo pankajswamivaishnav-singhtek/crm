@@ -11,7 +11,7 @@ const ContactCostumerDetails = () => {
       <div className="row">
         <div className="col-xl-12">
           <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
-            <div className="table-responsive">
+            <div className="table-responsive mannual-table-responsive">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -28,7 +28,7 @@ const ContactCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive mannual-table-responsive">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -45,7 +45,7 @@ const ContactCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive mannual-table-responsive">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -62,7 +62,7 @@ const ContactCostumerDetails = () => {
                 </tbody>
               </table>
             </div>
-            <div className="table-responsive">
+            <div className="table-responsive mannual-table-responsive">
               <table className="table table-borderless">
                 <tbody>
                   <tr>

@@ -6,7 +6,7 @@
   text-align: center;
 }
 
-.otp-letter-input::placeholder{
+.otp-letter-input::placeholder {
   color: red;
 }
 
@@ -29,4 +29,9 @@
 }
 .resend_otp_text_link {
   color: #ff7006;
+}
+
+.otp_verification_small_text {
+  margin-bottom: 10px;
+  text-align: center;
 }

@@ -23,7 +23,7 @@
 }
 
 #signup_left_mainDiv {
-  height: 705px;
+  height: 900px;
   width: 560px;
   border-radius: 22px;
   border: 8px;
@@ -44,6 +44,7 @@
   display: flex;
   justify-content: space-evenly;
 }
+
 .signup_div_name {
   color: #808080;
   font-family: Roboto;
@@ -67,7 +68,7 @@
 
 .signup_name_icons {
   position: absolute;
-  right: 36px; /* Adjust the distance from the right */
+  right: 8px; /* Adjust the distance from the right */
   top: 70%;
   transform: translateY(-50%);
   width: 22px;
@@ -166,7 +167,27 @@
   text-align: center;
   color: #ff7006;
 }
+.signup_input_form::placeholder {
+  color: red;
+  font-size: small;
+}
 
+.cpasswordErrorPara {
+  margin-top: -17px;
+  font-size: small;
+  color: red;
+}
+
+.required_sign {
+  color: red;
+}
+
+@media screen and (max-width: 1024px) {
+  .signup_fullname_div {
+    padding: 0 50px;
+    flex-direction: column;
+  }
+}
 @media screen and (max-width: 768px) {
   .signup_fullname_div {
     padding: 0 50px;
@@ -195,7 +216,7 @@
     top: 74%;
   }
   #signup_left_mainDiv {
-    height: 770px;
+    height: 900px;
   }
 }
 
@@ -204,12 +225,25 @@
     margin: 20px auto;
   }
 }
-@media screen and (max-width: 400px) {
-  #signup_left_mainDiv {
-    margin-right: 20px;
-  }
+@media screen and (max-width: 430px) {
   .signup_left_container {
+    --bs-gutter-x: 0;
+    margin-top: 20px;
     margin-left: 0px;
-    width: 332px;
+    /* width: 332px; */
+    width: 100%;
+  }
+  #signup_left_mainDiv {
+    /* margin-right: 20px; */
+    height: 100%;
+    margin: 60px 0;
+  }
+  .signup_right_bodyDiv {
+    height: 54vh;
+    margin: 30px 0 0 auto;
+  }
+  .otp_verification_row {
+    width: 100%;
+    text-align: end;
   }
 }

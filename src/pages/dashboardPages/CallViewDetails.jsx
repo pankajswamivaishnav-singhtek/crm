@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getSingleScheduleCall } from "../../controller/fetchApi";
 const CallViewDetails = () => {
   const [getSingleScheduleCallData, setSingleScheduleCallData] = useState([]);
+  // Get Schedule CallId & Toekn Id
   const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
   const userTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userTokenData?.data?.token;
@@ -66,7 +67,7 @@ const CallViewDetails = () => {
                         Call Type
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callType}
+                        {getSingleScheduleCallData.callType}
                       </td>
                     </tr>
                   </tbody>
@@ -100,7 +101,7 @@ const CallViewDetails = () => {
                         Call Start Time
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callStartTime}
+                        {getSingleScheduleCallData.callStartTime}
                       </td>
                     </tr>
                   </tbody>
@@ -117,7 +118,7 @@ const CallViewDetails = () => {
                         Call Owner
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callOwner}
+                        {getSingleScheduleCallData.callOwner}
                       </td>
                     </tr>
                   </tbody>
@@ -151,7 +152,7 @@ const CallViewDetails = () => {
                         reminder
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.reminder}
+                        {getSingleScheduleCallData.reminder}
                       </td>
                     </tr>
                   </tbody>
@@ -199,7 +200,7 @@ const CallViewDetails = () => {
                         Call Agenda
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleScheduleCallData.callAgenda}
+                        {getSingleScheduleCallData.callAgenda}
                       </td>
                     </tr>
                   </tbody>

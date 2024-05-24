@@ -10,6 +10,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FiPhone } from "react-icons/fi";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { IoMdEye } from "react-icons/io";
+
 // React Router Dom
 import { Link, useNavigate } from "react-router-dom";
 // Imags
@@ -20,7 +22,18 @@ import { signupUser } from "../controller/fetchApi";
 
 const Signup = () => {
   const navigate = useNavigate();
+  // Toast
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
 
+  // Function to hide the toast after 3 seconds
+  const hideToast = () => {
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
+  if (showToast) {
+    hideToast();
+  }
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -36,26 +49,31 @@ const Signup = () => {
 
       validationSchema: signupFormSchema,
       onSubmit: async (values, { resetForm }) => {
-        console.log("-----", values);
-        const signupSuccessFully = await signupUser(values, setShowToast);
-        if (signupSuccessFully) {
-          navigate("/dashboard");
+        if (errors.confirmPassword) {
+          setShowToast({ success: true, message: "password must match" });
         }
+        console.log("-----", values);
+        navigate("/otpverification", {
+          state: {
+            email: values.email,
+            name: `${values.firstName} ${values.lastName}`,
+          },
+        });
+        await signupUser(values, setShowToast);
+
         resetForm();
       },
     });
-  // Toast
-  const [showToast, setShowToast] = useState(false);
-  // Function to hide the toast after 3 seconds
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-  if (showToast) {
-    hideToast();
-  }
 
+  // Show & Hide Password
+  const [showPassword, setShowPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   return (
     <>
       <div className="container-fluid signup_body_div">
@@ -75,11 +93,15 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_name"
                         >
-                          First Name
+                          First Name <span className="required_sign">*</span>
                         </label>
                         <input
                           type="text"
-                          className="form-control signup_name_form_control"
+                          className={`form-control signup_name_form_control  ${
+                            errors.firstName && touched.firstName
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           placeholder={
                             touched.firstName && errors.firstName
@@ -99,11 +121,15 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_name"
                         >
-                          Last Name
+                          Last Name <span className="required_sign">*</span>
                         </label>
                         <input
                           type="text"
-                          className="form-control signup_name_form_control"
+                          className={`form-control signup_name_form_control  ${
+                            errors.lastName && touched.lastName
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           placeholder={
                             touched.lastName && errors.lastName
@@ -125,11 +151,15 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
                         >
-                          Username
+                          Username <span className="required_sign">*</span>
                         </label>
                         <input
                           type="text"
-                          className="form-control signup_email_form_control userName_input_signup"
+                          className={`form-control signup_email_form_control userName_input_signup  ${
+                            errors.userName && touched.userName
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           name="userName"
                           placeholder={
@@ -151,11 +181,15 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
                         >
-                          Email address
+                          Email address <span className="required_sign">*</span>
                         </label>
                         <input
                           type="email"
-                          className="form-control signup_email_form_control"
+                          className={`form-control signup_email_form_control  ${
+                            errors.email && touched.email
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           name="email"
                           placeholder={
@@ -177,11 +211,15 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
                         >
-                          Phone Number
+                          Phone Number <span className="required_sign">*</span>
                         </label>
                         <input
                           type="tel"
-                          className="form-control signup_email_form_control"
+                          className={`form-control signup_email_form_control  ${
+                            errors.phone && touched.phone
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           placeholder={
                             touched.phone && errors.phone
@@ -203,11 +241,15 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
                         >
-                          Create Password
+                          Password <span className="required_sign">*</span>
                         </label>
                         <input
-                          type="password"
-                          className="form-control signup_email_form_control"
+                          type={showPassword ? "password" : "text"}
+                          className={`form-control signup_email_form_control  ${
+                            errors.password && touched.password
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           placeholder={
                             touched.password && errors.password
@@ -219,7 +261,19 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <FaEyeSlash className="signup_input_icons" />
+                        {showPassword ? (
+                          <FaEyeSlash
+                            className="signup_input_icons"
+                            onClick={handleClickShowPassword}
+                            style={{ cursor: "pointer" }}
+                          />
+                        ) : (
+                          <IoMdEye
+                            className="signup_input_icons"
+                            onClick={handleClickShowPassword}
+                            style={{ cursor: "pointer" }}
+                          />
+                        )}
                       </div>
                     </div>
                     {/* Confirm Password */}
@@ -229,12 +283,16 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
                         >
-                          Confirm Password
+                          Confirm Password{" "}
+                          <span className="required_sign">*</span>
                         </label>
                         <input
-                          type="password"
-                          className="form-control signup_email_form_control 
-                          "
+                          type={showConfirmPassword ? "password" : "text"}
+                          className={`form-control signup_email_form_control  ${
+                            errors.confirmPassword && touched.confirmPassword
+                              ? "signup_input_form"
+                              : ""
+                          }`}
                           id="exampleFormControlInput1"
                           placeholder={
                             touched.confirmPassword && errors.confirmPassword
@@ -246,8 +304,27 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <FaEyeSlash className="signup_input_icons" />
+                        {showConfirmPassword ? (
+                          <FaEyeSlash
+                            className="signup_input_icons"
+                            onClick={handleClickShowConfirmPassword}
+                            style={{ cursor: "pointer" }}
+                          />
+                        ) : (
+                          <IoMdEye
+                            className="signup_input_icons"
+                            onClick={handleClickShowConfirmPassword}
+                            style={{ cursor: "pointer" }}
+                          />
+                        )}
                       </div>
+                      <p
+                        className={
+                          errors.confirmPassword ? "cpasswordErrorPara" : ""
+                        }
+                      >
+                        {errors.confirmPassword}
+                      </p>
                     </div>
                   </div>
                   {/* Submit Button */}

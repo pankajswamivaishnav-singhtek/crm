@@ -1,6 +1,8 @@
 import {
   // Dashboard & Singup Api
   SIGNUP_USER,
+  OTP_VERIFICATION_URL,
+  RESEND_OTP_URL,
   LOGIN_USER,
   LOGOUT_USER,
   FORGOT_PASSWORD,
@@ -76,13 +78,14 @@ import {
   UPDATE_LOG_CALL_URL,
   // Report Url
   GET_GENRATED_LEADS_URL,
+  GET_DEALS_DONE_URL,
+  GET_DONE_CALLS_URL,
 } from "../constants/Constant";
 import axios from "axios";
 
 // Signup User Post Api
 export const signupUser = async (userData, setShowToast) => {
   try {
-    console.log("userData", userData);
     const response = await axios.post(SIGNUP_USER, {
       firstName: userData.firstName,
       lastName: userData.lastName,
@@ -94,15 +97,50 @@ export const signupUser = async (userData, setShowToast) => {
     });
     // Show success message in toast
     setShowToast({ success: true, message: "Sign up successful." });
+    console.log("Signup", response);
     // Set Data In Local Storage
-    if (response) {
-      localStorage.setItem("user", JSON.stringify(response.data));
-    }
+    // if (response) {
+    //   localStorage.setItem("user", JSON.stringify(response.data));
+    // }
     return response;
   } catch (error) {
     const { message } = error.response.data;
     // Show error message in toast
     setShowToast({ success: false, message });
+  }
+};
+
+// OTP Verification Post Api
+export const otpVerification = async (userData, setShowToast) => {
+  try {
+    console.log("data otp", userData);
+    const response = await axios.post(OTP_VERIFICATION_URL, {
+      email: userData.email,
+      otp: userData.otp,
+    });
+    console.log("Otp Verify Successfully", response);
+    // Set Data In Local Storage
+    if (response) {
+      setShowToast({ success: true, message: "signup successfully" });
+      localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    return response;
+  } catch (error) {
+    const { message } = error.response.data;
+    console.log(message);
+  }
+};
+
+// Resend Otp Post Api
+export const resendOtp = async (email) => {
+  try {
+    console.log("email aaya", email);
+    const response = await axios.post(RESEND_OTP_URL + email);
+    console.log("resnet url", RESEND_OTP_URL + email);
+    return response;
+  } catch (error) {
+    const { message } = error.response.data;
+    console.log(message);
   }
 };
 
@@ -113,11 +151,14 @@ export const loginUser = async (userData, setShowToast) => {
       email: userData.email,
       password: userData.password,
     });
-    // Show success message in toast
-    setShowToast({ success: true, message: "Sign In successfully." });
     // Set Data In Local Storage
-    if (response) {
+    if (response.data.status === 200) {
       localStorage.setItem("user", JSON.stringify(response.data));
+      // Show success message in toast
+      setShowToast({ success: true, message: "Sign In successfully." });
+    }
+    if (response.data.status === 206) {
+      setShowToast({ success: false, message: "Invalid Credentials." });
     }
     return response;
   } catch (error) {
@@ -131,6 +172,7 @@ export const loginUser = async (userData, setShowToast) => {
 export const logoutUser = async () => {
   try {
     const response = await axios.get(LOGOUT_USER);
+    console.log("logout response: " + response);
     return response;
   } catch (error) {
     const { message } = error.response.data;
@@ -319,6 +361,7 @@ export const pipelineDeals = async (uid, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
+    console.log("response pipeline", response);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -465,12 +508,14 @@ export const verifyLeads = async (leadId, setShowToast, tokenId) => {
 // Delete Leads
 export const deleteLeads = async (leadId, setShowToast, tokenId) => {
   try {
+    console.log("chal gya lead delete", tokenId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
     };
     const response = await axios.delete(DELETE_LEADS_URL + [leadId], config);
+    console.log("response deleted", response);
     if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
@@ -613,11 +658,15 @@ export const createContact = async (
         },
       }
     );
+    console.log("create Successfully", response);
     if (response) {
       // Show success message in toast
       setShowToast({ success: true, message: "Create Contact Successfully." });
     }
-  } catch (error) {}
+  } catch (error) {
+    const message = error?.response?.data;
+    return message;
+  }
 };
 
 //Get All Contact get Api
@@ -1714,6 +1763,8 @@ export const updateLogCall = async (
 };
 
 // ************** Report Page Api *****************
+
+// Lead Generated Report Api
 export const getGenratedLeads = async (tokenId, leadBy) => {
   try {
     const response = await axios.get(GET_GENRATED_LEADS_URL + leadBy, {
@@ -1721,7 +1772,40 @@ export const getGenratedLeads = async (tokenId, leadBy) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("data", response)
+    if (response?.data?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// calls Done Report Api
+export const getCallsDone = async (tokenId, dealBy) => {
+  try {
+    const response = await axios.get(GET_DONE_CALLS_URL + dealBy, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.data?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log(message);
+  }
+};
+
+// Deals Done Report Api
+export const getDealsDone = async (tokenId, dealBy) => {
+  try {
+    const response = await axios.get(GET_DEALS_DONE_URL + dealBy, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
     if (response?.data?.status === 200) {
       return response?.data?.data;
     }

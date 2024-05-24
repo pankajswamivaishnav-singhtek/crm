@@ -1,7 +1,9 @@
-export const BASE_URL = "http://192.168.1.5:8080";
+export const BASE_URL = "http://192.168.1.31:8080";
 
 // Signup User endpoints
 export const SIGNUP_USER = `${BASE_URL}/user/createuser`;
+export const OTP_VERIFICATION_URL = `${BASE_URL}/user/verifyOtp`;
+export const RESEND_OTP_URL = `${BASE_URL}/user/resendOtp?email=`;
 export const LOGIN_USER = `${BASE_URL}/user/signin`;
 export const LOGOUT_USER = `${BASE_URL}/user/logout`;
 export const FORGOT_PASSWORD = `${BASE_URL}/auth/forgotPassword`;
@@ -80,3 +82,5 @@ export const UPDATE_SCHEDULE_CALL_URL = `${BASE_URL}/call/updateCall?callId=`;
 export const UPDATE_LOG_CALL_URL = `${BASE_URL}/callLog/updateCallLog?callLogId=`;
 // Report Configuration Url
 export const GET_GENRATED_LEADS_URL = `${BASE_URL}/report/getLeadReport?leadBy=`;
+export const GET_DEALS_DONE_URL = `${BASE_URL}/report/getDealsReport?dealsBy=`;
+export const GET_DONE_CALLS_URL = `${BASE_URL}/report/getCallReport?callsBy=`;

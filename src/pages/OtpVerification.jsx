@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // css
 import "../styles/signup.page.css";
 import "../styles/forgot.page.css";
@@ -6,15 +6,33 @@ import "../styles/otpVerification.page.css";
 // React Icons
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 // React Router Dom
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate, useLocation } from "react-router-dom";
 // Formik
 import { useFormik } from "formik";
 import { otpVerificationSchema } from "../schema/FormValidation";
-
 // Images
 import otpImg from "../images/otp_img.png";
+// Import Controller Methods
+import { otpVerification, resendOtp } from "../controller/fetchApi";
 const OtpVerification = () => {
+  // Toast
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
+  // Function to hide the toast after 3 seconds
+  const hideToast = () => {
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+  };
+  if (showToast) {
+    hideToast();
+  }
+
+  const navigate = useNavigate();
+  // Get Name & Email From Signup
+  const location = useLocation();
+  const [gmail, setGmail] = useState();
+  const [newName, setName] = useState();
+  const { email, name } = location.state || {};
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -26,13 +44,39 @@ const OtpVerification = () => {
       },
 
       validationSchema: otpVerificationSchema,
-      onSubmit: (values, { resetForm }) => {
+      onSubmit: async (values, { resetForm }) => {
         const finalOtp =
           values.digit1 + values.digit2 + values.digit3 + values.digit4;
         console.log("-----", finalOtp);
+        const finalValue = {
+          otp: finalOtp,
+          email: gmail,
+        };
+        console.log("finalOtp", finalValue);
+        const verifySuccessFully = await otpVerification(
+          finalValue,
+          setShowToast
+        );
+        if (verifySuccessFully) {
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 1000);
+        }
         resetForm();
       },
     });
+  //  Resend Otp Function
+  const resendOtpAgain = async (email, name) => {
+    console.log("Email", email);
+    setGmail(email);
+    setName(name);
+    await resendOtp(email);
+  };
+
+  useEffect(() => {
+    setGmail(email);
+    setName(name);
+  }, [email, name]);
 
   return (
     <div className="container-fluid signup_body_div">
@@ -48,9 +92,14 @@ const OtpVerification = () => {
                 <p className=" signup_text_in_signup_left_mainDiv otp_text_in_otp_left_mainDiv">
                   OTP Verification
                 </p>
+                <div className="otp_verification_small_text">
+                  <small>{`${name || newName} please check ${
+                    email || gmail
+                  } Email`}</small>
+                </div>
                 <div className="formGroup">
                   {/* Otp Verification */}
-                  <div className="row pb-4">
+                  <div className="row pb-4 otp_verification_row">
                     <div className="col-3">
                       <input
                         className="otp-letter-input"
@@ -111,12 +160,16 @@ const OtpVerification = () => {
                     Submit
                   </button>
                 </div>
-                <div>
-                  <Link className="resend_otp_text_link">
-                    <p id="resend_otp_text">Resend Code</p>
-                  </Link>
-                </div>
               </form>
+              {/* Resend Otp OR Code */}
+              <div>
+                <Link
+                  className="resend_otp_text_link"
+                  onClick={() => resendOtpAgain(email, name)}
+                >
+                  <p id="resend_otp_text">Resend Code</p>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -127,6 +180,30 @@ const OtpVerification = () => {
             <img src={otpImg} alt="otp_img" className="img-fluid" />
           </div>
         </div>
+        {/* Toast */}
+        {showToast.message && (
+          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+            <div
+              className="toast show create_lead_toast"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true"
+            >
+              <div className="toast-header create_lead_toast_header">
+                <strong className="me-auto">
+                  {/* Form Submitted Successfully */}
+                  {showToast.success ? "Success" : "Error"}
+                </strong>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowToast({ success: false, message: "" })}
+                />
+              </div>
+              <div className="toast-body">{showToast.message}</div>
+            </div>
+          </div>
+        )}
       </div>
       {/* Right Main Div End*/}
     </div>

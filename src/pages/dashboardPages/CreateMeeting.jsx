@@ -28,7 +28,7 @@ const CreateMeeting = () => {
     })();
   }, [tokenId]);
 
-  // Toast
+  // Toast Manage State
   const [showToast, setShowToast] = useState(false);
 
   // Function to hide the toast after 3 seconds
@@ -58,9 +58,7 @@ const CreateMeeting = () => {
       date: "", // for date,
       participants: [],
     },
-
     validationSchema: MeetingFormSchema,
-
     onSubmit: async (values, { resetForm }) => {
       try {
         const response = await createMeeting(
@@ -96,7 +94,7 @@ const CreateMeeting = () => {
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="host">Host</label>
+            <label htmlFor="host">Host <span className="required_sign">*</span></label>
             <input
               type="text"
               id="host"
@@ -110,7 +108,7 @@ const CreateMeeting = () => {
             <FaChalkboardUser className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Title <span className="required_sign">*</span></label>
             <input
               type="text"
               id="title"
@@ -124,7 +122,7 @@ const CreateMeeting = () => {
             <MdOutlineSubtitles className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="address">Address <span className="required_sign">*</span></label>
             <input
               type="text"
               id="address"
@@ -141,10 +139,10 @@ const CreateMeeting = () => {
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="date">
-              Date &nbsp;
-              <small className="text-danger">
+              Date <span className="required_sign">*</span> &nbsp; 
+              {/* <small className="text-danger">
                 {touched.date && errors.date ? errors.date : null}
-              </small>
+              </small> */}
             </label>
             <input
               type="date"
@@ -164,7 +162,7 @@ const CreateMeeting = () => {
               data-bs-target="#participantsCollapse"
               className="btn btn-primary text-white create_meeting_participant_btn"
             >
-              <MdAdd /> Add Participants
+              <MdAdd /> Add Participants <span className="required_sign">*</span>
             </label>
             <div
               id="participantsCollapse"

@@ -49,13 +49,13 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
 
         if (updateDeal) {
           onUpdateSuccess();
-          resetForm();
         }
       } catch (error) {
         console.log("Found Error", error);
       }
     },
   });
+  // Update Form Automatic Filled
   useEffect(() => {
     if (defaultValue) {
       formik.setValues({

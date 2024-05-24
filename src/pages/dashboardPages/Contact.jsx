@@ -26,17 +26,18 @@ const Contact = () => {
   if (showToast) {
     hideToast();
   }
-
+  
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
   const [contactCostumerId, setContactCostumerId] = useState([]);
   const [getAllContactData, setAllContactData] = useState([]);
+
   // Get Uid and Tokenid Who Saved In Cookie
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
 
-  //  Get All Leads Data
+  //  Get All Contact Data
   const getContactsData = useCallback(async () => {
     try {
       await getAllContact(pageNo, tokenId).then((res) => {
@@ -67,13 +68,41 @@ const Contact = () => {
       console.log("Contact Downloaded:", error);
     }
   };
-  // Handle Next Page
+  // Pagination Function ------
+  const [pageRangeStart, setPageRangeStart] = useState(0);
+  const totalPages = getAllContactData?.totalPages || 5;
+  const pagesToShow = 6;
   const handleNextPageClick = () => {
-    setPageNo(pageNo + 1); // Increment page number
+    const newPageNo = pageNo + 1;
+    if (newPageNo < totalPages) {
+      setPageNo(newPageNo);
+      if (newPageNo >= pageRangeStart + pagesToShow) {
+        setPageRangeStart(pageRangeStart + pagesToShow);
+      }
+    }
   };
+  const handlePreviousPageClick = () => {
+    const newPageNo = pageNo - 1;
+    if (newPageNo >= 0) {
+      setPageNo(newPageNo);
+      if (newPageNo < pageRangeStart) {
+        setPageRangeStart(pageRangeStart - pagesToShow);
+      }
+    }
+  };
+  const handlePageClick = (index) => {
+    setPageNo(index);
+    if (index >= pageRangeStart + pagesToShow) {
+      setPageRangeStart(pageRangeStart + pagesToShow);
+    } else if (index < pageRangeStart) {
+      setPageRangeStart(pageRangeStart - pagesToShow);
+    }
+  };
+
   useEffect(() => {
     getContactsData();
   }, [getContactsData]);
+
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
@@ -159,48 +188,38 @@ const Contact = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() =>
-                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
-                  }
+                  onClick={handlePreviousPageClick}
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {/* {Array.from({ length: 5 }, (_, index) => (
-                <li
-                  key={index}
-                  className={`page-item ${
-                    index + 1 === pageNo ? "active" : ""
-                  } dashboard_leads_pagination_pageItem`}
-                >
-                  <a
-                    className="page-link"
-                    href="#!"
-                    onClick={() => setPageNo(index + 1)}
-                  >
-                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                  </a>
-                </li>
-              ))} */}
-              {Array.from({ length: 6 }, (_, index) => (
-                <li
-                  key={index}
-                  className={`page-item ${
-                    index === pageNo ? "active" : ""
-                  } dashboard_leads_pagination_pageItem`}
-                >
-                  <a
-                    className="page-link"
-                    href="#!"
-                    onClick={() => setPageNo(index)}
-                  >
-                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                  </a>
-                </li>
-              ))}
+              {Array.from({ length: pagesToShow }, (_, index) => {
+                const pageIndex = pageRangeStart + index;
+                return (
+                  pageIndex < totalPages && (
+                    <li
+                      key={pageIndex}
+                      className={`page-item ${
+                        pageIndex === pageNo ? "active" : ""
+                      } dashboard_leads_pagination_pageItem`}
+                    >
+                      <a
+                        className="page-link"
+                        href="#!"
+                        onClick={() => handlePageClick(pageIndex)}
+                      >
+                        {pageIndex + 1 < 10
+                          ? `0${pageIndex + 1}`
+                          : pageIndex + 1}
+                      </a>
+                    </li>
+                  )
+                );
+              })}
 
+              {/* Next page button */}
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"

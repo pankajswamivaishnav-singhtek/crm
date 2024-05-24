@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getSingleDeal } from "../../controller/fetchApi";
 const DealsCostumerDetails = () => {
   const [getSingleDealData, setSingleDealData] = useState([]);
+  // Get Token & Deal Id
   const dealId = JSON.parse(localStorage.getItem("dealId"));
   const userTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userTokenData?.data?.token;
@@ -12,6 +13,7 @@ const DealsCostumerDetails = () => {
   }, [dealId, tokenId]);
   return (
     <div className="account_view_details_Row">
+      {/* Deals Information */}
       <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
         Deal Information
       </h3>

@@ -52,6 +52,7 @@ const CreateTask = () => {
       },
     });
 
+  // Controll Reminder Open Close
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -60,12 +61,15 @@ const CreateTask = () => {
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
+        {/* Company Information */}
         <div className="row">
           <p className="create_lead_section2_company_info mt-3">
             Company Details
           </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="taskOwner">Task Owner</label>
+            <label htmlFor="taskOwner">
+              Task Owner <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="taskOwner"
@@ -81,7 +85,9 @@ const CreateTask = () => {
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="taskSubject">Subject</label>
+            <label htmlFor="taskSubject">
+              Subject <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="taskSubject"
@@ -99,7 +105,9 @@ const CreateTask = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="dueDate">Due Date</label>
+            <label htmlFor="dueDate">
+              Due Date <span className="required_sign">*</span>
+            </label>
             <input
               type="date"
               id="dueDate"
@@ -114,7 +122,9 @@ const CreateTask = () => {
             />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="contact">Contact</label>
+            <label htmlFor="contact">
+              Contact <span className="required_sign">*</span>
+            </label>
             <input
               type="tel"
               id="contact"
@@ -130,7 +140,9 @@ const CreateTask = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountType">Account Type</label>
+            <label htmlFor="accountType">
+              Account Type <span className="required_sign">*</span>
+            </label>
             <select
               id="accountType"
               className="form-control"
@@ -154,7 +166,9 @@ const CreateTask = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="status">Status</label>
+            <label htmlFor="status">
+              Status <span className="required_sign">*</span>
+            </label>
             <select
               id="status"
               className="form-control"
@@ -179,7 +193,9 @@ const CreateTask = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="priority">Priority</label>
+            <label htmlFor="priority">
+              Priority <span className="required_sign">*</span>
+            </label>
             <select
               id="priority"
               className="form-control"
@@ -216,7 +232,7 @@ const CreateTask = () => {
                   className="form-check-label"
                   htmlFor="flexSwitchCheckDefault"
                 >
-                  Reminder
+                  Reminder <span className="required_sign">*</span>
                 </label>
               </div>
               {isOpen && (
@@ -244,7 +260,7 @@ const CreateTask = () => {
               htmlFor="description"
               className="create_lead_section2_description_label"
             >
-              Description
+              Description <span className="required_sign">*</span>
             </label>
             <textarea
               id="description"

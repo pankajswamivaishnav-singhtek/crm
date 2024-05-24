@@ -13,7 +13,7 @@ const LogCallViewDetails = () => {
   }, [logCallId, tokenId]);
   return (
     <div className="container-fluid account_view_details_main_container">
-      {/* Billing Information */}
+      {/* Log Call Information */}
       <div className="account_view_details_Row">
         <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
           Log Call Information

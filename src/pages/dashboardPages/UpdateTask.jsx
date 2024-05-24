@@ -42,16 +42,8 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
     onSubmit: async (values, { resetForm }) => {
       try {
         console.log("Chal gya task ", values);
-        const updateTaskSuccessfully = await updateTask(
-          taskCostumerId,
-          values,
-          setShowToast,
-          tokenId
-        );
+        await updateTask(taskCostumerId, values, setShowToast, tokenId);
         onUpdateSuccess();
-        if (updateTaskSuccessfully) {
-          resetForm();
-        }
       } catch (error) {}
     },
   });

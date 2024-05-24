@@ -9,6 +9,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { IoMdEye } from "react-icons/io";
 
 // Formik
 import { useFormik } from "formik";
@@ -20,9 +21,22 @@ import loginImg from "../images/login_img.png";
 
 // Api Call & Function
 import { loginUser } from "../controller/fetchApi";
-
+// import { useAuth0 } from "@auth0/auth0-react";
 const Login = () => {
   const navigate = useNavigate();
+  // const { loginWithRedirect } = useAuth0();
+
+  // const handleGoogleLogin = () => {
+  //   loginWithRedirect({
+  //     connection: "google-oauth2",
+  //   })
+  //     .then(() => {
+  //       navigate("/dashboard"); // Manually navigate to dashboard after login
+  //     })
+  //     .catch((error) => {
+  //       console.error("Login failed:", error);
+  //     });
+  // };
 
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -48,15 +62,18 @@ const Login = () => {
       onSubmit: async (values, { resetForm }) => {
         console.log("-----", values);
         const loginSuccessFully = await loginUser(values, setShowToast);
-        if (loginSuccessFully) {
-          console.log(loginSuccessFully, "Successfully logged in");
+        if (loginSuccessFully.data.status === 200) {
           navigate("/dashboard");
         }
         resetForm();
-        // setShowToast(true);
       },
     });
 
+  // Show & Hide Password
+  const [showPassword, setShowPassword] = useState(true);
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="container-fluid signup_body_div">
       <div className="row">
@@ -77,11 +94,15 @@ const Login = () => {
                         htmlFor="exampleFormControlInput1"
                         className="form-label signup_div_input"
                       >
-                        Email address
+                        Email address <span className="required_sign">*</span>
                       </label>
                       <input
                         type="email"
-                        className="form-control signup_email_form_control"
+                        className={`form-control signup_email_form_control  ${
+                          errors.email && touched.email
+                            ? "signup_input_form"
+                            : ""
+                        }`}
                         id="exampleFormControlInput1"
                         name="email"
                         placeholder={
@@ -103,11 +124,16 @@ const Login = () => {
                         htmlFor="exampleFormControlInput1"
                         className="form-label signup_div_input"
                       >
-                        Password
+                        Password <span className="required_sign">*</span>
                       </label>
                       <input
-                        type="password"
-                        className="form-control signup_email_form_control"
+                        // type="password
+                        type={showPassword ? "password" : "text"}
+                        className={`form-control signup_email_form_control  ${
+                          errors.password && touched.password
+                            ? "signup_input_form"
+                            : ""
+                        }`}
                         id="exampleFormControlInput1"
                         placeholder={
                           touched.password && errors.password
@@ -119,7 +145,19 @@ const Login = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <FaEyeSlash className="signup_input_icons" />
+                      {showPassword ? (
+                        <FaEyeSlash
+                          className="signup_input_icons"
+                          onClick={handleClickShowPassword}
+                          style={{ cursor: "pointer" }}
+                        />
+                      ) : (
+                        <IoMdEye
+                          className="signup_input_icons"
+                          onClick={handleClickShowPassword}
+                          style={{ cursor: "pointer" }}
+                        />
+                      )}
                     </div>
                     <div>
                       <Link
@@ -148,6 +186,7 @@ const Login = () => {
                   />
                 </div>
                 {/* Google Login */}
+                {/* <div className="signup_google_div " onClick={handleGoogleLogin}> */}
                 <div className="signup_google_div ">
                   <FcGoogle className="signup_google_icon" />
                 </div>

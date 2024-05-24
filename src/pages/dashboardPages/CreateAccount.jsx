@@ -81,7 +81,7 @@ const CreateAccount = () => {
         {/* User Account Information */}
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountOwner">Account Owner</label>
+            <label htmlFor="accountOwner">Account Owner <span className="required_sign">*</span></label>
             <input
               type="text"
               id="accountOwner"
@@ -99,7 +99,7 @@ const CreateAccount = () => {
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountName">Account Name</label>
+            <label htmlFor="accountName">Account Name <span className="required_sign">*</span></label>
             <input
               type="text"
               id="accountName"
@@ -117,7 +117,7 @@ const CreateAccount = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountSite">Account Site</label>
+            <label htmlFor="accountSite">Account Site <span className="required_sign">*</span></label>
             <input
               type="text"
               id="accountSite"
@@ -135,7 +135,7 @@ const CreateAccount = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="parentAccount">Parent Account</label>
+            <label htmlFor="parentAccount">Parent Account <span className="required_sign">*</span></label>
             <input
               type="text"
               id="parentAccount"
@@ -153,7 +153,7 @@ const CreateAccount = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountNumber">Account Number</label>
+            <label htmlFor="accountNumber">Account Number <span className="required_sign">*</span></label>
             <input
               type="tel"
               id="accountNumber"
@@ -171,7 +171,7 @@ const CreateAccount = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="aadharNumber">Aadhar Number</label>
+            <label htmlFor="aadharNumber">Aadhar Number <span className="required_sign">*</span></label>
             <input
               type="tel"
               id="aadharNumber"
@@ -189,7 +189,7 @@ const CreateAccount = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="panCardNumber">Pan Card Number</label>
+            <label htmlFor="panCardNumber">Pan Card Number <span className="required_sign">*</span></label>
             <input
               type="text"
               id="panCardNumber"
@@ -207,7 +207,7 @@ const CreateAccount = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountType">Account Type</label>
+            <label htmlFor="accountType">Account Type <span className="required_sign">*</span></label>
             <select
               id="accountType"
               className="form-control"
@@ -231,7 +231,7 @@ const CreateAccount = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="industry">Industry</label>
+            <label htmlFor="industry">Industry <span className="required_sign">*</span></label>
             <select
               id="industry"
               className="form-control"
@@ -256,7 +256,7 @@ const CreateAccount = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="annualRevenue">Annual Revenue</label>
+            <label htmlFor="annualRevenue">Annual Revenue <span className="required_sign">*</span></label>
             <input
               type="tel"
               id="annualRevenue"
@@ -274,7 +274,7 @@ const CreateAccount = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="address">Address <span className="required_sign">*</span></label>
             <input
               type="text"
               id="address"
@@ -296,7 +296,7 @@ const CreateAccount = () => {
             Billing Information
           </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="billingAddress">Billing Address</label>
+            <label htmlFor="billingAddress">Billing Address <span className="required_sign">*</span></label>
             <input
               type="text"
               id="billingAddress"
@@ -314,7 +314,7 @@ const CreateAccount = () => {
             <BsCurrencyRupee className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="billingCity">Billing City</label>
+            <label htmlFor="billingCity">Billing City <span className="required_sign">*</span></label>
             <input
               type="text"
               id="billingCity"
@@ -332,7 +332,7 @@ const CreateAccount = () => {
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="billingState">Billing State</label>
+            <label htmlFor="billingState">Billing State <span className="required_sign">*</span></label>
             <input
               type="text"
               id="billingState"
@@ -350,7 +350,7 @@ const CreateAccount = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="billingCode">Billing Code</label>
+            <label htmlFor="billingCode">Billing Code <span className="required_sign">*</span></label>
             <input
               type="tel"
               id="billingCode"
@@ -371,10 +371,10 @@ const CreateAccount = () => {
         {/* Shipping Information */}
         <div className="row">
           <p className="create_lead_section2_company_info">
-            Shipping Information
+            Shipping Information 
           </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="shippingStreet">Shipping Street</label>
+            <label htmlFor="shippingStreet">Shipping Street <span className="required_sign">*</span></label>
             <input
               type="text"
               id="shippingStreet"
@@ -392,7 +392,7 @@ const CreateAccount = () => {
             <BsCurrencyRupee className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="shippingCity">Shipping City</label>
+            <label htmlFor="shippingCity">Shipping City <span className="required_sign">*</span></label>
             <input
               type="text"
               id="shippingCity"
@@ -410,7 +410,7 @@ const CreateAccount = () => {
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="shippingState">Shipping State</label>
+            <label htmlFor="shippingState">Shipping State <span className="required_sign">*</span></label>
             <input
               type="text"
               id="shippingState"
@@ -428,7 +428,7 @@ const CreateAccount = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="shippingCode">Shipping Code</label>
+            <label htmlFor="shippingCode">Shipping Code <span className="required_sign">*</span></label>
             <input
               type="tel"
               id="shippingCode"
@@ -446,7 +446,7 @@ const CreateAccount = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="shippingAddress">Shpping Address</label>
+            <label htmlFor="shippingAddress">Shpping Address <span className="required_sign">*</span></label>
             <input
               type="text"
               id="shippingAddress"
@@ -468,7 +468,7 @@ const CreateAccount = () => {
         <div className="row">
           <p className="create_lead_section2_company_info">Deal Information</p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="dateOfIssue">Date Of Issue</label>
+            <label htmlFor="dateOfIssue">Date Of Issue <span className="required_sign">*</span></label>
             <input
               type="date"
               id="dateOfIssue"
@@ -486,7 +486,7 @@ const CreateAccount = () => {
             {/* <BsCurrencyRupee className="create_lead_input_icon" /> */}
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="dateOfBilling">Date Of Billing</label>
+            <label htmlFor="dateOfBilling">Date Of Billing <span className="required_sign">*</span></label>
             <input
               type="date"
               id="dateOfBilling"
@@ -504,7 +504,7 @@ const CreateAccount = () => {
             {/* <BsCurrencyRupee className="create_lead_input_icon" /> */}
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="dateOfShipment">Date Of Shipment</label>
+            <label htmlFor="dateOfShipment">Date Of Shipment <span className="required_sign">*</span></label>
             <input
               type="date"
               id="dateOfShipment"

@@ -24,7 +24,6 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const logCallId = JSON.parse(localStorage.getItem("logCallId"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   // Form Handle & Validations
   const formik = useFormik({
@@ -44,21 +43,14 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
     onSubmit: async (values, { resetForm }) => {
       try {
         console.log("-----", values);
-        const updateSuccessfully = await updateLogCall(
-          logCallId,
-          values,
-          setShowToast,
-          tokenId
-        );
+        updateLogCall(logCallId, values, setShowToast, tokenId);
         onUpdateSuccess();
-        if (updateSuccessfully) {
-          resetForm();
-        }
       } catch (error) {
         console.log("Did Not Update ", error);
       }
     },
   });
+  // Update Form Already Filled
   useEffect(() => {
     if (defaultValue) {
       formik.setValues({

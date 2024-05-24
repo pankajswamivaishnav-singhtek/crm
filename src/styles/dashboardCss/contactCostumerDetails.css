@@ -6,3 +6,7 @@
   text-align: left;
   color: rgba(128, 128, 128, 1);
 }
+
+.mannual-table-responsive {
+  width: 100%;
+}

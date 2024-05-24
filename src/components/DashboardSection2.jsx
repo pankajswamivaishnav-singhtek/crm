@@ -28,13 +28,13 @@ const DashboardSection2 = () => {
       }
     })();
   }, [uid, tokenId]);
-  const getDataArray = () => {
-    if (!pipelineDealsData || !Array.isArray(pipelineDealsData)) {
-      return [0, 0, 0, 0, 0, 0, 0];
-    }
-    return pipelineDealsData.map((deal) => deal.dealCount);
-  };
-  
+  // const getDataArray = () => {
+  //   if (!pipelineDealsData || !Array.isArray(pipelineDealsData)) {
+  //     return [0, 0, 0, 0, 0, 0, 0];
+  //   }
+  //   return pipelineDealsData.map((deal) => deal.dealCount);
+  // };
+
   return (
     <div className="row dashboard_row1">
       <div className="col-xl-8 col-md-8">
@@ -51,7 +51,8 @@ const DashboardSection2 = () => {
         <div className="dashboard_section2_chart_mainDiv">
           <div className="dashboard_section2_chart_div">
             <DonutChart
-              data={getDataArray()}
+              // data={getDataArray()}
+              data={pipelineDealsData}
               labels={[
                 "Need Analysis",
                 "Value",

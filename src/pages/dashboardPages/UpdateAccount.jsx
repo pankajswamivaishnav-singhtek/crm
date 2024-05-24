@@ -64,21 +64,19 @@ const UpdateAccount = ({
     onSubmit: async (values, { resetForm }) => {
       console.log("Value", values);
       try {
-        const updateSuccessFully = await updateSingleAccount(
+        await updateSingleAccount(
           values,
           accountId,
           setShowToast,
           tokenId
         );
         onUpdateSuccess();
-        if (updateSuccessFully) {
-          resetForm();
-        }
       } catch (error) {
         console.log("Did Not Create Account", error);
       }
     },
   });
+  // Update Form Automatic Filled
   useEffect(() => {
     if (defaultValue) {
       formik.setValues({

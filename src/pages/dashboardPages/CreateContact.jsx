@@ -53,12 +53,15 @@ const CreateContact = () => {
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
+        {/* Company Information */}
         <div className="row">
           <p className="create_lead_section2_company_info mt-3">
             Company Details
           </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyName">Company Name</label>
+            <label htmlFor="companyName">
+              Company Name <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="companyName"
@@ -76,7 +79,9 @@ const CreateContact = () => {
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyEmail">Company Email</label>
+            <label htmlFor="companyEmail">
+              Company Email <span className="required_sign">*</span>
+            </label>
             <input
               type="email"
               id="companyEmail"
@@ -94,7 +99,9 @@ const CreateContact = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyContact">Company Contact</label>
+            <label htmlFor="companyContact">
+              Company Contact <span className="required_sign">*</span>
+            </label>
             <input
               type="tel"
               id="companyContact"
@@ -112,7 +119,9 @@ const CreateContact = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="city">Address</label>
+            <label htmlFor="city">
+              Address <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="address"
@@ -161,7 +170,7 @@ const CreateContact = () => {
         </div>
       </form>
       {/* Toast */}
-      {showToast && (
+      {showToast.message && (
         <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
           <div
             className="toast show create_lead_toast"

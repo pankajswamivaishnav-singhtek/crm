@@ -32,7 +32,7 @@
 
 input[type="text"] {
   /* width: calc(100% - 30px); */
-  padding: 8px;
+  /* padding: 8px; */
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -233,7 +233,7 @@ input[type="text"] {
   font-family: Roboto;
   font-size: 17px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 29px;
   text-align: center;
   color: rgba(115, 129, 130, 1);
 }
@@ -245,6 +245,9 @@ input[type="text"] {
 }
 
 @media screen and (max-width: 768px) {
+  .dashboard_leads_pagination_pageItem a {
+    line-height: 20px;
+  }
   .dashboard_leads_main_container {
     height: auto;
   }
@@ -255,7 +258,7 @@ input[type="text"] {
     width: auto;
   }
   .dashboard_leads_pagination_pageItem a {
-    font-size: 10px;
+    font-size: 8px;
     line-height: auto;
   }
 }

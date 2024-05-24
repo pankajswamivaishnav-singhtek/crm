@@ -56,7 +56,7 @@ export const otpVerificationSchema = Yup.object().shape({
     .matches(/^[0-9]{1}$/, "Digit 4 must be a single digit"),
 });
 
-// Register Schema Vallidation
+// Create Lead Schema Vallidation
 export const registerSchema = Yup.object({
   leadOwner: Yup.string().required("Lead Owner is required"),
   firstName: Yup.string().required("First Name is required"),

@@ -4,6 +4,7 @@ import "../../styles/dashboardCss/meetingDetails.css";
 import { getSingleMeeting } from "../../controller/fetchApi";
 const MeetingsViewDetails = () => {
   const [getSingleMeetingData, setSingleMeetingData] = useState([]);
+  // Get Token Id and Meet ID
   const meetId = JSON.parse(localStorage.getItem("meetId"));
   const userTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userTokenData?.data?.token;
@@ -15,6 +16,7 @@ const MeetingsViewDetails = () => {
   console.log("Get single meeting data", getSingleMeetingData);
   return (
     <div className="account_view_details_Row">
+      {/* Meeting Information */}
       <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
         Meetings Information
       </h3>
@@ -82,7 +84,9 @@ const MeetingsViewDetails = () => {
                     >
                       Date
                     </th>
-                    <td className="lead_view_details_table_td">{getSingleMeetingData?.date}</td>
+                    <td className="lead_view_details_table_td">
+                      {getSingleMeetingData?.date}
+                    </td>
                   </tr>
                 </tbody>
               </table>

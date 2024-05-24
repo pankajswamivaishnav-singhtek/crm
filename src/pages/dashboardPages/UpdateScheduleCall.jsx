@@ -12,7 +12,7 @@ import { updateScheduleCall } from "../../controller/fetchApi";
 // Get TokenId and Uid
 const userIdTokenData = JSON.parse(localStorage.getItem("user"));
 const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
-const uid = userIdTokenData?.data?.userId;
+
 const tokenId = userIdTokenData?.data?.token;
 
 const UpdateScheduleCall = ({
@@ -20,7 +20,7 @@ const UpdateScheduleCall = ({
   defaultValue,
   onUpdateSuccess,
 }) => {
-  // Toast
+  // Toast Manage State
   const [showToast, setShowToast] = useState(false);
   const hideToast = () => {
     setTimeout(() => {
@@ -49,16 +49,8 @@ const UpdateScheduleCall = ({
     onSubmit: async (values, { resetForm }) => {
       try {
         console.log("-----", values);
-        const updateSuccessfully = await updateScheduleCall(
-          scheduleCallId,
-          values,
-          setShowToast,
-          tokenId
-        );
+        await updateScheduleCall(scheduleCallId, values, setShowToast, tokenId);
         onUpdateSuccess();
-        if (updateSuccessfully) {
-          resetForm();
-        }
       } catch (error) {
         console.log("Did Not Create Account", error);
       }

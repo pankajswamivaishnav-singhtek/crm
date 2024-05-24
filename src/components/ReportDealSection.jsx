@@ -1,28 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // Shared
 import ReportLineChart2 from "./shared/ReportLineChart2";
-const ReportDealSection = () => {
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+const ReportDealSection = ({ getDealsDoneData, setDealBy }) => {
+  const [selectedValue, setSelectedValue] = useState("month");
+  setDealBy(selectedValue);
+  const handleItemClick = (value) => {
+    setDealBy(value);
+    setSelectedValue(value);
+  };
+
+  // const labels = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  // ];
+  const labels =
+    selectedValue === "year"
+      ? [2024, 2025, 2026, 2027, 2028, 2029, 2030]
+      : [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+  // const data = {
+  //   labels: labels,
+  //   datasets: [
+  //     {
+  //       label: "My First Dataset",
+  //       data: [65, 59, 80, 81, 56, 55, 40],
+  //       fill: false,
+  //       borderColor: "rgba(98, 114, 255, 1)",
+  //       tension: 0.1,
+  //     },
+  //   ],
+  // };
   const data = {
     labels: labels,
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: "rgba(98, 114, 255, 1)",
-        tension: 0.1,
-      },
-    ],
+    datasets:
+      selectedValue === "year"
+        ? [
+            {
+              label: "Total Deals",
+              data: [2024, 2025, 2026, 2027, 2028, 2029, 2030]?.map(
+                (year) => getDealsDoneData?.[year] || 0
+              ),
+              fill: false,
+              borderColor: "rgba(98, 114, 255, 1)",
+              tension: 0.1,
+            },
+          ]
+        : // If "Month" is selected, prepare dataset for months
+          [
+            {
+              label: "Total Deals",
+              data: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ].map((month) => getDealsDoneData?.[month] || 0),
+              fill: false,
+              borderColor: "rgba(98, 114, 255, 1)",
+              tension: 0.1,
+            },
+          ],
   };
   return (
     <div className="col-xl-6">
@@ -44,6 +107,7 @@ const ReportDealSection = () => {
             <Link
               className="dropdown-item report_lead_genrated_first_table_dropdown_item"
               href="#!"
+              onClick={() => handleItemClick("month")}
             >
               Month
             </Link>
@@ -52,6 +116,7 @@ const ReportDealSection = () => {
             <Link
               className="dropdown-item report_lead_genrated_first_table_dropdown_item"
               href="#!"
+              onClick={() => handleItemClick("year")}
             >
               Year
             </Link>

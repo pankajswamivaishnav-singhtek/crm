@@ -14,6 +14,7 @@ import { registerSchema } from "../schema/FormValidation";
 // Controller Api Methods
 import { createLead } from "../controller/fetchApi";
 const CreateLeadForm = () => {
+  // Get TokenId And User Id
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
@@ -77,7 +78,9 @@ const CreateLeadForm = () => {
         {/* User Information */}
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="leadOwner">Lead Owner</label>
+            <label htmlFor="leadOwner">
+              Lead Owner <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="leadOwner"
@@ -93,7 +96,9 @@ const CreateLeadForm = () => {
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="firstName">
+              First Name <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="firstName"
@@ -109,7 +114,9 @@ const CreateLeadForm = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="lastName">Last Name</label>
+            <label htmlFor="lastName">
+              Last Name <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="lastName"
@@ -125,7 +132,9 @@ const CreateLeadForm = () => {
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              Email <span className="required_sign">*</span>
+            </label>
             <input
               type="email"
               id="email"
@@ -139,7 +148,9 @@ const CreateLeadForm = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="mobileNumber">Phone Number</label>
+            <label htmlFor="mobileNumber">
+              Phone Number <span className="required_sign">*</span>
+            </label>
             <input
               type="tel"
               id="mobileNumber"
@@ -177,7 +188,9 @@ const CreateLeadForm = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="leadSource">Lead Source</label>
+            <label htmlFor="leadSource">
+              Lead Source <span className="required_sign">*</span>
+            </label>
             <select
               id="leadSource"
               className="form-control"
@@ -188,7 +201,7 @@ const CreateLeadForm = () => {
             >
               <option value="">
                 {touched.leadSource && errors.leadSource ? (
-                  <p className="text-danger">{errors.leadSource}</p>
+                  <span style={{ color: "red" }}>{errors.leadSource}</span>
                 ) : (
                   "Select Lead Source"
                 )}
@@ -203,7 +216,9 @@ const CreateLeadForm = () => {
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="leadStatus">Lead Status</label>
+            <label htmlFor="leadStatus">
+              Lead Status <span className="required_sign">*</span>
+            </label>
             <select
               id="leadStatus"
               className="form-control"
@@ -232,7 +247,9 @@ const CreateLeadForm = () => {
         <div className="row">
           <p className="create_lead_section2_company_info">Company Details</p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="annualRevenue">Annual Revenue</label>
+            <label htmlFor="annualRevenue">
+              Annual Revenue <span className="required_sign">*</span>
+            </label>
             <input
               type="tel"
               id="annualRevenue"
@@ -250,7 +267,9 @@ const CreateLeadForm = () => {
             <BsCurrencyRupee className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyName">Company Name</label>
+            <label htmlFor="companyName">
+              Company Name <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="companyName"
@@ -268,7 +287,9 @@ const CreateLeadForm = () => {
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyEmail">Company Email</label>
+            <label htmlFor="companyEmail">
+              Company Email <span className="required_sign">*</span>
+            </label>
             <input
               type="email"
               id="companyEmail"
@@ -304,7 +325,7 @@ const CreateLeadForm = () => {
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="secondaryContact">Secondary Contact</label>
+            <label htmlFor="secondaryContact">Secondary Contact </label>
             <input
               type="tel"
               id="secondaryContact"
@@ -322,7 +343,9 @@ const CreateLeadForm = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="city">city</label>
+            <label htmlFor="city">
+              city <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="city"
@@ -336,7 +359,9 @@ const CreateLeadForm = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="district">District</label>
+            <label htmlFor="district">
+              District <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="district"
@@ -352,7 +377,9 @@ const CreateLeadForm = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="state">State</label>
+            <label htmlFor="state">
+              State <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="state"
@@ -366,7 +393,9 @@ const CreateLeadForm = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="country">Country</label>
+            <label htmlFor="country">
+              Country <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="country"

@@ -57,23 +57,21 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
 
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await updateMeeting(
+         await updateMeeting(
           meetId,
           values,
           setShowToast,
           tokenId
         );
         onUpdateSuccess();
-        if (response) {
-          resetForm();
-        }
+     
         resetForm();
       } catch (error) {
         console.log("Found Error", error);
       }
     },
   });
-
+  //  Updated Form Already Filled
   useEffect(() => {
     if (defaultValue) {
       formik.setValues({

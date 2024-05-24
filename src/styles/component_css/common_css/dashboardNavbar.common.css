@@ -100,6 +100,12 @@
 .navbar_dropdown_icon {
   color: rgba(88, 105, 255, 1);
 }
+.navbar-right-menu-mannual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /* Sidebar Toggler */
 .sidebar_toggle_icon {

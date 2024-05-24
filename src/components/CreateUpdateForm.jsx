@@ -59,7 +59,6 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
         await updateSingleLead(values, leadCostumerId, setShowToast, tokenId);
         if (updateSingleLead) {
           getLeadsData();
-          resetForm();
         }
       } catch (error) {
         console.log("Found Error", error);

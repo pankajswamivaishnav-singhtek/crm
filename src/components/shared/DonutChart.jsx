@@ -3,9 +3,7 @@ import Chart from "chart.js/auto";
 
 const DonutChart = ({ data, labels }) => {
   let donutDataArray = new Array(8).fill(0);
-  for (let i = 0; i < data.length; i++) {
-    donutDataArray[i] = data[i];
-  }
+
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
   useEffect(() => {
@@ -22,13 +20,13 @@ const DonutChart = ({ data, labels }) => {
           {
             label: "Data",
             data: [
-              donutDataArray[2],
-              donutDataArray[3], //Lost to compition
-              donutDataArray[4], // IdentityFy Descision Maker
-              donutDataArray[1], //Proposal
-              donutDataArray[6], //need Analysis
-              donutDataArray[0], //Purposoal Data
-              donutDataArray[5], //Won Data
+              data?.["need-analysis"] || 0, //need Analysis
+              data?.["value-proposition"], //Value Proposition 
+              data?.["identify-decision-maker"] || 0, // IdentityFy Descision Maker
+              data?.["proposal"] || 0, //Proposal
+              data?.["negotitation"] || 0,
+              data?.["won"] || 0,
+              data?.["lost"] || 0,
             ],
             backgroundColor: [
               "rgba(222, 83, 250, 0.644)", //need analysis
@@ -60,7 +58,7 @@ const DonutChart = ({ data, labels }) => {
         },
       },
     });
-  }, [donutDataArray, labels]);
+  }, [donutDataArray, labels, data]);
 
   return <canvas ref={chartRef} id="donutChart" />;
 };

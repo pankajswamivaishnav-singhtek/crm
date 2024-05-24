@@ -1,19 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // Shared
 import ReportCallPieChart from "./shared/ReportCallPieChart";
-const ReportCallsSecondSection = () => {
+const ReportCallsSecondSection = ({ getCallsDoneData, setCallBy }) => {
+  const [selectedValue, setSelectedValue] = useState("month");
+  console.log("year and month", selectedValue);
+  setCallBy(selectedValue);
+  const handleItemClick = (value) => {
+    setSelectedValue(value);
+  };
+
   const data = {
-    labels: ["Related TO", "Call To", "Call Purpose", "Reminder"],
+    labels: [
+      "Not Interested",
+      "Request More info",
+      "Interested",
+      "Invalid Number",
+      "No Response",
+      "Request Call back",
+    ],
     datasets: [
       {
         label: "My Call Data",
-        data: [200, 90, 160, 150],
+        data:
+          selectedValue === "year"
+            ? [
+                getCallsDoneData?.["not-interested"] || 0,
+                getCallsDoneData?.["requested-info"] || 0,
+                getCallsDoneData?.["interested"] || 0,
+                getCallsDoneData?.["invalid-number"] || 0,
+                getCallsDoneData?.["no-response"] || 0,
+                getCallsDoneData?.["requested-call-back"] || 0,
+              ]
+            : [
+                getCallsDoneData?.["not-interested"] || 0,
+                getCallsDoneData?.["requested-info"] || 0,
+                getCallsDoneData?.["interested"] || 0,
+                getCallsDoneData?.["invalid-number"] || 0,
+                getCallsDoneData?.["no-response"] || 0,
+                getCallsDoneData?.["requested-call-back"] || 0,
+              ],
         backgroundColor: [
           "rgba(255, 112, 6, 1)",
           "rgba(97, 113, 255, 1)",
           "rgba(43, 211, 106, 1)",
           "rgba(105, 194, 229, 1)",
+          "rgba(105, 194, 200, 1)",
+          "rgba(105, 194, 145, 1)",
         ],
         hoverOffset: 4,
         borderWidth: 5,
@@ -33,13 +66,14 @@ const ReportCallsSecondSection = () => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Calls Data
+          Deals Data
         </Link>
         <ul className="dropdown-menu report_lead_genrated_first_table_dropdown">
           <li>
             <Link
               className="dropdown-item report_lead_genrated_first_table_dropdown_item"
               href="#!"
+              onClick={() => handleItemClick("month")}
             >
               Month
             </Link>
@@ -48,6 +82,7 @@ const ReportCallsSecondSection = () => {
             <Link
               className="dropdown-item report_lead_genrated_first_table_dropdown_item"
               href="#!"
+              onClick={() => handleItemClick("year")}
             >
               Year
             </Link>

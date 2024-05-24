@@ -40,7 +40,6 @@ const CallLogs = () => {
   // Get Uid and Tokenid Who Saved In Cookie
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const logCallId = JSON.parse(localStorage.getItem("logCallId"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   //  Get All Schedule Call Data
   const getLogCallData = useCallback(async () => {
@@ -51,7 +50,7 @@ const CallLogs = () => {
       console.log(error);
     }
   }, [tokenId, pageNo, setAllLogCallData]);
-  // Handle Delete Account Api
+  // Handle Delete Log Call Api
   const handleDeleteLogCall = async (logCallCostumerId) => {
     try {
       await deleteLogCall(logCallCostumerId, setShowToast, tokenId);
@@ -90,8 +89,8 @@ const CallLogs = () => {
       }
     }
   };
-  // Update ScheDule Call Start--------
-  const [defaultValue, setDefaultValue] = useState([]); // Get Single Deal Data Which Fullfill Field Value
+  // Update Log Call Start--------
+  const [defaultValue, setDefaultValue] = useState([]); // Get Single Log Call Data Which Fullfill Field Value
   const handleUpdateLogCall = async () => {
     try {
       const singLogCallResult = await getSingleLogCall(logCallId, tokenId);
@@ -112,10 +111,37 @@ const CallLogs = () => {
       console.log("Error fetching updated data", error);
     }
   };
-  // Handle Next Page
+  // Pagination Function ------
+  const [pageRangeStart, setPageRangeStart] = useState(0);
+  const totalPages = getAllLogCallData?.totalPages || 6;
+  const pagesToShow = 6;
   const handleNextPageClick = () => {
-    setPageNo(pageNo + 1); // Increment page number
+    const newPageNo = pageNo + 1;
+    if (newPageNo < totalPages) {
+      setPageNo(newPageNo);
+      if (newPageNo >= pageRangeStart + pagesToShow) {
+        setPageRangeStart(pageRangeStart + pagesToShow);
+      }
+    }
   };
+  const handlePreviousPageClick = () => {
+    const newPageNo = pageNo - 1;
+    if (newPageNo >= 0) {
+      setPageNo(newPageNo);
+      if (newPageNo < pageRangeStart) {
+        setPageRangeStart(pageRangeStart - pagesToShow);
+      }
+    }
+  };
+  const handlePageClick = (index) => {
+    setPageNo(index);
+    if (index >= pageRangeStart + pagesToShow) {
+      setPageRangeStart(pageRangeStart + pagesToShow);
+    } else if (index < pageRangeStart) {
+      setPageRangeStart(pageRangeStart - pagesToShow);
+    }
+  };
+
   useEffect(() => {
     getLogCallData();
   }, [getLogCallData]);
@@ -243,32 +269,38 @@ const CallLogs = () => {
                 <a
                   className="page-link"
                   href="#!"
-                  onClick={() =>
-                    setPageNo((prevPage) => Math.max(prevPage - 1, 0))
-                  }
+                  onClick={handlePreviousPageClick}
                 >
                   <IoIosArrowBack />
                 </a>
               </li>
 
               {/* Render page numbers */}
-              {Array.from({ length: 6 }, (_, index) => (
-                <li
-                  key={index}
-                  className={`page-item ${
-                    index === pageNo ? "active" : ""
-                  } dashboard_leads_pagination_pageItem`}
-                >
-                  <a
-                    className="page-link"
-                    href="#!"
-                    onClick={() => setPageNo(index)}
-                  >
-                    {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                  </a>
-                </li>
-              ))}
+              {Array.from({ length: pagesToShow }, (_, index) => {
+                const pageIndex = pageRangeStart + index;
+                return (
+                  pageIndex < totalPages && (
+                    <li
+                      key={pageIndex}
+                      className={`page-item ${
+                        pageIndex === pageNo ? "active" : ""
+                      } dashboard_leads_pagination_pageItem`}
+                    >
+                      <a
+                        className="page-link"
+                        href="#!"
+                        onClick={() => handlePageClick(pageIndex)}
+                      >
+                        {pageIndex + 1 < 10
+                          ? `0${pageIndex + 1}`
+                          : pageIndex + 1}
+                      </a>
+                    </li>
+                  )
+                );
+              })}
 
+              {/* Next page button */}
               <li className="page-item dashboard_leads_pagination_pageItem">
                 <a
                   className="page-link"
