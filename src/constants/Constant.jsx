@@ -33,6 +33,7 @@ export const CREATE_CONTACT_URL = `${BASE_URL}/contact/saveContact`;
 export const GET_ALL_CONTACT_URL = `${BASE_URL}/contact/getAllContact?page=`;
 export const DELETE_CONTACT_URL = `${BASE_URL}/contact/deleteMultipleByContactId?contactId=`;
 export const GET_CONTACTS_URL = `${BASE_URL}/contact/getContacts`;
+export const GET_SINGLE_CONTACT_URL = `${BASE_URL}/contact/getContactByContactId?contactId=`;
 export const DOWNLOAD_CONTACT_URL = `${BASE_URL}/contact/downloadContacts?userId=`;
 // Account Configuration Url
 export const CREATE_ACCOUNTS_URL = `${BASE_URL}/account/createAccount`;
@@ -84,3 +85,4 @@ export const UPDATE_LOG_CALL_URL = `${BASE_URL}/callLog/updateCallLog?callLogId=
 export const GET_GENRATED_LEADS_URL = `${BASE_URL}/report/getLeadReport?leadBy=`;
 export const GET_DEALS_DONE_URL = `${BASE_URL}/report/getDealsReport?dealsBy=`;
 export const GET_DONE_CALLS_URL = `${BASE_URL}/report/getCallReport?callsBy=`;
+

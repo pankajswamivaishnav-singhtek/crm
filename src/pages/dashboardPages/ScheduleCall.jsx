@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { FaUserTie } from "react-icons/fa";
@@ -45,20 +45,25 @@ const ScheduleCall = () => {
       onSubmit: async (values, { resetForm }) => {
         try {
           console.log("-----", values);
-          const createSuccessfully = await createScheduleCall(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createSuccessfully) {
-            resetForm();
-          }
+          await createScheduleCall(uid, values, setShowToast, tokenId);
+          resetForm();
         } catch (error) {
           console.log("Did Not Create Account", error);
         }
       },
     });
+
+  // Set Current Date and Time
+  const [currentDateTime, setCurrentDateTime] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, "0");
+    const hh = String(today.getHours()).padStart(2, "0");
+    setCurrentDateTime(`${yyyy}-${mm}-${dd}T${hh}:00`);
+  }, []);
+
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -78,15 +83,19 @@ const ScheduleCall = () => {
               name="callTo"
             >
               <option value="">
-                {touched.callTo && errors.callTo ? (
+                {/* {touched.callTo && errors.callTo ? (
                   <p className="text-danger">{errors.callTo}</p>
                 ) : (
                   "Select call to "
-                )}
+                )} */}
+                Select call to
               </option>
               <option value="lead">Lead</option>
               <option value="contact">Contact</option>
             </select>
+            {touched.callTo && errors.callTo && (
+              <small className="errorMessage">{errors.callTo}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -102,11 +111,12 @@ const ScheduleCall = () => {
               name="relatedTo"
             >
               <option value="">
-                {touched.relatedTo && errors.relatedTo ? (
+                {/* {touched.relatedTo && errors.relatedTo ? (
                   <p className="text-danger">{errors.relatedTo}</p>
                 ) : (
                   "Related to "
-                )}
+                )} */}
+                Related to
               </option>
               <option value="account">Account</option>
               <option value="deal">Deal</option>
@@ -119,6 +129,9 @@ const ScheduleCall = () => {
               <option value="vendor">Vendor</option>
               <option value="case">Case</option>
             </select>
+            {touched.relatedTo && errors.relatedTo && (
+              <small className="errorMessage">{errors.relatedTo}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -134,16 +147,20 @@ const ScheduleCall = () => {
               name="callType"
             >
               <option value="">
-                {touched.callType && errors.callType ? (
+                {/* {touched.callType && errors.callType ? (
                   <p className="text-danger">{errors.callType}</p>
                 ) : (
                   "Call type "
-                )}
+                )} */}
+                Call type
               </option>
               <option value="outbound">outbound</option>
               <option value="inbound">inbound</option>
               <option value="missed">missed</option>
             </select>
+            {touched.callType && errors.callType && (
+              <small className="errorMessage">{errors.callType}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -158,12 +175,11 @@ const ScheduleCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="callStatus"
-              placeholder={
-                touched.callStatus && errors.callStatus
-                  ? errors.callStatus
-                  : null
-              }
+              placeholder="Enter call status"
             />
+            {touched.callStatus && errors.callStatus && (
+              <small className="errorMessage">{errors.callStatus}</small>
+            )}
             <HiOutlinePhoneOutgoing className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -173,17 +189,16 @@ const ScheduleCall = () => {
             <input
               type="datetime-local"
               id="callStartTime"
+              min={currentDateTime}
               className="form-control create_lead_form_input"
               value={values.callStartTime}
               onChange={handleChange}
               onBlur={handleBlur}
               name="callStartTime"
-              placeholder={
-                touched.callStartTime && errors.callStartTime
-                  ? errors.callStartTime
-                  : null
-              }
             />
+            {touched.callStartTime && errors.callStartTime && (
+              <small className="errorMessage">{errors.callStartTime}</small>
+            )}
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callOwner">
@@ -197,10 +212,11 @@ const ScheduleCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="callOwner"
-              placeholder={
-                touched.callOwner && errors.callOwner ? errors.callOwner : null
-              }
+              placeholder="Enter call owner name"
             />
+            {touched.callOwner && errors.callOwner && (
+              <small className="errorMessage">{errors.callOwner}</small>
+            )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -215,10 +231,11 @@ const ScheduleCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="subject"
-              placeholder={
-                touched.subject && errors.subject ? errors.subject : null
-              }
+              placeholder="Enter subject"
             />
+            {touched.subject && errors.subject && (
+              <small className="errorMessage">{errors.subject}</small>
+            )}
             <MdOutlineBook className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -234,17 +251,21 @@ const ScheduleCall = () => {
               name="reminder"
             >
               <option value="">
-                {touched.reminder && errors.reminder ? (
+                {/* {touched.reminder && errors.reminder ? (
                   <p className="text-danger">{errors.reminder}</p>
                 ) : (
                   "None"
-                )}
+                )} */}
+                None
               </option>
               <option value="5">5 Minute Before</option>
               <option value="10">10 Minute Before</option>
               <option value="15">15 Minute Before</option>
               <option value="30">30 Minute Before</option>
             </select>
+            {touched.reminder && errors.reminder && (
+              <small className="errorMessage">{errors.reminder}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
         </div>
@@ -266,11 +287,12 @@ const ScheduleCall = () => {
               name="callPurpose"
             >
               <option value="">
-                {touched.callPurpose && errors.callPurpose ? (
+                {/* {touched.callPurpose && errors.callPurpose ? (
                   <p className="text-danger">{errors.callPurpose}</p>
                 ) : (
                   "None"
-                )}
+                )} */}
+                None
               </option>
               <option value="prospecting">Prospecting</option>
               <option value="administrative">Administrative</option>
@@ -279,6 +301,9 @@ const ScheduleCall = () => {
               <option value="project">Project</option>
               <option value="desk">Desk</option>
             </select>
+            {touched.callPurpose && errors.callPurpose && (
+              <small className="errorMessage">{errors.callPurpose}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -293,12 +318,11 @@ const ScheduleCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="callAgenda"
-              placeholder={
-                touched.callAgenda && errors.callAgenda
-                  ? errors.callAgenda
-                  : null
-              }
+              placeholder="Enter call agenda "
             />
+            {touched.callAgenda && errors.callAgenda && (
+              <small className="errorMessage">{errors.callAgenda}</small>
+            )}
             <TfiAgenda className="create_lead_input_icon" />
           </div>
         </div>

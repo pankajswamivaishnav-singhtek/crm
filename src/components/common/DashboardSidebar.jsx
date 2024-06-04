@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/component_css/common_css/dashboardSidebar.common.css";
 // React Router Dom
 import { Link } from "react-router-dom";
@@ -18,13 +18,13 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 // Controller Api
 import { logoutUser } from "../../controller/fetchApi";
 // import { useAuth0 } from "@auth0/auth0-react";
+import { googleLogout } from "@react-oauth/google";
 const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
-  // const { logout } = useAuth0();
-  // const [show, setShow] = useState(false);
   // Logout User
   const logoutUserSubmit = async () => {
     try {
       // await logout({ logoutParams: { returnTo: window.location.origin } });
+      googleLogout();
       await logoutUser();
       localStorage.clear();
       window.location.href = "/login";
@@ -44,6 +44,32 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
       setIsSidebar(false);
     }
   };
+
+  // Get Expiry Time
+  useEffect(() => {
+    const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+    const expireTime = userIdTokenData?.data?.tokenDetails?.exp * 1000;
+    if (expireTime) {
+      const currentTime = new Date().getTime();
+      const timeLeft = expireTime - currentTime;
+
+      if (timeLeft > 0) {
+        const timer = setTimeout(() => {
+          // Logout user and clear local storage
+          logoutUser();
+          // Redirect to login page
+          window.location.href = "/login";
+        }, timeLeft);
+
+        return () => clearTimeout(timer);
+      } else {
+        // Token has already expired, so logout immediately
+        logoutUser();
+        // Redirect to login page
+        window.location.href = "/login";
+      }
+    }
+  }, []);
 
   return (
     <>

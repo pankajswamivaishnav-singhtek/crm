@@ -50,6 +50,7 @@ const CreateMeeting = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
+    setFieldTouched,
   } = useFormik({
     initialValues: {
       host: "",
@@ -88,71 +89,112 @@ const CreateMeeting = () => {
       setFieldValue("participants", newParticipants);
     }
   };
-  console.log("getAllContact Data", getAllContactData);
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setFieldTouched(name, true);
+  };
+  // Set Current Date
+  const [currentDate, setCurrentDate] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, "0");
+    const hh = String(today.getHours()).padStart(2, "0");
+    const min = String(today.getMinutes()).padStart(2, "0");
+
+    setCurrentDate(`${yyyy}-${mm}-${dd}T${hh}:${min}`);
+  }, []);
+
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="host">Host <span className="required_sign">*</span></label>
+            <label htmlFor="host">
+              Host <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="host"
+              maxLength={50}
               className="form-control create_lead_form_input"
               value={values.host}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="host"
-              placeholder={touched.host && errors.host ? errors.host : null}
+              placeholder="Enter host name"
             />
+            {touched.host && errors.host && (
+              <small className="errorMessage">{errors.host}</small>
+            )}
             <FaChalkboardUser className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="title">Title <span className="required_sign">*</span></label>
+            <label htmlFor="title">
+              Title <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="title"
+              maxLength={50}
               className="form-control create_lead_form_input"
               value={values.title}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="title"
-              placeholder={touched.title && errors.title ? errors.title : null}
+              placeholder="Enter title name"
             />
+            {touched.title && errors.title && (
+              <small className="errorMessage">{errors.title}</small>
+            )}
             <MdOutlineSubtitles className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="address">Address <span className="required_sign">*</span></label>
+            <label htmlFor="address">
+              Address <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="address"
+              maxLength={150}
               className="form-control create_lead_form_input"
               value={values.address}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="address"
-              placeholder={
-                touched.address && errors.address ? errors.address : null
-              }
+              placeholder="Enter address"
             />
+            {touched.address && errors.address && (
+              <small className="errorMessage">{errors.address}</small>
+            )}
             <IoLocationOutline className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="date">
-              Date <span className="required_sign">*</span> &nbsp; 
+              Date & Time<span className="required_sign">*</span> &nbsp;
               {/* <small className="text-danger">
                 {touched.date && errors.date ? errors.date : null}
               </small> */}
             </label>
             <input
-              type="date"
+              type="datetime-local"
               id="date"
+              min={currentDate}
               className="form-control create_lead_form_input"
               value={values.date}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="date"
             />
+            {touched.date && errors.date && (
+              <small className="errorMessage">{errors.date}</small>
+            )}
           </div>
           {/* Participants dropdown */}
           <div className="form-group createLeadInput col-xl-4 create_meeting_mainDiv">
@@ -162,7 +204,8 @@ const CreateMeeting = () => {
               data-bs-target="#participantsCollapse"
               className="btn btn-primary text-white create_meeting_participant_btn"
             >
-              <MdAdd /> Add Participants <span className="required_sign">*</span>
+              <MdAdd /> Add Participants{" "}
+              <span className="required_sign">*</span>
             </label>
             <div
               id="participantsCollapse"
@@ -202,6 +245,7 @@ const CreateMeeting = () => {
               className="form-control create_lead_form_input"
               value={values.description}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="description"
               rows="3"

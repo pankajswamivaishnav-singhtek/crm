@@ -13,18 +13,22 @@ const Dashboard = () => {
   // User Id & Token ID
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
+
   //  Get Current User Data OR Api
   const getUser = useCallback(async () => {
     try {
       const res = await getCurrentUser(tokenId);
-      setCurrentUserData(res);
+      if (res) {
+        setCurrentUserData(res);
+      }
     } catch (error) {
       console.log(error);
     }
-  }, [tokenId, setCurrentUserData]);
+  }, [tokenId]);
   useEffect(() => {
     getUser();
   }, [getUser]);
+
   return (
     <div className="dashboard_main_container container-fluid">
       <div className="dashboard_username_div">

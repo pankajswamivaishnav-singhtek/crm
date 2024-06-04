@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
-import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 // Components
 import AccountTable from "../../components/AccountTable";
@@ -42,7 +41,7 @@ const Accounts = () => {
 
   // Pagination Function ------
   const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllAccount?.totalPages || 5;
+  const totalPages = getAllAccount?.totalPages || 1;
   const pagesToShow = 6;
   const handleNextPageClick = () => {
     const newPageNo = pageNo + 1;
@@ -170,12 +169,12 @@ const Accounts = () => {
                       Delete
                     </button>
                   </li>
-                  <li>
+                  {/* <li>
                     <button className="dropdown-item">
                       <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
                       Upload Accounts
                     </button>
-                  </li>
+                  </li> */}
                   <li>
                     <button
                       className="dropdown-item"
@@ -189,7 +188,7 @@ const Accounts = () => {
               </button>
             </div>
             <div className="dashboard_leads_create_btn_div">
-              <button>
+              <button className="btn-shiny2">
                 <Link
                   className="dashboard_leads_create_link"
                   to="/create-account"
@@ -212,6 +211,7 @@ const Accounts = () => {
               thirdHead: "Account Owner",
               fourthHead: "Annual Revenue",
               fifthHead: "Account Site",
+              sixthHead: "View",
             }}
             redirectLink="/account-details"
             getAllAccountData={getAllAccountData}

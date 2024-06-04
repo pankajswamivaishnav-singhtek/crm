@@ -10,7 +10,7 @@ import CreateLeadForm from "../../components/CreateLeadForm";
 const CreateLead = () => {
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
-      <div className="create_lead_user_img_div">
+      {/* <div className="create_lead_user_img_div">
         <div className="create_user_img">
           <img
             src="https://wac-cdn.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg?cdnVersion=1543"
@@ -38,7 +38,7 @@ const CreateLead = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Create Lead Form Component */}
       <div className="create_leads_form_div">
         <CreateLeadForm />

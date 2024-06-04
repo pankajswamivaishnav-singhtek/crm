@@ -30,53 +30,67 @@ const CreateLeadForm = () => {
     hideToast();
   }
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        leadOwner: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        mobileNumber: "",
-        secondaryMobileNumber: "",
-        leadSource: "",
-        leadStatus: "",
-        annualRevenue: "",
-        companyName: "",
-        companyEmail: "",
-        companyContact: "",
-        secondaryContact: "",
-        city: "",
-        district: "",
-        state: "",
-        country: "",
-        description: "",
-      },
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldTouched,
+  } = useFormik({
+    initialValues: {
+      leadOwner: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobileNumber: "",
+      secondaryMobileNumber: "",
+      leadSource: "",
+      leadStatus: "",
+      leadService: "",
+      annualRevenue: "",
+      companyName: "",
+      companyEmail: "",
+      companyContact: "",
+      secondaryContact: "",
+      city: "",
+      district: "",
+      state: "",
+      country: "",
+      description: "",
+    },
 
-      validationSchema: registerSchema,
-      onSubmit: async (values, { resetForm }) => {
-        console.log("-----", values);
-        try {
-          const registerSuccessFully = await createLead(
-            values,
-            uid,
-            setShowToast,
-            tokenId
-          );
+    validationSchema: registerSchema,
+    onSubmit: async (values, { resetForm }) => {
+      console.log("-----", values);
+      try {
+        const registerSuccessFully = await createLead(
+          values,
+          uid,
+          setShowToast,
+          tokenId
+        );
 
-          if (registerSuccessFully) {
-            resetForm();
-          }
-        } catch (error) {
-          console.log("Found Error", error);
+        if (registerSuccessFully) {
+          resetForm();
         }
-      },
-    });
+      } catch (error) {
+        console.log("Found Error", error);
+      }
+    },
+  });
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setFieldTouched(name, true);
+  };
   return (
     <div className="create_lead_form_main_div">
       <form onSubmit={handleSubmit}>
         {/* User Information */}
         <div className="row">
+          <p className="create_lead_section2_company_info">Lead Details</p>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadOwner">
               Lead Owner <span className="required_sign">*</span>
@@ -87,12 +101,14 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.leadOwner}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="leadOwner"
-              placeholder={
-                touched.leadOwner && errors.leadOwner ? errors.leadOwner : null
-              }
+              placeholder="Enter Loead Owner Name"
             />
+            {touched.leadOwner && errors.leadOwner && (
+              <small className="errorMessage">{errors.leadOwner}</small>
+            )}
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -105,12 +121,14 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.firstName}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="firstName"
-              placeholder={
-                touched.firstName && errors.firstName ? errors.firstName : null
-              }
+              placeholder="Enter first name"
             />
+            {touched.firstName && errors.firstName && (
+              <small className="errorMessage">{errors.firstName}</small>
+            )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -123,12 +141,14 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.lastName}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="lastName"
-              placeholder={
-                touched.lastName && errors.lastName ? errors.lastName : null
-              }
+              placeholder="Enter last name"
             />
+            {touched.lastName && errors.lastName && (
+              <small className="errorMessage">{errors.lastName}</small>
+            )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -141,10 +161,14 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.email}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="email"
-              placeholder={touched.email && errors.email ? errors.email : null}
+              placeholder="Enter your email "
             />
+            {touched.email && errors.email && (
+              <small className="errorMessage">{errors.email}</small>
+            )}
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -154,17 +178,19 @@ const CreateLeadForm = () => {
             <input
               type="tel"
               id="mobileNumber"
+              maxlength="15"
+              minlength="10"
               className="form-control create_lead_form_input"
               value={values.mobileNumber}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="mobileNumber"
-              placeholder={
-                touched.mobileNumber && errors.mobileNumber
-                  ? errors.mobileNumber
-                  : null
-              }
+              placeholder="Enter Mobile Number"
             />
+            {touched.mobileNumber && errors.mobileNumber && (
+              <small className="errorMessage">{errors.mobileNumber}</small>
+            )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -177,14 +203,18 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.secondaryMobileNumber}
               onChange={handleChange}
+              maxlength="15"
+              minlength="10"
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="secondaryMobileNumber"
-              placeholder={
-                touched.secondaryMobileNumber && errors.secondaryMobileNumber
-                  ? errors.secondaryMobileNumber
-                  : null
-              }
+              placeholder="Other Mobile Number"
             />
+            {touched.secondaryMobileNumber && errors.secondaryMobileNumber && (
+              <small className="errorMessage">
+                {errors.secondaryMobileNumber}
+              </small>
+            )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -196,15 +226,17 @@ const CreateLeadForm = () => {
               className="form-control"
               value={values.leadSource}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="leadSource"
             >
               <option value="">
-                {touched.leadSource && errors.leadSource ? (
+                {/* {touched.leadSource && errors.leadSource ? (
                   <span style={{ color: "red" }}>{errors.leadSource}</span>
                 ) : (
-                  "Select Lead Source"
-                )}
+                  ""
+                )} */}
+                Select Lead Source
               </option>
               <option value="web-download">Web Download</option>
               <option value="web-search">Web Search</option>
@@ -213,6 +245,9 @@ const CreateLeadForm = () => {
               <option value="external-source">External Source</option>
               <option value="others">Others</option>
             </select>
+            {touched.leadSource && errors.leadSource && (
+              <small className="errorMessage">{errors.leadSource}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -224,15 +259,17 @@ const CreateLeadForm = () => {
               className="form-control"
               value={values.leadStatus}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="leadStatus"
             >
               <option value="">
-                {touched.leadStatus && errors.leadStatus ? (
+                {/* {touched.leadStatus && errors.leadStatus ? (
                   <p className="text-danger">{errors.leadStatus}</p>
                 ) : (
                   "Select Lead Status"
-                )}
+                )} */}
+                Select Lead Status
               </option>
 
               {/* <option value="lead">Select Lead Status</option> */}
@@ -240,6 +277,59 @@ const CreateLeadForm = () => {
               <option value="contacted">Contacted</option>
               <option value="deal">Deal</option>
             </select>
+            {touched.leadStatus && errors.leadStatus && (
+              <small className="errorMessage">{errors.leadStatus}</small>
+            )}
+            <MdKeyboardArrowDown className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4 costum-select">
+            <label htmlFor="leadStatus">
+              Lead Service <span className="required_sign">*</span>
+            </label>
+
+            <select
+              id="leadService"
+              className="form-control"
+              value={values.leadService}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              name="leadService"
+            >
+              <option value="">
+                {/* {touched.leadStatus && errors.leadStatus ? (
+                  <p className="text-danger">{errors.leadStatus}</p>
+                ) : (
+                  "Select Lead Status"
+                )} */}
+                Select Lead Service
+              </option>
+
+              {/* <option value="lead">Select Lead Status</option> */}
+              <option value="lead">Development</option>
+              <option value="contacted">IOS App Development</option>
+              <option value="deal">On Demand E-wallet</option>
+              <option value="deal">Matlab Software Purchase</option>
+              <option value="deal">Services</option>
+              <option value="deal">Earning Website Service</option>
+              <option value="deal">Jewellery Software</option>
+              <option value="deal">Hybrid Mobile Apps Development</option>
+              <option value="deal">Php Laravel Development</option>
+              <option value="deal">Restaurrant POS Software</option>
+              <option value="deal">Cloud Computing Services</option>
+              <option value="deal">Development Services</option>
+              <option value="deal">Pagarbook Software</option>
+              <option value="deal">Sports Data Api Development</option>
+              <option value="deal">Earning App</option>
+              <option value="deal">E-Commerce Bazar</option>
+              <option value="deal">Software Development Services</option>
+              <option value="deal">Cross Plateform Development</option>
+              <option value="deal">Digital Menu For Restuarants</option>
+              <option value="deal">Bangarpete Chats Franchise</option>
+            </select>
+            {touched.leadService && errors.leadService && (
+              <small className="errorMessage">{errors.leadService}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
         </div>
@@ -248,7 +338,7 @@ const CreateLeadForm = () => {
           <p className="create_lead_section2_company_info">Company Details</p>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="annualRevenue">
-              Annual Revenue <span className="required_sign">*</span>
+              Annual Revenue 
             </label>
             <input
               type="tel"
@@ -256,19 +346,19 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.annualRevenue}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="annualRevenue"
-              placeholder={
-                touched.annualRevenue && errors.annualRevenue
-                  ? errors.annualRevenue
-                  : null
-              }
+              placeholder="Enter Annual Revenue"
             />
+            {touched.annualRevenue && errors.annualRevenue && (
+              <small className="errorMessage">{errors.annualRevenue}</small>
+            )}
             <BsCurrencyRupee className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="companyName">
-              Company Name <span className="required_sign">*</span>
+              Company Name 
             </label>
             <input
               type="text"
@@ -276,19 +366,19 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.companyName}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="companyName"
-              placeholder={
-                touched.companyName && errors.companyName
-                  ? errors.companyName
-                  : null
-              }
+              placeholder="Enter company name"
             />
+            {touched.companyName && errors.companyName && (
+              <small className="errorMessage">{errors.companyName}</small>
+            )}
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="companyEmail">
-              Company Email <span className="required_sign">*</span>
+              Company Email 
             </label>
             <input
               type="email"
@@ -296,14 +386,14 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.companyEmail}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="companyEmail"
-              placeholder={
-                touched.companyEmail && errors.companyEmail
-                  ? errors.companyEmail
-                  : null
-              }
+              placeholder="Enter comapny email"
             />
+            {touched.companyEmail && errors.companyEmail && (
+              <small className="errorMessage">{errors.companyEmail}</small>
+            )}
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -314,15 +404,15 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.companyContact}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="companyContact"
-              placeholder={
-                touched.companyContact && errors.companyContact
-                  ? errors.companyContact
-                  : null
-              }
+              placeholder="Enter company contact"
             />
-            <MdEmail className="create_lead_input_icon" />
+            {touched.companyContact && errors.companyContact && (
+              <small className="errorMessage">{errors.companyContact}</small>
+            )}
+            <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="secondaryContact">Secondary Contact </label>
@@ -332,19 +422,20 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.secondaryContact}
               onChange={handleChange}
+              maxLength={15}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="secondaryContact"
-              placeholder={
-                touched.secondaryContact && errors.secondaryContact
-                  ? errors.secondaryContact
-                  : null
-              }
+              placeholder="Enter Secondary Contact"
             />
+            {touched.secondaryContact && errors.secondaryContact && (
+              <small className="errorMessage">{errors.secondaryContact}</small>
+            )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="city">
-              city <span className="required_sign">*</span>
+              city 
             </label>
             <input
               type="text"
@@ -352,15 +443,19 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.city}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="city"
-              placeholder={touched.city && errors.city ? errors.city : null}
+              placeholder="Enter city"
             />
+            {touched.city && errors.city && (
+              <small className="errorMessage">{errors.city}</small>
+            )}
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="district">
-              District <span className="required_sign">*</span>
+              District 
             </label>
             <input
               type="text"
@@ -368,17 +463,19 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.district}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="district"
-              placeholder={
-                touched.district && errors.district ? errors.district : null
-              }
+              placeholder="Enter District"
             />
+            {touched.district && errors.district && (
+              <small className="errorMessage">{errors.district}</small>
+            )}
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="state">
-              State <span className="required_sign">*</span>
+              State 
             </label>
             <input
               type="text"
@@ -386,15 +483,19 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.state}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="state"
-              placeholder={touched.state && errors.state ? errors.state : null}
+              placeholder="Enter state"
             />
+            {touched.state && errors.state && (
+              <small className="errorMessage">{errors.state}</small>
+            )}
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="country">
-              Country <span className="required_sign">*</span>
+              Country 
             </label>
             <input
               type="text"
@@ -402,12 +503,14 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.country}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="country"
-              placeholder={
-                touched.country && errors.country ? errors.country : null
-              }
+              placeholder="Enter country name"
             />
+            {touched.country && errors.country && (
+              <small className="errorMessage">{errors.country}</small>
+            )}
             <FaLandmarkFlag className="create_lead_input_icon" />
           </div>
         </div>
@@ -426,16 +529,16 @@ const CreateLeadForm = () => {
               className="form-control create_lead_form_input"
               value={values.description}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="description"
               rows="3"
-              placeholder={
-                touched.description && errors.description
-                  ? errors.description
-                  : null
-              }
+              placeholder="Enter description"
             ></textarea>
           </div>
+          {touched.description && errors.description && (
+            <small className="errorMessage">{errors.description}</small>
+          )}
         </div>
         {/* Submit Button */}
         <div className="text-center">

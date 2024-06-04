@@ -44,6 +44,7 @@ import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 import UpdateProfile from "../pages/UpdateProfile";
 
 const AllRoutes = () => {
+  const [loading, setLoading] = useState(true);
   const [isSidebar, setIsSidebar] = useState(window.innerWidth > 425);
   useEffect(() => {
     const handleResize = () => {
@@ -61,7 +62,14 @@ const AllRoutes = () => {
     <Routes>
       {/* Dashboard Routes */}
       <Route
-        element={<Main isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
+        element={
+          <Main
+            isSidebar={isSidebar}
+            setIsSidebar={setIsSidebar}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        }
       >
         <Route path="/dummy" element={<Dummy setIsSidebar={setIsSidebar} />} />
         <Route
@@ -76,7 +84,7 @@ const AllRoutes = () => {
           path="/leads"
           element={
             <ValidateRoute>
-              <Leads />
+              <Leads loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -84,7 +92,7 @@ const AllRoutes = () => {
           path="/create-lead"
           element={
             <ValidateRoute>
-              <CreateLead />
+              <CreateLead loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -92,7 +100,7 @@ const AllRoutes = () => {
           path="/update-lead"
           element={
             <ValidateRoute>
-              <UpdateLead />
+              <UpdateLead loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -100,7 +108,7 @@ const AllRoutes = () => {
           path="/lead-details"
           element={
             <ValidateRoute>
-              <LeadCostumerDetails />
+              <LeadCostumerDetails loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -108,7 +116,7 @@ const AllRoutes = () => {
           path="/contact"
           element={
             <ValidateRoute>
-              <Contact />
+              <Contact loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -116,7 +124,7 @@ const AllRoutes = () => {
           path="/create-contact"
           element={
             <ValidateRoute>
-              <CreateContact />
+              <CreateContact loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -124,7 +132,10 @@ const AllRoutes = () => {
           path="/contact-details"
           element={
             <ValidateRoute>
-              <ContactCostumerDetails />
+              <ContactCostumerDetails
+                loading={loading}
+                setLoading={setLoading}
+              />
             </ValidateRoute>
           }
         />
@@ -132,7 +143,7 @@ const AllRoutes = () => {
           path="/accounts"
           element={
             <ValidateRoute>
-              <Accounts />
+              <Accounts loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -140,7 +151,7 @@ const AllRoutes = () => {
           path="/create-account"
           element={
             <ValidateRoute>
-              <CreateAccount />
+              <CreateAccount loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -148,7 +159,10 @@ const AllRoutes = () => {
           path="/account-details"
           element={
             <ValidateRoute>
-              <AccountCostumerDetails />
+              <AccountCostumerDetails
+                loading={loading}
+                setLoading={setLoading}
+              />
             </ValidateRoute>
           }
         />
@@ -156,7 +170,7 @@ const AllRoutes = () => {
           path="/tasks"
           element={
             <ValidateRoute>
-              <Task />
+              <Task loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -164,7 +178,7 @@ const AllRoutes = () => {
           path="/create-task"
           element={
             <ValidateRoute>
-              <CreateTask />
+              <CreateTask loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -172,7 +186,7 @@ const AllRoutes = () => {
           path="/task-details"
           element={
             <ValidateRoute>
-              <TaskDetails />
+              <TaskDetails loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -180,7 +194,7 @@ const AllRoutes = () => {
           path="/meetings"
           element={
             <ValidateRoute>
-              <Meetings />
+              <Meetings loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -188,7 +202,7 @@ const AllRoutes = () => {
           path="/create-meeting"
           element={
             <ValidateRoute>
-              <CreateMeeting />
+              <CreateMeeting loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -196,7 +210,7 @@ const AllRoutes = () => {
           path="/meetings-details"
           element={
             <ValidateRoute>
-              <MeetingsViewDetails />
+              <MeetingsViewDetails loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -204,7 +218,7 @@ const AllRoutes = () => {
           path="/call-schedule"
           element={
             <ValidateRoute>
-              <Calls />
+              <Calls loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -212,7 +226,7 @@ const AllRoutes = () => {
           path="/schedule-call"
           element={
             <ValidateRoute>
-              <ScheduleCall />
+              <ScheduleCall loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -220,7 +234,7 @@ const AllRoutes = () => {
           path="/log-call"
           element={
             <ValidateRoute>
-              <LogCall />
+              <LogCall loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -228,7 +242,7 @@ const AllRoutes = () => {
           path="/call-logs"
           element={
             <ValidateRoute>
-              <CallLogs />
+              <CallLogs loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -236,7 +250,7 @@ const AllRoutes = () => {
           path="/schedule-call-details"
           element={
             <ValidateRoute>
-              <CallViewDetails />
+              <CallViewDetails loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -244,7 +258,7 @@ const AllRoutes = () => {
           path="/log-call-details"
           element={
             <ValidateRoute>
-              <LogCallViewDetails />
+              <LogCallViewDetails loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -252,7 +266,7 @@ const AllRoutes = () => {
           path="/deals"
           element={
             <ValidateRoute>
-              <Deals />
+              <Deals loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -260,7 +274,7 @@ const AllRoutes = () => {
           path="/create-deal"
           element={
             <ValidateRoute>
-              <CreateDeal />
+              <CreateDeal loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -268,7 +282,7 @@ const AllRoutes = () => {
           path="/deal-details"
           element={
             <ValidateRoute>
-              <DealsCostumerDetails />
+              <DealsCostumerDetails loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />
@@ -276,7 +290,7 @@ const AllRoutes = () => {
           path="/reports"
           element={
             <ValidateRoute>
-              <Reports />
+              <Reports loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
         />

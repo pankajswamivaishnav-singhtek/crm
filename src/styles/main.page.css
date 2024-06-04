@@ -13,6 +13,21 @@
   background-color: #f8f8ff;
 }
 
+.errorMessage {
+  color: red;
+  font-size: 0.875rem;
+  position: absolute;
+  top: 90%;
+  left: 4%;
+  transform: translateY(5px); /* Adjust spacing as needed */
+  white-space: nowrap;
+}
+
+/* All Tables */
+.showDetailEye {
+  color: rgba(88, 105, 255, 1);
+}
+
 /* For Extra Small Devices (Phones) */
 @media (max-width: 575.98px) {
   /* Your CSS styles for extra small devices go here */

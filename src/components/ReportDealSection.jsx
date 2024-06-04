@@ -9,16 +9,6 @@ const ReportDealSection = ({ getDealsDoneData, setDealBy }) => {
     setDealBy(value);
     setSelectedValue(value);
   };
-
-  // const labels = [
-  //   "January",
-  //   "February",
-  //   "March",
-  //   "April",
-  //   "May",
-  //   "June",
-  //   "July",
-  // ];
   const labels =
     selectedValue === "year"
       ? [2024, 2025, 2026, 2027, 2028, 2029, 2030]
@@ -36,18 +26,7 @@ const ReportDealSection = ({ getDealsDoneData, setDealBy }) => {
           "November",
           "December",
         ];
-  // const data = {
-  //   labels: labels,
-  //   datasets: [
-  //     {
-  //       label: "My First Dataset",
-  //       data: [65, 59, 80, 81, 56, 55, 40],
-  //       fill: false,
-  //       borderColor: "rgba(98, 114, 255, 1)",
-  //       tension: 0.1,
-  //     },
-  //   ],
-  // };
+
   const data = {
     labels: labels,
     datasets:
@@ -123,6 +102,7 @@ const ReportDealSection = ({ getDealsDoneData, setDealBy }) => {
           </li>
         </ul>
       </div>
+      {/* Report Line Chart */}
       <div className="report_call_done_first_table_lineChart">
         <ReportLineChart2 data={data} />
       </div>

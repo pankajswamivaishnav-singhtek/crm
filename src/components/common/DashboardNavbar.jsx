@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // CSS
 import "../../styles/component_css/common_css/dashboardNavbar.common.css";
 // React Icon
-import { IoNotificationsCircleOutline } from "react-icons/io5";
+import { IoMdNotifications } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOutCircle } from "react-icons/bi";
@@ -19,13 +19,13 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   const [pageName, setPageName] = useState("");
   const pathname = location.pathname;
 
-  // Page Name Function End --------
+  //  Sidebar Functionality 
   const sidebarState = () => {
     setShowSidebarSmallScreen(true);
     setIsSidebar((prev) => !prev);
   };
 
-  // Logout User
+  // Logout User Api Call 
   const logoutUserSubmit = () => {
     logoutUser();
     localStorage.clear();
@@ -172,11 +172,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         >
           CR<span>M</span>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={sidebarState}
-        >
+        <button className="navbar-toggler" type="button" onClick={sidebarState}>
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -193,10 +189,14 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
           </ul>
           {/* Right Menu  */}
           <div className="ms-auto">
-            <ul className="navbar-nav mb-2 mb-lg-0">
+            <ul className="navbar-nav mb-2 mb-lg-0 navbar-right-menu-mannual">
               <li className="nav-item nav-item-notification">
-                <a className="nav-link" href="#!">
-                  <IoNotificationsCircleOutline className="dashboard_navbar_notification_icon" />
+                <a
+                  className="nav-link dashboard_navbar_notification_link"
+                  href="#!"
+                >
+                  <IoMdNotifications className="dashboard_navbar_notification_icon" />
+                  <small className="dashboard_navbar_notification_nadge">5</small>
                 </a>
               </li>
               <li className="nav-item">

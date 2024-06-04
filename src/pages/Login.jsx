@@ -5,11 +5,8 @@ import "../styles/signup.page.css";
 import "../styles/login.page.css";
 
 // React Icons
-import { HiOutlineMail } from "react-icons/hi";
-import { FaEyeSlash } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import { FcFeedback } from "react-icons/fc";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { IoMdEye } from "react-icons/io";
 
 // Formik
 import { useFormik } from "formik";
@@ -22,21 +19,11 @@ import loginImg from "../images/login_img.png";
 // Api Call & Function
 import { loginUser } from "../controller/fetchApi";
 // import { useAuth0 } from "@auth0/auth0-react";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+
 const Login = () => {
   const navigate = useNavigate();
-  // const { loginWithRedirect } = useAuth0();
-
-  // const handleGoogleLogin = () => {
-  //   loginWithRedirect({
-  //     connection: "google-oauth2",
-  //   })
-  //     .then(() => {
-  //       navigate("/dashboard"); // Manually navigate to dashboard after login
-  //     })
-  //     .catch((error) => {
-  //       console.error("Login failed:", error);
-  //     });
-  // };
 
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -114,7 +101,7 @@ const Login = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <HiOutlineMail className="signup_input_icons" />
+                      <FcFeedback className="signup_input_icons" />
                     </div>
                   </div>
                   {/*Password */}
@@ -146,17 +133,21 @@ const Login = () => {
                         onBlur={handleBlur}
                       />
                       {showPassword ? (
-                        <FaEyeSlash
+                        <p
                           className="signup_input_icons"
                           onClick={handleClickShowPassword}
                           style={{ cursor: "pointer" }}
-                        />
+                        >
+                          🙈
+                        </p>
                       ) : (
-                        <IoMdEye
+                        <p
                           className="signup_input_icons"
                           onClick={handleClickShowPassword}
                           style={{ cursor: "pointer" }}
-                        />
+                        >
+                          🐵
+                        </p>
                       )}
                     </div>
                     <div>
@@ -185,15 +176,23 @@ const Login = () => {
                     className="orLogin_img img-fluid"
                   />
                 </div>
-                {/* Google Login */}
-                {/* <div className="signup_google_div " onClick={handleGoogleLogin}> */}
                 <div className="signup_google_div ">
-                  <FcGoogle className="signup_google_icon" />
+                  <GoogleLogin
+                    onSuccess={(credentialResponse) => {
+                      const credentialResponseDecode = jwtDecode(
+                        credentialResponse.credential
+                      );
+                      console.log(credentialResponseDecode);
+                    }}
+                    onError={() => {
+                      console.log("Login Failed");
+                    }}
+                  />
                 </div>
                 {/* Don't Have a account */}
                 <div>
                   <p className="signup_already_have_account_text">
-                    Don't have an account?
+                    Don't have an account? &nbsp;
                     <span>
                       <Link
                         to="/signup"

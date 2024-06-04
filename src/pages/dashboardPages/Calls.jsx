@@ -1,16 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
 // CSS
 import "../../styles/dashboardCss/calls.css";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
-import { MdPermPhoneMsg, MdOutlinePhonePaused } from "react-icons/md";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 import ScheduleCallTable from "../../components/ScheduleCallTable";
-// React Router Dom
-import { useNavigate } from "react-router-dom";
+
 // Controller Methods
 import {
   getAllScheduleCall,
@@ -32,7 +31,7 @@ const Calls = () => {
   if (showToast) {
     hideToast();
   }
-  const navigate = useNavigate();
+
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
   const [scheduleCallCostumerId, setScheduleCallCostumerId] = useState([]);
@@ -117,7 +116,7 @@ const Calls = () => {
   };
   // Pagination Function ------
   const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllScheduleCallData?.totalPages || 5;
+  const totalPages = getAllScheduleCallData?.totalPages || 1;
   const pagesToShow = 6;
   const handleNextPageClick = () => {
     const newPageNo = pageNo + 1;
@@ -214,8 +213,19 @@ const Calls = () => {
               </button>
             </div>
             <div className="dashboard_leads_create_btn_div">
-              <button
-                className="dashboard_section1_table_edit_button dropdown-toggle remove_arrow_create_call_btn"
+              <button className="btn-shiny2">
+                <Link
+                  className="dashboard_leads_create_link"
+                  to="/schedule-call"
+                >
+                  <span>
+                    <MdAdd />
+                  </span>
+                  Create Schedule Call
+                </Link>
+              </button>
+              {/* <button
+                className="dashboard_section1_table_edit_button dropdown-toggle remove_arrow_create_call_btn btn-shiny2"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -248,7 +258,7 @@ const Calls = () => {
                     </button>
                   </li>
                 </ul>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -261,6 +271,7 @@ const Calls = () => {
               thirdHead: "Call Start Time",
               fourthHead: "Call Status",
               fifthHead: "Call Purpose",
+              sixthHead: "View",
             }}
             redirectLink="/schedule-call-details"
             getAllScheduleCallData={getAllScheduleCallData}

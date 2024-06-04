@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { BsPencil, BsTrash } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import { TbFileDownload } from "react-icons/tb";
 import ContactRightSectionTable from "../../components/ContactRightSectionTable";
 // Controller
@@ -26,7 +26,7 @@ const Contact = () => {
   if (showToast) {
     hideToast();
   }
-  
+
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
   const [contactCostumerId, setContactCostumerId] = useState([]);
@@ -70,7 +70,7 @@ const Contact = () => {
   };
   // Pagination Function ------
   const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllContactData?.totalPages || 5;
+  const totalPages = getAllContactData?.totalPages || 1;
   const pagesToShow = 6;
   const handleNextPageClick = () => {
     const newPageNo = pageNo + 1;
@@ -111,7 +111,7 @@ const Contact = () => {
           <div className="dashboard_leads_btns_div">
             <div className="dashboard_leads_action_btn_div">
               <button
-                className="dashboard_section1_table_edit_button dropdown-toggle"
+                className="dashboard_section1_table_edit_button dropdown-toggle "
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -120,12 +120,12 @@ const Contact = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li>
+                  {/* <li>
                     <button className="dropdown-item">
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
                     </button>
-                  </li>
+                  </li> */}
                   <li>
                     <button
                       className="dropdown-item"
@@ -149,7 +149,7 @@ const Contact = () => {
             </div>
 
             <div className="dashboard_leads_create_btn_div">
-              <button>
+              <button className="btn-shiny2">
                 <Link
                   className="dashboard_leads_create_link"
                   to="/create-contact"
@@ -171,6 +171,7 @@ const Contact = () => {
               secondHead: "Email",
               thirdHead: "Contact",
               fourthHead: "Address",
+              fifthHead: "View",
             }}
             redirectLink="/contact-details"
             getAllContactData={getAllContactData}

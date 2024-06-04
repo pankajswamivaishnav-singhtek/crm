@@ -150,7 +150,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   };
   // Pagination Function ------
   const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllLeadData?.totalPages || 6;
+  const totalPages = getAllLeadData?.totalPages || 1;
   const pagesToShow = 5;
   const handleNextPageClick = () => {
     const newPageNo = pageNo + 1;
@@ -249,7 +249,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               </button>
             </div>
             <div className="dashboard_leads_create_btn_div">
-              <button>
+              <button className="btn-shiny2">
                 <Link className="dashboard_leads_create_link" to="/create-lead">
                   <span>
                     <MdAdd />
@@ -268,13 +268,14 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               secondHead: "First Name",
               thirdHead: "Lead Source",
               fourthHead: "Lead Status",
+              fifthHead: "View",
             }}
             redirectLink="/lead-details"
             getAllLeadData={getAllLeadData}
             tableName="leadsTable"
+          
           />
         </div>
-
         {/* Pagination Div */}
         <div className="dashboard_leads_pagination_div">
           <nav aria-label="...">

@@ -19,6 +19,7 @@ const FilterSidebar = ({ setFilterData }) => {
       // resetForm();
     },
   });
+
   return (
     <div className="filter-sidebar">
       <form onSubmit={handleSubmit}>
@@ -57,6 +58,39 @@ const FilterSidebar = ({ setFilterData }) => {
             </label>
           </div>
         </div>
+        {/* <div className="filter-container">
+          <h4>System Defined Filter</h4>
+          <div className="form-check">
+            <input
+              name="status"
+              type="radio"
+              className="form-check-input"
+              id="touchedFilter"
+              value="verified"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              checked={values.status === "verified"}
+            />
+            <label className="form-check-label" htmlFor="touchedFilter">
+              Verified
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              name="status"
+              type="radio"
+              className="form-check-input"
+              id="untouchedFilter"
+              value="unverified"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              checked={values.status === "unverified"}
+            />
+            <label className="form-check-label" htmlFor="untouchedFilter">
+              Unverified
+            </label>
+          </div>
+        </div> */}
         {/* Filter By Fields */}
         <div className="filter-container">
           <h4>Filter By Fields</h4>

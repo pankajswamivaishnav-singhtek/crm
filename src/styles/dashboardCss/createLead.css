@@ -1,5 +1,6 @@
 .dashboard_create_lead_main_container {
   /* height: calc(100% - 10px); */
+  padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 1);
@@ -68,9 +69,8 @@
 }
 
 /* From */
-
 .create_lead_form_main_div {
-  padding: 0 20px;
+  padding: 40px 20px 20px 20px;
 }
 
 .createLeadInput input[type="text"],
@@ -91,12 +91,12 @@
 }
 
 .createLeadInput {
-  margin: 20px 0;
+  margin: -10px 0 40px 0;
   position: relative;
 }
 
 .create_lead_form_input::placeholder {
-  color: red;
+  color: #808080;
   font-size: small;
 }
 
@@ -107,6 +107,11 @@
   transform: translateY(-50%);
   color: rgba(115, 115, 115, 1);
 }
+
+
+
+
+
 
 /* form section 2 */
 .create_lead_section2_company_info {

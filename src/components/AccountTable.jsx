@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
-
+import { FaRegEye } from "react-icons/fa";
 const AccountTable = ({
   tblHead,
   redirectLink,
@@ -10,6 +10,7 @@ const AccountTable = ({
   setAccountCostumerId,
   data,
 }) => {
+  const [isMasterChecked, setIsMasterChecked] = useState(false);
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
   const handleCheckboxChange = (leadId) => {
     const isSelected = accountCostumerId.includes(leadId);
@@ -23,6 +24,7 @@ const AccountTable = ({
   // Handle Master Checkbox Change Start -----
   const handleMasterCheckboxChange = (event) => {
     const isChecked = event.target.checked;
+    setIsMasterChecked(isChecked);
     const allLeadIds = getAllAccountData?.content?.map((data) => data.id) || [];
     if (isChecked) {
       setAccountCostumerId(allLeadIds);
@@ -31,27 +33,65 @@ const AccountTable = ({
     }
   };
   // Handle Master Checkbox Change End   -----
+  useEffect(() => {
+    const allLeadIds = getAllAccountData?.content?.map((data) => data.id) || [];
+    if (allLeadIds.length === 0) return;
+    if (accountCostumerId.length === allLeadIds.length) {
+      setIsMasterChecked(true);
+    } else {
+      setIsMasterChecked(false);
+    }
+  }, [accountCostumerId, getAllAccountData]);
   return (
     <div className="container-fluid table-responsive">
       <div className="row dashboard_table_main_heading"></div>
       <div className="LeadRightSectionTable_body">
+        {/* Table */}
         <table className="table table-responsive ">
           <thead>
             <tr className="table-danger dashboard_section1_tableHead_tr">
+              {/* Checkbox Column */}
               <th scope="col">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue=""
-                  id="flexCheckIndeterminate"
-                  onClick={handleMasterCheckboxChange}
-                />
+                <div className="wrap-check-29">
+                  <div className="cbx">
+                    <input
+                      id="cbx-29"
+                      type="checkbox"
+                      onClick={handleMasterCheckboxChange}
+                      checked={isMasterChecked}
+                    />
+                    <label htmlFor="cbx-29" />
+                    <svg width={15} height={14} viewBox="0 0 15 14" fill="none">
+                      <path d="M2 8.36364L6.23077 12L13 2" />
+                    </svg>
+                  </div>
+                  {/* Gooey*/}
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <defs>
+                      <filter id="goo-12">
+                        <feGaussianBlur
+                          in="SourceGraphic"
+                          stdDeviation={4}
+                          result="blur"
+                        />
+                        <feColorMatrix
+                          in="blur"
+                          mode="matrix"
+                          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
+                          result="goo-12"
+                        />
+                        <feBlend in="SourceGraphic" in2="goo-12" />
+                      </filter>
+                    </defs>
+                  </svg>
+                </div>
               </th>
               <th scope="col">{tblHead.firstHead}</th>
               <th scope="col">{tblHead.secondHead}</th>
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
               <th scope="col">{tblHead.fifthHead}</th>
+              <th scope="col">{tblHead.sixthHead}</th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -96,11 +136,16 @@ const AccountTable = ({
                       {data.accountSite}
                     </Link>
                   </td>
+                  <td>
+                    <Link to={redirectLink} className="Link-button-leads">
+                      <FaRegEye className="showDetailEye fs-4" />
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6">No Account Data At this Time</td>
+                <td colSpan="7">No Account Data At this Time</td>
               </tr>
             )}
           </tbody>

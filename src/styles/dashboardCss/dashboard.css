@@ -49,7 +49,6 @@
   color: #c062b0 !important;
 }
 .stage-won {
-  
   color: #2ec282 !important;
 }
 
@@ -121,7 +120,10 @@
   text-align: center;
   color: rgba(88, 88, 88, 1);
 }
-
+.dashboard_card_text_link {
+  text-decoration: none;
+  color: inherit;
+}
 .dashboard_card_number {
   font-family: Roboto;
   font-size: 22px;

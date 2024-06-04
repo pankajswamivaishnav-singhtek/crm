@@ -8,6 +8,8 @@ import { FaHandshakeSimple } from "react-icons/fa6";
 
 // Import Shared Component
 import DashboardSection1Table from "./shared/DashboardSection1Table";
+import { Link } from "react-router-dom";
+
 // import DashboardSection2Table from "./shared/DashboardSection2Table";
 const DashboardSection1 = ({ getCurrentUserData }) => {
   return (
@@ -23,8 +25,14 @@ const DashboardSection1 = ({ getCurrentUserData }) => {
                   <FaHandshakeSimple className="dashboard_card_icon dashboard_firstCard_icon" />
                 }
               </div>
-              <p className="dashboard_card_text">My Open Deals</p>
-              <p className="dashboard_card_number">{getCurrentUserData?.totalDeal}</p>
+              <p className="dashboard_card_text">
+                <Link className="dashboard_card_text_link" to="/deals">
+                  My Open Deals
+                </Link>
+              </p>
+              <p className="dashboard_card_number">
+                {getCurrentUserData?.totalDeal}
+              </p>
             </div>
           </div>
           {/* Second Card */}
@@ -35,8 +43,15 @@ const DashboardSection1 = ({ getCurrentUserData }) => {
                   <SiGoogleadmob className="dashboard_card_icon dashboard_secondCard_icon" />
                 }
               </div>
-              <p className="dashboard_card_text">My Leads</p>
-              <p className="dashboard_card_number">{getCurrentUserData?.totalLead}</p>
+
+              <p className="dashboard_card_text">
+                <Link className="dashboard_card_text_link" to="/leads">
+                  My Leads
+                </Link>
+              </p>
+              <p className="dashboard_card_number">
+                {getCurrentUserData?.totalLead}
+              </p>
             </div>
           </div>
           {/* Third Card */}
@@ -47,7 +62,11 @@ const DashboardSection1 = ({ getCurrentUserData }) => {
                   <MdTask className="dashboard_card_icon dashboard_thirdCard_icon" />
                 }
               </div>
-              <p className="dashboard_card_text">My Task</p>
+              <p className="dashboard_card_text">
+                <Link className="dashboard_card_text_link" to="/tasks">
+                  My Task
+                </Link>
+              </p>
               <p className="dashboard_card_number">
                 {getCurrentUserData?.totalTask}
               </p>
@@ -61,7 +80,11 @@ const DashboardSection1 = ({ getCurrentUserData }) => {
                   <BiSolidPhoneCall className="dashboard_card_icon dashboard_fourthCard_icon" />
                 }
               </div>
-              <p className="dashboard_card_text">My Calls Today</p>
+              <p className="dashboard_card_text">
+                <Link className="dashboard_card_text_link" to="/call-schedule">
+                  My Calls Today
+                </Link>
+              </p>
               <p className="dashboard_card_number">
                 {getCurrentUserData?.totalCall}
               </p>

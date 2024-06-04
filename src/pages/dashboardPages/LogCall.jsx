@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 // React Icon
 import { HiOutlinePhoneOutgoing } from "react-icons/hi";
@@ -58,6 +58,16 @@ const LogCall = () => {
         }
       },
     });
+  const [currentDateTime, setCurrentDateTime] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, "0");
+    const hh = String(today.getHours()).padStart(2, "0");
+    setCurrentDateTime(`${yyyy}-${mm}-${dd}T${hh}:00`);
+  }, []);
+
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -65,7 +75,9 @@ const LogCall = () => {
         <div className="row">
           <p className="create_lead_section2_company_info">Call Information </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callTo">Call To <span className="required_sign">*</span></label>
+            <label htmlFor="callTo">
+              Call To <span className="required_sign">*</span>
+            </label>
             <select
               id="callTo"
               className="form-control"
@@ -75,19 +87,25 @@ const LogCall = () => {
               name="callTo"
             >
               <option value="">
-                {touched.callTo && errors.callTo ? (
+                {/* {touched.callTo && errors.callTo ? (
                   <p className="text-danger">{errors.callTo}</p>
                 ) : (
-                  "Select call to "
-                )}
+                  ""
+                )} */}
+                Select call to
               </option>
               <option value="lead">Lead</option>
               <option value="contact">Contact</option>
             </select>
+            {touched.callTo && errors.callTo && (
+              <small className="errorMessage">{errors.callTo}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="relatedTo">Related To <span className="required_sign">*</span></label>
+            <label htmlFor="relatedTo">
+              Related To <span className="required_sign">*</span>
+            </label>
             <select
               id="relatedTo"
               className="form-control"
@@ -97,11 +115,12 @@ const LogCall = () => {
               name="relatedTo"
             >
               <option value="">
-                {touched.relatedTo && errors.relatedTo ? (
+                {/* {touched.relatedTo && errors.relatedTo ? (
                   <p className="text-danger">{errors.relatedTo}</p>
                 ) : (
                   "Related to "
-                )}
+                )} */}
+                Related to
               </option>
               <option value="account">Account</option>
               <option value="deal">Deal</option>
@@ -114,10 +133,15 @@ const LogCall = () => {
               <option value="vendor">Vendor</option>
               <option value="case">Case</option>
             </select>
+            {touched.relatedTo && errors.relatedTo && (
+              <small className="errorMessage">{errors.relatedTo}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callType">Call Type <span className="required_sign">*</span></label>
+            <label htmlFor="callType">
+              Call Type <span className="required_sign">*</span>
+            </label>
             <select
               id="callType"
               className="form-control"
@@ -127,20 +151,26 @@ const LogCall = () => {
               name="callType"
             >
               <option value="">
-                {touched.callType && errors.callType ? (
+                {/* {touched.callType && errors.callType ? (
                   <p className="text-danger">{errors.callType}</p>
                 ) : (
                   "Call type "
-                )}
+                )} */}
+                Call type
               </option>
               <option value="account">outbound</option>
               <option value="deal">inbound</option>
               <option value="project">missed</option>
             </select>
+            {touched.callType && errors.callType && (
+              <small className="errorMessage">{errors.callType}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callStatus">Outgoing Call Status <span className="required_sign">*</span></label>
+            <label htmlFor="callStatus">
+              Outgoing Call Status <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="callStatus"
@@ -149,33 +179,36 @@ const LogCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="callStatus"
-              placeholder={
-                touched.callStatus && errors.callStatus
-                  ? errors.callStatus
-                  : null
-              }
+              placeholder="Enter call status"
             />
+            {touched.callStatus && errors.callStatus && (
+              <small className="errorMessage">{errors.callStatus}</small>
+            )}
             <HiOutlinePhoneOutgoing className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callStartTime">Call Start Time <span className="required_sign">*</span></label>
+            <label htmlFor="callStartTime">
+              Call Start Time <span className="required_sign">*</span>
+            </label>
             <input
               type="datetime-local"
               id="callStartTime"
+              min={currentDateTime}
               className="form-control create_lead_form_input"
               value={values.callStartTime}
               onChange={handleChange}
               onBlur={handleBlur}
               name="callStartTime"
-              placeholder={
-                touched.callStartTime && errors.callStartTime
-                  ? errors.callStartTime
-                  : null
-              }
+              placeholder="Enter call start time"
             />
+            {touched.callStartTime && errors.callStartTime && (
+              <small className="errorMessage">{errors.callStartTime}</small>
+            )}
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callDuration">Call Duration <span className="required_sign">*</span></label>
+            <label htmlFor="callDuration">
+              Call Duration <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="callDuration"
@@ -184,16 +217,17 @@ const LogCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="callDuration"
-              placeholder={
-                touched.callDuration && errors.callDuration
-                  ? errors.callDuration
-                  : null
-              }
+              placeholder="Enter call duration"
             />
+            {touched.callDuration && errors.callDuration && (
+              <small className="errorMessage">{errors.callDuration}</small>
+            )}
             <GiDuration className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="accountNumber">Subject <span className="required_sign">*</span></label>
+            <label htmlFor="accountNumber">
+              Subject <span className="required_sign">*</span>
+            </label>
             <input
               type="subject"
               id="subject"
@@ -202,10 +236,11 @@ const LogCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="subject"
-              placeholder={
-                touched.subject && errors.subject ? errors.subject : null
-              }
+              placeholder="Enter Subject"
             />
+            {touched.subject && errors.subject && (
+              <small className="errorMessage">{errors.subject}</small>
+            )}
             <MdOutlineBook className="create_lead_input_icon" />
           </div>
         </div>
@@ -215,7 +250,9 @@ const LogCall = () => {
             Purpose Of Outgoing Call
           </p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callPurpose">Call Purpose <span className="required_sign">*</span></label>
+            <label htmlFor="callPurpose">
+              Call Purpose <span className="required_sign">*</span>
+            </label>
             <select
               id="callPurpose"
               className="form-control"
@@ -225,11 +262,12 @@ const LogCall = () => {
               name="callPurpose"
             >
               <option value="">
-                {touched.callPurpose && errors.callPurpose ? (
+                {/* {touched.callPurpose && errors.callPurpose ? (
                   <p className="text-danger">{errors.callPurpose}</p>
                 ) : (
                   "None"
-                )}
+                )} */}
+                None
               </option>
               <option value="prospecting">Prospecting</option>
               <option value="administrative">Administrative</option>
@@ -238,10 +276,15 @@ const LogCall = () => {
               <option value="project">Project</option>
               <option value="desk">Desk</option>
             </select>
+            {touched.callPurpose && errors.callPurpose && (
+              <small className="errorMessage">{errors.callPurpose}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callAgenda">Call Agenda <span className="required_sign">*</span></label>
+            <label htmlFor="callAgenda">
+              Call Agenda <span className="required_sign">*</span>
+            </label>
             <input
               type="text"
               id="callAgenda"
@@ -250,16 +293,17 @@ const LogCall = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               name="callAgenda"
-              placeholder={
-                touched.callAgenda && errors.callAgenda
-                  ? errors.callAgenda
-                  : null
-              }
+              placeholder="Enter call agenda"
             />
+            {touched.callAgenda && errors.callAgenda && (
+              <small className="errorMessage">{errors.callAgenda}</small>
+            )}
             <TfiAgenda className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="callResult">Call Result <span className="required_sign">*</span></label>
+            <label htmlFor="callResult">
+              Call Result <span className="required_sign">*</span>
+            </label>
             <select
               id="callResult"
               className="form-control"
@@ -269,11 +313,12 @@ const LogCall = () => {
               name="callResult"
             >
               <option value="">
-                {touched.callResult && errors.callResult ? (
+                {/* {touched.callResult && errors.callResult ? (
                   <p className="text-danger">{errors.callResult}</p>
                 ) : (
                   "Result Type "
-                )}
+                )} */}
+                Result Type
               </option>
               <option value="interested">Interested</option>
               <option value="not-interested">Not Interested</option>
@@ -282,6 +327,9 @@ const LogCall = () => {
               <option value="requested-call-back">Requested Call Back</option>
               <option value="invalid-number">Invalid Number</option>
             </select>
+            {touched.callResult && errors.callResult && (
+              <small className="errorMessage">{errors.callResult}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
         </div>

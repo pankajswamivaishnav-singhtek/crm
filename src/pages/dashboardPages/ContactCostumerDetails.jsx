@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // CSS
 import "../../styles/dashboardCss/contactCostumerDetails.css";
+// Controller Method
+import { getSingleContact } from "../../controller/fetchApi";
 const ContactCostumerDetails = () => {
+  const [getSingleContactData, setSingleContactData] = useState([]);
+  // Get Schedule CallId & Toekn Id
+  const contactId = JSON.parse(localStorage.getItem("contactId"));
+  const userTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userTokenData?.data?.token;
+  useEffect(() => {
+    getSingleContact(contactId, tokenId).then((res) => {
+      setSingleContactData(res);
+    });
+  }, [contactId, tokenId]);
+  console.log("get single contact", getSingleContactData);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       {/* Company Details */}
@@ -10,7 +23,7 @@ const ContactCostumerDetails = () => {
       </h3>
       <div className="row">
         <div className="col-xl-12">
-          <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
+          <div className="d-xl-flex d-md-flex justify-content-around justify-content-center align-items-center">
             <div className="table-responsive mannual-table-responsive">
               <table className="table table-borderless">
                 <tbody>
@@ -22,7 +35,7 @@ const ContactCostumerDetails = () => {
                       Company Name
                     </th>
                     <td className="lead_view_details_table_td">
-                      Singhtek IT Jaipur
+                      {getSingleContactData?.companyName}
                     </td>
                   </tr>
                 </tbody>
@@ -39,7 +52,7 @@ const ContactCostumerDetails = () => {
                       Company Email
                     </th>
                     <td className="lead_view_details_table_td">
-                      singhtek@gmail.com
+                      {getSingleContactData?.companyEmail}
                     </td>
                   </tr>
                 </tbody>
@@ -56,7 +69,7 @@ const ContactCostumerDetails = () => {
                       Address
                     </th>
                     <td className="lead_view_details_table_td">
-                      Ajmer Road Jaipur
+                      {getSingleContactData?.companyAddress}
                     </td>
                   </tr>
                 </tbody>
@@ -73,7 +86,7 @@ const ContactCostumerDetails = () => {
                       Company Contact
                     </th>
                     <td className="lead_view_details_table_td">
-                      +917073272146
+                      {getSingleContactData?.companyContact}
                     </td>
                   </tr>
                 </tbody>
@@ -89,12 +102,7 @@ const ContactCostumerDetails = () => {
       <div className="row">
         <div className="col-xl-12 my-1 mx-2">
           <p className="lead_view_details_description">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad autem
-            delectus tempore quisquam! Libero nisi excepturi pariatur explicabo
-            consequatur nam labore earum animi corrupti impedit unde dolorum,
-            amet esse, facere eos eum distinctio voluptatem officiis nobis
-            beatae. Illum porro recusandae maxime earum laudantium animi
-            molestiae, error quibusdam nobis, dolor atque!
+            {getSingleContactData?.description}
           </p>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
+
 // React Router Dom
 import { Link } from "react-router-dom";
 // Components
@@ -115,7 +116,7 @@ const Deals = () => {
   };
   // Pagination Function ------
   const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllDealsData?.totalPages || 6;
+  const totalPages = getAllDealsData?.totalPages || 1;
   const pagesToShow = 6;
   const handleNextPageClick = () => {
     const newPageNo = pageNo + 1;
@@ -203,7 +204,7 @@ const Deals = () => {
               </button>
             </div>
             <div className="dashboard_leads_create_btn_div">
-              <button>
+              <button className="btn-shiny2">
                 <Link className="dashboard_leads_create_link" to="/create-deal">
                   <span>
                     <MdAdd />
@@ -224,6 +225,7 @@ const Deals = () => {
               fourthHead: "Closing Date",
               fifthHead: "Contact Name",
               sixthHead: "Stage",
+              seventhHead:"View"
             }}
             redirectLink="/deal-details"
             getAllDealsData={getAllDealsData}

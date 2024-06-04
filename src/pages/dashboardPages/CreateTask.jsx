@@ -26,38 +26,48 @@ const CreateTask = () => {
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        taskOwner: "",
-        taskSubject: "",
-        dueDate: "",
-        contact: "",
-        status: "",
-        priority: "",
-        description: "",
-        accountType: "",
-        reminderDateTime: "",
-      },
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldTouched,
+  } = useFormik({
+    initialValues: {
+      taskOwner: "",
+      taskSubject: "",
+      dueDate: "",
+      contact: "",
+      status: "",
+      priority: "",
+      description: "",
+      accountType: "",
+      reminderDateTime: "",
+    },
 
-      validationSchema: TaskFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        try {
-          console.log("-----", values);
-          await createTask(uid, values, setShowToast, tokenId);
-          if (createTask) {
-            resetForm();
-          }
-        } catch (error) {}
-      },
-    });
+    validationSchema: TaskFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await createTask(uid, values, setShowToast, tokenId);
+        resetForm();
+      } catch (error) {
+        console.log("Found Error", error);
+      }
+    },
+  });
 
   // Controll Reminder Open Close
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setFieldTouched(name, true);
+  };
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -73,15 +83,18 @@ const CreateTask = () => {
             <input
               type="text"
               id="taskOwner"
+              maxLength={50}
               className="form-control create_lead_form_input"
               value={values.companyName}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="taskOwner"
-              placeholder={
-                touched.taskOwner && errors.taskOwner ? errors.taskOwner : null
-              }
+              placeholder="Enter owner name"
             />
+            {touched.taskOwner && errors.taskOwner && (
+              <small className="errorMessage">{errors.taskOwner}</small>
+            )}
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -91,17 +104,18 @@ const CreateTask = () => {
             <input
               type="text"
               id="taskSubject"
+              maxLength={50}
               className="form-control create_lead_form_input"
               value={values.companyEmail}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="taskSubject"
-              placeholder={
-                touched.taskSubject && errors.taskSubject
-                  ? errors.taskSubject
-                  : null
-              }
+              placeholder="Enter subject"
             />
+            {touched.taskSubject && errors.taskSubject && (
+              <small className="errorMessage">{errors.taskSubject}</small>
+            )}
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -114,12 +128,13 @@ const CreateTask = () => {
               className="form-control create_lead_form_input"
               value={values.dueDate}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="dueDate"
-              placeholder={
-                touched.dueDate && errors.dueDate ? errors.dueDate : null
-              }
             />
+            {touched.dueDate && errors.dueDate && (
+              <small className="errorMessage">{errors.dueDate}</small>
+            )}
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="contact">
@@ -128,15 +143,19 @@ const CreateTask = () => {
             <input
               type="tel"
               id="contact"
+              minLength={8}
+              maxLength={15}
               className="form-control create_lead_form_input"
               value={values.contact}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="contact"
-              placeholder={
-                touched.contact && errors.contact ? errors.contact : null
-              }
+              placeholder="Enter contact number"
             />
+            {touched.contact && errors.contact && (
+              <small className="errorMessage">{errors.contact}</small>
+            )}
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -148,21 +167,26 @@ const CreateTask = () => {
               className="form-control"
               value={values.accountType}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="accountType"
             >
               <option value="">
-                {touched.accountType && errors.accountType ? (
+                {/* {touched.accountType && errors.accountType ? (
                   <p className="text-danger">{errors.accountType}</p>
                 ) : (
                   "Select Account Type"
-                )}
+                )} */}
+                Select Account Type
               </option>
               <option value="web-download">Client</option>
               <option value="web-search">Reseller</option>
               <option value="advertisement">Competator</option>
               <option value="employee-referral">Analyst</option>
             </select>
+            {touched.accountType && errors.accountType && (
+              <small className="errorMessage">{errors.accountType}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -174,15 +198,17 @@ const CreateTask = () => {
               className="form-control"
               value={values.status}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="status"
             >
               <option value="">
-                {touched.status && errors.status ? (
+                {/* {touched.status && errors.status ? (
                   <p className="text-danger">{errors.status}</p>
                 ) : (
                   "Select Status"
-                )}
+                )} */}
+                Select Status
               </option>
               <option value="not-started">Not Started</option>
               <option value="deffered">Deffered</option>
@@ -190,9 +216,12 @@ const CreateTask = () => {
               <option value="completed">Completed</option>
               <option value="waiting-for-input">Waiting For Input</option>
             </select>
+            {touched.status && errors.status && (
+              <small className="errorMessage">{errors.status}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
-          <div className="form-group createLeadInput col-xl-4">
+          <div className="form-group createLeadInput col-xl-4 ">
             <label htmlFor="priority">
               Priority <span className="required_sign">*</span>
             </label>
@@ -201,20 +230,25 @@ const CreateTask = () => {
               className="form-control"
               value={values.priority}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="priority"
             >
               <option value="">
-                {touched.priority && errors.priority ? (
+                {/* {touched.priority && errors.priority ? (
                   <p className="text-danger">{errors.priority}</p>
                 ) : (
                   "Priority"
-                )}
+                )} */}
+                Priority
               </option>
               <option value="not-started">Normall</option>
               <option value="deffered">Low</option>
               <option value="in-progress">High</option>
             </select>
+            {touched.priority && errors.priority && (
+              <small className="errorMessage">{errors.priority}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           {/* Reminder Input */}
@@ -245,6 +279,7 @@ const CreateTask = () => {
                     value={values.dateTime}
                     // onChange={(e) => setDateTime(e.target.value)}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     // value={reminderTime}
                     // onBlur={handleDateTimeChange}
                   />
@@ -267,6 +302,7 @@ const CreateTask = () => {
               className="form-control create_lead_form_input"
               value={values.description}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="description"
               rows="3"

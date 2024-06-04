@@ -27,29 +27,40 @@ const CreateContact = () => {
   const tokenId = userIdTokenData?.data?.token;
 
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        companyName: "",
-        companyEmail: "",
-        companyContact: "",
-        address: "",
-        description: "",
-      },
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldTouched,
+  } = useFormik({
+    initialValues: {
+      companyName: "",
+      companyEmail: "",
+      companyContact: "",
+      address: "",
+      description: "",
+    },
 
-      validationSchema: ContactFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        try {
-          await createContact(values, uid, setShowToast, tokenId);
-          if (createContact) {
-            resetForm();
-          }
-        } catch (error) {
-          console.log("Did Not Create Contact", error);
+    validationSchema: ContactFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        await createContact(values, uid, setShowToast, tokenId);
+        if (createContact) {
+          resetForm();
         }
-      },
-    });
-
+      } catch (error) {
+        console.log("Did Not Create Contact", error);
+      }
+    },
+  });
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setFieldTouched(name, true);
+  };
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -68,14 +79,14 @@ const CreateContact = () => {
               className="form-control create_lead_form_input"
               value={values.companyName}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="companyName"
-              placeholder={
-                touched.companyName && errors.companyName
-                  ? errors.companyName
-                  : null
-              }
+              placeholder="Enter company name"
             />
+            {touched.companyName && errors.companyName && (
+              <small className="errorMessage">{errors.companyName}</small>
+            )}
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -88,14 +99,14 @@ const CreateContact = () => {
               className="form-control create_lead_form_input"
               value={values.companyEmail}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="companyEmail"
-              placeholder={
-                touched.companyEmail && errors.companyEmail
-                  ? errors.companyEmail
-                  : null
-              }
+              placeholder="Enter Company Email"
             />
+            {touched.companyEmail && errors.companyEmail && (
+              <small className="errorMessage">{errors.companyEmail}</small>
+            )}
             <MdEmail className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -105,17 +116,19 @@ const CreateContact = () => {
             <input
               type="tel"
               id="companyContact"
+              maxlength="15"
+              minlength="10"
               className="form-control create_lead_form_input"
               value={values.companyContact}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="companyContact"
-              placeholder={
-                touched.companyContact && errors.companyContact
-                  ? errors.companyContact
-                  : null
-              }
+              placeholder="Enter company contact"
             />
+            {touched.companyContact && errors.companyContact && (
+              <small className="errorMessage">{errors.companyContact}</small>
+            )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -128,12 +141,14 @@ const CreateContact = () => {
               className="form-control create_lead_form_input"
               value={values.address}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="address"
-              placeholder={
-                touched.address && errors.address ? errors.address : null
-              }
+              placeholder="Enter address"
             />
+            {touched.address && errors.address && (
+              <small className="errorMessage">{errors.address}</small>
+            )}
             <FaTreeCity className="create_lead_input_icon" />
           </div>
         </div>
@@ -151,15 +166,15 @@ const CreateContact = () => {
               className="form-control create_lead_form_input"
               value={values.description}
               onChange={handleChange}
+              onFocus={handleFocus}
               onBlur={handleBlur}
               name="description"
               rows="3"
-              placeholder={
-                touched.description && errors.description
-                  ? errors.description
-                  : null
-              }
+              placeholder="Please enter description"
             ></textarea>
+            {touched.description && errors.description && (
+              <small className="errorMessage">{errors.description}</small>
+            )}
           </div>
         </div>
         {/* Submit Button */}

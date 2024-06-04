@@ -17,9 +17,12 @@ const TaskDetails = () => {
   const month = date.toLocaleString("default", { month: "long" });
   const day = date.toLocaleString("default", { day: "2-digit" });
   const year = date.toLocaleString("default", { year: "numeric" });
-  const time = date.toLocaleString("default", { hour: "2-digit" });
-  const min = date.toLocaleString("default", { minute: "2-digit" });
-  const reminder = `${day} ${month} ${year} || ${time}:${min}Min`;
+  const time = date.toLocaleString("default", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+  const reminder = `${day} ${month} ${year} || ${time}`;
 
   return (
     <div className="container-fluid account_view_details_main_container">

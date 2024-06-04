@@ -111,7 +111,7 @@ const Meetings = () => {
   }, [getAllMeetingsData]);
   // Pagination Function ------
   const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllMeetingData?.totalPages || 6;
+  const totalPages = getAllMeetingData?.totalPages || 1;
   const pagesToShow = 6;
   const handleNextPageClick = () => {
     const newPageNo = pageNo + 1;
@@ -199,7 +199,7 @@ const Meetings = () => {
             </div>
 
             <div className="dashboard_leads_create_btn_div">
-              <button>
+              <button className="btn-shiny2">
                 <Link
                   className="dashboard_leads_create_link"
                   to="/create-meeting"
@@ -221,6 +221,7 @@ const Meetings = () => {
               secondHead: "Host",
               thirdHead: "Date",
               fourthHead: "Location",
+              fifthHead:"View"
             }}
             redirectLink="/meetings-details"
             getAllMeetingData={getAllMeetingData}

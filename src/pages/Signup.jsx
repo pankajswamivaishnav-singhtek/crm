@@ -5,12 +5,11 @@ import "../styles/signup.page.css";
 import { useFormik } from "formik";
 import { signupFormSchema } from "../schema/FormValidation";
 // React Icons
-import { LuUserCircle } from "react-icons/lu";
-import { HiOutlineMail } from "react-icons/hi";
-import { FiPhone } from "react-icons/fi";
-import { FaEyeSlash } from "react-icons/fa";
+import { FcBusinessman } from "react-icons/fc";
+import { FcFeedback } from "react-icons/fc";
+import { FcCellPhone } from "react-icons/fc";
+import { FcManager } from "react-icons/fc";
 import { FcGoogle } from "react-icons/fc";
-import { IoMdEye } from "react-icons/io";
 
 // React Router Dom
 import { Link, useNavigate } from "react-router-dom";
@@ -113,7 +112,7 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <LuUserCircle className="signup_name_icons" />
+                        <FcBusinessman className="signup_name_icons" />
                       </div>
                       {/* last name */}
                       <div className="mb-3 position-relative">
@@ -141,7 +140,7 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <LuUserCircle className="signup_name_icons" />
+                        <FcBusinessman className="signup_name_icons" />
                       </div>
                     </div>
                     {/* UserName */}
@@ -171,7 +170,7 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <HiOutlineMail className="signup_input_icons" />
+                        <FcManager className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Email */}
@@ -201,7 +200,7 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <HiOutlineMail className="signup_input_icons" />
+                        <FcFeedback className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Phone */}
@@ -231,7 +230,7 @@ const Signup = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <FiPhone className="signup_input_icons" />
+                        <FcCellPhone className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Create Password */}
@@ -245,6 +244,7 @@ const Signup = () => {
                         </label>
                         <input
                           type={showPassword ? "password" : "text"}
+                          minLength={6}
                           className={`form-control signup_email_form_control  ${
                             errors.password && touched.password
                               ? "signup_input_form"
@@ -262,17 +262,21 @@ const Signup = () => {
                           onBlur={handleBlur}
                         />
                         {showPassword ? (
-                          <FaEyeSlash
+                          <p
                             className="signup_input_icons"
                             onClick={handleClickShowPassword}
                             style={{ cursor: "pointer" }}
-                          />
+                          >
+                            🙈
+                          </p>
                         ) : (
-                          <IoMdEye
+                          <p
                             className="signup_input_icons"
                             onClick={handleClickShowPassword}
                             style={{ cursor: "pointer" }}
-                          />
+                          >
+                            🐵
+                          </p>
                         )}
                       </div>
                     </div>
@@ -283,11 +287,12 @@ const Signup = () => {
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
                         >
-                          Confirm Password{" "}
+                          Confirm Password
                           <span className="required_sign">*</span>
                         </label>
                         <input
                           type={showConfirmPassword ? "password" : "text"}
+                          minLength={6}
                           className={`form-control signup_email_form_control  ${
                             errors.confirmPassword && touched.confirmPassword
                               ? "signup_input_form"
@@ -305,17 +310,21 @@ const Signup = () => {
                           onBlur={handleBlur}
                         />
                         {showConfirmPassword ? (
-                          <FaEyeSlash
+                          <p
                             className="signup_input_icons"
                             onClick={handleClickShowConfirmPassword}
                             style={{ cursor: "pointer" }}
-                          />
+                          >
+                            🙈
+                          </p>
                         ) : (
-                          <IoMdEye
+                          <p
                             className="signup_input_icons"
                             onClick={handleClickShowConfirmPassword}
                             style={{ cursor: "pointer" }}
-                          />
+                          >
+                            🐵
+                          </p>
                         )}
                       </div>
                       <p

@@ -26,6 +26,7 @@ import {
   UPLOAD_LEADS_URL,
   // Contact Url
   CREATE_CONTACT_URL,
+  GET_SINGLE_CONTACT_URL,
   GET_ALL_CONTACT_URL,
   DELETE_CONTACT_URL,
   DOWNLOAD_CONTACT_URL,
@@ -662,6 +663,27 @@ export const createContact = async (
     if (response) {
       // Show success message in toast
       setShowToast({ success: true, message: "Create Contact Successfully." });
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    return message;
+  }
+};
+
+// Get Single Contact Information
+
+export const getSingleContact = async (contactId, tokenId) => {
+  try {
+    const response = await axios.get(GET_SINGLE_CONTACT_URL + contactId, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    const finalResponse = response?.data?.data;
+    if (finalResponse) {
+      return finalResponse;
+    } else {
+      return [];
     }
   } catch (error) {
     const message = error?.response?.data;
@@ -1490,7 +1512,10 @@ export const createScheduleCall = async (
     if (response) {
       console.log("Mil gya response", response);
       // Show success message in toast
-      setShowToast({ success: true, message: "Create Log Call Successfully." });
+      setShowToast({
+        success: true,
+        message: "Create Schedule Call Successfully.",
+      });
     }
   } catch (error) {}
 };
@@ -1772,6 +1797,7 @@ export const getGenratedLeads = async (tokenId, leadBy) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
+    console.log("data reprot", response);
     if (response?.data?.status === 200) {
       return response?.data?.data;
     }

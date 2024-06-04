@@ -114,7 +114,7 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                 type="submit"
                 onClick={handleUploadImg}
               >
-                Upload new image
+                Upload 
               </button>
             </div>
           </div>

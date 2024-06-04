@@ -79,6 +79,17 @@ const LeadCostumerDetails = () => {
                       {getSingleLeadData.leadStatus}
                     </td>
                   </tr>
+                  <tr>
+                    <th
+                      scope="row"
+                      className="lead_view_details_costumer_table_th"
+                    >
+                      Lead Service
+                    </th>
+                    <td className="lead_view_details_table_td">
+                      {getSingleLeadData?.leadService}
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>

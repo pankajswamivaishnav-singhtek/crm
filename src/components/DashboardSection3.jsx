@@ -1,17 +1,40 @@
 import React, { useEffect, useState } from "react";
 // Controller Methods
 import { monthlyClosingDeals } from "../controller/fetchApi";
-
+import Loader2 from "../pages/Loader2";
 const DashboardSection3 = () => {
+  const [loading, setLoading] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   const [monthlyClosingDealsData, setMonthlyClosingDealsData] = useState([]);
   useEffect(() => {
-    monthlyClosingDeals(uid, tokenId).then((res) => {
-      setMonthlyClosingDealsData(res);
-    });
+    (async () => {
+      try {
+        setLoading(true);
+        const result = await monthlyClosingDeals(uid, tokenId);
+        if (result === null || result === undefined) {
+          setMonthlyClosingDealsData();
+          setLoading(false);
+        } else {
+          setMonthlyClosingDealsData(result);
+          setLoading(false);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    })();
+    // monthlyMeetings(uid, tokenId).then((res) => {
+    //   setMonthlyMeetingsData(res);
+    // });
   }, [uid, tokenId]);
+  // useEffect(() => {
+  //   monthlyClosingDeals(uid, tokenId).then((res) => {
+  //     setMonthlyClosingDealsData(res);
+  //   });
+  // }, [uid, tokenId]);
   // Function to return the class name based on Stage
   const getStatusClassName = (stage) => {
     switch (stage.toLowerCase()) {
@@ -41,6 +64,7 @@ const DashboardSection3 = () => {
         </div>
       </div>
       <div className="dashboard_section3_table_mainDiv">
+        {/* Table */}
         <table className="table">
           <thead>
             <tr className="table-danger dashboard_section1_tableHead_tr">
@@ -52,26 +76,30 @@ const DashboardSection3 = () => {
               <th scope="col">Closing Date</th>
             </tr>
           </thead>
-          <tbody className="dashboard_section1_tableBody">
-            {monthlyClosingDealsData && monthlyClosingDealsData.length > 0 ? (
-              monthlyClosingDealsData.map((meeting, index) => (
-                <tr key={index}>
-                  <td>{meeting.dealOwner}</td>
-                  <td>{meeting.contactName}</td>
-                  <td>{meeting.dealName}</td>
-                  <td>{meeting.accountName}</td>
-                  <td className={getStatusClassName(meeting.stage)}>
-                    {meeting.stage}
-                  </td>
-                  <td>{meeting.closingDate}</td>
+          {loading ? (
+            <Loader2 />
+          ) : (
+            <tbody className="dashboard_section1_tableBody">
+              {monthlyClosingDealsData && monthlyClosingDealsData.length > 0 ? (
+                monthlyClosingDealsData.map((meeting, index) => (
+                  <tr key={index}>
+                    <td>{meeting.dealOwner}</td>
+                    <td>{meeting.contactName}</td>
+                    <td>{meeting.dealName}</td>
+                    <td>{meeting.accountName}</td>
+                    <td className={getStatusClassName(meeting.stage)}>
+                      {meeting.stage}
+                    </td>
+                    <td>{meeting.closingDate}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6">No closing deals found This Month</td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5">No closing deals found This Month</td>
-              </tr>
-            )}
-          </tbody>
+              )}
+            </tbody>
+          )}
         </table>
       </div>
     </div>
