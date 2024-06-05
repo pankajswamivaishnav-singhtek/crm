@@ -9,7 +9,6 @@ import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 import ForgotPassword from "../pages/ForgotPassword";
 import OtpVerification from "../pages/OtpVerification";
-import Dummy from "../pages/Dummy";
 import Main from "../pages/Main";
 import Dashboard from "../pages/dashboardPages/Dashboard";
 import Leads from "../pages/dashboardPages/Leads";
@@ -71,7 +70,6 @@ const AllRoutes = () => {
           />
         }
       >
-        <Route path="/dummy" element={<Dummy setIsSidebar={setIsSidebar} />} />
         <Route
           path="/dashboard"
           element={

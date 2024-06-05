@@ -140,6 +140,15 @@
   display: none;
 }
 
+/* Active Sidebar menu */
+.active_sidebar_item {
+  color: black !important;
+}
+
+.calls-dropdown {
+  display: none;
+}
+
 /* Show Hide Sidebar In small Screen */
 
 @media screen and (max-width: 768px) {

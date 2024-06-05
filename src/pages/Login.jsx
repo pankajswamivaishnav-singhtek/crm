@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // css
 import "../styles/signup.page.css";
@@ -17,7 +17,7 @@ import orLogin from "../images/orLogin.jpg";
 import loginImg from "../images/login_img.png";
 
 // Api Call & Function
-import { loginUser } from "../controller/fetchApi";
+import { loginUser, loginUserThroughGoogle } from "../controller/fetchApi";
 // import { useAuth0 } from "@auth0/auth0-react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -61,6 +61,21 @@ const Login = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  // Login With Google
+  const [userData, setUserData] = useState();
+  const loginUserWithGoogle = useCallback(async () => {
+    const response = await loginUserThroughGoogle(userData, setShowToast);
+    if (response.data.status === 200) {
+      navigate("/dashboard");
+    }
+    console.log(response);
+  }, [userData, navigate]);
+
+  useEffect(() => {
+    loginUserWithGoogle();
+  }, [userData, loginUserWithGoogle]);
+
   return (
     <div className="container-fluid signup_body_div">
       <div className="row">
@@ -182,6 +197,13 @@ const Login = () => {
                       const credentialResponseDecode = jwtDecode(
                         credentialResponse.credential
                       );
+                      const data = {
+                        name: credentialResponseDecode.family_name,
+                        email: credentialResponseDecode.email,
+                        userName: credentialResponseDecode.email,
+                        firstName: credentialResponseDecode.given_name,
+                      };
+                      setUserData(data);
                       console.log(credentialResponseDecode);
                     }}
                     onError={() => {

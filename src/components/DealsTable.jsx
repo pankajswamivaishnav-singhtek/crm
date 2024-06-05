@@ -147,7 +147,7 @@ const DealsTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="7">No Deals Data At this Time</td>
+                <td colSpan="8">No Deals Data At this Time</td>
               </tr>
             )}
           </tbody>

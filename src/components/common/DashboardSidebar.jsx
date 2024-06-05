@@ -3,7 +3,11 @@ import "../../styles/component_css/common_css/dashboardSidebar.common.css";
 // React Router Dom
 import { Link } from "react-router-dom";
 // React Icons
-import { MdOutlineDashboardCustomize } from "react-icons/md";
+import {
+  MdAddIcCall,
+  MdLocalLibrary,
+  MdOutlineDashboardCustomize,
+} from "react-icons/md";
 import { MdOutlineAccountBalance } from "react-icons/md";
 import { IoIosContact } from "react-icons/io";
 import { LiaFileInvoiceSolid } from "react-icons/lia";
@@ -17,7 +21,6 @@ import { RiMenu4Line } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
 // Controller Api
 import { logoutUser } from "../../controller/fetchApi";
-// import { useAuth0 } from "@auth0/auth0-react";
 import { googleLogout } from "@react-oauth/google";
 const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
   // Logout User
@@ -71,6 +74,20 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
     }
   }, []);
 
+  //  Add Class In active navbar
+  function handleClick(event) {
+    const liElements = document.querySelectorAll(".Link-button");
+    liElements.forEach((link) => {
+      link.classList.remove("active_sidebar_item");
+    });
+    const liElement = event.currentTarget;
+    liElement.classList.add("active_sidebar_item");
+  }
+  const liElements = document.querySelectorAll(".Link-button");
+  liElements.forEach((link) => {
+    link.addEventListener("click", handleClick);
+  });
+
   return (
     <>
       {
@@ -96,7 +113,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     </div>
                     <li className="nav-item sidebar_navItems ">
                       <Link
-                        className="Link-button"
+                        className="Link-button "
                         to="/dashboard"
                         onClick={sideBarClose}
                       >
@@ -164,7 +181,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         <span className="sidebar_navItem_text">Meetings</span>
                       </Link>
                     </li>
-                    <li className="nav-item sidebar_navItems dropdown">
+                    <li className="nav-item sidebar_navItems dropdown ">
                       <Link
                         className="Link-button"
                         to="/calls"
@@ -181,7 +198,15 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                             to="/call-schedule"
                             onClick={sideBarClose}
                           >
-                            Schedule Call
+                            <MdAddIcCall />
+                            &nbsp;
+                            <span
+                              className={`sidebar-calls-menu ${
+                                shrinkSidebar ? "calls-dropdown" : ""
+                              }`}
+                            >
+                              Schedule Call
+                            </span>
                           </Link>
                         </li>
                         <li>
@@ -190,7 +215,15 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                             to="/call-logs"
                             onClick={sideBarClose}
                           >
-                            Log Call
+                            <MdLocalLibrary />
+                            &nbsp;{" "}
+                            <span
+                              className={`sidebar-calls-menu ${
+                                shrinkSidebar ? "calls-dropdown" : ""
+                              }`}
+                            >
+                              Log Call
+                            </span>
                           </Link>
                         </li>
                       </ul>

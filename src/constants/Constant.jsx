@@ -5,6 +5,7 @@ export const SIGNUP_USER = `${BASE_URL}/user/createuser`;
 export const OTP_VERIFICATION_URL = `${BASE_URL}/user/verifyOtp`;
 export const RESEND_OTP_URL = `${BASE_URL}/user/resendOtp?email=`;
 export const LOGIN_USER = `${BASE_URL}/user/signin`;
+export const LOGIN_WITH_GOOGLE = `${BASE_URL}/googleLogin/loginWithGoogle`;
 export const LOGOUT_USER = `${BASE_URL}/user/logout`;
 export const FORGOT_PASSWORD = `${BASE_URL}/auth/forgotPassword`;
 export const RESET_PASSWORD_VALIDATE = `${BASE_URL}/auth/validate-reset-link?uid=`;
@@ -85,4 +86,3 @@ export const UPDATE_LOG_CALL_URL = `${BASE_URL}/callLog/updateCallLog?callLogId=
 export const GET_GENRATED_LEADS_URL = `${BASE_URL}/report/getLeadReport?leadBy=`;
 export const GET_DEALS_DONE_URL = `${BASE_URL}/report/getDealsReport?dealsBy=`;
 export const GET_DONE_CALLS_URL = `${BASE_URL}/report/getCallReport?callsBy=`;
-

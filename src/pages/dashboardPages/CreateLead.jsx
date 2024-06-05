@@ -1,9 +1,7 @@
 import React from "react";
 // CSS
 import "../../styles/dashboardCss/createLead.css";
-// React Icons
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { HiOutlineRefresh } from "react-icons/hi";
+
 // Import Component
 import CreateLeadForm from "../../components/CreateLeadForm";
 

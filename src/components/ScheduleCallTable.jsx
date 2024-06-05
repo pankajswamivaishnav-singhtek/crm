@@ -150,7 +150,7 @@ const ScheduleCallTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="6">There are no scheduled calls at the moment.</td>
+                <td colSpan="7">There are no scheduled calls at the moment.</td>
               </tr>
             )}
           </tbody>

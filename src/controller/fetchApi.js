@@ -4,6 +4,7 @@ import {
   OTP_VERIFICATION_URL,
   RESEND_OTP_URL,
   LOGIN_USER,
+  LOGIN_WITH_GOOGLE,
   LOGOUT_USER,
   FORGOT_PASSWORD,
   RESET_PASSWORD_VALIDATE,
@@ -121,9 +122,14 @@ export const otpVerification = async (userData, setShowToast) => {
     });
     console.log("Otp Verify Successfully", response);
     // Set Data In Local Storage
-    if (response) {
+    if (response?.data?.status === 200) {
       setShowToast({ success: true, message: "signup successfully" });
       localStorage.setItem("user", JSON.stringify(response.data));
+    } else {
+      setShowToast({
+        success: true,
+        message: "InCorrect Otp ! Please Try Again",
+      });
     }
     return response;
   } catch (error) {
@@ -167,6 +173,30 @@ export const loginUser = async (userData, setShowToast) => {
     // Show error message in toast
     setShowToast({ success: false, message });
   }
+};
+
+// Login User Through Google
+export const loginUserThroughGoogle = async (userData, setShowToast) => {
+  try {
+    console.log("Enter your Google account", userData);
+    const response = await axios.post(LOGIN_WITH_GOOGLE, {
+      email: userData.email,
+      firstName: userData.firstName,
+      userName: userData.userName,
+      name: userData.name,
+    });
+    console.log("milgyo data", response);
+    // Set Data In Local Storage
+    if (response.data.status === 200) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+      // Show success message in toast
+      setShowToast({ success: true, message: "Sign In successfully." });
+    }
+    if (response.data.status !== 206) {
+      setShowToast({ success: false, message: "Invalid Credentials." });
+    }
+    return response;
+  } catch (error) {}
 };
 
 // Logout User Api

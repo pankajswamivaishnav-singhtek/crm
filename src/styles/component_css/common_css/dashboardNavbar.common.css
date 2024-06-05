@@ -37,11 +37,10 @@
 
 .dashboard_navbar_dashboard_text {
   font-family: Poppins;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 600;
   line-height: 32px;
   text-align: left;
-  margin-left: 153px;
 }
 
 .dashboard_navbar_notification_icon {

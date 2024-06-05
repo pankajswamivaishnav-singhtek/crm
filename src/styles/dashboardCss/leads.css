@@ -91,6 +91,11 @@ input[type="text"] {
   border-bottom-left-radius: 20px;
 }
 
+
+/*  */
+.LeadRightSectionTable_body::-webkit-scrollbar {
+  display: none;
+}
 /* Create Btn */
 .btn-shiny2 {
   width: 160px;

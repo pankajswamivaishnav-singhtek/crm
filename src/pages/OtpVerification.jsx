@@ -57,7 +57,8 @@ const OtpVerification = () => {
           finalValue,
           setShowToast
         );
-        if (verifySuccessFully) {
+        console.log("verifySuccessFully", verifySuccessFully?.data?.status);
+        if (verifySuccessFully?.data?.status === 200) {
           setTimeout(() => {
             navigate("/dashboard");
           }, 1000);
@@ -104,6 +105,7 @@ const OtpVerification = () => {
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        maxLength={1}
                         placeholder={
                           touched.digit1 && errors.digit1 ? errors.digit1 : null
                         }
@@ -117,6 +119,7 @@ const OtpVerification = () => {
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        maxLength={1}
                         placeholder={
                           touched.digit2 && errors.digit2 ? errors.digit2 : null
                         }
@@ -130,6 +133,7 @@ const OtpVerification = () => {
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        maxLength={1}
                         placeholder={
                           touched.digit3 && errors.digit3 ? errors.digit3 : null
                         }
@@ -143,6 +147,7 @@ const OtpVerification = () => {
                       <input
                         className="otp-letter-input"
                         type="tel"
+                        maxLength={1}
                         placeholder={
                           touched.digit4 && errors.digit4 ? errors.digit4 : null
                         }

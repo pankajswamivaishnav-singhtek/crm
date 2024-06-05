@@ -337,12 +337,11 @@ const CreateLeadForm = () => {
         <div className="row">
           <p className="create_lead_section2_company_info">Company Details</p>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="annualRevenue">
-              Annual Revenue 
-            </label>
+            <label htmlFor="annualRevenue">Annual Revenue</label>
             <input
               type="tel"
               id="annualRevenue"
+              maxLength={12}
               className="form-control create_lead_form_input"
               value={values.annualRevenue}
               onChange={handleChange}
@@ -357,9 +356,7 @@ const CreateLeadForm = () => {
             <BsCurrencyRupee className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyName">
-              Company Name 
-            </label>
+            <label htmlFor="companyName">Company Name</label>
             <input
               type="text"
               id="companyName"
@@ -377,9 +374,7 @@ const CreateLeadForm = () => {
             <BsBuildingsFill className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="companyEmail">
-              Company Email 
-            </label>
+            <label htmlFor="companyEmail">Company Email</label>
             <input
               type="email"
               id="companyEmail"
@@ -434,9 +429,7 @@ const CreateLeadForm = () => {
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="city">
-              city 
-            </label>
+            <label htmlFor="city">city</label>
             <input
               type="text"
               id="city"
@@ -454,9 +447,7 @@ const CreateLeadForm = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="district">
-              District 
-            </label>
+            <label htmlFor="district">District</label>
             <input
               type="text"
               id="district"
@@ -474,9 +465,7 @@ const CreateLeadForm = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="state">
-              State 
-            </label>
+            <label htmlFor="state">State</label>
             <input
               type="text"
               id="state"
@@ -494,9 +483,7 @@ const CreateLeadForm = () => {
             <FaTreeCity className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
-            <label htmlFor="country">
-              Country 
-            </label>
+            <label htmlFor="country">Country</label>
             <input
               type="text"
               id="country"

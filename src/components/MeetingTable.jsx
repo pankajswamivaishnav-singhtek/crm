@@ -139,7 +139,7 @@ const MeetingTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="5">No Meeting Data At this Time</td>
+                <td colSpan="6">No Meeting Data At this Time</td>
               </tr>
             )}
           </tbody>
