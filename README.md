@@ -33,7 +33,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-
 ## Connecting to the Backend
 
 To connect the frontend to the backend, ensure that the Java Spring Boot backend server is running. Follow the instructions provided in the backend repository to start the server.
@@ -101,7 +100,7 @@ POST ${BASE_URL}/user/logout
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### FORGOT PASSWORD
 
@@ -162,7 +161,7 @@ GET ${BASE_URL}/profile/getUserImage
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 Here are the README sections for the dashboard configuration APIs, including a comment indicating that these are dashboard configuration APIs.
 
@@ -218,7 +217,7 @@ GET ${BASE_URL}/dashboard/getCurrentUser
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 Sure, here are the README sections for the leads configuration APIs:
 
@@ -305,7 +304,7 @@ GET ${BASE_URL}/leadInfo/downloadLeads
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### UPLOAD LEADS
 
@@ -361,7 +360,7 @@ GET ${BASE_URL}/contact/getContacts
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### GET SINGLE CONTACT
 
@@ -470,7 +469,7 @@ GET ${BASE_URL}/deals/getAllDeal?
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### GET SINGLE DEAL
 
@@ -511,7 +510,7 @@ GET ${BASE_URL}/deals/downloadDeals
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### UPLOAD DEAL
 
@@ -545,7 +544,7 @@ GET ${BASE_URL}/tasks/getAllTasks?
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### DELETE TASK
 
@@ -575,7 +574,7 @@ GET ${BASE_URL}/tasks/downloadTasks
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### UPDATE TASK
 
@@ -620,7 +619,7 @@ GET ${BASE_URL}/meet/getAllMeetings?
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### DELETE MEETINGS
 
@@ -661,7 +660,7 @@ GET ${BASE_URL}/meet/downloadMeetings
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### UPLOAD MEETING
 
@@ -704,7 +703,7 @@ GET ${BASE_URL}/call/getAllScheduleCall?
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### GET ALL LOG CALLS
 
@@ -714,7 +713,7 @@ GET ${BASE_URL}/callLog/getAllCallLog?
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### GET SINGLE SCHEDULE CALL
 
@@ -784,7 +783,7 @@ GET ${BASE_URL}/call/downloadCallsInfo
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### DOWNLOAD LOG CALLS
 
@@ -794,7 +793,7 @@ GET ${BASE_URL}/callLog/downloadCallLog
 
 | Parameter | Type | Description   |
 | :-------- | :--- | :------------ |
-| tokenId      |      | No parameters |
+| tokenId   |      | No parameters |
 
 ### UPDATE SCHEDULE CALL
 
@@ -867,8 +866,14 @@ GET ${BASE_URL}/report/getCallReport?callsBy=
 
 ## Authors
 
-- [@pankajswamivaishnav](https://www.github.com/pankajswamivaishnav-singhsoft)
-## 🚀 About Me
-Pankaj Swami Vaishnav
-I'm a full stack developer in singhsoft pvt ltd company. Aprat From this i have deep knowledge and skill in proramming and netorking. I have gained multiple certificate who showcase my knowledge & skill, I won a hackathon IIM2.0.
+- [@pankajswamivaishnav](https://www.github.com/pankajswamivaishnav-singhtek)
 
+## 🚀 About Me
+
+Pankaj Swami Vaishnav
+
+I am a dedicated Full Stack Developer at Singhsoft Pvt Ltd with extensive experience in both programming and networking. My career is marked by a strong proficiency in creating robust web applications and seamless user experiences.
+
+In addition to my professional role, I hold multiple certifications that highlight my expertise and commitment to staying at the forefront of technology. My accomplishments include winning the prestigious IIM2.0 hackathon, showcasing my ability to innovate and excel in competitive environments.
+
+I am passionate about leveraging my skills to drive technological advancements and deliver high-quality solutions.
