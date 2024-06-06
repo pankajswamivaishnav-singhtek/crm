@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
-const ReportCallPieChart = ({ data }) => {
+const  ReportCallPieChart = ({ data }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 

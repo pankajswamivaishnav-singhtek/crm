@@ -81,7 +81,18 @@ export const registerSchema = Yup.object({
   leadSource: Yup.string().required("Lead Source is required"),
   leadStatus: Yup.string().required("Lead Status is required"),
   leadService: Yup.string().required("Lead Service is required"),
-  annualRevenue: Yup.number().typeError("Revenue must be a number"),
+  annualRevenue: Yup.number()
+    .typeError("Revenue must be a number")
+    .test(
+      "is-decimal",
+      "Revenue must have at most 2 decimal places",
+      (value) => {
+        if (value === null || value === undefined || value === "") {
+          return true; // Skip validation if the value is empty
+        }
+        return /^\d+(\.\d{1,2})?$/.test(value);
+      }
+    ),
   companyName: Yup.string().max(100, "Name must be 100 characters or less"),
   companyEmail: Yup.string()
     .matches(/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/, "Invalid email format.")
@@ -168,8 +179,15 @@ export const accountFormSchema = Yup.object({
   annualRevenue: Yup.number()
     .typeError("Revenue must be a number")
     .required("Annual Revenue is required")
-    .test("is-decimal", "Revenue must have up to two decimal places", (value) =>
-      /^\d+(\.\d{1,2})?$/.test(value)
+    .test(
+      "is-decimal",
+      "Revenue must have at most 2 decimal places",
+      (value) => {
+        if (value === null || value === undefined || value === "") {
+          return true; // Skip validation if the value is empty
+        }
+        return /^\d+(\.\d{1,2})?$/.test(value);
+      }
     ),
   address: Yup.string().required("Address is required"),
   billingAddress: Yup.string().required("Billing Address is required"),
@@ -278,7 +296,18 @@ export const DealFormSchema = Yup.object({
   nextStep: Yup.string()
     .required("Next Step is required")
     .max(50, "Step character must be 50 characters or less"),
-  expectedRevenue: Yup.string().required("Expected Revenue is required"),
+  expectedRevenue: Yup.string()
+    .required("Expected Revenue is required")
+    .test(
+      "is-decimal",
+      "Revenue must have at most 2 decimal places",
+      (value) => {
+        if (value === null || value === undefined || value === "") {
+          return true; // Skip validation if the value is empty
+        }
+        return /^\d+(\.\d{1,2})?$/.test(value);
+      }
+    ),
   leadSource: Yup.string().required("Lead Source is required"),
   campaignSource: Yup.string().required("Campaign Source is required"),
   contactName: Yup.string()

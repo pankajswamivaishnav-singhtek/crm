@@ -14,11 +14,12 @@ import { LiaFileInvoiceSolid } from "react-icons/lia";
 import { LuPin } from "react-icons/lu";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { VscGraph } from "react-icons/vsc";
-import { TbPhonePlus } from "react-icons/tb";
 import { SiSimpleanalytics } from "react-icons/si";
 import { MdOutlineLogout } from "react-icons/md";
 import { RiMenu4Line } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoCallOutline } from "react-icons/io5";
+
 // Controller Api
 import { logoutUser } from "../../controller/fetchApi";
 import { googleLogout } from "@react-oauth/google";
@@ -188,7 +189,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        <TbPhonePlus className="sidebar_navItem_icon" />
+                        <IoCallOutline className="sidebar_navItem_icon" />
                         <span className="sidebar_navItem_text">Calls</span>
                       </Link>
                       <ul className="dropdown-menu dashboard_sidebar_navItem_dropDown">

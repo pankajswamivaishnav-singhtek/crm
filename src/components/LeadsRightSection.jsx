@@ -273,7 +273,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
             redirectLink="/lead-details"
             getAllLeadData={getAllLeadData}
             tableName="leadsTable"
-          
           />
         </div>
         {/* Pagination Div */}
