@@ -57,14 +57,9 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
 
     onSubmit: async (values, { resetForm }) => {
       try {
-         await updateMeeting(
-          meetId,
-          values,
-          setShowToast,
-          tokenId
-        );
+        await updateMeeting(meetId, values, setShowToast, tokenId);
         onUpdateSuccess();
-     
+
         resetForm();
       } catch (error) {
         console.log("Found Error", error);
@@ -103,6 +98,19 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
       formik.setFieldValue("participants", newParticipants);
     }
   };
+
+  // Set Current Date
+  const [currentDate, setCurrentDate] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const dd = String(today.getDate()).padStart(2, "0");
+    const hh = String(today.getHours()).padStart(2, "0");
+    const min = String(today.getMinutes()).padStart(2, "0");
+
+    setCurrentDate(`${yyyy}-${mm}-${dd}T${hh}:${min}`);
+  }, []);
 
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
@@ -162,7 +170,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
             />
             <IoLocationOutline className="create_lead_input_icon" />
           </div>
-          <div className="form-group createLeadInput col-xl-4">
+          {/* <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="date">
               Date &nbsp;
               <small className="text-danger">
@@ -180,6 +188,29 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
               onBlur={formik.handleBlur}
               name="date"
             />
+          </div> */}
+
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="date">
+              Date & Time<span className="required_sign">*</span> &nbsp;
+              {/* <small className="text-danger">
+                {touched.date && errors.date ? errors.date : null}
+              </small> */}
+            </label>
+            <input
+              type="datetime-local"
+              id="date"
+              min={currentDate}
+              className="form-control create_lead_form_input"
+              value={formik.values.date}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              onFocus={formik.handleFocus}
+              name="date"
+            />
+            {formik.touched.date && formik.errors.date && (
+              <small className="errorMessage">{formik.errors.date}</small>
+            )}
           </div>
           {/* Participants dropdown */}
           <div className="form-group createLeadInput col-xl-4 create_meeting_mainDiv">

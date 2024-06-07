@@ -110,7 +110,7 @@ export const registerSchema = Yup.object({
   description: Yup.string().max(1000, "State must be 50 characters or less"),
 });
 
-// Update Schema validation
+// Update Lead Schema validation
 export const updateRegisterSchema = Yup.object({
   leadOwner: Yup.string().required("Lead Owner is required"),
   firstName: Yup.string().required("First Name is required"),
@@ -120,17 +120,26 @@ export const updateRegisterSchema = Yup.object({
   secondaryMobileNumber: Yup.string(),
   leadSource: Yup.string().required("Lead Source is required"),
   leadStatus: Yup.string().required("Lead Status is required"),
-  annualRevenue: Yup.number().required("Annual Revenue is required"),
-  companyName: Yup.string().required("Company Name is required"),
-  companyEmail: Yup.string()
-    .email("Invalid email")
-    .required("Company Email is required"),
+  annualRevenue: Yup.number()
+    .typeError("Revenue must be a number")
+    .test(
+      "is-decimal",
+      "Revenue must have at most 2 decimal places",
+      (value) => {
+        if (value === null || value === undefined || value === "") {
+          return true; // Skip validation if the value is empty
+        }
+        return /^\d+(\.\d{1,2})?$/.test(value);
+      }
+    ),
+  companyName: Yup.string(),
+  companyEmail: Yup.string().email("Invalid email"),
   companyContact: Yup.string(),
   secondaryContact: Yup.string(),
-  city: Yup.string().required("City is required"),
-  district: Yup.string().required("District is required"),
-  state: Yup.string().required("State is required"),
-  country: Yup.string().required("Country is required"),
+  city: Yup.string(),
+  district: Yup.string(),
+  state: Yup.string(),
+  country: Yup.string(),
   description: Yup.string(),
 });
 

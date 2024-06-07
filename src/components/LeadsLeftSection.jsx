@@ -12,7 +12,7 @@ const FilterSidebar = ({ setFilterData }) => {
         companyName: "",
         date: "",
         leadOwnerName: "",
-        verified: false,
+        // verified: false,
         // verified: true,
         unverified: true,
       },
@@ -36,11 +36,6 @@ const FilterSidebar = ({ setFilterData }) => {
       setFieldValue("unverified", true);
       setFieldValue("verified", false);
     }
-    // If neither checkbox is checked, update both to unchecked (optional)
-    else {
-      setFieldValue("verified", false);
-      setFieldValue("unverified", false);
-    }
   };
 
   return (
@@ -55,8 +50,8 @@ const FilterSidebar = ({ setFilterData }) => {
           <div className="form-check">
             <input
               name="verified"
-              type="checkbox"
-              className="form-check-input"
+              type="radio"
+              className="form-check-input lead_filter_radio_btn"
               id="touchedFilter"
               value={values.verified}
               // onChange={handleChange}
@@ -71,8 +66,8 @@ const FilterSidebar = ({ setFilterData }) => {
           <div className="form-check">
             <input
               name="unverified"
-              type="checkbox"
-              className="form-check-input"
+              type="radio"
+              className="form-check-input lead_filter_radio_btn"
               id="untouchedFilter"
               value={values.unverified}
               onChange={handleCheckboxChange}
@@ -84,39 +79,6 @@ const FilterSidebar = ({ setFilterData }) => {
             </label>
           </div>
         </div>
-        {/* <div className="filter-container">
-          <h4>System Defined Filter</h4>
-          <div className="form-check">
-            <input
-              name="status"
-              type="radio"
-              className="form-check-input"
-              id="touchedFilter"
-              value="verified"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              checked={values.status === "verified"}
-            />
-            <label className="form-check-label" htmlFor="touchedFilter">
-              Verified
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              name="status"
-              type="radio"
-              className="form-check-input"
-              id="untouchedFilter"
-              value="unverified"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              checked={values.status === "unverified"}
-            />
-            <label className="form-check-label" htmlFor="untouchedFilter">
-              Unverified
-            </label>
-          </div>
-        </div> */}
         {/* Filter By Fields */}
         <div className="filter-container">
           <h4>Filter By Fields</h4>
@@ -126,7 +88,7 @@ const FilterSidebar = ({ setFilterData }) => {
               type="text"
               name="cityName"
               placeholder="Enter City"
-              className="filters"
+              className="filters leads_filter_input_field"
               value={values.cityName}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -138,7 +100,7 @@ const FilterSidebar = ({ setFilterData }) => {
               type="text"
               name="companyName"
               placeholder="Company name"
-              className="filters"
+              className="filters leads_filter_input_field"
               value={values.companyName}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -150,7 +112,7 @@ const FilterSidebar = ({ setFilterData }) => {
               type="date"
               name="date"
               placeholder="Select date"
-              className="filters"
+              className="filters leads_filter_input_field"
               value={values.date}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -162,7 +124,7 @@ const FilterSidebar = ({ setFilterData }) => {
               type="text"
               name="leadOwnerName"
               placeholder="Enter Lead Owner"
-              className="filters"
+              className="filters leads_filter_input_field"
               value={values.leadOwnerName}
               onChange={handleChange}
               onBlur={handleBlur}

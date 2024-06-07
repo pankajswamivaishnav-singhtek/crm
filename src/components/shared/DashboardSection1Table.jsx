@@ -31,9 +31,6 @@ const DashboardSection1Table = () => {
         setLoading(false);
       }
     })();
-    // monthlyMeetings(uid, tokenId).then((res) => {
-    //   setMonthlyMeetingsData(res);
-    // });
   }, [uid, tokenId]);
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
@@ -41,25 +38,6 @@ const DashboardSection1Table = () => {
         <div className="col dashboard_section1_table">
           <h4>My Meeting this month</h4>
         </div>
-        {/* <div className="col dropdown" style={{ textAlign: "end" }}>
-          <PiDotsThreeCircleVertical
-            className="dashboard_section1_table_edit_button dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          />
-          <ul className="dropdown-menu" aria-labelledby="editDeleteDropdown">
-            <li>
-              <button className="dropdown-item">
-                <BsPencil className="dashboard_section1_table_editBtn"/> Edit
-              </button>
-            </li>
-            <li>
-              <button className="dropdown-item">
-                <BsTrash  className="dashboard_section1_table_deleteBtn"/> Delete
-              </button>
-            </li>
-          </ul>
-        </div> */}
       </div>
       <div className="dashboard_section1_mainDiv">
         <table className="table ">

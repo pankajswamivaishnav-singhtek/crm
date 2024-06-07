@@ -33,6 +33,19 @@ const LeadsRightSectionTable = ({
       setLeadCostumerId([]);
     }
   };
+  // Lead Status Color
+  const getStatusClassName = (status) => {
+    switch (status.toLowerCase()) {
+      case "lead":
+        return "lead-table-leadStatus-lead";
+      case "contacted":
+        return "lead-table-leadStatus-contacted";
+      case "deal":
+        return "lead-table-leadStatus-deal";
+      default:
+        return "";
+    }
+  };
 
   // Update master checkbox state when leadCostumerId changes
   useEffect(() => {
@@ -103,7 +116,7 @@ const LeadsRightSectionTable = ({
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllLeadData && getAllLeadData.content ? (
+            {getAllLeadData && getAllLeadData?.content ? (
               getAllLeadData?.content?.map((data, index) => (
                 <tr
                   key={data.id}
@@ -135,8 +148,13 @@ const LeadsRightSectionTable = ({
                     </Link>
                   </td>
                   <td>
-                    <Link to={redirectLink} className="Link-button-leads">
-                      {data.leadStatus}
+                    <Link
+                      to={redirectLink}
+                      className={`Link-button-leads ${getStatusClassName(
+                        data.leadStatus
+                      )}`}
+                    >
+                      <span> {data.leadStatus}</span>
                     </Link>
                   </td>
                   <td>

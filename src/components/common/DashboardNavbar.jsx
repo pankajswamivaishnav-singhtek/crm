@@ -9,23 +9,28 @@ import { IoMdNotifications } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOutCircle } from "react-icons/bi";
+import { FcConferenceCall } from "react-icons/fc";
 // Components
 import UpdateProfile from "../../pages/UpdateProfile";
 // Controller Api
-import { logoutUser, getCurrentUser } from "../../controller/fetchApi";
+import {
+  logoutUser,
+  getCurrentUser,
+  monthlyMeetings,
+} from "../../controller/fetchApi";
 const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Page Name -----Start-------
   const location = useLocation();
   const [pageName, setPageName] = useState("");
   const pathname = location.pathname;
 
-  //  Sidebar Functionality 
+  //  Sidebar Functionality
   const sidebarState = () => {
     setShowSidebarSmallScreen(true);
     setIsSidebar((prev) => !prev);
   };
 
-  // Logout User Api Call 
+  // Logout User Api Call
   const logoutUserSubmit = () => {
     logoutUser();
     localStorage.clear();
@@ -35,7 +40,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   const [getCurrentUserData, setCurrentUserData] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-
+  const uid = userIdTokenData?.data?.userId;
   //  Get Current User Data
   const getUser = useCallback(async () => {
     try {
@@ -46,6 +51,86 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
     }
   }, [tokenId, setCurrentUserData]);
 
+  // Get Current Day & Time
+  const getCurrentDayMeetings = (meetings) => {
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    return meetings.filter((meeting) => {
+      const meetingDate = new Date(meeting.date).toISOString().split("T")[0];
+      return meetingDate === today;
+    });
+  };
+  const [currentDayMeetings, setCurrentDayMeetings] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const result = await monthlyMeetings(uid, tokenId);
+        if (result) {
+          const todayMeetings = getCurrentDayMeetings(result);
+          setCurrentDayMeetings(todayMeetings);
+        } else {
+          setCurrentDayMeetings([]);
+        }
+      } catch (error) {
+        console.log(error);
+        setCurrentDayMeetings([]);
+      }
+    })();
+  }, [uid, tokenId]);
+
+  // Show Reminder
+  // Show Toast When Meeting is start before 2 min
+  const [showToast, setShowToast] = useState(false);
+  // useEffect(() => {
+  //   const meetingTime = new Date("2024-06-07T16:50:00");
+  //   const currentTime = new Date();
+  //   const twoMinutesBefore = 2 * 60 * 1000;
+  //   const timeDifference = meetingTime - currentTime - twoMinutesBefore;
+
+  //   const timeoutToShow = setTimeout(() => {
+  //     setShowToast(true);
+  //   }, timeDifference);
+
+  //   const timeoutToHide = setTimeout(() => {
+  //     setShowToast(false);
+  //   }, timeDifference + 15000);
+
+  //   return () => {
+  //     clearTimeout(timeoutToShow);
+  //     clearTimeout(timeoutToHide);
+  //   };
+  // }, []);
+
+  // Second useEffect to handle meeting reminders
+  useEffect(() => {
+    const timeouts = [];
+
+    currentDayMeetings.forEach((meeting) => {
+      const meetingTime = new Date(meeting.date);
+      const currentTime = new Date();
+      const twoMinutesBefore = 2 * 60 * 1000;
+      const timeDifference = meetingTime - currentTime - twoMinutesBefore;
+
+      if (timeDifference > 0) {
+        const timeoutToShow = setTimeout(() => {
+          setShowToast(true);
+        }, timeDifference);
+
+        const timeoutToHide = setTimeout(() => {
+          setShowToast(false);
+        }, timeDifference + 15000);
+
+        timeouts.push(timeoutToShow, timeoutToHide);
+      }
+    });
+
+    // Clean up timeouts on component unmount
+    return () => {
+      timeouts.forEach((timeout) => clearTimeout(timeout));
+    };
+  }, [currentDayMeetings]);
+
+  // Use Effect Function
   useEffect(() => {
     getUser();
     switch (pathname) {
@@ -162,7 +247,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         setPageName("Singhsoft Product");
     }
   }, [getUser, pathname]);
-
+  console.log("Get Current Month Data", currentDayMeetings);
   return (
     <nav className="navbar navbar-expand-lg  dashboard_navbar">
       <div className="container-fluid dashboard_navbar_container_fluid">
@@ -191,13 +276,15 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
           <div className="ms-auto">
             <ul className="navbar-nav mb-2 mb-lg-0 navbar-right-menu-mannual">
               <li className="nav-item nav-item-notification">
-                <a
+                <Link
                   className="nav-link dashboard_navbar_notification_link"
-                  href="#!"
+                  to="/meetings"
                 >
                   <IoMdNotifications className="dashboard_navbar_notification_icon" />
-                  <small className="dashboard_navbar_notification_nadge">5</small>
-                </a>
+                  <small className="dashboard_navbar_notification_nadge">
+                    {currentDayMeetings?.length}
+                  </small>
+                </Link>
               </li>
               <li className="nav-item">
                 <div className="rounded-pill dashboard_navbar_userImg">
@@ -289,6 +376,32 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
           </div>
         </div>
       </>
+      {/* Toast */}
+      {showToast && (
+        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+          <div
+            className="toast show create_lead_toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header create_lead_toast_header">
+              <FcConferenceCall className="fs-3" />
+              &nbsp;
+              <strong className="me-auto">Meeting Reminder</strong>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowToast(false)}
+              />
+            </div>
+            {/* <div className="toast-body">Sign In successfully.</div> */}
+            <div className="toast-body">
+              Your meeting is scheduled in 2 minutes with
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

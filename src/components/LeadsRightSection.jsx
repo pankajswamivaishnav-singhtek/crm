@@ -183,6 +183,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
     getLeadsData();
   }, [getLeadsData]);
 
+  console.log("getAllLeadsData", getAllLeadData);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_containers">
       <div className="dashboard_content_wrapper">

@@ -91,8 +91,21 @@ input[type="text"] {
   border-bottom-left-radius: 20px;
 }
 
+.lead_filter_radio_btn {
+  cursor: pointer;
+}
 
-/*  */
+.leads_filter_input_field {
+  padding: 8px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(208, 209, 210, 1);
+}
+
+/* Remove default highlighting on click */
+.leads_filter_input_field:focus {
+  outline: none;
+}
+
 .LeadRightSectionTable_body::-webkit-scrollbar {
   display: none;
 }
@@ -282,6 +295,20 @@ input[type="text"] {
   line-height: 29px;
   text-align: center;
   color: rgba(115, 129, 130, 1);
+}
+
+/* Lead Status Text Color */
+.lead-table-leadStatus-lead {
+  color: red !important;
+  font-weight: 500 !important;
+}
+.lead-table-leadStatus-contacted {
+  color: rgb(53, 212, 53) !important;
+  font-weight: 500 !important;
+}
+.lead-table-leadStatus-deal {
+  color: rgba(103, 119, 255, 1) !important;
+  font-weight: 500 !important;
 }
 
 /* Same Css All Leads */
