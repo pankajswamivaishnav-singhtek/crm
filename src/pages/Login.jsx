@@ -66,7 +66,7 @@ const Login = () => {
   const [userData, setUserData] = useState();
   const loginUserWithGoogle = useCallback(async () => {
     const response = await loginUserThroughGoogle(userData, setShowToast);
-    if (response.data.status === 200) {
+    if (response?.data?.status === 200) {
       navigate("/dashboard");
     }
     console.log(response);

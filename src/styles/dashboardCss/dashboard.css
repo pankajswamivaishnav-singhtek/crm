@@ -268,6 +268,15 @@
   .dashboard_section2_row2 {
     margin-top: 20px;
   }
+  .dashboard_section1_mainDiv {
+    max-height: 28vh;
+    overflow-y: auto;
+  }
+  .dashboard_section1_mainDiv thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 }
 
 @media screen and (max-width: 1400px) {

@@ -48,3 +48,15 @@
       calc(-9 * var(--w)) 0;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .loader {
+    position: fixed;
+    left: 30%;
+    top: 50%;
+    --w: 10ch;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+  }
+}

@@ -4,7 +4,6 @@ import DashboardSidebar from "../components/common/DashboardSidebar";
 import DashboardNavbar from "../components/common/DashboardNavbar";
 import Loader from "./Loader";
 
-
 //CSS
 import "../styles/main.page.css";
 // Controller Api

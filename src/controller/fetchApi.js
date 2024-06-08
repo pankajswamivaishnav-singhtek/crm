@@ -1331,9 +1331,11 @@ export const createMeeting = async (uid, callData, setShowToast, tokenId) => {
         },
       }
     );
-    if (response) {
+
+    if (response.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Create Meeting Successfully." });
+      return response;
     }
   } catch (error) {
     const message = error?.response?.data;
@@ -1468,6 +1470,8 @@ export const uploadMeetings = async (file, setShowToast, tokenId) => {
     console.log(message);
   }
 };
+
+// Socket Io Connection
 
 // ************* Calls Api ************
 

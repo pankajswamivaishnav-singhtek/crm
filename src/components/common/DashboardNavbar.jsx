@@ -9,7 +9,8 @@ import { IoMdNotifications } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOutCircle } from "react-icons/bi";
-import { FcConferenceCall } from "react-icons/fc";
+import { FcAlarmClock } from "react-icons/fc";
+
 // Components
 import UpdateProfile from "../../pages/UpdateProfile";
 // Controller Api
@@ -81,38 +82,19 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Show Reminder
   // Show Toast When Meeting is start before 2 min
   const [showToast, setShowToast] = useState(false);
-  // useEffect(() => {
-  //   const meetingTime = new Date("2024-06-07T16:50:00");
-  //   const currentTime = new Date();
-  //   const twoMinutesBefore = 2 * 60 * 1000;
-  //   const timeDifference = meetingTime - currentTime - twoMinutesBefore;
-
-  //   const timeoutToShow = setTimeout(() => {
-  //     setShowToast(true);
-  //   }, timeDifference);
-
-  //   const timeoutToHide = setTimeout(() => {
-  //     setShowToast(false);
-  //   }, timeDifference + 15000);
-
-  //   return () => {
-  //     clearTimeout(timeoutToShow);
-  //     clearTimeout(timeoutToHide);
-  //   };
-  // }, []);
-
   // Second useEffect to handle meeting reminders
+  const [meetPerson, setMeetPerson] = useState("");
   useEffect(() => {
     const timeouts = [];
 
     currentDayMeetings.forEach((meeting) => {
-      const meetingTime = new Date(meeting.date);
+      const meetingTime = new Date(meeting?.date);
       const currentTime = new Date();
       const twoMinutesBefore = 2 * 60 * 1000;
       const timeDifference = meetingTime - currentTime - twoMinutesBefore;
-
       if (timeDifference > 0) {
         const timeoutToShow = setTimeout(() => {
+          setMeetPerson(meeting?.title);
           setShowToast(true);
         }, timeDifference);
 
@@ -386,7 +368,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
             aria-atomic="true"
           >
             <div className="toast-header create_lead_toast_header">
-              <FcConferenceCall className="fs-3" />
+              <FcAlarmClock className="fs-3" />
               &nbsp;
               <strong className="me-auto">Meeting Reminder</strong>
               <button
@@ -397,7 +379,11 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
             </div>
             {/* <div className="toast-body">Sign In successfully.</div> */}
             <div className="toast-body">
-              Your meeting is scheduled in 2 minutes with
+              <small>
+                Your meeting is scheduled in 2 minutes with
+                <br />
+                {meetPerson}
+              </small>
             </div>
           </div>
         </div>

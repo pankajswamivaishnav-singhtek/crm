@@ -30,7 +30,7 @@ const CreateMeeting = () => {
 
   // Toast Manage State
   const [showToast, setShowToast] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
@@ -62,18 +62,20 @@ const CreateMeeting = () => {
     validationSchema: MeetingFormSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
+        setLoading(true);
         const response = await createMeeting(
           uid,
           values,
           setShowToast,
           tokenId
         );
-        if (response) {
+        if (response.status === 200) {
           resetForm();
+          setLoading(false);
         }
-        resetForm();
       } catch (error) {
         console.log("Found Error", error);
+        setLoading(false);
       }
     },
   });
@@ -258,11 +260,17 @@ const CreateMeeting = () => {
           </div>
         </div>
         {/* Submit Button */}
-        <div className="text-center">
-          <button className="create_lead_form_submitBtn" type="submit">
-            Submit
-          </button>
-        </div>
+        {loading ? (
+          <div className="text-center">
+            <button className="create_lead_form_submitBtn">Creating...</button>
+          </div>
+        ) : (
+          <div className="text-center">
+            <button className="create_lead_form_submitBtn" type="submit">
+              Submit
+            </button>
+          </div>
+        )}
       </form>
       {/* Toast */}
       {showToast && (
