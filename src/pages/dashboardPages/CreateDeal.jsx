@@ -265,7 +265,7 @@ const CreateDeal = () => {
               Expected Revenue <span className="required_sign">*</span>
             </label>
             <input
-              type="text"
+              type="tel"
               id="expectedRevenue"
               className="form-control create_lead_form_input"
               value={values.expectedRevenue}

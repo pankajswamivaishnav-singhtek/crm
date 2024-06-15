@@ -182,6 +182,15 @@
   color: red;
 }
 
+.errorMessageSignup {
+  color: red;
+  font-size: 0.875rem;
+  position: absolute;
+  top: 90%;
+  transform: translateY(5px); /* Adjust spacing as needed */
+  white-space: nowrap;
+}
+
 @media screen and (max-width: 1024px) {
   .signup_fullname_div {
     padding: 0 50px;

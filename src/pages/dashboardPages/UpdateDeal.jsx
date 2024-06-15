@@ -45,6 +45,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
     validationSchema: DealFormSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
+        console.log("Enter Submit");
         await updateDeal(dealId, values, setShowToast, tokenId);
 
         if (updateDeal) {
@@ -92,12 +93,11 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="dealOwner"
-              placeholder={
-                formik.touched.dealOwner && formik.errors.dealOwner
-                  ? formik.errors.dealOwner
-                  : null
-              }
+              placeholder="Enter name"
             />
+            {formik.touched.dealOwner && formik.errors.dealOwner && (
+              <small className="errorMessage">{formik.errors.dealOwner}</small>
+            )}
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -110,30 +110,28 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="dealName"
-              placeholder={
-                formik.touched.dealName && formik.errors.dealName
-                  ? formik.errors.dealName
-                  : null
-              }
+              placeholder="Enter deal name"
             />
+            {formik.touched.dealName && formik.errors.dealName && (
+              <small className="errorMessage">{formik.errors.dealName}</small>
+            )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="amount">Amount</label>
             <input
-              type="text"
+              type="tel"
               id="amount"
               className="form-control create_lead_form_input"
               value={formik.values.amount}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="amount"
-              placeholder={
-                formik.touched.amount && formik.errors.amount
-                  ? formik.errors.amount
-                  : null
-              }
+              placeholder="Enter amount"
             />
+            {formik.touched.amount && formik.errors.amount && (
+              <small className="errorMessage">{formik.errors.amount}</small>
+            )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -146,12 +144,12 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="closingDate"
-              placeholder={
-                formik.touched.closingDate && formik.errors.closingDate
-                  ? formik.errors.closingDate
-                  : null
-              }
             />
+            {formik.touched.closingDate && formik.errors.closingDate && (
+              <small className="errorMessage">
+                {formik.errors.closingDate}
+              </small>
+            )}
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="accountName">Account Name</label>
@@ -163,12 +161,13 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="accountName"
-              placeholder={
-                formik.touched.accountName && formik.errors.accountName
-                  ? formik.errors.accountName
-                  : null
-              }
+              placeholder="Enter account name"
             />
+            {formik.touched.accountName && formik.errors.accountName && (
+              <small className="errorMessage">
+                {formik.errors.accountName}
+              </small>
+            )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -182,11 +181,12 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               name="stage"
             >
               <option value="">
-                {formik.touched.stage && formik.errors.stage ? (
+                {/* {formik.touched.stage && formik.errors.stage ? (
                   <p className="text-danger">{formik.errors.stage}</p>
                 ) : (
                   "Qualification"
-                )}
+                )} */}
+                Choose Stage
               </option>
               <option value="need-analysis">Need Analysis</option>
               <option value="value-proposition">Value Proposition</option>
@@ -201,6 +201,9 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
                 Closed Lost To Compition
               </option>
             </select>
+            {formik.touched.stage && formik.errors.stage && (
+              <small className="errorMessage">{formik.errors.stage}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -214,15 +217,19 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               name="type"
             >
               <option value="">
-                {formik.touched.type && formik.errors.type ? (
+                {/* {formik.touched.type && formik.errors.type ? (
                   <p className="text-danger">{formik.errors.type}</p>
                 ) : (
                   "Qualification"
-                )}
+                )} */}
+                Choose Type
               </option>
               <option value="existing-business">Existing Business</option>
               <option value="new-business">New Business</option>
             </select>
+            {formik.touched.type && formik.errors.type && (
+              <small className="errorMessage">{formik.errors.type}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -235,30 +242,31 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="nextStep"
-              placeholder={
-                formik.touched.nextStep && formik.errors.nextStep
-                  ? formik.errors.nextStep
-                  : null
-              }
+              placeholder="Your next step"
             />
+            {formik.touched.nextStep && formik.errors.nextStep && (
+              <small className="errorMessage">{formik.errors.nextStep}</small>
+            )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="expectedRevenue">Expected Revenue</label>
             <input
-              type="text"
+              type="tel"
               id="expectedRevenue"
               className="form-control create_lead_form_input"
               value={formik.values.expectedRevenue}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="expectedRevenue"
-              placeholder={
-                formik.touched.expectedRevenue && formik.errors.expectedRevenue
-                  ? formik.errors.expectedRevenue
-                  : null
-              }
+              placeholder="Enter revenue"
             />
+            {formik.touched.expectedRevenue &&
+              formik.errors.expectedRevenue && (
+                <small className="errorMessage">
+                  {formik.errors.expectedRevenue}
+                </small>
+              )}
             <FaPhone className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -272,11 +280,12 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               name="leadSource"
             >
               <option value="">
-                {formik.touched.leadSource && formik.errors.leadSource ? (
+                {/* {formik.touched.leadSource && formik.errors.leadSource ? (
                   <p className="text-danger">{formik.errors.leadSource}</p>
                 ) : (
                   "Select Source"
-                )}
+                )} */}
+                Select Source
               </option>
               <option value="advertisement">Advertisement</option>
               <option value="cold-call">Cold Call</option>
@@ -284,6 +293,9 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               <option value="external-referral">External Refferal</option>
               <option value="other">Other</option>
             </select>
+            {formik.touched.leadSource && formik.errors.leadSource && (
+              <small className="errorMessage">{formik.errors.leadSource}</small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -296,12 +308,13 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="campaignSource"
-              placeholder={
-                formik.touched.campaignSource && formik.errors.campaignSource
-                  ? formik.errors.campaignSource
-                  : null
-              }
+              placeholder="Enter Campaign Source"
             />
+            {formik.touched.campaignSource && formik.errors.campaignSource && (
+              <small className="errorMessage">
+                {formik.errors.campaignSource}
+              </small>
+            )}
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
           <div className="form-group createLeadInput col-xl-4">
@@ -314,12 +327,13 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="contactName"
-              placeholder={
-                formik.touched.contactName && formik.errors.contactName
-                  ? formik.errors.contactName
-                  : null
-              }
+              placeholder="Enter contact name"
             />
+            {formik.touched.contactName && formik.errors.contactName && (
+              <small className="errorMessage">
+                {formik.errors.contactName}
+              </small>
+            )}
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
         </div>
@@ -343,12 +357,17 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               onBlur={formik.handleBlur}
               name="description"
               rows="3"
-              placeholder={
-                formik.touched.description && formik.errors.description
-                  ? formik.errors.description
-                  : null
-              }
+              // placeholder={
+              //   formik.touched.description && formik.errors.description
+              //     ? formik.errors.description
+              //     : null
+              // }
             ></textarea>
+            {formik.touched.description && formik.errors.description && (
+              <small className="errorMessage">
+                {formik.errors.description}
+              </small>
+            )}
           </div>
         </div>
         {/* Submit Button */}

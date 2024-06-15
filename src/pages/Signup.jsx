@@ -87,7 +87,7 @@ const Signup = () => {
                     {/* Full Name */}
                     <div className="signup_fullname_div">
                       {/* first name */}
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_name"
@@ -96,26 +96,23 @@ const Signup = () => {
                         </label>
                         <input
                           type="text"
-                          className={`form-control signup_name_form_control  ${
-                            errors.firstName && touched.firstName
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_name_form_control`}
                           id="exampleFormControlInput1"
-                          placeholder={
-                            touched.firstName && errors.firstName
-                              ? errors.firstName
-                              : "John"
-                          }
+                          placeholder="Enter first name"
                           name="firstName"
                           value={values.firstName}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.firstName && errors.firstName && (
+                          <small className="errorMessageSignup">
+                            {errors.firstName}
+                          </small>
+                        )}
                         <FcBusinessman className="signup_name_icons" />
                       </div>
                       {/* last name */}
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_name"
@@ -124,28 +121,25 @@ const Signup = () => {
                         </label>
                         <input
                           type="text"
-                          className={`form-control signup_name_form_control  ${
-                            errors.lastName && touched.lastName
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_name_form_control`}
                           id="exampleFormControlInput1"
-                          placeholder={
-                            touched.lastName && errors.lastName
-                              ? errors.lastName
-                              : "Doe"
-                          }
+                          placeholder="Enter last name"
                           name="lastName"
                           value={values.lastName}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.lastName && errors.lastName && (
+                          <small className="errorMessageSignup ">
+                            {errors.lastName}
+                          </small>
+                        )}
                         <FcBusinessman className="signup_name_icons" />
                       </div>
                     </div>
                     {/* UserName */}
                     <div className="signup_input_div ">
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -154,28 +148,25 @@ const Signup = () => {
                         </label>
                         <input
                           type="text"
-                          className={`form-control signup_email_form_control userName_input_signup  ${
-                            errors.userName && touched.userName
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_email_form_control userName_input_signup`}
                           id="exampleFormControlInput1"
                           name="userName"
-                          placeholder={
-                            touched.userName && errors.userName
-                              ? errors.userName
-                              : "Johndoe123"
-                          }
+                          placeholder="Enter User name"
                           value={values.userName}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.userName && errors.userName && (
+                          <small className="errorMessageSignup">
+                            {errors.userName}
+                          </small>
+                        )}
                         <FcManager className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Email */}
                     <div className="signup_input_div">
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -184,28 +175,25 @@ const Signup = () => {
                         </label>
                         <input
                           type="email"
-                          className={`form-control signup_email_form_control  ${
-                            errors.email && touched.email
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_email_form_control`}
                           id="exampleFormControlInput1"
                           name="email"
-                          placeholder={
-                            touched.email && errors.email
-                              ? errors.email
-                              : "email@example.com"
-                          }
+                          placeholder="Enter email"
                           value={values.email}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.email && errors.email && (
+                          <small className="errorMessageSignup">
+                            {errors.email}
+                          </small>
+                        )}
                         <FcFeedback className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Phone */}
                     <div className="signup_input_div">
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -214,28 +202,25 @@ const Signup = () => {
                         </label>
                         <input
                           type="tel"
-                          className={`form-control signup_email_form_control  ${
-                            errors.phone && touched.phone
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_email_form_control`}
                           id="exampleFormControlInput1"
-                          placeholder={
-                            touched.phone && errors.phone
-                              ? errors.phone
-                              : "0145707327"
-                          }
+                          placeholder="Enter number"
                           name="phone"
                           value={values.phone}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.phone && errors.phone && (
+                          <small className="errorMessageSignup">
+                            {errors.phone}
+                          </small>
+                        )}
                         <FcCellPhone className="signup_input_icons" />
                       </div>
                     </div>
                     {/* Create Password */}
                     <div className="signup_input_div">
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -245,22 +230,19 @@ const Signup = () => {
                         <input
                           type={showPassword ? "password" : "text"}
                           minLength={6}
-                          className={`form-control signup_email_form_control  ${
-                            errors.password && touched.password
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_email_form_control  `}
                           id="exampleFormControlInput1"
-                          placeholder={
-                            touched.password && errors.password
-                              ? errors.password
-                              : "*****"
-                          }
+                          placeholder="Make password"
                           name="password"
                           value={values.password}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.password && errors.password && (
+                          <small className="errorMessageSignup">
+                            {errors.password}
+                          </small>
+                        )}
                         {showPassword ? (
                           <p
                             className="signup_input_icons"
@@ -282,7 +264,7 @@ const Signup = () => {
                     </div>
                     {/* Confirm Password */}
                     <div className="signup_input_div">
-                      <div className="mb-3 position-relative">
+                      <div className="mb-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -293,22 +275,19 @@ const Signup = () => {
                         <input
                           type={showConfirmPassword ? "password" : "text"}
                           minLength={6}
-                          className={`form-control signup_email_form_control  ${
-                            errors.confirmPassword && touched.confirmPassword
-                              ? "signup_input_form"
-                              : ""
-                          }`}
+                          className={`form-control signup_email_form_control `}
                           id="exampleFormControlInput1"
-                          placeholder={
-                            touched.confirmPassword && errors.confirmPassword
-                              ? errors.confirmPassword
-                              : "*****"
-                          }
+                          placeholder="Check password"
                           name="confirmPassword"
                           value={values.confirmPassword}
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
+                        {touched.confirmPassword && errors.confirmPassword && (
+                          <small className="errorMessageSignup">
+                            {errors.confirmPassword}
+                          </small>
+                        )}
                         {showConfirmPassword ? (
                           <p
                             className="signup_input_icons"
@@ -327,13 +306,13 @@ const Signup = () => {
                           </p>
                         )}
                       </div>
-                      <p
+                      {/* <p
                         className={
                           errors.confirmPassword ? "cpasswordErrorPara" : ""
                         }
                       >
                         {errors.confirmPassword}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                   {/* Submit Button */}

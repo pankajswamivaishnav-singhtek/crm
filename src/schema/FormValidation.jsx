@@ -7,6 +7,11 @@ export const signupFormSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
   userName: Yup.string().required("Username is required"),
   password: Yup.string().required("Password is required"),
+  phone: Yup.number()
+    .required("Phone number is required")
+    .typeError(
+      "Phone                                                       must be a number"
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Password is required"),
@@ -295,7 +300,7 @@ export const DealFormSchema = Yup.object({
   dealName: Yup.string()
     .required("Deal Name is required")
     .max(50, "Deal name must be 50 characters or less"),
-  amount: Yup.string().required("Amount is required"),
+  amount: Yup.number().required("Amount is required"),
   closingDate: Yup.date().required("Closing date is required"),
   accountName: Yup.string()
     .required("Account Name is required")
@@ -305,7 +310,7 @@ export const DealFormSchema = Yup.object({
   nextStep: Yup.string()
     .required("Next Step is required")
     .max(50, "Step character must be 50 characters or less"),
-  expectedRevenue: Yup.string()
+  expectedRevenue: Yup.number()
     .required("Expected Revenue is required")
     .test(
       "is-decimal",
