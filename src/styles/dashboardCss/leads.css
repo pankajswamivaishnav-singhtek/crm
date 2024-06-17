@@ -203,7 +203,7 @@ input[type="text"] {
 
 .dashboard_leads_action_btn_div > button {
   width: 128px;
-  height: 50px;
+  height: 43px;
   border-radius: 8px;
   border: 1px solid rgba(194, 200, 212, 1);
   background-color: rgba(255, 255, 255, 1);
@@ -220,10 +220,11 @@ input[type="text"] {
 
 .dashboard_leads_verify_btn_div > button {
   width: 128px;
-  height: 50px;
+  height: 43px;
   border-radius: 8px;
   border: 1px solid rgba(194, 200, 212, 1);
-  background-color: rgba(88, 105, 255, 1);
+  /* background-color: rgba(88, 105, 255, 1); */
+  background-color: #7fcf2f;
   box-shadow: 2px 3px 26px 0px rgba(64, 123, 255, 0.11);
   font-family: Roboto;
   font-size: 17px;
@@ -235,11 +236,12 @@ input[type="text"] {
   margin-bottom: 10px;
 }
 .leads_verify_btn_icon {
-  color: rgb(15, 228, 15);
+  /* color: rgb(15, 228, 15); */
+  color: #ffffff;
 }
 .dashboard_leads_create_btn_div > button {
   width: 150px;
-  height: 50px;
+  height: 43px;
   border-radius: 8px;
   border: 1px solid rgba(194, 200, 212, 1);
   background-color: rgba(88, 105, 255, 1);
@@ -309,6 +311,10 @@ input[type="text"] {
 .lead-table-leadStatus-deal {
   color: rgba(103, 119, 255, 1) !important;
   font-weight: 500 !important;
+}
+
+.lead-table-contact-action-icon {
+  color: #ff7006;
 }
 
 /* Same Css All Leads */

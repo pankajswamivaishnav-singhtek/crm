@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
+import { HiPencilSquare } from "react-icons/hi2";
 const MeetingTable = ({
   tblHead,
   redirectLink,
@@ -91,6 +92,9 @@ const MeetingTable = ({
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
               <th scope="col">{tblHead.fifthHead}</th>
+              <th scope="col" className="text-center">
+                {tblHead.sixthHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -135,11 +139,20 @@ const MeetingTable = ({
                       <FaRegEye className="showDetailEye fs-4" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to="/create-deal">
+                      <HiPencilSquare className="lead-table-contact-action-icon fs-5" />
+                    </Link>
+                    &nbsp;&nbsp;
+                    <Link to="/deal-details">
+                      <FaRegEye className="fs-5" />
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6">No Meeting Data At this Time</td>
+                <td colSpan="7">No Meeting Data At this Time</td>
               </tr>
             )}
           </tbody>

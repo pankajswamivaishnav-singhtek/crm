@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import leadIdContext from "../LeadIdContext";
 // CSS
 import "../../styles/dashboardCss/leads.css";
@@ -6,12 +6,35 @@ import "../../styles/dashboardCss/leads.css";
 import FilterSidebar from "../../components/LeadsLeftSection";
 import LeadsRightSection from "../../components/LeadsRightSection";
 
+const initialFilterState = {
+  cityName: "",
+  companyName: "",
+  date: "",
+  leadOwnerName: "",
+  verified: "",
+  unverified: "",
+};
+
+// Function to load filter state from localStorage
+const loadFilterState = () => {
+  const savedFilter = localStorage.getItem("filterData");
+  return savedFilter ? JSON.parse(savedFilter) : initialFilterState;
+};
+
 const Leads = () => {
-  const [filterData, setFilterData] = useState();
+  // const [filterData, setFilterData] = useState({
+  //   unverified: true,
+  // });
+
+  // Function to load filter state from localStorage
+  const [filterData, setFilterData] = useState(loadFilterState);
+
+  // Save filter state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("filterData", JSON.stringify(filterData));
+  }, [filterData]);
   const [leadCostumerId, setLeadCostumerId] = useState([]);
 
-
-  
   return (
     <div className="container-fluid dashboard_leads_main_container">
       <div className="row dashboard_filter_sidebar_row">

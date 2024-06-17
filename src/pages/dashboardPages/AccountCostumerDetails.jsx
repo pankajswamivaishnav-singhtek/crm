@@ -272,7 +272,7 @@ const AccountCostumerDetails = () => {
                         Shipping City
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleAccountData.shippingCity}
+                        {getSingleAccountData?.shippingCity}
                       </td>
                     </tr>
                   </tbody>

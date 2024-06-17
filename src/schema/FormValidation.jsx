@@ -9,9 +9,7 @@ export const signupFormSchema = Yup.object({
   password: Yup.string().required("Password is required"),
   phone: Yup.number()
     .required("Phone number is required")
-    .typeError(
-      "Phone                                                       must be a number"
-    ),
+    .typeError("Phone must be a number"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Password is required"),
@@ -312,6 +310,7 @@ export const DealFormSchema = Yup.object({
     .max(50, "Step character must be 50 characters or less"),
   expectedRevenue: Yup.number()
     .required("Expected Revenue is required")
+    .typeError("Revenue must be a number")
     .test(
       "is-decimal",
       "Revenue must have at most 2 decimal places",

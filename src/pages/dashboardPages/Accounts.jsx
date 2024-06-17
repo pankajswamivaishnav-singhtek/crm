@@ -212,6 +212,7 @@ const Accounts = () => {
               fourthHead: "Annual Revenue",
               fifthHead: "Account Site",
               sixthHead: "View",
+              seventhHead:"Deal Action"
             }}
             redirectLink="/account-details"
             getAllAccountData={getAllAccountData}

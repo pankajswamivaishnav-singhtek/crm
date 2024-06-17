@@ -221,7 +221,8 @@ const Task = () => {
               thirdHead: "Contact",
               fourthHead: "Subject",
               fifthHead: "Status",
-              sixthHead:"View"
+              sixthHead:"View",
+              seventhHead:"Action"
             }}
             redirectLink="/task-details"
             getAllTaskData={getAllTaskData}

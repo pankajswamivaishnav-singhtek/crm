@@ -229,7 +229,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         setPageName("Singhsoft Product");
     }
   }, [getUser, pathname]);
-  console.log("Get Current Month Data", currentDayMeetings);
+
   return (
     <nav className="navbar navbar-expand-lg  dashboard_navbar">
       <div className="container-fluid dashboard_navbar_container_fluid">

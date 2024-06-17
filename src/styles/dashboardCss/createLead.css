@@ -108,6 +108,22 @@
   color: rgba(115, 115, 115, 1);
 }
 
+.create-lead-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-lead-heading-right-para {
+  font-family: Roboto;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.create-lead-heading-span {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: bold;
+}
 
 /* form section 2 */
 .create_lead_section2_company_info {
@@ -199,5 +215,11 @@
     width: 80px;
     height: 50px;
     margin: 5px;
+  }
+  .create-lead-heading {
+    margin: 0px 0px 20px 0px;
+  }
+  .create-lead-heading-right-part {
+    margin: 0px 0px 0px 20px;
   }
 }

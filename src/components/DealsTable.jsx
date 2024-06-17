@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
+import { HiPencilSquare } from "react-icons/hi2";
 const DealsTable = ({
   tblHead,
   redirectLink,
@@ -89,6 +90,9 @@ const DealsTable = ({
               <th scope="col">{tblHead.fifthHead}</th>
               <th scope="col">{tblHead.sixthHead}</th>
               <th scope="col">{tblHead.seventhHead}</th>
+              <th scope="col" className="text-center">
+                {tblHead.eighthHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -143,11 +147,20 @@ const DealsTable = ({
                       <FaRegEye className="showDetailEye fs-4" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to="">
+                      <HiPencilSquare className="lead-table-contact-action-icon fs-5" />
+                    </Link>
+                    &nbsp;&nbsp;
+                    <Link to="">
+                      <FaRegEye className="fs-5" />
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8">No Deals Data At this Time</td>
+                <td colSpan="9">No Deals Data At this Time</td>
               </tr>
             )}
           </tbody>

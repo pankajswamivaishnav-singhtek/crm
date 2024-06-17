@@ -88,9 +88,23 @@ const CreateLeadForm = () => {
   return (
     <div className="create_lead_form_main_div">
       <form onSubmit={handleSubmit}>
+      {/* Create Lead Heading */}
+        <div className="create-lead-heading">
+          <div>
+            <p className="create_lead_section2_company_info">Lead Details</p>
+          </div>
+          <div className="create-lead-heading-right-part">
+            <p className="create-lead-heading-right-para">
+              Lead Name :{" "}
+              <span className="create-lead-heading-span">Pankaj Swami Vaishnav</span>
+            </p>
+            <p className="create-lead-heading-right-para">
+              Lead Id : <span className="create-lead-heading-span">2024</span>
+            </p>
+          </div>
+        </div>
         {/* User Information */}
         <div className="row">
-          <p className="create_lead_section2_company_info">Lead Details</p>
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadOwner">
               Lead Owner <span className="required_sign">*</span>

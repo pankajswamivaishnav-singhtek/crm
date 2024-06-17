@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
-
+import { HiPencilSquare } from "react-icons/hi2";
 const ScheduleCallTable = ({
   tblHead,
   redirectLink,
@@ -95,6 +95,9 @@ const ScheduleCallTable = ({
               <th scope="col">{tblHead.fourthHead}</th>
               <th scope="col">{tblHead.fifthHead}</th>
               <th scope="col">{tblHead.sixthHead}</th>
+              <th scope="col" className="text-center">
+                {tblHead.seventhHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -146,11 +149,20 @@ const ScheduleCallTable = ({
                       <FaRegEye className="showDetailEye fs-4" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to="">
+                      <HiPencilSquare className="lead-table-contact-action-icon fs-5" />
+                    </Link>
+                    &nbsp;&nbsp;
+                    <Link to="">
+                      <FaRegEye className="fs-5" />
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="7">There are no scheduled calls at the moment.</td>
+                <td colSpan="8">There are no scheduled calls at the moment.</td>
               </tr>
             )}
           </tbody>

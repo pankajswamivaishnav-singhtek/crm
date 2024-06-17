@@ -67,9 +67,28 @@ const ScheduleCall = () => {
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
+        {/* Create Schedule Call Heading */}
+        <div className="create-lead-heading">
+          <div>
+            <p className="create_lead_section2_company_info">
+              Call Information
+            </p>
+          </div>
+          <div className="create-lead-heading-right-part">
+            <p className="create-lead-heading-right-para">
+              Lead Name :{" "}
+              <span className="create-lead-heading-span">
+                Pankaj Swami Vaishnav
+              </span>
+            </p>
+            <p className="create-lead-heading-right-para">
+              Lead Id : <span className="create-lead-heading-span">2024</span>
+            </p>
+          </div>
+        </div>
         {/* User Account Information */}
         <div className="row">
-          <p className="create_lead_section2_company_info">Call Information</p>
+          {/* <p className="create_lead_section2_company_info">Call Information</p> */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callTo">
               Call To <span className="required_sign">*</span>

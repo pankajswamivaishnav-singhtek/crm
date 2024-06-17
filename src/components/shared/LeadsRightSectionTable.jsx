@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import leadIdContext from "../../pages/LeadIdContext";
 import { FaRegEye } from "react-icons/fa";
+import { HiPencilSquare } from "react-icons/hi2";
 
 const LeadsRightSectionTable = ({
   tblHead,
@@ -113,6 +114,9 @@ const LeadsRightSectionTable = ({
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
               <th scope="col">{tblHead.fifthHead}</th>
+              <th scope="col" className="text-center">
+                {tblHead.sixthHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -160,6 +164,15 @@ const LeadsRightSectionTable = ({
                   <td>
                     <Link to={redirectLink} className="Link-button-leads">
                       <FaRegEye className="showDetailEye fs-4" />
+                    </Link>
+                  </td>
+                  <td className="text-center">
+                    <Link to="/create-contact">
+                      <HiPencilSquare className="lead-table-contact-action-icon fs-5" />
+                    </Link>
+                    &nbsp;&nbsp;
+                    <Link to="/contact-details">
+                      <FaRegEye className="fs-5" />
                     </Link>
                   </td>
                 </tr>

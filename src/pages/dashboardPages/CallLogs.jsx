@@ -250,6 +250,7 @@ const CallLogs = () => {
               fourthHead: "Call Result",
               fifthHead: "Status",
               sixthHead: "View",
+              seventhHead: "Action",
             }}
             redirectLink="/log-call-details"
             getAllLogCallData={getAllLogCallData}

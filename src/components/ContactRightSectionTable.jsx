@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
+import { HiPencilSquare } from "react-icons/hi2";
 const ContactRightSectionTable = ({
   tblHead,
   redirectLink,
@@ -49,7 +50,7 @@ const ContactRightSectionTable = ({
         <table className="table table-responsive ">
           <thead>
             <tr className="table-danger dashboard_section1_tableHead_tr">
-               {/* Checkbox Column */}
+              {/* Checkbox Column */}
               <th scope="col">
                 <div className="wrap-check-29">
                   <div className="cbx">
@@ -90,6 +91,9 @@ const ContactRightSectionTable = ({
               <th scope="col">{tblHead.thirdHead}</th>
               <th scope="col">{tblHead.fourthHead}</th>
               <th scope="col">{tblHead.fifthHead}</th>
+              <th scope="col" className="text-center">
+                {tblHead.sixthHead}
+              </th>
               {/* <th scope="col">{tblHead.fifthHead}</th> */}
             </tr>
           </thead>
@@ -135,11 +139,20 @@ const ContactRightSectionTable = ({
                       <FaRegEye className="showDetailEye fs-4" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to="/create-account">
+                      <HiPencilSquare className="lead-table-contact-action-icon fs-5" />
+                    </Link>
+                    &nbsp;&nbsp;
+                    <Link to="/account-details">
+                      <FaRegEye className="fs-5" />
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6">No Contact Data At this Time</td>
+                <td colSpan="7">No Contact Data At this Time</td>
               </tr>
             )}
           </tbody>

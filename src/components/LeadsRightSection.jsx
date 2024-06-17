@@ -43,6 +43,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   const tokenId = userIdTokenData?.data?.token;
   const [getAllLeadData, setAllLeadsData] = useState([]);
 
+
   //  Get All Leads Data
   const getLeadsData = useCallback(async () => {
     const filter = {
@@ -270,6 +271,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               thirdHead: "Lead Source",
               fourthHead: "Lead Status",
               fifthHead: "View",
+              sixthHead: "Contact Action",
             }}
             redirectLink="/lead-details"
             getAllLeadData={getAllLeadData}

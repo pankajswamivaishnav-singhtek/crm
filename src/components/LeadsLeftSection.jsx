@@ -4,6 +4,9 @@ import { useFormik } from "formik";
 import "../styles/component_css/leadsLeftSection.css";
 // React Icon
 const FilterSidebar = ({ setFilterData }) => {
+  // Get By Default Data From Local Storage
+  const savedFilter = JSON.parse(localStorage.getItem("filterData") || "{}");
+  console.log("jshqwh", savedFilter);
   // Form Handle & Validations
   const { values, handleBlur, handleChange, handleSubmit, setFieldValue } =
     useFormik({
@@ -12,9 +15,8 @@ const FilterSidebar = ({ setFilterData }) => {
         companyName: "",
         date: "",
         leadOwnerName: "",
-        // verified: false,
-        // verified: true,
-        unverified: true,
+        verified: savedFilter.verified || false,
+        unverified: savedFilter.unverified || false,
       },
       onSubmit: async (values, { resetForm }) => {
         setFilterData(values);

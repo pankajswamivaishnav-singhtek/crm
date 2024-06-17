@@ -1172,7 +1172,7 @@ export const createTask = async (uid, taskData, setShowToast, tokenId) => {
         },
       }
     );
-    if (response) {
+    if (response.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Create Task Successfully." });
     }

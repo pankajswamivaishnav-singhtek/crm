@@ -225,7 +225,8 @@ const Deals = () => {
               fourthHead: "Closing Date",
               fifthHead: "Contact Name",
               sixthHead: "Stage",
-              seventhHead:"View"
+              seventhHead: "View",
+              eighthHead: "Action",
             }}
             redirectLink="/deal-details"
             getAllDealsData={getAllDealsData}
