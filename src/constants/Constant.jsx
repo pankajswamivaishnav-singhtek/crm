@@ -1,4 +1,5 @@
-export const BASE_URL = "http://192.168.1.31:8080";
+export const BASE_URL = "http://192.168.1.97:8080";
+// export const BASE_URL = "http://66.85.140.154:2234";
 
 // Signup User endpoints
 export const SIGNUP_USER = `${BASE_URL}/user/createuser`;

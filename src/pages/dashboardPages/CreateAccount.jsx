@@ -9,6 +9,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { BsBuildingsFill } from "react-icons/bs";
 import { accountFormSchema } from "../../schema/FormValidation";
+import { FaTreeCity } from "react-icons/fa6";
 // Controller Api Methods
 import { createAccount } from "../../controller/fetchApi";
 const CreateAccount = () => {
@@ -335,6 +336,26 @@ const CreateAccount = () => {
               )}
 
               <MdAdminPanelSettings className="create_lead_input_icon" />
+            </div>
+            <div className="form-group createLeadInput col-xl-4">
+              <label htmlFor="leadId">
+                Lead Id <span className="required_sign">*</span>
+              </label>
+              <input
+                type="tel"
+                id="leadId"
+                className="form-control create_lead_form_input"
+                value={values.leadId}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                name="leadId"
+                placeholder="Enter address"
+              />
+              {touched.leadId && errors.leadId && (
+                <small className="errorMessage">{errors.leadId}</small>
+              )}
+              <FaTreeCity className="create_lead_input_icon" />
             </div>
           </div>
           {/* Billing Information */}

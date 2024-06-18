@@ -42,6 +42,7 @@ const CreateTask = () => {
       contact: "",
       status: "",
       priority: "",
+      leadId: "",
       description: "",
       accountType: "",
       reminderDateTime: "",
@@ -49,6 +50,7 @@ const CreateTask = () => {
 
     validationSchema: TaskFormSchema,
     onSubmit: async (values, { resetForm }) => {
+      console.log("Task Create Data", values);
       try {
         await createTask(uid, values, setShowToast, tokenId);
         resetForm();
@@ -250,6 +252,26 @@ const CreateTask = () => {
               <small className="errorMessage">{errors.priority}</small>
             )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={values.leadId}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {touched.leadId && errors.leadId && (
+              <small className="errorMessage">{errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
           {/* Reminder Input */}
           <div className="form-group createLeadInput col-xl-4 create_task_reminder">

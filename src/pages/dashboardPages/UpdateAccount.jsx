@@ -9,7 +9,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { BsCurrencyRupee } from "react-icons/bs";
 import { BsBuildingsFill } from "react-icons/bs";
 import { accountFormSchema } from "../../schema/FormValidation";
-
+import { FaTreeCity } from "react-icons/fa6";
 // Controller Api Methods
 import { updateSingleAccount } from "../../controller/fetchApi";
 const UpdateAccount = ({
@@ -53,6 +53,7 @@ const UpdateAccount = ({
       shippingStreet: "",
       shippingCity: "",
       shippingState: "",
+      leadId: "",
       shippingCode: "",
       shippingAddress: "",
       dateOfIssue: new Date(Date.now()), // for date
@@ -64,12 +65,7 @@ const UpdateAccount = ({
     onSubmit: async (values, { resetForm }) => {
       console.log("Value", values);
       try {
-        await updateSingleAccount(
-          values,
-          accountId,
-          setShowToast,
-          tokenId
-        );
+        await updateSingleAccount(values, accountId, setShowToast, tokenId);
         onUpdateSuccess();
       } catch (error) {
         console.log("Did Not Create Account", error);
@@ -92,6 +88,7 @@ const UpdateAccount = ({
         industry: defaultValue.industry,
         annualRevenue: defaultValue.annualRevenue,
         address: defaultValue.addressInformation,
+        leadId: defaultValue.leadId,
         billingAddress: defaultValue.billingAddress,
         billingCity: defaultValue.billingCity,
         billingState: defaultValue.billingState,
@@ -324,6 +321,26 @@ const UpdateAccount = ({
               }
             />
             <MdAdminPanelSettings className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={formik.values.leadId}
+              onChange={formik.handleChange}
+              onFocus={formik.handleFocus}
+              onBlur={formik.handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {formik.touched.leadId && formik.errors.leadId && (
+              <small className="errorMessage">{formik.errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
         </div>
         {/* Billing Information */}

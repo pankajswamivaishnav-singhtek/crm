@@ -272,6 +272,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               fourthHead: "Lead Status",
               fifthHead: "View",
               sixthHead: "Contact Action",
+              seventhHead:"Lead Id"
             }}
             redirectLink="/lead-details"
             getAllLeadData={getAllLeadData}

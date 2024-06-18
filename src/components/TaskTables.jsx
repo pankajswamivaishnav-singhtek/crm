@@ -93,6 +93,9 @@ const TaskTables = ({
               <th scope="col" className="text-center">
                 {tblHead.seventhHead}
               </th>
+              <th scope="col" className="text-center">
+                {tblHead.eighthHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -151,11 +154,20 @@ const TaskTables = ({
                       <FaRegEye className="fs-5" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to={redirectLink} className="Link-button-leads">
+                      <div className="leads_table_id_col rounded">
+                        <span className="leads_table_id_text">
+                          LI-{data.leadId}
+                        </span>
+                      </div>
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8">No Task At this Time</td>
+                <td colSpan="9">No Task At this Time</td>
               </tr>
             )}
           </tbody>

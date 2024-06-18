@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // controller methods
 import { getSingleLogCall } from "../../controller/fetchApi";
 const LogCallViewDetails = () => {
@@ -15,9 +15,12 @@ const LogCallViewDetails = () => {
     <div className="container-fluid account_view_details_main_container">
       {/* Log Call Information */}
       <div className="account_view_details_Row">
-        <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
+        <h3 className="mt-2 mx-2 dashboard_leadView_company_details_heading">
           Log Call Information
         </h3>
+        <p className="mx-2 dashboard_leadView_details_heading_second">
+          Lead Id : LI-{getSingleLogCallData?.leadId}
+        </p>
         <div className="row">
           <div className="col-xl-12">
             <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">
@@ -32,7 +35,7 @@ const LogCallViewDetails = () => {
                         Call To
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleLogCallData?.callTo}
+                        {getSingleLogCallData?.callTo}
                       </td>
                     </tr>
                   </tbody>
@@ -66,7 +69,7 @@ const LogCallViewDetails = () => {
                         Call Type
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleLogCallData?.callType}
+                        {getSingleLogCallData?.callType}
                       </td>
                     </tr>
                   </tbody>
@@ -83,7 +86,7 @@ const LogCallViewDetails = () => {
                         Call Status
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleLogCallData?.callStatus}
+                        {getSingleLogCallData?.callStatus}
                       </td>
                     </tr>
                   </tbody>
@@ -117,7 +120,7 @@ const LogCallViewDetails = () => {
                         Call Duration
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleLogCallData?.callDuration}
+                        {getSingleLogCallData?.callDuration}
                       </td>
                     </tr>
                   </tbody>
@@ -134,7 +137,7 @@ const LogCallViewDetails = () => {
                         Subject
                       </th>
                       <td className="lead_view_details_table_td">
-                       {getSingleLogCallData?.subject}
+                        {getSingleLogCallData?.subject}
                       </td>
                     </tr>
                   </tbody>
@@ -213,7 +216,7 @@ const LogCallViewDetails = () => {
         <div className="row">
           <div className="col-xl-12 my-1 mx-2">
             <p className="lead_view_details_description">
-            {getSingleLogCallData?.description}
+              {getSingleLogCallData?.description}
             </p>
           </div>
         </div>

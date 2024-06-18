@@ -161,6 +161,9 @@ export const ContactFormSchema = Yup.object({
   address: Yup.string()
     .required("Company Contact is required")
     .max(100, "Address must be 100 characters or less"),
+  leadId: Yup.number()
+    .required("Required Lead Id ")
+    .typeError("Lead Id must be a number"),
   description: Yup.string().max(1000, "State must be 50 characters or less"),
 });
 
@@ -202,6 +205,9 @@ export const accountFormSchema = Yup.object({
       }
     ),
   address: Yup.string().required("Address is required"),
+  leadId: Yup.number()
+    .required("Required Lead Id ")
+    .typeError("Lead Id must be a number"),
   billingAddress: Yup.string().required("Billing Address is required"),
   billingCity: Yup.string().required("Billing City is required"),
   billingState: Yup.string().required("Billing State is required"),
@@ -227,6 +233,9 @@ export const TaskFormSchema = Yup.object({
     .max(50, "Subject must be 50 characters or less"),
   description: Yup.string().required("Task Description is required"),
   priority: Yup.string().required("Task Priority is required"),
+  leadId: Yup.number()
+    .required("Required Lead Id ")
+    .typeError("Lead Id must be a number"),
   status: Yup.string().required("Status is required"),
   dueDate: Yup.date()
     .required("Due Date is required")
@@ -247,6 +256,9 @@ export const MeetingFormSchema = Yup.object({
     .required("Address is required")
     .max(150, "Owner must be 50 characters or less"),
   date: Yup.date().required("Date is required"),
+  leadId: Yup.number()
+    .required("Required Lead Id ")
+    .typeError("Lead Id must be a number"),
   // participants: Yup.array().min(1, "At least one participant is required"),
 });
 
@@ -265,6 +277,9 @@ export const ScheduleCallSchema = Yup.object({
     .required("Subject is required")
     .max(50, "Subject must be 50 characters or less"),
   reminder: Yup.string().required("Reminder is required"),
+  leadId: Yup.number()
+    .required("Required Lead Id ")
+    .typeError("Lead Id must be a number"),
   callPurpose: Yup.string().required("Call Purpose is required"),
   callAgenda: Yup.string().required("Call Agenda is required"),
   callStartTime: Yup.date().required("Call Start Time is required"),
@@ -326,4 +341,7 @@ export const DealFormSchema = Yup.object({
   contactName: Yup.string()
     .required("Contact Name is required")
     .max(50, "Contact name must be 50 characters or less"),
+  leadId: Yup.number()
+    .required("Required Lead Id ")
+    .typeError("Lead Id must be a number"),
 });

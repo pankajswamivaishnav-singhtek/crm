@@ -18,9 +18,12 @@ const AccountCostumerDetails = () => {
     <div className="container-fluid account_view_details_main_container">
       {/* Account Information */}
       <div className="account_view_details_Row">
-        <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
+        <h3 className="mt-2 mx-2 dashboard_leadView_company_details_heading">
           Account Information
         </h3>
+        <p className="mx-2 dashboard_leadView_details_heading_second">
+          Lead Id : LI-{getSingleAccountData?.leadId}
+        </p>
         <div className="row">
           <div className="col-xl-12">
             <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3 ">

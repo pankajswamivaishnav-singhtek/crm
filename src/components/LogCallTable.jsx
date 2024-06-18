@@ -101,6 +101,9 @@ const LogCallTable = ({
               <th scope="col" className="text-center">
                 {tblHead.seventhHead}
               </th>
+              <th scope="col" className="text-center">
+                {tblHead.eighthHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -159,11 +162,20 @@ const LogCallTable = ({
                       <FaRegEye className="fs-5" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to={redirectLink} className="Link-button-leads">
+                      <div className="leads_table_id_col rounded">
+                        <span className="leads_table_id_text">
+                          LI-{data.leadId}
+                        </span>
+                      </div>
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8">There are no Log calls at the moment.</td>
+                <td colSpan="9">There are no Log calls at the moment.</td>
               </tr>
             )}
           </tbody>

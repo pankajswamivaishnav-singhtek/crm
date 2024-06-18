@@ -222,7 +222,8 @@ const Meetings = () => {
               thirdHead: "Date",
               fourthHead: "Location",
               fifthHead:"View",
-              sixthHead:"Deals Action"
+              sixthHead:"Deals Action",
+              seventhHead:"Lead Id"
             }}
             redirectLink="/meetings-details"
             getAllMeetingData={getAllMeetingData}

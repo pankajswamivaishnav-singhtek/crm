@@ -172,7 +172,8 @@ const Contact = () => {
               thirdHead: "Contact",
               fourthHead: "Address",
               fifthHead: "View",
-              sixthHead:"Account Action"
+              sixthHead: "Account Action",
+              seventhHead: "Lead Id",
             }}
             redirectLink="/contact-details"
             getAllContactData={getAllContactData}

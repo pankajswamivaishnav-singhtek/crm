@@ -6,6 +6,7 @@ import { MdOutlineBook } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TfiAgenda } from "react-icons/tfi";
 import { GiDuration } from "react-icons/gi";
+import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { LogCallSchema } from "../../schema/FormValidation";
 // Controller Api Methods
@@ -35,6 +36,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
       callStartTime: "",
       callDuration: "",
       subject: "",
+      leadId: "",
       callPurpose: "",
       callAgenda: "",
       callResult: "",
@@ -59,6 +61,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
         relatedTo: defaultValue.relatedTo,
         callType: defaultValue.callType,
         callStatus: defaultValue.callStatus,
+        leadId: defaultValue.leadId,
         callStartTime: defaultValue.callStartTime,
         callDuration: defaultValue.callDuration,
         callPurpose: defaultValue.callPurpose,
@@ -221,6 +224,25 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               }
             />
             <MdOutlineBook className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={formik.values.leadId}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {formik.touched.leadId && formik.errors.leadId && (
+              <small className="errorMessage">{formik.errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
         </div>
         {/* Calling Purpose */}

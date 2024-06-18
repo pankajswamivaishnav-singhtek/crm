@@ -6,6 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaChalkboardUser } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
 import { MeetingFormSchema } from "../../schema/FormValidation";
+import { FaTreeCity } from "react-icons/fa6";
 // CSS
 import "../../styles/dashboardCss/createMeeting.css";
 import { getAllContact, updateMeeting } from "../../controller/fetchApi";
@@ -50,6 +51,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
       title: "",
       address: "",
       date: "", // for date,
+      leadId: "",
       participants: [],
     },
 
@@ -75,6 +77,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
         address: defaultValue.location,
         fromTime: defaultValue.fromTime,
         host: defaultValue.host,
+        leadId: defaultValue.leadId,
         participants: defaultValue.participants,
         relatedTo: defaultValue.relatedTo,
         repeatStatus: defaultValue.repeatStatus,
@@ -211,6 +214,26 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
             {formik.touched.date && formik.errors.date && (
               <small className="errorMessage">{formik.errors.date}</small>
             )}
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={formik.values.leadId}
+              onChange={formik.handleChange}
+              onFocus={formik.handleFocus}
+              onBlur={formik.handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {formik.touched.leadId && formik.errors.leadId && (
+              <small className="errorMessage">{formik.errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
           {/* Participants dropdown */}
           <div className="form-group createLeadInput col-xl-4 create_meeting_mainDiv">

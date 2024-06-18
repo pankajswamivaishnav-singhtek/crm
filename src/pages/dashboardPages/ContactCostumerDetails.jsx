@@ -14,13 +14,15 @@ const ContactCostumerDetails = () => {
       setSingleContactData(res);
     });
   }, [contactId, tokenId]);
-  console.log("get single contact", getSingleContactData);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       {/* Company Details */}
-      <h3 className="my-2 mx-2 dashboard_leadView_company_details_heading">
+      <h3 className="mt-2 mx-2 dashboard_leadView_company_details_heading">
         Company Info
       </h3>
+      <p className="mx-2 dashboard_leadView_details_heading_second">
+        Lead Id : LI-{getSingleContactData?.leadId}
+      </p>
       <div className="row">
         <div className="col-xl-12">
           <div className="d-xl-flex d-md-flex justify-content-around justify-content-center align-items-center">

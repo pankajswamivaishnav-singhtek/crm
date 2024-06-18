@@ -6,6 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaChalkboardUser } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
 import { MeetingFormSchema } from "../../schema/FormValidation";
+import { FaTreeCity } from "react-icons/fa6";
 // CSS
 import "../../styles/dashboardCss/createMeeting.css";
 import { getContacts, createMeeting } from "../../controller/fetchApi";
@@ -57,22 +58,24 @@ const CreateMeeting = () => {
       title: "",
       address: "",
       date: "", // for date,
+      leadId: "",
       participants: [],
     },
     validationSchema: MeetingFormSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
+        console.log("meeting Data", values);
         setLoading(true);
-        const response = await createMeeting(
-          uid,
-          values,
-          setShowToast,
-          tokenId
-        );
-        if (response.status === 200) {
+        await createMeeting(uid, values, setShowToast, tokenId);
+        if (createMeeting) {
           resetForm();
           setLoading(false);
         }
+        // console.log("jwabfjasjkhakjFHJKsbakjdcbSJK KCa", response);
+        // if (response.status === 200) {
+        //   resetForm();
+        //   setLoading(false);
+        // }
       } catch (error) {
         console.log("Found Error", error);
         setLoading(false);
@@ -197,6 +200,26 @@ const CreateMeeting = () => {
             {touched.date && errors.date && (
               <small className="errorMessage">{errors.date}</small>
             )}
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={values.leadId}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {touched.leadId && errors.leadId && (
+              <small className="errorMessage">{errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
           {/* Participants dropdown */}
           <div className="form-group createLeadInput col-xl-4 create_meeting_mainDiv">

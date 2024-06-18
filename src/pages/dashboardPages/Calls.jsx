@@ -272,7 +272,8 @@ const Calls = () => {
               fourthHead: "Call Status",
               fifthHead: "Call Purpose",
               sixthHead: "View",
-              seventhHead:"Action"
+              seventhHead:"Action",
+              eighthHead:"Lead Id"
             }}
             redirectLink="/schedule-call-details"
             getAllScheduleCallData={getAllScheduleCallData}

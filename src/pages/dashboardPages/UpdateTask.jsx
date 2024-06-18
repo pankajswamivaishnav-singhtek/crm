@@ -36,6 +36,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
       description: "",
       accountType: "",
       reminderDateTime: "",
+      leadId: "",
     },
 
     validationSchema: TaskFormSchema,
@@ -62,6 +63,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
         taskSubject: defaultValue.subject,
         priority: defaultValue.priority,
         status: defaultValue.status,
+        leadId: defaultValue.leadId,
         reminderDateTime: defaultValue.reminder,
         accountType: defaultValue.accountType,
         description: defaultValue.description,
@@ -219,6 +221,26 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
               <option value="in-progress">High</option>
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={formik.values.leadId}
+              onChange={formik.handleChange}
+              onFocus={formik.handleFocus}
+              onBlur={formik.handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {formik.touched.leadId && formik.errors.leadId && (
+              <small className="errorMessage">{formik.errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
           {/* Reminder Input */}
           <div className="form-group createLeadInput col-xl-4 create_task_reminder">

@@ -7,6 +7,7 @@ import { MdOutlineBook } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { ScheduleCallSchema } from "../../schema/FormValidation";
 import { TfiAgenda } from "react-icons/tfi";
+import { FaTreeCity } from "react-icons/fa6";
 // Controller Api Methods
 import { updateScheduleCall } from "../../controller/fetchApi";
 // Get TokenId and Uid
@@ -44,6 +45,7 @@ const UpdateScheduleCall = ({
       reminder: "",
       callPurpose: "",
       callAgenda: "",
+      leadId:"",
     },
     validationSchema: ScheduleCallSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -66,6 +68,7 @@ const UpdateScheduleCall = ({
         callStatus: defaultValue.callStatus,
         callStartTime: defaultValue.callStartTime,
         callOwner: defaultValue.callOwner,
+        leadId: defaultValue.leadId,
         subject: defaultValue.subject,
         reminder: defaultValue.reminder,
         callPurpose: defaultValue.callPurpose,
@@ -250,6 +253,25 @@ const UpdateScheduleCall = ({
               <option value="30">30 Minute Before</option>
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={formik.values.leadId}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {formik.touched.leadId && formik.errors.leadId && (
+              <small className="errorMessage">{formik.errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
         </div>
         {/* Calling Purpose */}

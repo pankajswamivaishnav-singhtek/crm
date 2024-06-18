@@ -6,6 +6,7 @@ import { MdOutlineBook } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TfiAgenda } from "react-icons/tfi";
 import { GiDuration } from "react-icons/gi";
+import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { LogCallSchema } from "../../schema/FormValidation";
 // Controller Api Methods
@@ -36,6 +37,7 @@ const LogCall = () => {
         callStartTime: "",
         callDuration: "",
         subject: "",
+        leadId: "",
         callPurpose: "",
         callAgenda: "",
         callResult: "",
@@ -44,13 +46,8 @@ const LogCall = () => {
       onSubmit: async (values, { resetForm }) => {
         try {
           console.log("-----", values);
-          const createSuccessfully = await createLogCall(
-            uid,
-            values,
-            setShowToast,
-            tokenId
-          );
-          if (createSuccessfully) {
+          await createLogCall(uid, values, setShowToast, tokenId);
+          if (createLogCall) {
             resetForm();
           }
         } catch (error) {
@@ -261,6 +258,25 @@ const LogCall = () => {
               <small className="errorMessage">{errors.subject}</small>
             )}
             <MdOutlineBook className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={values.leadId}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {touched.leadId && errors.leadId && (
+              <small className="errorMessage">{errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
         </div>
         {/* Calling Purpose */}

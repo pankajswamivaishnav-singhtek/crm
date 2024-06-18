@@ -251,6 +251,7 @@ const CallLogs = () => {
               fifthHead: "Status",
               sixthHead: "View",
               seventhHead: "Action",
+              eighthHead:"Lead Id"
             }}
             redirectLink="/log-call-details"
             getAllLogCallData={getAllLogCallData}

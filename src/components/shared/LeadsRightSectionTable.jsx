@@ -117,6 +117,9 @@ const LeadsRightSectionTable = ({
               <th scope="col" className="text-center">
                 {tblHead.sixthHead}
               </th>
+              <th scope="col" className="text-center">
+                {tblHead.seventhHead}
+              </th>
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
@@ -175,11 +178,18 @@ const LeadsRightSectionTable = ({
                       <FaRegEye className="fs-5" />
                     </Link>
                   </td>
+                  <td className="text-center">
+                    <Link to={redirectLink} className="Link-button-leads">
+                      <div className="leads_table_id_col rounded">
+                        <span className="leads_table_id_text">LI-{data.id}</span>
+                      </div>
+                    </Link>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="7">No Lead Data At this Time</td>
+                <td colSpan="8">No Lead Data At this Time</td>
               </tr>
             )}
           </tbody>

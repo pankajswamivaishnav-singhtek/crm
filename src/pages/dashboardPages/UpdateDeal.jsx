@@ -5,6 +5,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { FaUserTie } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { DealFormSchema } from "../../schema/FormValidation";
 // Controller Methods & Api
@@ -40,6 +41,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
       leadSource: "",
       campaignSource: "",
       contactName: "",
+      leadId: "",
     },
 
     validationSchema: DealFormSchema,
@@ -67,6 +69,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
         type: defaultValue.type,
         leadSource: defaultValue.leadSource,
         contactName: defaultValue.contactName,
+        leadId: defaultValue.leadId,
         amount: defaultValue.amount,
         nextStep: defaultValue.nextStep,
         stage: defaultValue.stage,
@@ -335,6 +338,26 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               </small>
             )}
             <MdAdminPanelSettings className="create_lead_input_icon" />
+          </div>
+          <div className="form-group createLeadInput col-xl-4">
+            <label htmlFor="leadId">
+              Lead Id <span className="required_sign">*</span>
+            </label>
+            <input
+              type="tel"
+              id="leadId"
+              className="form-control create_lead_form_input"
+              value={formik.values.leadId}
+              onChange={formik.handleChange}
+              onFocus={formik.handleFocus}
+              onBlur={formik.handleBlur}
+              name="leadId"
+              placeholder="Enter address"
+            />
+            {formik.touched.leadId && formik.errors.leadId && (
+              <small className="errorMessage">{formik.errors.leadId}</small>
+            )}
+            <FaTreeCity className="create_lead_input_icon" />
           </div>
         </div>
         {/* Description */}

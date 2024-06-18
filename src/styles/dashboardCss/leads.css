@@ -317,6 +317,19 @@ input[type="text"] {
   color: #ff7006;
 }
 
+.leads_table_id_col {
+  /* background-color: silver; */
+  background-color: #7fcf2f;
+  display: inline-block;
+  padding: 5px;
+}
+
+.leads_table_id_text {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
 /* Same Css All Leads */
 .Link-button-leads {
   text-decoration: none;

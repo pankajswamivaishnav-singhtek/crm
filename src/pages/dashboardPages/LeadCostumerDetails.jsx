@@ -17,9 +17,12 @@ const LeadCostumerDetails = () => {
   }, [leadId, tokenId]);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
-      <h2 className="my-3 mx-2 dashboard_leadView_details_heading">
+      <h2 className="mt-3 mx-2 dashboard_leadView_details_heading">
         Lead Information
       </h2>
+      <p className="mx-2 dashboard_leadView_details_heading_second">
+        Lead Id : LI-{getSingleLeadData?.id}
+      </p>
       {/* Cosutmer Details */}
       <div className="row my-3 mx-2 lead_view_details_costumer_details">
         <div className="col-xl-3 col-md-3">
@@ -153,7 +156,7 @@ const LeadCostumerDetails = () => {
                       Annual Revenue
                     </th>
                     <td className="lead_view_details_table_td">
-                      {getSingleLeadData.annualRevenue}
+                      {getSingleLeadData?.annualRevenue}
                     </td>
                   </tr>
                   <tr>
@@ -164,7 +167,7 @@ const LeadCostumerDetails = () => {
                       Company Contact
                     </th>
                     <td className="lead_view_details_table_td">
-                      {getSingleLeadData.companyContact}
+                      {getSingleLeadData?.companyContact}
                     </td>
                   </tr>
                   <tr>
@@ -175,7 +178,7 @@ const LeadCostumerDetails = () => {
                       District
                     </th>
                     <td className="lead_view_details_table_td">
-                      {getSingleLeadData.district}
+                      {getSingleLeadData?.district}
                     </td>
                   </tr>
                 </tbody>
