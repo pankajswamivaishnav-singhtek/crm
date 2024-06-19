@@ -18,6 +18,7 @@ import loginImg from "../images/login_img.png";
 
 // Api Call & Function
 import { loginUser, loginUserThroughGoogle } from "../controller/fetchApi";
+
 // import { useAuth0 } from "@auth0/auth0-react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
@@ -47,7 +48,6 @@ const Login = () => {
 
       validationSchema: loginFormSchema,
       onSubmit: async (values, { resetForm }) => {
-        console.log("-----", values);
         const loginSuccessFully = await loginUser(values, setShowToast);
         if (loginSuccessFully.data.status === 200) {
           navigate("/dashboard");

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { useLocation } from "react-router-dom";
 // React Icon
 import { MdEmail } from "react-icons/md";
 import { BsBuildingsFill } from "react-icons/bs";
@@ -11,6 +12,9 @@ import "../../styles/dashboardCss/createTask.css";
 // Controller Methods
 import { createTask } from "../../controller/fetchApi";
 const CreateTask = () => {
+  // Get Lead Id
+  const location = useLocation();
+  const leadId = location.state?.leadId;
   // Toast
   const [showToast, setShowToast] = useState(false);
   const hideToast = () => {
@@ -42,7 +46,7 @@ const CreateTask = () => {
       contact: "",
       status: "",
       priority: "",
-      leadId: "",
+      leadId: leadId,
       description: "",
       accountType: "",
       reminderDateTime: "",

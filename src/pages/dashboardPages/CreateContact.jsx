@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { useLocation } from "react-router-dom";
 // React Icon
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
@@ -9,6 +10,9 @@ import { ContactFormSchema } from "../../schema/FormValidation";
 // Controllers Methods
 import { createContact } from "../../controller/fetchApi";
 const CreateContact = () => {
+  // Get LeadId
+  const location = useLocation();
+  const leadId = location.state?.leadId; // Use optional chaining to avoid errors
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
@@ -41,7 +45,7 @@ const CreateContact = () => {
       companyEmail: "",
       companyContact: "",
       address: "",
-      leadId: "",
+      leadId: leadId,
       description: "",
     },
 
@@ -65,11 +69,16 @@ const CreateContact = () => {
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
-        {/* Company Information */}
-        <div className="row">
+        <div>
           <p className="create_lead_section2_company_info mt-3">
             Company Details
           </p>
+          {/* <p className="mx-2 dashboard_leadView_details_heading_second">
+            Lead Id : LI-{data}
+          </p> */}
+        </div>
+        {/* Company Information */}
+        <div className="row">
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="companyName">
               Company Name <span className="required_sign">*</span>

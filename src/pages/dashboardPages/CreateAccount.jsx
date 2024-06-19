@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { useLocation } from "react-router-dom";
 // React Icon
 import { MdAdminPanelSettings } from "react-icons/md";
 import { FaUserTie } from "react-icons/fa";
@@ -13,6 +14,9 @@ import { FaTreeCity } from "react-icons/fa6";
 // Controller Api Methods
 import { createAccount } from "../../controller/fetchApi";
 const CreateAccount = () => {
+  // Get Lead Id
+  const location = useLocation();
+  const leadId = location.state?.leadId;
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -64,6 +68,7 @@ const CreateAccount = () => {
       dateOfBilling: "", //new Date(Date.now()),
       dateOfShipment: "",
       description: "",
+      leadId: leadId,
     },
     validationSchema: accountFormSchema,
     onSubmit: async (values, { resetForm }) => {

@@ -112,6 +112,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         onClick={toggleSidebar}
                       />
                     </div>
+                    {/* Dashboard Item */}
                     <li className="nav-item sidebar_navItems ">
                       <Link
                         className="Link-button "
@@ -122,6 +123,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         <span className="sidebar_navItem_text">Dashboard</span>
                       </Link>
                     </li>
+                    {/* Leads Item */}
                     <li className="nav-item sidebar_navItems">
                       <Link
                         className="Link-button"
@@ -132,6 +134,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         <span className="sidebar_navItem_text">Leads</span>
                       </Link>
                     </li>
+                    {/* Contact Item */}
                     <li className="nav-item sidebar_navItems">
                       <Link
                         className="Link-button"
@@ -142,46 +145,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         <span className="sidebar_navItem_text">Contact</span>
                       </Link>
                     </li>
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/accounts"
-                        onClick={sideBarClose}
-                      >
-                        <MdOutlineAccountBalance className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Account</span>
-                      </Link>
-                    </li>
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/deals"
-                        onClick={sideBarClose}
-                      >
-                        <LiaFileInvoiceSolid className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Deals</span>
-                      </Link>
-                    </li>
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/tasks"
-                        onClick={sideBarClose}
-                      >
-                        <LuPin className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Tasks</span>
-                      </Link>
-                    </li>
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/meetings"
-                        onClick={sideBarClose}
-                      >
-                        <HiOutlineUserGroup className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Meetings</span>
-                      </Link>
-                    </li>
+                    {/* Calls Item */}
                     <li className="nav-item sidebar_navItems dropdown ">
                       <Link
                         className="Link-button"
@@ -229,6 +193,51 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         </li>
                       </ul>
                     </li>
+                    {/* Meetings Item */}
+                    <li className="nav-item sidebar_navItems">
+                      <Link
+                        className="Link-button"
+                        to="/meetings"
+                        onClick={sideBarClose}
+                      >
+                        <HiOutlineUserGroup className="sidebar_navItem_icon" />
+                        <span className="sidebar_navItem_text">Meetings</span>
+                      </Link>
+                    </li>
+                    {/* Deals Item */}
+                    <li className="nav-item sidebar_navItems">
+                      <Link
+                        className="Link-button"
+                        to="/deals"
+                        onClick={sideBarClose}
+                      >
+                        <LiaFileInvoiceSolid className="sidebar_navItem_icon" />
+                        <span className="sidebar_navItem_text">Deals</span>
+                      </Link>
+                    </li>
+                    {/* Accounts Item */}
+                    <li className="nav-item sidebar_navItems">
+                      <Link
+                        className="Link-button"
+                        to="/accounts"
+                        onClick={sideBarClose}
+                      >
+                        <MdOutlineAccountBalance className="sidebar_navItem_icon" />
+                        <span className="sidebar_navItem_text">Account</span>
+                      </Link>
+                    </li>
+                    {/* Task Item */}
+                    <li className="nav-item sidebar_navItems">
+                      <Link
+                        className="Link-button"
+                        to="/tasks"
+                        onClick={sideBarClose}
+                      >
+                        <LuPin className="sidebar_navItem_icon" />
+                        <span className="sidebar_navItem_text">Tasks</span>
+                      </Link>
+                    </li>
+                    {/* Reports */}
                     <li className="nav-item sidebar_navItems">
                       <Link
                         className="Link-button"

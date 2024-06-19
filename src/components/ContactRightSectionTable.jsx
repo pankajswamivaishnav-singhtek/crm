@@ -143,22 +143,24 @@ const ContactRightSectionTable = ({
                     </Link>
                   </td>
                   <td className="text-center">
-                    <Link to="/create-account">
-                      <HiPencilSquare className="lead-table-contact-action-icon fs-5" />
+                    <Link to="/create-account" state={{ leadId: data.leadId }}>
+                      <HiPencilSquare className="lead-table-contact-action-icon fs-4" />
                     </Link>
-                    &nbsp;&nbsp;
+                    {/* &nbsp;&nbsp;
                     <Link to="/account-details">
                       <FaRegEye className="fs-5" />
-                    </Link>
+                    </Link> */}
                   </td>
                   <td className="text-center">
-                    <Link to={redirectLink} className="Link-button-leads">
-                      <div className="leads_table_id_col rounded">
-                        <span className="leads_table_id_text">
-                          LI-{data.leadId}
-                        </span>
-                      </div>
-                    </Link>
+                    {data?.leadId && (
+                      <Link to={redirectLink} className="Link-button-leads">
+                        <div className="leads_table_id_col rounded">
+                          <span className="leads_table_id_text">
+                            LI-{data.leadId}
+                          </span>
+                        </div>
+                      </Link>
+                    )}
                   </td>
                 </tr>
               ))

@@ -88,12 +88,12 @@ const CreateLeadForm = () => {
   return (
     <div className="create_lead_form_main_div">
       <form onSubmit={handleSubmit}>
-      {/* Create Lead Heading */}
+        {/* Create Lead Heading */}
         <div className="create-lead-heading">
           <div>
             <p className="create_lead_section2_company_info">Lead Details</p>
           </div>
-          <div className="create-lead-heading-right-part">
+          {/* <div className="create-lead-heading-right-part">
             <p className="create-lead-heading-right-para">
               Lead Name :{" "}
               <span className="create-lead-heading-span">Pankaj Swami Vaishnav</span>
@@ -101,10 +101,11 @@ const CreateLeadForm = () => {
             <p className="create-lead-heading-right-para">
               Lead Id : <span className="create-lead-heading-span">2024</span>
             </p>
-          </div>
+          </div> */}
         </div>
         {/* User Information */}
         <div className="row">
+          {/* Lead Owner */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadOwner">
               Lead Owner <span className="required_sign">*</span>
@@ -125,6 +126,7 @@ const CreateLeadForm = () => {
             )}
             <MdAdminPanelSettings className="create_lead_input_icon" />
           </div>
+          {/* First Name */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="firstName">
               First Name <span className="required_sign">*</span>
@@ -145,6 +147,7 @@ const CreateLeadForm = () => {
             )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
+          {/* Last Name */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="lastName">
               Last Name <span className="required_sign">*</span>
@@ -165,6 +168,7 @@ const CreateLeadForm = () => {
             )}
             <FaUserTie className="create_lead_input_icon" />
           </div>
+          {/* Email */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="email">
               Email <span className="required_sign">*</span>
@@ -185,6 +189,7 @@ const CreateLeadForm = () => {
             )}
             <MdEmail className="create_lead_input_icon" />
           </div>
+          {/* Phone Number */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="mobileNumber">
               Phone Number <span className="required_sign">*</span>
@@ -207,6 +212,7 @@ const CreateLeadForm = () => {
             )}
             <FaPhone className="create_lead_input_icon" />
           </div>
+          {/* Secondary Phone Number */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="secondaryMobileNumber">
               Secondary Phone Number
@@ -231,6 +237,7 @@ const CreateLeadForm = () => {
             )}
             <FaPhone className="create_lead_input_icon" />
           </div>
+          {/* Lead Source */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadSource">
               Lead Source <span className="required_sign">*</span>
@@ -264,6 +271,7 @@ const CreateLeadForm = () => {
             )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Lead Status */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadStatus">
               Lead Status <span className="required_sign">*</span>
@@ -296,6 +304,7 @@ const CreateLeadForm = () => {
             )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Lead Service */}
           <div className="form-group createLeadInput col-xl-4 costum-select">
             <label htmlFor="leadStatus">
               Lead Service <span className="required_sign">*</span>

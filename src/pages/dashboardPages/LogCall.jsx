@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
+import { useLocation } from "react-router-dom";
 // React Icon
 import { HiOutlinePhoneOutgoing } from "react-icons/hi";
 import { MdOutlineBook } from "react-icons/md";
@@ -12,6 +13,9 @@ import { LogCallSchema } from "../../schema/FormValidation";
 // Controller Api Methods
 import { createLogCall } from "../../controller/fetchApi";
 const LogCall = () => {
+  // Get Lead Id
+  const location = useLocation();
+  const leadId = location.state?.leadId;
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
@@ -37,7 +41,7 @@ const LogCall = () => {
         callStartTime: "",
         callDuration: "",
         subject: "",
-        leadId: "",
+        leadId: leadId,
         callPurpose: "",
         callAgenda: "",
         callResult: "",

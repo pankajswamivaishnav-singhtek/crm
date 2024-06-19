@@ -18,9 +18,11 @@ const LogCallViewDetails = () => {
         <h3 className="mt-2 mx-2 dashboard_leadView_company_details_heading">
           Log Call Information
         </h3>
-        <p className="mx-2 dashboard_leadView_details_heading_second">
-          Lead Id : LI-{getSingleLogCallData?.leadId}
-        </p>
+        {getSingleLogCallData?.leadId && (
+          <p className="mx-2 dashboard_leadView_details_heading_second">
+            Lead Id : LI-{getSingleLogCallData.leadId}
+          </p>
+        )}
         <div className="row">
           <div className="col-xl-12">
             <div className="d-xl-flex d-md-flex justify-content-between flex-wrap justify-content-center align-items-center row-cols-3">

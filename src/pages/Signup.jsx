@@ -34,36 +34,47 @@ const Signup = () => {
     hideToast();
   }
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        firstName: "",
-        lastName: "",
-        userName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        phone: "",
-      },
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldTouched,
+  } = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      userName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phone: "",
+    },
 
-      validationSchema: signupFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        if (errors.confirmPassword) {
-          setShowToast({ success: true, message: "password must match" });
-        }
-        console.log("-----", values);
-        navigate("/otpverification", {
-          state: {
-            email: values.email,
-            name: `${values.firstName} ${values.lastName}`,
-          },
-        });
-        await signupUser(values, setShowToast);
+    validationSchema: signupFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      if (errors.confirmPassword) {
+        setShowToast({ success: true, message: "password must match" });
+      }
+      console.log("-----", values);
+      navigate("/otpverification", {
+        state: {
+          email: values.email,
+          name: `${values.firstName} ${values.lastName}`,
+        },
+      });
+      await signupUser(values, setShowToast);
 
-        resetForm();
-      },
-    });
-
+      resetForm();
+    },
+  });
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setFieldTouched(name, true);
+  };
   // Show & Hide Password
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
@@ -103,6 +114,7 @@ const Signup = () => {
                           value={values.firstName}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          onFocus={handleFocus}
                         />
                         {touched.firstName && errors.firstName && (
                           <small className="errorMessageSignup">
@@ -128,6 +140,7 @@ const Signup = () => {
                           value={values.lastName}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          onFocus={handleFocus}
                         />
                         {touched.lastName && errors.lastName && (
                           <small className="errorMessageSignup ">
@@ -155,6 +168,7 @@ const Signup = () => {
                           value={values.userName}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          onFocus={handleFocus}
                         />
                         {touched.userName && errors.userName && (
                           <small className="errorMessageSignup">
@@ -182,6 +196,7 @@ const Signup = () => {
                           value={values.email}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          onFocus={handleFocus}
                         />
                         {touched.email && errors.email && (
                           <small className="errorMessageSignup">
@@ -202,6 +217,8 @@ const Signup = () => {
                         </label>
                         <input
                           type="tel"
+                          minLength="10"
+                          maxLength="12"
                           className={`form-control signup_email_form_control`}
                           id="exampleFormControlInput1"
                           placeholder="Enter number"
@@ -209,6 +226,7 @@ const Signup = () => {
                           value={values.phone}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          onFocus={handleFocus}
                         />
                         {touched.phone && errors.phone && (
                           <small className="errorMessageSignup">
@@ -237,6 +255,7 @@ const Signup = () => {
                           value={values.password}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          onFocus={handleFocus}
                         />
                         {touched.password && errors.password && (
                           <small className="errorMessageSignup">
@@ -281,6 +300,7 @@ const Signup = () => {
                           name="confirmPassword"
                           value={values.confirmPassword}
                           onChange={handleChange}
+                          onFocus={handleFocus}
                           onBlur={handleBlur}
                         />
                         {touched.confirmPassword && errors.confirmPassword && (
@@ -288,6 +308,7 @@ const Signup = () => {
                             {errors.confirmPassword}
                           </small>
                         )}
+
                         {showConfirmPassword ? (
                           <p
                             className="signup_input_icons"

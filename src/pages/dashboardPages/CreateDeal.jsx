@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { useLocation } from "react-router-dom";
 // React Icon
 import { MdAdminPanelSettings } from "react-icons/md";
 import { FaUserTie } from "react-icons/fa";
@@ -11,6 +12,9 @@ import { DealFormSchema } from "../../schema/FormValidation";
 // Controller Methods & Api
 import { createDeal } from "../../controller/fetchApi";
 const CreateDeal = () => {
+  // Get Lead Id
+  const location = useLocation();
+  const leadId = location.state?.leadId;
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -49,7 +53,7 @@ const CreateDeal = () => {
       leadSource: "",
       campaignSource: "",
       contactName: "",
-      leadId:""
+      leadId: leadId,
     },
 
     validationSchema: DealFormSchema,

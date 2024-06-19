@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
+import { useLocation } from "react-router-dom";
 // React Icon
 import { MdOutlineSubtitles } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
@@ -11,6 +12,9 @@ import { FaTreeCity } from "react-icons/fa6";
 import "../../styles/dashboardCss/createMeeting.css";
 import { getContacts, createMeeting } from "../../controller/fetchApi";
 const CreateMeeting = () => {
+  // Get LeadId
+  const location = useLocation();
+  const leadId = location.state?.leadId;
   // For Particiapnts
   const [getAllContactData, setAllContactData] = useState([]);
   // Get Uid and Tokenid Who Saved In Cookie
@@ -58,7 +62,7 @@ const CreateMeeting = () => {
       title: "",
       address: "",
       date: "", // for date,
-      leadId: "",
+      leadId: leadId,
       participants: [],
     },
     validationSchema: MeetingFormSchema,

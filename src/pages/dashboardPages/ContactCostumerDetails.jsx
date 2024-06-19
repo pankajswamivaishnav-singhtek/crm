@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 // CSS
 import "../../styles/dashboardCss/contactCostumerDetails.css";
 // Controller Method
 import { getSingleContact } from "../../controller/fetchApi";
 const ContactCostumerDetails = () => {
+  
   const [getSingleContactData, setSingleContactData] = useState([]);
   // Get Schedule CallId & Toekn Id
   const contactId = JSON.parse(localStorage.getItem("contactId"));
