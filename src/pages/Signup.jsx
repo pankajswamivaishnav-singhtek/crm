@@ -9,12 +9,12 @@ import { FcBusinessman } from "react-icons/fc";
 import { FcFeedback } from "react-icons/fc";
 import { FcCellPhone } from "react-icons/fc";
 import { FcManager } from "react-icons/fc";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 
 // React Router Dom
 import { Link, useNavigate } from "react-router-dom";
 // Imags
-import orLogin from "../images/orLogin.jpg";
+// import orLogin from "../images/orLogin.jpg";
 import signupImg from "../images/signup_img.png";
 // Import Api Function
 import { signupUser } from "../controller/fetchApi";
@@ -343,17 +343,17 @@ const Signup = () => {
                     </button>
                   </div>
                   {/* OR LOGIN */}
-                  <div className="orLogin_Img">
+                  {/* <div className="orLogin_Img">
                     <img
                       src={orLogin}
                       alt="Or Login"
                       className="orLogin_img img-fluid"
                     />
-                  </div>
+                  </div> */}
                   {/* Google Login */}
-                  <div className="signup_google_div ">
+                  {/* <div className="signup_google_div ">
                     <FcGoogle className="signup_google_icon" />
-                  </div>
+                  </div> */}
                   {/* Already Have a account */}
                   <div>
                     <p className="signup_already_have_account_text">

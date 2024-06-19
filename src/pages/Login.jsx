@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState } from "react";
+// import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // css
 import "../styles/signup.page.css";
@@ -13,15 +14,16 @@ import { useFormik } from "formik";
 import { loginFormSchema } from "../schema/FormValidation";
 
 // Imags
-import orLogin from "../images/orLogin.jpg";
+// import orLogin from "../images/orLogin.jpg";
 import loginImg from "../images/login_img.png";
 
 // Api Call & Function
-import { loginUser, loginUserThroughGoogle } from "../controller/fetchApi";
+// import { loginUser, loginUserThroughGoogle } from "../controller/fetchApi";
+import { loginUser } from "../controller/fetchApi";
 
 // import { useAuth0 } from "@auth0/auth0-react";
-import { GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+// import { GoogleLogin } from "@react-oauth/google";
+// import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -63,18 +65,18 @@ const Login = () => {
   };
 
   // Login With Google
-  const [userData, setUserData] = useState();
-  const loginUserWithGoogle = useCallback(async () => {
-    const response = await loginUserThroughGoogle(userData, setShowToast);
-    if (response?.data?.status === 200) {
-      navigate("/dashboard");
-    }
-    console.log(response);
-  }, [userData, navigate]);
+  // const [userData, setUserData] = useState();
+  // const loginUserWithGoogle = useCallback(async () => {
+  //   const response = await loginUserThroughGoogle(userData, setShowToast);
+  //   if (response?.data?.status === 200) {
+  //     navigate("/dashboard");
+  //   }
+  //   console.log(response);
+  // }, [userData, navigate]);
 
-  useEffect(() => {
-    loginUserWithGoogle();
-  }, [userData, loginUserWithGoogle]);
+  // useEffect(() => {
+  //   loginUserWithGoogle();
+  // }, [userData, loginUserWithGoogle]);
 
   return (
     <div className="container-fluid signup_body_div">
@@ -184,7 +186,7 @@ const Login = () => {
                   </button>
                 </div>
                 {/* OR LOGIN */}
-                <div className="orLogin_Img">
+                {/* <div className="orLogin_Img">
                   <img
                     src={orLogin}
                     alt="Or Login"
@@ -210,7 +212,7 @@ const Login = () => {
                       console.log("Login Failed");
                     }}
                   />
-                </div>
+                </div> */}
                 {/* Don't Have a account */}
                 <div>
                   <p className="signup_already_have_account_text">
