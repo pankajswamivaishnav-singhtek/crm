@@ -102,7 +102,7 @@ const Login = () => {
                       </label>
                       <input
                         type="email"
-                        className={`form-control signup_email_form_control  ${
+                        className={`form-control signup_email_form_control login_page_input ${
                           errors.email && touched.email
                             ? "signup_input_form"
                             : ""
@@ -133,7 +133,7 @@ const Login = () => {
                       <input
                         // type="password
                         type={showPassword ? "password" : "text"}
-                        className={`form-control signup_email_form_control  ${
+                        className={`form-control signup_email_form_control login_page_input ${
                           errors.password && touched.password
                             ? "signup_input_form"
                             : ""
@@ -179,13 +179,13 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-                {/* Submit Button */}
+                  {/* Submit Button */}
                 <div className="signup_submit_div">
                   <button type="submit" className=" signup_submit_button">
                     Login
                   </button>
                 </div>
-                {/* OR LOGIN */}
+                  {/* OR LOGIN */}
                 {/* <div className="orLogin_Img">
                   <img
                     src={orLogin}
@@ -228,7 +228,7 @@ const Login = () => {
                   </p>
                 </div>
               </form>
-              {/* Toast */}
+                 {/* Toast */}
               {showToast.message && (
                 <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
                   <div

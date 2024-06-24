@@ -6,7 +6,6 @@ import "../styles/component_css/leadsLeftSection.css";
 const FilterSidebar = ({ setFilterData }) => {
   // Get By Default Data From Local Storage
   const savedFilter = JSON.parse(localStorage.getItem("filterData") || "{}");
-  console.log("jshqwh", savedFilter);
   // Form Handle & Validations
   const { values, handleBlur, handleChange, handleSubmit, setFieldValue } =
     useFormik({
@@ -17,8 +16,10 @@ const FilterSidebar = ({ setFilterData }) => {
         leadOwnerName: "",
         verified: savedFilter.verified || false,
         unverified: savedFilter.unverified || false,
+        rejected: savedFilter.rejected || false,
       },
       onSubmit: async (values, { resetForm }) => {
+        console.log("filter Value on submit", values);
         setFilterData(values);
         // resetForm();
       },
@@ -32,11 +33,15 @@ const FilterSidebar = ({ setFilterData }) => {
     if (name === "verified" && checked) {
       setFieldValue("verified", true);
       setFieldValue("unverified", false);
-    }
-    // If "unverified" checkbox is checked, uncheck "verified" checkbox
-    else if (name === "unverified" && checked) {
+      setFieldValue("rejected", false);
+    } else if (name === "unverified" && checked) {
       setFieldValue("unverified", true);
       setFieldValue("verified", false);
+      setFieldValue("rejected", false);
+    } else if (name === "rejected" && checked) {
+      setFieldValue("rejected", true);
+      setFieldValue("verified", false);
+      setFieldValue("unverified", false);
     }
   };
 
@@ -78,6 +83,21 @@ const FilterSidebar = ({ setFilterData }) => {
             />
             <label className="form-check-label" htmlFor="untouchedFilter">
               Unverified
+            </label>
+          </div>
+          <div className="form-check">
+            <input
+              name="rejected"
+              type="radio"
+              className="form-check-input lead_filter_radio_btn"
+              id="rejectedFilter"
+              value={values.rejected}
+              onChange={handleCheckboxChange}
+              onBlur={handleBlur}
+              checked={values.rejected}
+            />
+            <label className="form-check-label" htmlFor="rejectedFilter">
+              Rejected
             </label>
           </div>
         </div>

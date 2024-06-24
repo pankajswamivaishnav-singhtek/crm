@@ -120,6 +120,10 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
         document.title = "Dashboard";
         setPageName("Dashboard");
         break;
+      case "/created-users":
+        document.title = "Created User";
+        setPageName("CreatedUser");
+        break;
       case "/leads":
         document.title = "Leads";
         setPageName("Leads");

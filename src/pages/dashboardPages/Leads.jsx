@@ -13,6 +13,7 @@ const initialFilterState = {
   leadOwnerName: "",
   verified: "",
   unverified: "",
+  rejected: "",
 };
 
 // Function to load filter state from localStorage
@@ -34,7 +35,7 @@ const Leads = () => {
     localStorage.setItem("filterData", JSON.stringify(filterData));
   }, [filterData]);
   const [leadCostumerId, setLeadCostumerId] = useState([]);
-
+  console.log("FilerData", filterData);
   return (
     <div className="container-fluid dashboard_leads_main_container">
       <div className="row dashboard_filter_sidebar_row">

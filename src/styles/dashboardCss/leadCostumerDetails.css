@@ -85,6 +85,43 @@
   color: rgba(83, 83, 83, 1);
 }
 
+/* Btns  */
+.view_leads_details_btn_div > .leads_reject_btn {
+  width: 138px;
+  height: 43px;
+  border-radius: 8px;
+  border: 1px solid rgba(194, 200, 212, 1);
+  /* background-color: rgba(88, 105, 255, 1); */
+  background-color: #d84b21;
+  box-shadow: 2px 3px 26px 0px rgba(64, 123, 255, 0.11);
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 19.92px;
+  text-align: center;
+  color: rgba(253, 254, 254, 1);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.view_leads_details_btn_div > .leads_verify_btn {
+  width: 128px;
+  height: 43px;
+  border-radius: 8px;
+  border: 1px solid rgba(194, 200, 212, 1);
+  /* background-color: rgba(88, 105, 255, 1); */
+  background-color: #7fcf2f;
+  box-shadow: 2px 3px 26px 0px rgba(64, 123, 255, 0.11);
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 19.92px;
+  text-align: center;
+  color: rgba(253, 254, 254, 1);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 @media screen and (min-width: 1400px) {
   .lead_view_details_costumer_table_th {
     padding-right: 50px !important;
@@ -127,6 +164,9 @@
   .lead_costumer_details_firstRow_left_imgDiv {
     width: 130px;
     height: 130px;
+  }
+  .view_leads_details_btn_div {
+    text-align: center;
   }
 }
 

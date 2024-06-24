@@ -24,6 +24,7 @@
 
 #signup_left_mainDiv {
   height: 900px;
+  margin-top: 20px;
   width: 560px;
   border-radius: 22px;
   border: 8px;
@@ -108,7 +109,7 @@
 }
 
 .userName_input_signup {
-  width: 100%important;
+  width: 95%important;
 }
 
 .signup_submit_button {
@@ -202,30 +203,32 @@
     padding: 0 50px;
   }
   .signup_left_container {
-    margin-left: 20px;
+    /* margin-left: 20px; */
   }
   .signup_fullname_div {
     flex-direction: column;
   }
   .signup_name_form_control {
-    width: 95% !important;
+    width: 100% !important;
   }
   .signup_name_icons {
-    right: 11%;
+    right: 4%;
     top: 74%;
   }
   .signup_email_form_control {
-    width: 95%;
+    width: 100%;
   }
   .signup_email_form_control::placeholder {
     font-size: small;
   }
   .signup_input_icons {
-    right: 11%;
+    right: 4%;
     top: 74%;
   }
   #signup_left_mainDiv {
-    height: 900px;
+    /* height: 900px; */
+    height: 750px;
+    margin-top: 20px;
   }
 }
 
@@ -237,7 +240,8 @@
 @media screen and (max-width: 430px) {
   .signup_left_container {
     --bs-gutter-x: 0;
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    margin-top: 10px;
     margin-left: 0px;
     /* width: 332px; */
     width: 100%;
@@ -245,7 +249,7 @@
   #signup_left_mainDiv {
     /* margin-right: 20px; */
     height: 100%;
-    margin: 60px 0;
+    /* margin: 60px 0; */
   }
   .signup_right_bodyDiv {
     height: 54vh;

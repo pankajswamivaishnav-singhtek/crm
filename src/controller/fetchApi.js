@@ -23,6 +23,7 @@ import {
   SINGLE_LEAD_UPDATE_URL,
   GET_ALL_LEAD_URL_BY_FILTER,
   VERIFY_LEADS_URL,
+  UNVERIFIED_LEADS_URL,
   DOWNLOAD_LEADS_URL,
   UPLOAD_LEADS_URL,
   // Contact Url
@@ -474,6 +475,7 @@ export const createLead = async (userData, uid, setShowToast, tokenId) => {
 
 // Get All Lead By Filter Api
 export const getAllLeadByFilter = async (filters, tokenId) => {
+  console.log("value of filter", filters);
   const queryString = Object.keys(filters)
     .filter((key) => filters[key]) // Only include filters that have a value
     .map(
@@ -519,15 +521,43 @@ export const getSingleLead = async (leadId, tokenId) => {
 // Verifying Leads Post Api
 export const verifyLeads = async (leadId, setShowToast, tokenId) => {
   try {
+    console.log("Enter Verified Leads Post", leadId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
     };
     const response = await axios.post(VERIFY_LEADS_URL + leadId, {}, config);
+    console.log("verified lead response", response);
     if (response) {
       // Show success message in toast
       setShowToast({ success: true, message: "Verify Successfully " });
+    }
+    return response;
+  } catch (error) {
+    const message = error?.response?.data;
+    return message;
+  }
+};
+
+// Verifying Leads Post Api
+export const rejectedLeads = async (leadId, setShowToast, tokenId) => {
+  try {
+    console.log("Enter rejected Leads Post", leadId);
+    let config = {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    };
+    const response = await axios.post(
+      UNVERIFIED_LEADS_URL + leadId,
+      {},
+      config
+    );
+    console.log("verified lead response", response);
+    if (response) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Rejected Successfully " });
     }
     return response;
   } catch (error) {

@@ -19,6 +19,7 @@ import { MdOutlineLogout } from "react-icons/md";
 import { RiMenu4Line } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCallOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa6";
 
 // Controller Api
 import { logoutUser } from "../../controller/fetchApi";
@@ -121,6 +122,17 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       >
                         <MdOutlineDashboardCustomize className="sidebar_navItem_icon" />
                         <span className="sidebar_navItem_text">Dashboard</span>
+                      </Link>
+                    </li>
+                    {/* User Item */}
+                    <li className="nav-item sidebar_navItems">
+                      <Link
+                        className="Link-button"
+                        to="/created-users"
+                        onClick={sideBarClose}
+                      >
+                        <FaRegUser className="sidebar_navItem_icon" />
+                        <span className="sidebar_navItem_text">User</span>
                       </Link>
                     </li>
                     {/* Leads Item */}

@@ -1,0 +1,215 @@
+.super_admin_div {
+  background-color: rgba(255, 255, 255, 1);
+  border-top: 1px solid rgba(229, 235, 249, 1);
+  border-radius: 10px;
+  box-shadow: 2px 3px 30px 0px rgba(64, 123, 255, 0.12);
+}
+
+.super_admin_first_div > .dashboard_username_div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.super_admin_first_section_user_name2 {
+  font-family: Roboto;
+  font-size: 17px;
+  font-weight: 400;
+  text-align: left;
+  color: rgba(114, 114, 114, 1);
+}
+.super_admin_first_section_user_name {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(31, 31, 31, 1);
+  margin-bottom: -6px;
+}
+
+.super_admin_first_section_single_card {
+  display: flex;
+  align-items: center;
+  width: 370px;
+  height: 100px;
+  margin: 10px 20px 10px 10px;
+  border-radius: 12px;
+  border: 1px;
+}
+
+.super_admin_first_section_text_div {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 0 0 40px;
+  align-items: center;
+}
+
+.super_admin_first_section_card_text {
+  font-family: Roboto;
+  font-size: x-large;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.super_admin_first_section_card_number {
+  font-family: Roboto;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: left;
+}
+
+.super_admin_first_section_card_icon_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 66px;
+  height: 66px;
+  border: 1.5px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.super_admin_first_section_card_link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.super_admin_first_section_first_card {
+  background-color: #baebff;
+  border: 1px solid #8ed4ef;
+}
+
+.super_admin_first_section_second_card {
+  background-color: #c8ffdc;
+  border: 1px solid #7bdc9e;
+}
+
+.super_admin_first_section_third_card {
+  background-color: #ffddd3;
+  border: 1px solid #fdbdaa;
+}
+
+.super_admin_first_section_fourth_card {
+  background-color: #e5e8ff;
+  border: 1px solid #abc3f8;
+}
+
+.super_admin_first_section_firstCard_icon {
+  color: #8ed4ef;
+}
+
+.super_admin_first_section_secondCard_icon {
+  color: #7bdc9e;
+}
+
+.super_admin_first_section_thirdCard_icon {
+  color: #f4a48b;
+}
+
+.super_admin_first_section_fourthCard_icon {
+  color: #8298c9;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .super_admin_first_section_single_card {
+    width: 300px;
+    height: 80px;
+    margin: 10px 60px 10px 10px;
+  }
+  .super_admin_first_section_card_text {
+    font-size: large;
+  }
+  .super_admin_div {
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .super_admin_first_section_single_card {
+    width: 330px;
+    height: 80px;
+    margin: 10px 60px 10px 10px;
+  }
+
+  .super_admin_div {
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .super_admin_first_section_single_card {
+    width: 280px;
+  }
+  .super_admin_first_section_card_text {
+    font-size: large;
+  }
+
+  .super_admin_first_section_user_name2 {
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: 10px;
+  }
+  .super_admin_first_section_user_name {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 16px;
+    text-align: left;
+    color: rgba(31, 31, 31, 1);
+    margin-bottom: -6px;
+  }
+}
+
+/* Section 2 */
+.super_admin_section2 {
+  margin-top: 20px;
+}
+
+.super_admin_section2_user_name {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(31, 31, 31, 1);
+  margin-bottom: -6px;
+}
+
+.super_admin_section2_user_name2 {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: left;
+  color: rgba(114, 114, 114, 1);
+}
+
+.super_admin_section2_right_div {
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+}
+
+#super_admin_section2_right_div_text {
+  font-family: Roboto;
+  font-weight: 600;
+  line-height: 23.44px;
+  text-align: left;
+}
+
+.super_admin_section2_right_div_label_text {
+  font-family: Roboto !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+}
+
+.super_admin_section2_right_checkbox_div {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* User Modal */
+.super_admin_create_user_modal {
+  padding: 0 !important;
+}

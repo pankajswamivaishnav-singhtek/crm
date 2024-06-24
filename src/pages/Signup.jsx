@@ -89,7 +89,7 @@ const Signup = () => {
       <div className="container-fluid signup_body_div">
         <div className="row">
           {/* Left Main Div Start*/}
-          <div className="col-xl-6 col-md-6 col-sm-12">
+          <div className="col-xl-12 col-md-12 col-sm-12">
             <div className="container signup_left_container">
               <div id="signup_left_mainDiv">
                 <form onSubmit={handleSubmit}>
@@ -98,7 +98,7 @@ const Signup = () => {
                     {/* Full Name */}
                     <div className="signup_fullname_div">
                       {/* first name */}
-                      <div className="mb-4 position-relative">
+                      <div className="mb-xl-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_name"
@@ -124,7 +124,7 @@ const Signup = () => {
                         <FcBusinessman className="signup_name_icons" />
                       </div>
                       {/* last name */}
-                      <div className="mb-4 position-relative">
+                      <div className="mb-xl-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_name"
@@ -152,7 +152,7 @@ const Signup = () => {
                     </div>
                     {/* UserName */}
                     <div className="signup_input_div ">
-                      <div className="mb-4 position-relative">
+                      <div className="mb-xl-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -180,7 +180,7 @@ const Signup = () => {
                     </div>
                     {/* Email */}
                     <div className="signup_input_div">
-                      <div className="mb-4 position-relative">
+                      <div className="mb-xl-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -208,7 +208,7 @@ const Signup = () => {
                     </div>
                     {/* Phone */}
                     <div className="signup_input_div">
-                      <div className="mb-4 position-relative">
+                      <div className="mb-xl-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -238,7 +238,7 @@ const Signup = () => {
                     </div>
                     {/* Create Password */}
                     <div className="signup_input_div">
-                      <div className="mb-4 position-relative">
+                      <div className="mb-xl-4 position-relative">
                         <label
                           htmlFor="exampleFormControlInput1"
                           className="form-label signup_div_input"
@@ -400,11 +400,11 @@ const Signup = () => {
           </div>
           {/* Left Main End */}
           {/* Right Main Div */}
-          <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
+          {/* <div className="col-xl-6 col-md-12 col-sm-12 signup_right_bodyDiv">
             <div className="signup_right_mainDiv">
               <img src={signupImg} alt="signup-img" className="img-fluid" />
             </div>
-          </div>
+          </div> */}
         </div>
         {/* Right Main Div End*/}
       </div>

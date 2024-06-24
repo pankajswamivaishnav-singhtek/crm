@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import ForgotPassword from "../pages/ForgotPassword";
 import OtpVerification from "../pages/OtpVerification";
 import Main from "../pages/Main";
+import SuperAdmin from "../pages/SuperAdmin";
 import Dashboard from "../pages/dashboardPages/Dashboard";
 import Leads from "../pages/dashboardPages/Leads";
 import CreateLead from "../pages/dashboardPages/CreateLead";
@@ -41,6 +42,7 @@ import UpdateLead from "../pages/dashboardPages/UpdateLead";
 import ValidateRoute from "./ValidateRoute";
 import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 import UpdateProfile from "../pages/UpdateProfile";
+import CreatedUser from "../pages/CreatedUser";
 
 const AllRoutes = () => {
   const [loading, setLoading] = useState(true);
@@ -60,6 +62,7 @@ const AllRoutes = () => {
   return (
     <Routes>
       {/* Dashboard Routes */}
+
       <Route
         element={
           <Main
@@ -71,10 +74,26 @@ const AllRoutes = () => {
         }
       >
         <Route
+          path="/super-admin"
+          element={
+            <ValidateRoute>
+              <SuperAdmin />
+            </ValidateRoute>
+          }
+        />
+        <Route
           path="/dashboard"
           element={
             <ValidateRoute>
               <Dashboard />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/created-users"
+          element={
+            <ValidateRoute>
+              <CreatedUser />
             </ValidateRoute>
           }
         />

@@ -43,8 +43,40 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   const tokenId = userIdTokenData?.data?.token;
   const [getAllLeadData, setAllLeadsData] = useState([]);
 
-
   //  Get All Leads Data
+  // const getLeadsData = useCallback(async () => {
+  //   const filter = {
+  //     page: pageNo,
+  //     city: filterData?.cityName,
+  //     company: filterData?.companyName,
+  //     createdAt: filterData?.date,
+  //     leadOwner: filterData?.leadOwnerName,
+  //     leadType: filterData?.verified
+  //       ? "verified"
+  //       : filterData?.unverified
+  //       ? "unverified"
+  //       : "unverified",
+  //   };
+  //   try {
+  //     getAllLeadByFilter(filter, tokenId).then((res) => {
+  //       setAllLeadsData(res);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [
+  //   filterData?.cityName,
+  //   filterData?.companyName,
+  //   filterData?.date,
+  //   filterData?.leadOwnerName,
+  //   filterData?.verified,
+  //   tokenId,
+  //   filterData?.unverified,
+  //   pageNo,
+  //   setAllLeadsData,
+  // ]);
+
+
   const getLeadsData = useCallback(async () => {
     const filter = {
       page: pageNo,
@@ -56,12 +88,13 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
         ? "verified"
         : filterData?.unverified
         ? "unverified"
+        : filterData?.rejected
+        ? "rejected"
         : "unverified",
     };
     try {
-      getAllLeadByFilter(filter, tokenId).then((res) => {
-        setAllLeadsData(res);
-      });
+      const res = await getAllLeadByFilter(filter, tokenId);
+      setAllLeadsData(res);
     } catch (error) {
       console.log(error);
     }
@@ -71,8 +104,9 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
     filterData?.date,
     filterData?.leadOwnerName,
     filterData?.verified,
-    tokenId,
     filterData?.unverified,
+    filterData?.rejected,
+    tokenId,
     pageNo,
     setAllLeadsData,
   ]);
@@ -184,7 +218,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
     getLeadsData();
   }, [getLeadsData]);
 
-  console.log("getAllLeadsData", getAllLeadData);
+  console.log("getAllLeadsDatassssssssss", leadCostumerId);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_containers">
       <div className="dashboard_content_wrapper">
@@ -272,7 +306,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               fourthHead: "Lead Status",
               fifthHead: "View",
               sixthHead: "Contact Action",
-              seventhHead:"Lead Id"
+              seventhHead: "Lead Id",
             }}
             redirectLink="/lead-details"
             getAllLeadData={getAllLeadData}

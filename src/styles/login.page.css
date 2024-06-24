@@ -40,3 +40,31 @@
   align-items: center;
   padding: 10px;
 }
+
+.login_page_input {
+  font-size: small;
+  width: 20vw;
+  font-family: Roboto;
+  font-size: small;
+  font-weight: 500;
+  line-height: 19.92px;
+  color: #808080;
+}
+
+@media screen and (max-width: 768px) {
+  .login_page_input {
+    width: 35vw;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .login_page_input {
+    width: 60vw;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .login_page_input {
+    width: 65vw;
+  }
+}

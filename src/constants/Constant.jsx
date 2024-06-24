@@ -1,4 +1,4 @@
-export const BASE_URL = "http://192.168.0.153:8080";
+export const BASE_URL = "http://192.168.1.2:8080";
 // export const BASE_URL = "http://66.85.140.154:2234";
 
 // Signup User endpoints
@@ -28,6 +28,7 @@ export const DELETE_LEADS_URL = `${BASE_URL}/leadInfo/deleteMultipleByLeadId?lea
 export const SINGLE_LEAD_UPDATE_URL = `${BASE_URL}/leadInfo/updateLeadById?leadId=`;
 export const GET_ALL_LEAD_URL_BY_FILTER = `${BASE_URL}/leadInfo/leads/filter?`;
 export const VERIFY_LEADS_URL = `${BASE_URL}/leadInfo/verifyLead?leads=`;
+export const UNVERIFIED_LEADS_URL = `${BASE_URL}/leadInfo/rejectLead?leads=`;
 export const DOWNLOAD_LEADS_URL = `${BASE_URL}/leadInfo/downloadLeads`;
 export const UPLOAD_LEADS_URL = `${BASE_URL}/leadInfo/uploadLead`;
 // Contact Congiguration url
