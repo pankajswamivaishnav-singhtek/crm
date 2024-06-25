@@ -1,0 +1,52 @@
+.role_and_permission {
+  background-color: rgba(255, 255, 255, 1);
+  border-top: 1px solid rgba(229, 235, 249, 1);
+  border-radius: 10px;
+  box-shadow: 2px 3px 30px 0px rgba(64, 123, 255, 0.12);
+}
+
+.role_and_permission_role_options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.role_and_permission_role_module_text {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 23.44px;
+}
+
+.role_and_permission_role_module_checks {
+  margin: 0 50px 0 0;
+}
+
+.role_and_permission_role_module_checks > label {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.role_and_permission_role_module_checks > input {
+  cursor: pointer;
+}
+
+/* module collapse */
+.role_and_permission_details_main {
+  border: 1px solid #dfe5f1;
+  padding: 12px;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  margin: 10px 70px 20px 20px;
+  box-shadow: 0px 4px 22px 0px #5869ff1f;
+}
+
+.role_and_permission_faq_summary {
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}

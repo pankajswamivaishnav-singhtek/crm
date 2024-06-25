@@ -43,6 +43,7 @@ import ValidateRoute from "./ValidateRoute";
 import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 import UpdateProfile from "../pages/UpdateProfile";
 import CreatedUser from "../pages/CreatedUser";
+import RoleAndPermission from "../pages/RoleAndPermission";
 
 const AllRoutes = () => {
   const [loading, setLoading] = useState(true);
@@ -94,6 +95,14 @@ const AllRoutes = () => {
           element={
             <ValidateRoute>
               <CreatedUser />
+            </ValidateRoute>
+          }
+        />
+        <Route
+          path="/role&permission"
+          element={
+            <ValidateRoute>
+              <RoleAndPermission />
             </ValidateRoute>
           }
         />

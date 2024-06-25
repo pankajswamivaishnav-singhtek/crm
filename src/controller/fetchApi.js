@@ -16,6 +16,12 @@ import {
   GET_CURRENT_USER_URL,
   UPDATE_PROFILE_URL,
   UPLOAD_USER_IMG_URL,
+
+  // Super Admin Url
+  GET_ALL_ROLES,
+  GET_ALL_MODULE,
+  GET_MODULE_PERMISSIONS,
+  SEND_ROLE_MODULE_PERMISSIONS,
   // Leads Url
   CREATE_LEAD_URL,
   GET_SINGLE_LEAD_URL,
@@ -116,7 +122,6 @@ export const signupUser = async (userData, setShowToast) => {
 // OTP Verification Post Api
 export const otpVerification = async (userData, setShowToast) => {
   try {
-    console.log("data otp", userData);
     const response = await axios.post(OTP_VERIFICATION_URL, {
       email: userData.email,
       otp: userData.otp,
@@ -215,7 +220,6 @@ export const logoutUser = async () => {
 // Upload User Img
 export const uploadUserImg = async (file, setShowToast, tokenId) => {
   try {
-    console.log("Enter upload Images");
     const formData = new FormData();
     formData.append("file", file);
     const response = await axios.post(UPLOAD_USER_IMG_URL, formData, {
@@ -317,6 +321,69 @@ export const updateProfile = async (tokenId, setShowToast, profileData) => {
     }
     console.log("Did not lead", error);
   }
+};
+
+// --------------Super Admin Configuration Api -------------
+
+// Roles Get Api
+export const getRoles = async (tokenId) => {
+  try {
+    const response = await axios.get(GET_ALL_ROLES, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("Roles Data", response);
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log("Error: " + message);
+    return message;
+  }
+};
+
+// Module Get Api
+export const getModules = async (tokenId) => {
+  try {
+    const response = await axios.get(GET_ALL_MODULE, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {}
+};
+
+// Module Get Api
+export const getModulePermissions = async (tokenId) => {
+  try {
+    const response = await axios.get(GET_MODULE_PERMISSIONS, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("Permissions", response);
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {}
+};
+
+// Send Role & Permissions
+export const sendRoleModulePermissions = async (formdata, tokenId) => {
+  try {
+    console.log("Role Nad Permissions: " + formdata);
+    const response = await axios.post(SEND_ROLE_MODULE_PERMISSIONS, formdata, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("Role And Permission Send: " + response);
+  } catch (error) {}
 };
 
 // --------------Dashboard Configuration Api -------------

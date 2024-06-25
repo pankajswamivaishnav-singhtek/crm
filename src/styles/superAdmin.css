@@ -197,6 +197,11 @@
   line-height: 23.44px;
   text-align: left;
 }
+@media screen and (min-width: 1401px) {
+  .super_admin_section2_table {
+    height: 100% !important;
+  }
+}
 
 .super_admin_section2_right_div_label_text {
   font-family: Roboto !important;

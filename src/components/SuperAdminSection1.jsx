@@ -43,7 +43,7 @@ const SuperAdminSection1 = () => {
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
               <Link className="super_admin_first_section_card_link" to="/deals">
-                My Open Deals
+                Total Leads
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">20</p>
@@ -59,7 +59,7 @@ const SuperAdminSection1 = () => {
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
               <Link className="super_admin_first_section_card_link" to="/deals">
-                My Open Deals
+                Total Admins
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">20</p>
@@ -75,7 +75,7 @@ const SuperAdminSection1 = () => {
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
               <Link className="super_admin_first_section_card_link" to="/deals">
-                My Open Deals
+                Admin Assign Leads
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">20</p>
@@ -91,7 +91,7 @@ const SuperAdminSection1 = () => {
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
               <Link className="super_admin_first_section_card_link" to="/deals">
-                My Open Deals
+                Remaining Leads
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">20</p>
@@ -118,7 +118,7 @@ const SuperAdminSection1 = () => {
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 />
-              </div> 
+              </div>
               <div className="modal-body super_admin_create_user_modal">
                 <Signup />
               </div>
