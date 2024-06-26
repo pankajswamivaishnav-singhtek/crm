@@ -20,16 +20,17 @@ import { RiMenu4Line } from "react-icons/ri";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoCallOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
+import { RiAdminLine } from "react-icons/ri";
 
 // Controller Api
 import { logoutUser } from "../../controller/fetchApi";
-import { googleLogout } from "@react-oauth/google";
+// import { googleLogout } from "@react-oauth/google";
 const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
   // Logout User
   const logoutUserSubmit = async () => {
     try {
       // await logout({ logoutParams: { returnTo: window.location.origin } });
-      googleLogout();
+      // googleLogout();
       await logoutUser();
       localStorage.clear();
       window.location.href = "/login";
@@ -113,6 +114,19 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         onClick={toggleSidebar}
                       />
                     </div>
+                    {/* Super Admin Item */}
+                    <li className="nav-item sidebar_navItems ">
+                      <Link
+                        className="Link-button "
+                        to="/super-admin"
+                        onClick={sideBarClose}
+                      >
+                        <RiAdminLine className="sidebar_navItem_icon" />
+                        <span className="sidebar_navItem_text">
+                          Super Admin
+                        </span>
+                      </Link>
+                    </li>
                     {/* Dashboard Item */}
                     <li className="nav-item sidebar_navItems ">
                       <Link
@@ -293,6 +307,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     <MdOutlineLogout
                       className="sidebar_shrink_logout_btn"
                       onClick={logoutUserSubmit}
+
                     />
                   )}
                 </div>

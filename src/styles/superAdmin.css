@@ -199,7 +199,25 @@
 }
 @media screen and (min-width: 1401px) {
   .super_admin_section2_table {
-    height: 100% !important;
+    height: 500px !important;
+    overflow-y: auto;
+  }
+
+  .super_admin_section2_table_thead {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1 !important;
+  }
+  .super_admin_section2_table::-webkit-scrollbar {
+    width: 4px;
+  }
+  .super_admin_section2_table::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #ff7006;
+  }
+  .table-container::-webkit-scrollbar-thumb:hover {
+    height: 10px;
+    background: #ff7006; /* Color of the scrollbar thumb on hover */
   }
 }
 

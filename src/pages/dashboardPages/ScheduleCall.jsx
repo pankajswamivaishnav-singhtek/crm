@@ -75,7 +75,7 @@ const ScheduleCall = () => {
               Call Information
             </p>
           </div>
-          <div className="create-lead-heading-right-part">
+          {/* <div className="create-lead-heading-right-part">
             <p className="create-lead-heading-right-para">
               Lead Name :{" "}
               <span className="create-lead-heading-span">
@@ -85,7 +85,7 @@ const ScheduleCall = () => {
             <p className="create-lead-heading-right-para">
               Lead Id : <span className="create-lead-heading-span">2024</span>
             </p>
-          </div>
+          </div> */}
         </div>
         {/* User Account Information */}
         <div className="row">

@@ -333,7 +333,6 @@ export const getRoles = async (tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("Roles Data", response);
     if (response?.status === 200) {
       return response?.data?.data;
     }
@@ -374,16 +373,30 @@ export const getModulePermissions = async (tokenId) => {
 };
 
 // Send Role & Permissions
-export const sendRoleModulePermissions = async (formdata, tokenId) => {
+export const sendRoleModulePermissions = async (
+  formData,
+  tokenId,
+  uid,
+  setShowToast
+) => {
   try {
-    console.log("Role Nad Permissions: " + formdata);
-    const response = await axios.post(SEND_ROLE_MODULE_PERMISSIONS, formdata, {
-      headers: {
-        Authorization: `Bearer ${tokenId}`,
-      },
-    });
-    console.log("Role And Permission Send: " + response);
-  } catch (error) {}
+    console.log("Role Module Permissions data: " + formData);
+    const response = await axios.post(
+      SEND_ROLE_MODULE_PERMISSIONS + uid,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    setShowToast("Save Role & Permission Successfully");
+    return response;
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log("Error: " + message);
+    return message;
+  }
 };
 
 // --------------Dashboard Configuration Api -------------

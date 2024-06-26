@@ -5,7 +5,11 @@ import Signup from "../pages/Signup";
 import { Link } from "react-router-dom";
 // React Icons
 import { MdAdd } from "react-icons/md";
-import { FaHandshakeSimple } from "react-icons/fa6";
+import { SiGoogleads } from "react-icons/si";
+import { MdAdminPanelSettings } from "react-icons/md";
+import { MdAssignmentTurnedIn } from "react-icons/md";
+import { MdAssignmentAdd } from "react-icons/md";
+
 const SuperAdminSection1 = () => {
   return (
     <div className="super_admin_first_div ">
@@ -37,7 +41,7 @@ const SuperAdminSection1 = () => {
         <div className="super_admin_first_section_single_card col super_admin_first_section_first_card">
           <div className="super_admin_first_section_card_icon_div">
             {
-              <FaHandshakeSimple className="dashboard_card_icon super_admin_first_section_firstCard_icon" />
+              <SiGoogleads className="dashboard_card_icon super_admin_first_section_firstCard_icon" />
             }
           </div>
           <div className="super_admin_first_section_text_div">
@@ -53,7 +57,7 @@ const SuperAdminSection1 = () => {
         <div className="super_admin_first_section_single_card col super_admin_first_section_second_card">
           <div className="super_admin_first_section_card_icon_div">
             {
-              <FaHandshakeSimple className="dashboard_card_icon super_admin_first_section_secondCard_icon" />
+              <MdAdminPanelSettings className="dashboard_card_icon super_admin_first_section_secondCard_icon" />
             }
           </div>
           <div className="super_admin_first_section_text_div">
@@ -69,7 +73,7 @@ const SuperAdminSection1 = () => {
         <div className="super_admin_first_section_single_card col super_admin_first_section_third_card">
           <div className="super_admin_first_section_card_icon_div">
             {
-              <FaHandshakeSimple className="dashboard_card_icon super_admin_first_section_thirdCard_icon" />
+              <MdAssignmentTurnedIn className="dashboard_card_icon super_admin_first_section_thirdCard_icon" />
             }
           </div>
           <div className="super_admin_first_section_text_div">
@@ -85,7 +89,7 @@ const SuperAdminSection1 = () => {
         <div className="super_admin_first_section_single_card col super_admin_first_section_fourth_card">
           <div className="super_admin_first_section_card_icon_div">
             {
-              <FaHandshakeSimple className="dashboard_card_icon super_admin_first_section_fourthCard_icon" />
+              <MdAssignmentAdd className="dashboard_card_icon super_admin_first_section_fourthCard_icon" />
             }
           </div>
           <div className="super_admin_first_section_text_div">

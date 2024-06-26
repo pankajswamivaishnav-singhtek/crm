@@ -19,7 +19,7 @@ export const GET_IMG_URL = `${BASE_URL}/profile/getUserImage`;
 export const GET_ALL_ROLES = `${BASE_URL}/roleAndPermission/getAllRole`;
 export const GET_ALL_MODULE = `${BASE_URL}/roleAndPermission/getAllModule`;
 export const GET_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/getAllPermission`;
-export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assignRoleAndPermission`;
+export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assignRoleModulePermission?userId=`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;

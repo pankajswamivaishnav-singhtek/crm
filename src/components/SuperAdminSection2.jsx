@@ -7,9 +7,9 @@ const SuperAdminSection2 = () => {
     <div className="row super_admin_section2">
       {/* Left Div */}
       <div className="super_admin_section2_left_div col">
-        <div className="dashboard_section1_mainDiv super_admin_section2_table">
+        <div className="super_admin_section2_table">
           <table className="table border border-secondary-subtle super_admin_section2_left_table">
-            <thead>
+            <thead className="super_admin_section2_table_thead">
               <tr className="dashboard_section1_tableHead_tr table-danger">
                 <th scope="col">Sr. No</th>
                 <th scope="col">Name</th>

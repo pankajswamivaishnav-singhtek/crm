@@ -6,15 +6,28 @@ import {
   getRoles,
   getModules,
   getModulePermissions,
+  sendRoleModulePermissions,
 } from "../controller/fetchApi";
 
 const RoleAndPermission = () => {
+  // Toast
+  const [showToast, setShowToast] = useState(false);
+  // Function to hide the toast after 3 seconds
+  const hideToast = () => {
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
+  if (showToast) {
+    hideToast();
+  }
+
   const [roles, setRoles] = useState();
   const [module, setModules] = useState([]);
   const [modulePermissions, setModulePermissions] = useState([]);
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-
+  const uid = userIdTokenData?.data?.userId;
   useEffect(() => {
     (async () => {
       try {
@@ -29,6 +42,80 @@ const RoleAndPermission = () => {
     })();
   }, [tokenId]);
 
+  // handleRoleChecks
+  const [selectedRolesId, setSelectedRoleId] = useState();
+  const handleRoleChecks = (id) => {
+    setSelectedRoleId(id);
+  };
+
+  // handlePermissionChecks
+  const [selectedModulePermissions, setSelectedModulePermissions] = useState(
+    {}
+  );
+  const handlePermissionChecks = (event, moduleId) => {
+    let isSelected = event.target.checked;
+    let value = parseInt(event.target.value);
+
+    setSelectedModulePermissions((prevState) => {
+      const newState = { ...prevState };
+      if (isSelected) {
+        if (!newState[moduleId]) {
+          newState[moduleId] = [];
+        }
+        newState[moduleId].push(value);
+      } else {
+        if (newState[moduleId]) {
+          newState[moduleId] = newState[moduleId].filter((id) => id !== value);
+          if (newState[moduleId].length === 0) {
+            delete newState[moduleId];
+          }
+        }
+      }
+      return newState;
+    });
+  };
+  // Submit Form
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      // Get Modules Id
+      let modulesIdArray = [];
+      for (const key in selectedModulePermissions) {
+        modulesIdArray.push(Number(key));
+      }
+      const formData = {
+        roleId: selectedRolesId,
+        moduleIds: modulesIdArray,
+        permissionIds: selectedModulePermissions,
+      };
+      const moduleIds = formData.moduleIds.slice(1);
+
+      // Create modulePermissions array
+      const modulePermissions = moduleIds.map((moduleId) => {
+        return {
+          moduleId: moduleId,
+          permissionIds: formData.permissionIds[moduleId],
+          // permissionIds: selectedModulePermissions[moduleId],
+        };
+      });
+
+      // Construct the desired output object
+      const desiredFormat = {
+        roleId: selectedRolesId,
+        moduleIds: moduleIds,
+        modulePermissions: modulePermissions,
+      };
+      await sendRoleModulePermissions(
+        desiredFormat,
+        tokenId,
+        uid,
+        setShowToast
+      );
+    } catch (error) {
+      console.log("Error sending Role & Permissions", error);
+    }
+  };
+
   return (
     <div className="role_and_permission p-3">
       {/* Heading */}
@@ -36,7 +123,7 @@ const RoleAndPermission = () => {
         <p className="dashboard_user_name">{`Welcome : Pankaj Swami Vaishnav`}</p>
         <p className="dashboard_user_name2">{`username : pankajvaishnav128`}</p>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* Roles */}
         <div className="role_and_permission_roles_module">
           <p className="role_and_permission_role_module_text">Role</p>
@@ -53,6 +140,11 @@ const RoleAndPermission = () => {
                     defaultValue=""
                     id={data?.id}
                     name={data?.role + data?.id}
+                    // checked={selectedRolesId?.includes(data?.id)}
+                    value={data?.id}
+                    onChange={() => {
+                      handleRoleChecks(data?.id);
+                    }}
                   />
                   <label className="form-check-label" htmlFor={data?.id}>
                     {data.role}
@@ -80,6 +172,7 @@ const RoleAndPermission = () => {
                   {data?.module}
                 </summary>
                 <hr />
+                {/* Permissions */}
                 <div className="role_and_permission_role_options mt-2">
                   {modulePermissions?.map((permissionData, index) => (
                     <div
@@ -89,12 +182,20 @@ const RoleAndPermission = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        defaultValue=""
-                        id={permissionData?.id}
+                        id={permissionData?.permission + permissionData?.id}
+                        checked={
+                          selectedModulePermissions[data.id]?.includes(
+                            permissionData?.id
+                          ) || false
+                        }
+                        value={permissionData?.id}
+                        onChange={(e) => handlePermissionChecks(e, data.id)}
                       />
                       <label
                         className="form-check-label"
-                        htmlFor={permissionData?.id}
+                        htmlFor={
+                          permissionData?.permission + permissionData?.id
+                        }
                       >
                         {permissionData?.permission}
                       </label>
@@ -112,6 +213,27 @@ const RoleAndPermission = () => {
           </button>
         </div>
       </form>
+      {/* Toast */}
+      {showToast && (
+        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+          <div
+            className="toast show create_lead_toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header create_lead_toast_header">
+              <strong className="me-auto">Form Submitted Successfully</strong>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowToast({ success: false, message: "" })}
+              />
+            </div>
+            <div className="toast-body">{showToast.message}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
