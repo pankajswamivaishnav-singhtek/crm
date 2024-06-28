@@ -145,7 +145,6 @@ const ForgotPassword = () => {
             </div>
           </div>
         </div>
-        {/* Left Main End */}
         {/* Right Main Div */}
         <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
           <div className="signup_right_mainDiv">

@@ -33,13 +33,6 @@ const DashboardSection2 = () => {
       }
     })();
   }, [uid, tokenId]);
-  // const getDataArray = () => {
-  //   if (!pipelineDealsData || !Array.isArray(pipelineDealsData)) {
-  //     return [0, 0, 0, 0, 0, 0, 0];
-  //   }
-  //   return pipelineDealsData.map((deal) => deal.dealCount);
-  // };
-  console.log("pipelineDealsData", pipelineDealsData?.length);
   return (
     <div className="row dashboard_row1">
       {/* Dashboard Section 2 table */}

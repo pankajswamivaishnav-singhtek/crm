@@ -126,7 +126,7 @@ const Signup = () => {
                       {/* last name */}
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="exampleFormControlInput2"
                           className="form-label signup_div_name"
                         >
                           Last Name <span className="required_sign">*</span>
@@ -134,7 +134,7 @@ const Signup = () => {
                         <input
                           type="text"
                           className={`form-control signup_name_form_control`}
-                          id="exampleFormControlInput1"
+                          id="exampleFormControlInput2"
                           placeholder="Enter last name"
                           name="lastName"
                           value={values.lastName}
@@ -154,7 +154,7 @@ const Signup = () => {
                     <div className="signup_input_div ">
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="exampleFormControlInput3"
                           className="form-label signup_div_input"
                         >
                           Username <span className="required_sign">*</span>
@@ -162,7 +162,7 @@ const Signup = () => {
                         <input
                           type="text"
                           className={`form-control signup_email_form_control userName_input_signup`}
-                          id="exampleFormControlInput1"
+                          id="exampleFormControlInput3"
                           name="userName"
                           placeholder="Enter User name"
                           value={values.userName}
@@ -182,7 +182,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="exampleFormControlInput4"
                           className="form-label signup_div_input"
                         >
                           Email address <span className="required_sign">*</span>
@@ -190,7 +190,7 @@ const Signup = () => {
                         <input
                           type="email"
                           className={`form-control signup_email_form_control`}
-                          id="exampleFormControlInput1"
+                          id="exampleFormControlInput4"
                           name="email"
                           placeholder="Enter email"
                           value={values.email}
@@ -210,7 +210,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="exampleFormControlInput5"
                           className="form-label signup_div_input"
                         >
                           Phone Number <span className="required_sign">*</span>
@@ -220,7 +220,7 @@ const Signup = () => {
                           minLength="10"
                           maxLength="12"
                           className={`form-control signup_email_form_control`}
-                          id="exampleFormControlInput1"
+                          id="exampleFormControlInput5"
                           placeholder="Enter number"
                           name="phone"
                           value={values.phone}
@@ -240,7 +240,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="exampleFormControlInput6"
                           className="form-label signup_div_input"
                         >
                           Password <span className="required_sign">*</span>
@@ -249,7 +249,7 @@ const Signup = () => {
                           type={showPassword ? "password" : "text"}
                           minLength={6}
                           className={`form-control signup_email_form_control  `}
-                          id="exampleFormControlInput1"
+                          id="exampleFormControlInput6"
                           placeholder="Make password"
                           name="password"
                           value={values.password}
@@ -285,7 +285,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="exampleFormControlInput7"
                           className="form-label signup_div_input"
                         >
                           Confirm Password
@@ -295,7 +295,7 @@ const Signup = () => {
                           type={showConfirmPassword ? "password" : "text"}
                           minLength={6}
                           className={`form-control signup_email_form_control `}
-                          id="exampleFormControlInput1"
+                          id="exampleFormControlInput7"
                           placeholder="Check password"
                           name="confirmPassword"
                           value={values.confirmPassword}

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import ContactRightSectionTable from "../components/ContactRightSectionTable";
+import React, { useState, useEffect, useCallback } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import CreatedUserTable from "../components/CreatedUserTable";
-// React Router Dom
-import { Link } from "react-router-dom";
+// Controller Method
+import { getAllUsersMadeByAdmin } from "../controller/fetchApi";
 const CreatedUser = () => {
   // Start Toast -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -17,7 +16,9 @@ const CreatedUser = () => {
   if (showToast) {
     hideToast();
   }
-
+  // TokenId
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
 
@@ -52,6 +53,19 @@ const CreatedUser = () => {
     }
   };
 
+  //  Get All Users Api
+  const [getAllUsers, setAlluser] = useState();
+  const getAllUser = useCallback(async () => {
+    try {
+      const result = await getAllUsersMadeByAdmin(tokenId);
+      setAlluser(result);
+    } catch (error) {}
+  }, [tokenId, setAlluser]);
+
+  useEffect(() => {
+    getAllUser();
+  }, [getAllUser]);
+
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
@@ -66,6 +80,7 @@ const CreatedUser = () => {
               fifthHead: "Id",
               sixthHead: "Give Permission",
             }}
+            data={getAllUsers}
             redirectLink="/role&permission"
           />
         </div>

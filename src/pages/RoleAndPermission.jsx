@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 // CSS
 import "../styles/roleAndPermission.css";
 // Controllers
@@ -22,6 +23,11 @@ const RoleAndPermission = () => {
     hideToast();
   }
 
+  // Get User Data From user page for permissions
+  const location = useLocation();
+  const userData = location?.state?.userData;
+
+  // const userData = location.state?.userData;
   const [roles, setRoles] = useState();
   const [module, setModules] = useState([]);
   const [modulePermissions, setModulePermissions] = useState([]);
@@ -34,7 +40,6 @@ const RoleAndPermission = () => {
         const response = await getRoles(tokenId);
         const moduleResponse = await getModules(tokenId);
         const modulePermissionsResponse = await getModulePermissions(tokenId);
-        console.log("modules Permissions", modulePermissionsResponse);
         setRoles(response);
         setModules(moduleResponse);
         setModulePermissions(modulePermissionsResponse);
@@ -83,28 +88,20 @@ const RoleAndPermission = () => {
       for (const key in selectedModulePermissions) {
         modulesIdArray.push(Number(key));
       }
-      const formData = {
-        roleId: selectedRolesId,
-        moduleIds: modulesIdArray,
-        permissionIds: selectedModulePermissions,
-      };
-      const moduleIds = formData.moduleIds.slice(1);
-
-      // Create modulePermissions array
-      const modulePermissions = moduleIds.map((moduleId) => {
+      // Make Module Permissions
+      const modulePermissions = modulesIdArray.map((moduleId) => {
         return {
           moduleId: moduleId,
-          permissionIds: formData.permissionIds[moduleId],
-          // permissionIds: selectedModulePermissions[moduleId],
+          permissionIds: selectedModulePermissions[moduleId],
         };
       });
-
       // Construct the desired output object
       const desiredFormat = {
         roleId: selectedRolesId,
-        moduleIds: moduleIds,
+        moduleIds: modulesIdArray,
         modulePermissions: modulePermissions,
       };
+      // Log the desired format as a string
       await sendRoleModulePermissions(
         desiredFormat,
         tokenId,
@@ -120,8 +117,8 @@ const RoleAndPermission = () => {
     <div className="role_and_permission p-3">
       {/* Heading */}
       <div className="role_and_permission_heading dashboard_username_div">
-        <p className="dashboard_user_name">{`Welcome : Pankaj Swami Vaishnav`}</p>
-        <p className="dashboard_user_name2">{`username : pankajvaishnav128`}</p>
+        <p className="dashboard_user_name">{`Username : ${userData?.firstName} ${userData?.lastName}`}</p>
+        <p className="dashboard_user_name2">{`User Id : ${userData?.id}`}</p>
       </div>
       <form onSubmit={handleSubmit}>
         {/* Roles */}

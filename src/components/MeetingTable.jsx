@@ -146,10 +146,6 @@ const MeetingTable = ({
                     <Link to="/create-deal" state={{ leadId: data.leadId }}>
                       <HiPencilSquare className="lead-table-contact-action-icon fs-4" />
                     </Link>
-                    {/* &nbsp;&nbsp;
-                    <Link to="/deal-details">
-                      <FaRegEye className="fs-5" />
-                    </Link> */}
                   </td>
                   <td className="text-center">
                     {data?.leadId && (

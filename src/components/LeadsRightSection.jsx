@@ -76,7 +76,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   //   setAllLeadsData,
   // ]);
 
-
   const getLeadsData = useCallback(async () => {
     const filter = {
       page: pageNo,
@@ -218,7 +217,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
     getLeadsData();
   }, [getLeadsData]);
 
-  console.log("getAllLeadsDatassssssssss", leadCostumerId);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_containers">
       <div className="dashboard_content_wrapper">

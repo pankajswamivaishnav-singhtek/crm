@@ -114,7 +114,7 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                 type="submit"
                 onClick={handleUploadImg}
               >
-                Upload 
+                Upload
               </button>
             </div>
           </div>
@@ -237,17 +237,18 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                 <div className="row gx-3 mb-3">
                   {/* Form Group (Password)*/}
                   <div className="col-md-6">
-                    <label className="small mb-1" htmlFor="inputPhone">
+                    <label className="small mb-1" htmlFor="inputPassword">
                       Password
                     </label>
                     <input
                       className="form-control"
-                      id="inputPhone"
+                      id="inputPassword"
                       type="password"
                       value={formik.values.password}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       name="password"
+                      autoComplete=""
                       placeholder={
                         formik.touched.password && formik.errors.password
                           ? formik.errors.password
@@ -268,6 +269,7 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       name="confirmPassword"
+                      autoComplete=""
                       placeholder={
                         formik.touched.confirmPassword &&
                         formik.errors.confirmPassword

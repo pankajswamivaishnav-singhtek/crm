@@ -22,6 +22,7 @@ import {
   GET_ALL_MODULE,
   GET_MODULE_PERMISSIONS,
   SEND_ROLE_MODULE_PERMISSIONS,
+  CREATE_USERS_URL,
   // Leads Url
   CREATE_LEAD_URL,
   GET_SINGLE_LEAD_URL,
@@ -326,6 +327,7 @@ export const updateProfile = async (tokenId, setShowToast, profileData) => {
 // --------------Super Admin Configuration Api -------------
 
 // Roles Get Api
+
 export const getRoles = async (tokenId) => {
   try {
     const response = await axios.get(GET_ALL_ROLES, {
@@ -365,7 +367,6 @@ export const getModulePermissions = async (tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("Permissions", response);
     if (response?.status === 200) {
       return response?.data?.data;
     }
@@ -390,12 +391,32 @@ export const sendRoleModulePermissions = async (
         },
       }
     );
-    setShowToast("Save Role & Permission Successfully");
+    setShowToast({
+      success: true,
+      message: "Save Role & Permission Successfully",
+    });
     return response;
   } catch (error) {
     const message = error?.response?.data;
     console.log("Error: " + message);
     return message;
+  }
+};
+
+// Get All User Who Made Super Admin
+export const getAllUsersMadeByAdmin = async (tokenId) => {
+  try {
+    const response = await axios.get(CREATE_USERS_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log("Error do not get all users by made admin", message);
   }
 };
 
@@ -473,7 +494,6 @@ export const pipelineDeals = async (uid, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("response pipeline", response);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -555,7 +575,6 @@ export const createLead = async (userData, uid, setShowToast, tokenId) => {
 
 // Get All Lead By Filter Api
 export const getAllLeadByFilter = async (filters, tokenId) => {
-  console.log("value of filter", filters);
   const queryString = Object.keys(filters)
     .filter((key) => filters[key]) // Only include filters that have a value
     .map(
@@ -835,7 +854,6 @@ export const getSingleContact = async (contactId, tokenId) => {
 //Get All Contact get Api
 export const getAllContact = async (pageNo, tokenId) => {
   try {
-    console.log("Get All Data ENTER", tokenId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
@@ -843,7 +861,6 @@ export const getAllContact = async (pageNo, tokenId) => {
     };
     const response = await axios.get(GET_ALL_CONTACT_URL + pageNo, config);
     const finalResponse = response?.data?.data;
-    console.log("Get All Contact ata in Api", finalResponse);
     if (finalResponse) {
       return finalResponse;
     } else {
@@ -1949,7 +1966,7 @@ export const getGenratedLeads = async (tokenId, leadBy) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("data reprot", response);
+
     if (response?.data?.status === 200) {
       return response?.data?.data;
     }

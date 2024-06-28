@@ -59,7 +59,6 @@ const LeadsRightSectionTable = ({
     }
   }, [leadCostumerId, getAllLeadData]);
 
-  console.log("ALl Lead length", getAllLeadData?.totalElements);
   return (
     <div className="container-fluid table-responsive">
       <div className="row dashboard_table_main_heading"></div>
@@ -80,7 +79,8 @@ const LeadsRightSectionTable = ({
                     <input
                       id="cbx-29"
                       type="checkbox"
-                      onClick={handleMasterCheckboxChange}
+                      onChange={handleMasterCheckboxChange}
+                      // onClick={handleMasterCheckboxChange}
                       checked={isMasterChecked}
                     />
                     <label htmlFor="cbx-29" />

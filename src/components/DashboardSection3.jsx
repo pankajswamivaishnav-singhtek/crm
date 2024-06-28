@@ -30,11 +30,7 @@ const DashboardSection3 = () => {
     //   setMonthlyMeetingsData(res);
     // });
   }, [uid, tokenId]);
-  // useEffect(() => {
-  //   monthlyClosingDeals(uid, tokenId).then((res) => {
-  //     setMonthlyClosingDealsData(res);
-  //   });
-  // }, [uid, tokenId]);
+
   // Function to return the class name based on Stage
   const getStatusClassName = (stage) => {
     switch (stage.toLowerCase()) {

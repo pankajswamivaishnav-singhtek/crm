@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ReportCallPieChart from "./shared/ReportCallPieChart";
 const ReportCallsSecondSection = ({ getCallsDoneData, setCallBy }) => {
   const [selectedValue, setSelectedValue] = useState("month");
-  console.log("year and month", selectedValue);
+
   setCallBy(selectedValue);
   const handleItemClick = (value) => {
     setSelectedValue(value);

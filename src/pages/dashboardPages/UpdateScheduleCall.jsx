@@ -45,7 +45,7 @@ const UpdateScheduleCall = ({
       reminder: "",
       callPurpose: "",
       callAgenda: "",
-      leadId:"",
+      leadId: "",
     },
     validationSchema: ScheduleCallSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -77,7 +77,7 @@ const UpdateScheduleCall = ({
       });
     }
   }, [defaultValue]);
-  console.log("Default Value: " + defaultValue);
+
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={formik.handleSubmit}>

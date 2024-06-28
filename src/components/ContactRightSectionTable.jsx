@@ -22,7 +22,7 @@ const ContactRightSectionTable = ({
       setContactCostumerId([...contactCostumerId, contactId]);
     }
   };
-  // Handle Master Checkbox Change Start -----
+
   const handleMasterCheckboxChange = (event) => {
     const isChecked = event.target.checked;
     setIsMasterChecked(isChecked);

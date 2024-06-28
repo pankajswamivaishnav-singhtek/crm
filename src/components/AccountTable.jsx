@@ -21,7 +21,6 @@ const AccountTable = ({
       setAccountCostumerId([...accountCostumerId, leadId]);
     }
   };
-  // Handle Single Check Box For Single Updateion And Id get and send End    ------
   // Handle Master Checkbox Change Start -----
   const handleMasterCheckboxChange = (event) => {
     const isChecked = event.target.checked;
@@ -33,7 +32,6 @@ const AccountTable = ({
       setAccountCostumerId([]);
     }
   };
-  // Handle Master Checkbox Change End   -----
   useEffect(() => {
     const allLeadIds = getAllAccountData?.content?.map((data) => data.id) || [];
     if (allLeadIds.length === 0) return;

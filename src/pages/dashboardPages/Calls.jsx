@@ -149,7 +149,6 @@ const Calls = () => {
     getScheduleCallData();
   }, [getScheduleCallData]);
 
-  console.log("defaultValue", defaultValue);
   return (
     <div className="conatiner-fluid dashboard_rightLeads_main_container">
       <div className="dashboard_content_wrapper">
@@ -272,8 +271,8 @@ const Calls = () => {
               fourthHead: "Call Status",
               fifthHead: "Call Purpose",
               sixthHead: "View",
-              seventhHead:"Log Call Action",
-              eighthHead:"Lead Id"
+              seventhHead: "Log Call Action",
+              eighthHead: "Lead Id",
             }}
             redirectLink="/schedule-call-details"
             getAllScheduleCallData={getAllScheduleCallData}

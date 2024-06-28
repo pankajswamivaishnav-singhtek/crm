@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // React Icons
 import { BsPencilSquare } from "react-icons/bs";
 
-const CreatedUserTable = ({ tblHead, redirectLink }) => {
+const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
   return (
     <div className="LeadRightSectionTable_body">
       <table className="table table-responsive ">
@@ -22,38 +22,33 @@ const CreatedUserTable = ({ tblHead, redirectLink }) => {
           </tr>
         </thead>
         <tbody className="dashboard_section1_tableBody ">
-          <tr>
-            <td>
-              <Link to={redirectLink} className="Link-button-leads">
-                101
-              </Link>
-            </td>
-            <td>
-              <Link to={redirectLink} className="Link-button-leads">
-                Pankaj Swami Vaishnav
-              </Link>
-            </td>
-            <td>
-              <Link to={redirectLink} className="Link-button-leads">
-                pankajvaishnav128@gmail.com
-              </Link>
-            </td>
-            <td>
-              <Link to={redirectLink} className="Link-button-leads">
-                7073272134
-              </Link>
-            </td>
-            <td>
-              <Link to={redirectLink} className="Link-button-leads">
-                2415
-              </Link>
-            </td>
-            <td className="text-center">
-              <Link to={redirectLink} className="Link-button-leads">
-                <BsPencilSquare />
-              </Link>
-            </td>
-          </tr>
+          {data && data?.length > 0 ? (
+            data?.map((user, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{`${user?.firstName}  ${user?.lastName}`}</td>
+                <td>{user?.email}</td>
+                <td>{user?.mobile}</td>
+                <td>{user?.id}</td>
+                <td className="text-center">
+                  <Link
+                    to={redirectLink}
+                    className="Link-button-leads"
+                    state={{ userData: user }}
+                  >
+                    <BsPencilSquare
+                      className="fs-4"
+                      style={{ color: "rgba(145, 155, 250, 1)" }}
+                    />
+                  </Link>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6">No dara at this time</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

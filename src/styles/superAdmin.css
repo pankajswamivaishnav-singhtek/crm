@@ -197,6 +197,25 @@
   line-height: 23.44px;
   text-align: left;
 }
+
+.super_admin_section2_right_div_label_text {
+  font-family: Roboto !important;
+  font-weight: 500 !important;
+  line-height: 20px !important;
+}
+
+.super_admin_section2_table_icon {
+  color: #8ed4ef;
+}
+
+.super_admin_section2_table_tbody_tr {
+  cursor: pointer;
+}
+.super_admin_section2_right_checkbox_div {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media screen and (min-width: 1401px) {
   .super_admin_section2_table {
     height: 500px !important;
@@ -219,17 +238,6 @@
     height: 10px;
     background: #ff7006; /* Color of the scrollbar thumb on hover */
   }
-}
-
-.super_admin_section2_right_div_label_text {
-  font-family: Roboto !important;
-  font-weight: 500 !important;
-  line-height: 20px !important;
-}
-
-.super_admin_section2_right_checkbox_div {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* User Modal */

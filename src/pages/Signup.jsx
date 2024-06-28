@@ -15,7 +15,7 @@ import { FcManager } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 // Imags
 // import orLogin from "../images/orLogin.jpg";
-import signupImg from "../images/signup_img.png";
+// import signupImg from "../images/signup_img.png";
 // Import Api Function
 import { signupUser } from "../controller/fetchApi";
 
@@ -100,7 +100,7 @@ const Signup = () => {
                       {/* first name */}
                       <div className="mb-xl-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_firstName"
                           className="form-label signup_div_name"
                         >
                           First Name <span className="required_sign">*</span>
@@ -108,7 +108,7 @@ const Signup = () => {
                         <input
                           type="text"
                           className={`form-control signup_name_form_control`}
-                          id="exampleFormControlInput1"
+                          id="signup_firstName"
                           placeholder="Enter first name"
                           name="firstName"
                           value={values.firstName}
@@ -126,7 +126,7 @@ const Signup = () => {
                       {/* last name */}
                       <div className="mb-xl-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_lastName"
                           className="form-label signup_div_name"
                         >
                           Last Name <span className="required_sign">*</span>
@@ -134,7 +134,7 @@ const Signup = () => {
                         <input
                           type="text"
                           className={`form-control signup_name_form_control`}
-                          id="exampleFormControlInput1"
+                          id="signup_lastName"
                           placeholder="Enter last name"
                           name="lastName"
                           value={values.lastName}
@@ -154,7 +154,7 @@ const Signup = () => {
                     <div className="signup_input_div ">
                       <div className="mb-xl-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_userName"
                           className="form-label signup_div_input"
                         >
                           Username <span className="required_sign">*</span>
@@ -162,7 +162,7 @@ const Signup = () => {
                         <input
                           type="text"
                           className={`form-control signup_email_form_control userName_input_signup`}
-                          id="exampleFormControlInput1"
+                          id="signup_userName"
                           name="userName"
                           placeholder="Enter User name"
                           value={values.userName}
@@ -182,7 +182,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-xl-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_email"
                           className="form-label signup_div_input"
                         >
                           Email address <span className="required_sign">*</span>
@@ -190,7 +190,7 @@ const Signup = () => {
                         <input
                           type="email"
                           className={`form-control signup_email_form_control`}
-                          id="exampleFormControlInput1"
+                          id="signup_email"
                           name="email"
                           placeholder="Enter email"
                           value={values.email}
@@ -210,7 +210,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-xl-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_phone"
                           className="form-label signup_div_input"
                         >
                           Phone Number <span className="required_sign">*</span>
@@ -220,7 +220,7 @@ const Signup = () => {
                           minLength="10"
                           maxLength="12"
                           className={`form-control signup_email_form_control`}
-                          id="exampleFormControlInput1"
+                          id="signup_phone"
                           placeholder="Enter number"
                           name="phone"
                           value={values.phone}
@@ -240,7 +240,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-xl-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_password"
                           className="form-label signup_div_input"
                         >
                           Password <span className="required_sign">*</span>
@@ -249,12 +249,13 @@ const Signup = () => {
                           type={showPassword ? "password" : "text"}
                           minLength={6}
                           className={`form-control signup_email_form_control  `}
-                          id="exampleFormControlInput1"
+                          id="signup_password"
                           placeholder="Make password"
                           name="password"
                           value={values.password}
                           onChange={handleChange}
                           onBlur={handleBlur}
+                          autoComplete=""
                           onFocus={handleFocus}
                         />
                         {touched.password && errors.password && (
@@ -285,7 +286,7 @@ const Signup = () => {
                     <div className="signup_input_div">
                       <div className="mb-4 position-relative">
                         <label
-                          htmlFor="exampleFormControlInput1"
+                          htmlFor="signup_confirm_password"
                           className="form-label signup_div_input"
                         >
                           Confirm Password
@@ -295,12 +296,13 @@ const Signup = () => {
                           type={showConfirmPassword ? "password" : "text"}
                           minLength={6}
                           className={`form-control signup_email_form_control `}
-                          id="exampleFormControlInput1"
+                          id="signup_confirm_password"
                           placeholder="Check password"
                           name="confirmPassword"
                           value={values.confirmPassword}
                           onChange={handleChange}
                           onFocus={handleFocus}
+                          autoComplete=""
                           onBlur={handleBlur}
                         />
                         {touched.confirmPassword && errors.confirmPassword && (

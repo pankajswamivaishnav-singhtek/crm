@@ -125,7 +125,7 @@ const Login = () => {
                   <div className="signup_input_div">
                     <div className="mb-3 position-relative">
                       <label
-                        htmlFor="exampleFormControlInput1"
+                        htmlFor="exampleFormControlInput2"
                         className="form-label signup_div_input"
                       >
                         Password <span className="required_sign">*</span>
@@ -138,7 +138,7 @@ const Login = () => {
                             ? "signup_input_form"
                             : ""
                         }`}
-                        id="exampleFormControlInput1"
+                        id="exampleFormControlInput2"
                         placeholder={
                           touched.password && errors.password
                             ? errors.password
@@ -179,13 +179,13 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-                  {/* Submit Button */}
+                {/* Submit Button */}
                 <div className="signup_submit_div">
                   <button type="submit" className=" signup_submit_button">
                     Login
                   </button>
                 </div>
-                  {/* OR LOGIN */}
+                {/* OR LOGIN */}
                 {/* <div className="orLogin_Img">
                   <img
                     src={orLogin}
@@ -228,7 +228,7 @@ const Login = () => {
                   </p>
                 </div>
               </form>
-                 {/* Toast */}
+              {/* Toast */}
               {showToast.message && (
                 <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
                   <div

@@ -1,4 +1,5 @@
 export const BASE_URL = "http://192.168.1.2:8080";
+// export const BASE_URL = "http://192.168.1.2:9090";
 // export const BASE_URL = "http://66.85.140.154:2234";
 
 // Signup User endpoints
@@ -20,6 +21,7 @@ export const GET_ALL_ROLES = `${BASE_URL}/roleAndPermission/getAllRole`;
 export const GET_ALL_MODULE = `${BASE_URL}/roleAndPermission/getAllModule`;
 export const GET_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/getAllPermission`;
 export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assignRoleModulePermission?userId=`;
+export const CREATE_USERS_URL = `${BASE_URL}/super/getAllUser`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
