@@ -1,10 +1,12 @@
-export const BASE_URL = "http://192.168.1.2:8080";
+export const BASE_URL = "http://192.168.1.20:8080";
 // export const BASE_URL = "http://192.168.1.2:9090";
 // export const BASE_URL = "http://66.85.140.154:2234";
 
 // Signup User endpoints
-export const SIGNUP_USER = `${BASE_URL}/user/createuser`;
-export const OTP_VERIFICATION_URL = `${BASE_URL}/user/verifyOtp`;
+// export const SIGNUP_USER = `${BASE_URL}/user/createuser`;
+export const SIGNUP_USER = `${BASE_URL}/signup/createuser`;
+// export const OTP_VERIFICATION_URL = `${BASE_URL}/user/verifyOtp`;
+export const OTP_VERIFICATION_URL = `${BASE_URL}/signup/verifyOtp`;
 export const RESEND_OTP_URL = `${BASE_URL}/user/resendOtp?email=`;
 export const LOGIN_USER = `${BASE_URL}/user/signin`;
 export const LOGIN_WITH_GOOGLE = `${BASE_URL}/googleLogin/loginWithGoogle`;
@@ -22,6 +24,8 @@ export const GET_ALL_MODULE = `${BASE_URL}/roleAndPermission/getAllModule`;
 export const GET_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/getAllPermission`;
 export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assignRoleModulePermission?userId=`;
 export const CREATE_USERS_URL = `${BASE_URL}/super/getAllUser`;
+export const GET_TOTAL_LEADS_URL = `${BASE_URL}/super/getAllLeads`;
+export const GET_TOTAL_ROLES_URL = `${BASE_URL}/super/getTotalRoles`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;

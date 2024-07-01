@@ -20,6 +20,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { signupUser } from "../controller/fetchApi";
 
 const Signup = () => {
+  // TokenId
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
   const navigate = useNavigate();
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -65,7 +68,7 @@ const Signup = () => {
           name: `${values.firstName} ${values.lastName}`,
         },
       });
-      await signupUser(values, setShowToast);
+      await signupUser(values, setShowToast, tokenId);
 
       resetForm();
     },

@@ -29,10 +29,10 @@ const SuperAdminSection2 = ({ getAllUsers }) => {
                     key={index}
                   >
                     <td>{index + 1}</td>
-                    <td>{`${user?.firstName} `}</td>
-                    <td>pankajvaishnav128@gmail.com</td>
-                    <td>Admin</td>
-                    <td>0142</td>
+                    <td>{`${user?.firstName} ${user?.lastName}`}</td>
+                    <td>{user?.email}</td>
+                    <td>{user?.role}</td>
+                    <td>{user?.id}</td>
                     <td className="text-center">
                       <FaRegEye className="fs-3 super_admin_section2_table_icon" />
                     </td>

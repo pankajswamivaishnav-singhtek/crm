@@ -37,13 +37,14 @@ import Deals from "../pages/dashboardPages/Deals";
 import CreateDeal from "../pages/dashboardPages/CreateDeal";
 import Reports from "../pages/dashboardPages/Reports";
 import UpdateLead from "../pages/dashboardPages/UpdateLead";
-
-// Validation Route
-import ValidateRoute from "./ValidateRoute";
 import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 import UpdateProfile from "../pages/UpdateProfile";
 import CreatedUser from "../pages/CreatedUser";
 import RoleAndPermission from "../pages/RoleAndPermission";
+
+// Validation Route
+import ValidateRoute from "./ValidateRoute";
+import ErrorPage from "../pages/ErrorPage";
 
 const AllRoutes = () => {
   const [loading, setLoading] = useState(true);
@@ -77,6 +78,7 @@ const AllRoutes = () => {
         <Route
           path="/super-admin"
           element={
+            // <ValidateRoute requiredRoles={['admin']}>
             <ValidateRoute>
               <SuperAdmin />
             </ValidateRoute>
@@ -328,6 +330,7 @@ const AllRoutes = () => {
       <Route path="/otpverification" element={<OtpVerification />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
       <Route path="/update-profile" element={<UpdateProfile />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 };

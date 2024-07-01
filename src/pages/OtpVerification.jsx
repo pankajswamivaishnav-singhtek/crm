@@ -15,6 +15,11 @@ import otpImg from "../images/otp_img.png";
 // Import Controller Methods
 import { otpVerification, resendOtp } from "../controller/fetchApi";
 const OtpVerification = () => {
+
+  // TokenId
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
+
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
@@ -47,7 +52,6 @@ const OtpVerification = () => {
       onSubmit: async (values, { resetForm }) => {
         const finalOtp =
           values.digit1 + values.digit2 + values.digit3 + values.digit4;
-        console.log("-----", finalOtp);
         const finalValue = {
           otp: finalOtp,
           email: gmail,
@@ -55,7 +59,8 @@ const OtpVerification = () => {
         console.log("finalOtp", finalValue);
         const verifySuccessFully = await otpVerification(
           finalValue,
-          setShowToast
+          setShowToast,
+          tokenId
         );
         console.log("verifySuccessFully", verifySuccessFully?.data?.status);
         if (verifySuccessFully?.data?.status === 200) {

@@ -7,11 +7,14 @@ import SuperAdminSection2 from "../components/SuperAdminSection2";
 import "../styles/superAdmin.css";
 
 // Controller Methods
-import { getAllUsersMadeByAdmin } from "../controller/fetchApi";
+import {
+  getAllUsersMadeByAdmin,
+  getTotalLeadsInSuperAdmin,
+  getTotalRoles,
+} from "../controller/fetchApi";
 // TokenId
 const userIdTokenData = JSON.parse(localStorage.getItem("user"));
 const tokenId = userIdTokenData?.data?.token;
-
 const SuperAdmin = () => {
   //  Get All Users Api
   const [getAllUsers, setAlluser] = useState();
@@ -22,12 +25,37 @@ const SuperAdmin = () => {
     } catch (error) {}
   }, [setAlluser]);
 
+  // Get Total Leads
+  const [totalLeads, setTotalLeads] = useState();
+  const getTotalLeads = async () => {
+    try {
+      const response = await getTotalLeadsInSuperAdmin(tokenId);
+      setTotalLeads(response);
+    } catch (error) {
+      console.log("Not Get Total Leads super Admin", error);
+    }
+  };
+
+  // Get All Roles
+  const [allRoles, setAllRoles] = useState([]);
+  const getAllRoles = async () => {
+    try {
+      const result = await getTotalRoles(tokenId);
+      setAllRoles(result);
+    } catch (error) {
+      console.log("Not Get All Roles", error);
+    }
+  };
+
   useEffect(() => {
     getAllUser();
+    getTotalLeads();
+    getAllRoles();
   }, [getAllUser]);
+
   return (
     <div className="super_admin_div p-3">
-      <SuperAdminSection1 />
+      <SuperAdminSection1 totalLeads={totalLeads} allRoles={allRoles} />
       <SuperAdminSection2 getAllUsers={getAllUsers} />
     </div>
   );

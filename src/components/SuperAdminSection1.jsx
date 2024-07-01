@@ -10,7 +10,8 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { MdAssignmentTurnedIn } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
 
-const SuperAdminSection1 = () => {
+const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
+  console.log("ttotledd", allRoles);
   return (
     <div className="super_admin_first_div ">
       <div className="dashboard_username_div ">
@@ -50,7 +51,9 @@ const SuperAdminSection1 = () => {
                 Total Leads
               </Link>
             </p>
-            <p className="super_admin_first_section_card_number">20</p>
+            <p className="super_admin_first_section_card_number">
+              {totalLeads}
+            </p>
           </div>
         </div>
         {/* Second Card */}
@@ -66,7 +69,9 @@ const SuperAdminSection1 = () => {
                 Total Admins
               </Link>
             </p>
-            <p className="super_admin_first_section_card_number">20</p>
+            <p className="super_admin_first_section_card_number">
+              {allRoles?.ADMIN}
+            </p>
           </div>
         </div>
         {/* Third Card */}
@@ -79,10 +84,12 @@ const SuperAdminSection1 = () => {
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
               <Link className="super_admin_first_section_card_link" to="/deals">
-                Admin Assign Leads
+                Total Project Manager
               </Link>
             </p>
-            <p className="super_admin_first_section_card_number">20</p>
+            <p className="super_admin_first_section_card_number">
+              {allRoles.PROJECTMANAGER}
+            </p>
           </div>
         </div>
         {/* Fourth Card */}
@@ -95,10 +102,12 @@ const SuperAdminSection1 = () => {
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
               <Link className="super_admin_first_section_card_link" to="/deals">
-                Remaining Leads
+                Total Sales Executives
               </Link>
             </p>
-            <p className="super_admin_first_section_card_number">20</p>
+            <p className="super_admin_first_section_card_number">
+              {allRoles?.SALESEXECUTIVE}
+            </p>
           </div>
         </div>
       </div>
@@ -142,7 +151,5 @@ const SuperAdminSection1 = () => {
     </div>
   );
 };
-
-<p>jkjjjjk</p>;
 
 export default SuperAdminSection1;

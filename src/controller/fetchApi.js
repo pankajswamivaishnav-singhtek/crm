@@ -23,6 +23,8 @@ import {
   GET_MODULE_PERMISSIONS,
   SEND_ROLE_MODULE_PERMISSIONS,
   CREATE_USERS_URL,
+  GET_TOTAL_LEADS_URL,
+  GET_TOTAL_ROLES_URL,
   // Leads Url
   CREATE_LEAD_URL,
   GET_SINGLE_LEAD_URL,
@@ -94,17 +96,27 @@ import {
 import axios from "axios";
 
 // Signup User Post Api
-export const signupUser = async (userData, setShowToast) => {
+export const signupUser = async (userData, setShowToast, tokenId) => {
   try {
-    const response = await axios.post(SIGNUP_USER, {
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      userName: userData.userName,
-      email: userData.email,
-      password: userData.password,
-      confirmPassword: userData.confirmPassword,
-      mobile: userData.phone,
-    });
+    console.log("Token jaant ka shab ka", tokenId);
+    const response = await axios.post(
+      SIGNUP_USER,
+      {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        userName: userData.userName,
+        email: userData.email,
+        password: userData.password,
+        confirmPassword: userData.confirmPassword,
+        mobile: userData.phone,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
     // Show success message in toast
     setShowToast({ success: true, message: "Sign up successful." });
     console.log("Signup", response);
@@ -121,12 +133,22 @@ export const signupUser = async (userData, setShowToast) => {
 };
 
 // OTP Verification Post Api
-export const otpVerification = async (userData, setShowToast) => {
+export const otpVerification = async (userData, setShowToast, tokenId) => {
   try {
-    const response = await axios.post(OTP_VERIFICATION_URL, {
-      email: userData.email,
-      otp: userData.otp,
-    });
+    console.log("Token manjeet jaantu  ka", tokenId);
+    const response = await axios.post(
+      OTP_VERIFICATION_URL,
+      {
+        email: userData.email,
+        otp: userData.otp,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
     console.log("Otp Verify Successfully", response);
     // Set Data In Local Storage
     if (response?.data?.status === 200) {
@@ -166,6 +188,7 @@ export const loginUser = async (userData, setShowToast) => {
       password: userData.password,
     });
     // Set Data In Local Storage
+    console.log("login", response);
     if (response.data.status === 200) {
       localStorage.setItem("user", JSON.stringify(response.data));
       // Show success message in toast
@@ -210,7 +233,6 @@ export const loginUserThroughGoogle = async (userData, setShowToast) => {
 export const logoutUser = async () => {
   try {
     const response = await axios.get(LOGOUT_USER);
-    console.log("logout response: " + response);
     return response;
   } catch (error) {
     const { message } = error.response.data;
@@ -417,6 +439,40 @@ export const getAllUsersMadeByAdmin = async (tokenId) => {
   } catch (error) {
     const message = error?.response?.data;
     console.log("Error do not get all users by made admin", message);
+  }
+};
+
+// Get All Total Leads
+export const getTotalLeadsInSuperAdmin = async (tokenId) => {
+  try {
+    const response = await axios.get(GET_TOTAL_LEADS_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log("Error not get total lead on super admin: " + message);
+  }
+};
+
+// Get Total Role like : Superadmin, Admin, Project manager, Sales Executives
+export const getTotalRoles = async (tokenId) => {
+  try {
+    const response = await axios.get(GET_TOTAL_ROLES_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log("Error not get total roles on super admin: " + message);
   }
 };
 

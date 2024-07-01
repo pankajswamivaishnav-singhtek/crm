@@ -21,6 +21,9 @@ import { signupUser } from "../controller/fetchApi";
 
 const Signup = () => {
   const navigate = useNavigate();
+  // TokenId
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
 
@@ -65,7 +68,7 @@ const Signup = () => {
           name: `${values.firstName} ${values.lastName}`,
         },
       });
-      await signupUser(values, setShowToast);
+      await signupUser(values, setShowToast, tokenId);
 
       resetForm();
     },
