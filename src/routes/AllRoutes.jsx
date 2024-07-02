@@ -61,6 +61,7 @@ const AllRoutes = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <Routes>
       {/* Dashboard Routes */}
@@ -79,7 +80,7 @@ const AllRoutes = () => {
           path="/super-admin"
           element={
             // <ValidateRoute requiredRoles={['admin']}>
-            <ValidateRoute>
+            <ValidateRoute requiredRoles="SUPERADMIN">
               <SuperAdmin />
             </ValidateRoute>
           }
@@ -95,7 +96,9 @@ const AllRoutes = () => {
         <Route
           path="/created-users"
           element={
-            <ValidateRoute>
+            <ValidateRoute
+              requiredRoles={"SUPERADMIN" || "ADMIN" || "PROJECTMANAGER"}
+            >
               <CreatedUser />
             </ValidateRoute>
           }
@@ -103,7 +106,9 @@ const AllRoutes = () => {
         <Route
           path="/role&permission"
           element={
-            <ValidateRoute>
+            <ValidateRoute
+              requiredRoles={"SUPERADMIN" || "ADMIN" || "PROJECTMANAGER"}
+            >
               <RoleAndPermission />
             </ValidateRoute>
           }
@@ -111,7 +116,7 @@ const AllRoutes = () => {
         <Route
           path="/leads"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Leads">
               <Leads loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -143,7 +148,7 @@ const AllRoutes = () => {
         <Route
           path="/contact"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Contact">
               <Contact loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -170,7 +175,7 @@ const AllRoutes = () => {
         <Route
           path="/accounts"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Account">
               <Accounts loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -197,7 +202,7 @@ const AllRoutes = () => {
         <Route
           path="/tasks"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Task">
               <Task loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -221,7 +226,7 @@ const AllRoutes = () => {
         <Route
           path="/meetings"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Meeting">
               <Meetings loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -245,7 +250,7 @@ const AllRoutes = () => {
         <Route
           path="/call-schedule"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Calls">
               <Calls loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -261,7 +266,7 @@ const AllRoutes = () => {
         <Route
           path="/log-call"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Calls">
               <LogCall loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -293,7 +298,7 @@ const AllRoutes = () => {
         <Route
           path="/deals"
           element={
-            <ValidateRoute>
+            <ValidateRoute requiredModule="Deal">
               <Deals loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -323,11 +328,26 @@ const AllRoutes = () => {
           }
         />
       </Route>
+      <Route
+        path="/otpverification"
+        element={
+          <ValidateRoute>
+            <OtpVerification />
+          </ValidateRoute>
+        }
+      />
+      <Route
+        path="/error-page"
+        element={
+          <ValidateRoute>
+            <ErrorPage />
+          </ValidateRoute>
+        }
+      />
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/otpverification" element={<OtpVerification />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
       <Route path="/update-profile" element={<UpdateProfile />} />
       <Route path="*" element={<ErrorPage />} />

@@ -7,6 +7,7 @@ import {
   MdAddIcCall,
   MdLocalLibrary,
   MdOutlineDashboardCustomize,
+  MdClose,
 } from "react-icons/md";
 import { MdOutlineAccountBalance } from "react-icons/md";
 import { IoIosContact } from "react-icons/io";
@@ -46,7 +47,10 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
 
   // Close Sidebar After Choose Nav Items
   const sideBarClose = () => {
-    if (window.innerWidth <= 425) {
+    // if (window.innerWidth <= 425) {
+    //   setIsSidebar(false);
+    // }
+    if (window.innerWidth <= 769) {
       setIsSidebar(false);
     }
   };
@@ -91,6 +95,11 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
     link.addEventListener("click", handleClick);
   });
 
+  // User Permissions from localStorage
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const permission = userIdTokenData?.data?.roleAndPermissions?.modules;
+  const roles = userIdTokenData?.data?.roleAndPermissions?.roles[0];
+
   return (
     <>
       {
@@ -106,6 +115,10 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
           <nav>
             <div className=" sidebar_container_fluid">
               <div className="sidebar_container">
+                <MdClose
+                  className="sidebar_close_btn fs-3"
+                  onClick={sideBarClose}
+                />
                 <div className="dashboard_sidebar_mainDiv">
                   <ul className="navbar-nav sidebar_navbar_nav">
                     <div className="sidebar_hamburger_icon_main_div">
@@ -115,18 +128,21 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       />
                     </div>
                     {/* Super Admin Item */}
-                    <li className="nav-item sidebar_navItems ">
-                      <Link
-                        className="Link-button "
-                        to="/super-admin"
-                        onClick={sideBarClose}
-                      >
-                        <RiAdminLine className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">
-                          Super Admin
-                        </span>
-                      </Link>
-                    </li>
+                    {roles?.role === "SUPERADMIN" && (
+                      <li className="nav-item sidebar_navItems ">
+                        <Link
+                          className="Link-button "
+                          to="/super-admin"
+                          onClick={sideBarClose}
+                        >
+                          <RiAdminLine className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">
+                            Super Admin
+                          </span>
+                        </Link>
+                      </li>
+                    )}
+
                     {/* Dashboard Item */}
                     <li className="nav-item sidebar_navItems ">
                       <Link
@@ -139,130 +155,165 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       </Link>
                     </li>
                     {/* User Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/created-users"
-                        onClick={sideBarClose}
-                      >
-                        <FaRegUser className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">User</span>
-                      </Link>
-                    </li>
+                    {(roles?.role === "SUPERADMIN" ||
+                      roles?.role === "ADMIN" ||
+                      roles?.role === "PROJECTMANAGER") && (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/created-users"
+                          onClick={sideBarClose}
+                        >
+                          <FaRegUser className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">User</span>
+                        </Link>
+                      </li>
+                    )}
+
                     {/* Leads Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/leads"
-                        onClick={sideBarClose}
-                      >
-                        <VscGraph className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Leads</span>
-                      </Link>
-                    </li>
+                    {permission?.includes("Leads") ? (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/leads"
+                          onClick={sideBarClose}
+                        >
+                          <VscGraph className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Leads</span>
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
                     {/* Contact Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/contact"
-                        onClick={sideBarClose}
-                      >
-                        <IoIosContact className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Contact</span>
-                      </Link>
-                    </li>
+                    {permission?.includes("Contact") ? (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/contact"
+                          onClick={sideBarClose}
+                        >
+                          <IoIosContact className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Contact</span>
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
                     {/* Calls Item */}
-                    <li className="nav-item sidebar_navItems dropdown ">
-                      <Link
-                        className="Link-button"
-                        to="/calls"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <IoCallOutline className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Calls</span>
-                      </Link>
-                      <ul className="dropdown-menu dashboard_sidebar_navItem_dropDown">
-                        <li>
-                          <Link
-                            className="dropdown-item"
-                            to="/call-schedule"
-                            onClick={sideBarClose}
-                          >
-                            <MdAddIcCall />
-                            &nbsp;
-                            <span
-                              className={`sidebar-calls-menu ${
-                                shrinkSidebar ? "calls-dropdown" : ""
-                              }`}
+                    {permission?.includes("Calls") ? (
+                      <li className="nav-item sidebar_navItems dropdown ">
+                        <Link
+                          className="Link-button"
+                          to="/calls"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <IoCallOutline className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Calls</span>
+                        </Link>
+                        <ul className="dropdown-menu dashboard_sidebar_navItem_dropDown">
+                          <li>
+                            <Link
+                              className="dropdown-item"
+                              to="/call-schedule"
+                              onClick={sideBarClose}
                             >
-                              Schedule Call
-                            </span>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            className="dropdown-item"
-                            to="/call-logs"
-                            onClick={sideBarClose}
-                          >
-                            <MdLocalLibrary />
-                            &nbsp;{" "}
-                            <span
-                              className={`sidebar-calls-menu ${
-                                shrinkSidebar ? "calls-dropdown" : ""
-                              }`}
+                              <MdAddIcCall />
+                              &nbsp;
+                              <span
+                                className={`sidebar-calls-menu ${
+                                  shrinkSidebar ? "calls-dropdown" : ""
+                                }`}
+                              >
+                                Schedule Call
+                              </span>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              className="dropdown-item"
+                              to="/call-logs"
+                              onClick={sideBarClose}
                             >
-                              Log Call
-                            </span>
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
+                              <MdLocalLibrary />
+                              &nbsp;{" "}
+                              <span
+                                className={`sidebar-calls-menu ${
+                                  shrinkSidebar ? "calls-dropdown" : ""
+                                }`}
+                              >
+                                Log Call
+                              </span>
+                            </Link>
+                          </li>
+                        </ul>
+                      </li>
+                    ) : (
+                      ""
+                    )}
+
                     {/* Meetings Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/meetings"
-                        onClick={sideBarClose}
-                      >
-                        <HiOutlineUserGroup className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Meetings</span>
-                      </Link>
-                    </li>
+                    {permission?.includes("Meeting") ? (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/meetings"
+                          onClick={sideBarClose}
+                        >
+                          <HiOutlineUserGroup className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Meetings</span>
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
                     {/* Deals Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/deals"
-                        onClick={sideBarClose}
-                      >
-                        <LiaFileInvoiceSolid className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Deals</span>
-                      </Link>
-                    </li>
+                    {permission?.includes("Deal") ? (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/deals"
+                          onClick={sideBarClose}
+                        >
+                          <LiaFileInvoiceSolid className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Deals</span>
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
+
                     {/* Accounts Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/accounts"
-                        onClick={sideBarClose}
-                      >
-                        <MdOutlineAccountBalance className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Account</span>
-                      </Link>
-                    </li>
+                    {permission?.includes("Account") ? (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/accounts"
+                          onClick={sideBarClose}
+                        >
+                          <MdOutlineAccountBalance className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Account</span>
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
                     {/* Task Item */}
-                    <li className="nav-item sidebar_navItems">
-                      <Link
-                        className="Link-button"
-                        to="/tasks"
-                        onClick={sideBarClose}
-                      >
-                        <LuPin className="sidebar_navItem_icon" />
-                        <span className="sidebar_navItem_text">Tasks</span>
-                      </Link>
-                    </li>
+                    {permission?.includes("Task") ? (
+                      <li className="nav-item sidebar_navItems">
+                        <Link
+                          className="Link-button"
+                          to="/tasks"
+                          onClick={sideBarClose}
+                        >
+                          <LuPin className="sidebar_navItem_icon" />
+                          <span className="sidebar_navItem_text">Tasks</span>
+                        </Link>
+                      </li>
+                    ) : (
+                      ""
+                    )}
                     {/* Reports */}
                     <li className="nav-item sidebar_navItems">
                       <Link
@@ -307,7 +358,6 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     <MdOutlineLogout
                       className="sidebar_shrink_logout_btn"
                       onClick={logoutUserSubmit}
-
                     />
                   )}
                 </div>

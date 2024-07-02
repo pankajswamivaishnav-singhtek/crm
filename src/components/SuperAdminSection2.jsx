@@ -7,8 +7,8 @@ const SuperAdminSection2 = ({ getAllUsers }) => {
     <div className="row super_admin_section2">
       {/* Left Div */}
       <div className="super_admin_section2_left_div col">
-        <div className="super_admin_section2_table">
-          <table className="table border border-secondary-subtle super_admin_section2_left_table">
+        <div className="super_admin_section2_table table-responsive">
+          <table className="table border border-secondary-subtle super_admin_section2_left_table ">
             <thead className="super_admin_section2_table_thead">
               <tr className="dashboard_section1_tableHead_tr table-danger">
                 <th scope="col">Sr. No</th>
@@ -40,7 +40,7 @@ const SuperAdminSection2 = ({ getAllUsers }) => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6">No dara at this time</td>
+                  <td colSpan="6">No users at this time</td>
                 </tr>
               )}
             </tbody>

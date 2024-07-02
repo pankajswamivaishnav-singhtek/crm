@@ -44,10 +44,10 @@ const ContactRightSectionTable = ({
     }
   }, [contactCostumerId, getAllContactData]);
   return (
-    <div className="container-fluid table-responsive">
+    <div className="container-fluid ">
       <div className="row dashboard_table_main_heading"></div>
-      <div className="LeadRightSectionTable_body">
-        <table className="table table-responsive ">
+      <div className="LeadRightSectionTable_body table-responsive">
+        <table className="table ">
           <thead>
             <tr className="table-danger dashboard_section1_tableHead_tr">
               {/* Checkbox Column */}

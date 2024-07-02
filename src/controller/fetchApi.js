@@ -112,7 +112,6 @@ export const signupUser = async (userData, setShowToast, tokenId) => {
       },
       {
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${tokenId}`,
         },
       }
@@ -120,10 +119,6 @@ export const signupUser = async (userData, setShowToast, tokenId) => {
     // Show success message in toast
     setShowToast({ success: true, message: "Sign up successful." });
     console.log("Signup", response);
-    // Set Data In Local Storage
-    // if (response) {
-    //   localStorage.setItem("user", JSON.stringify(response.data));
-    // }
     return response;
   } catch (error) {
     const { message } = error.response.data;
@@ -135,7 +130,6 @@ export const signupUser = async (userData, setShowToast, tokenId) => {
 // OTP Verification Post Api
 export const otpVerification = async (userData, setShowToast, tokenId) => {
   try {
-    console.log("Token manjeet jaantu  ka", tokenId);
     const response = await axios.post(
       OTP_VERIFICATION_URL,
       {
@@ -144,12 +138,10 @@ export const otpVerification = async (userData, setShowToast, tokenId) => {
       },
       {
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${tokenId}`,
         },
       }
     );
-    console.log("Otp Verify Successfully", response);
     // Set Data In Local Storage
     if (response?.data?.status === 200) {
       setShowToast({ success: true, message: "signup successfully" });
@@ -403,7 +395,7 @@ export const sendRoleModulePermissions = async (
   setShowToast
 ) => {
   try {
-    console.log("Role Module Permissions data: " + formData);
+    console.log("Role Module Permissions data: " + uid);
     const response = await axios.post(
       SEND_ROLE_MODULE_PERMISSIONS + uid,
       formData,

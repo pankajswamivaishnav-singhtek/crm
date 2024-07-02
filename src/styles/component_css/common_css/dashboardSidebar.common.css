@@ -149,6 +149,18 @@
   display: none;
 }
 
+.sidebar_close_btn {
+  color: white;
+  float: inline-end;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 769px) {
+  .sidebar_close_btn {
+    display: none;
+  }
+}
+
 /* Show Hide Sidebar In small Screen */
 
 @media screen and (max-width: 768px) {

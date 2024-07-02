@@ -42,9 +42,9 @@ const AccountTable = ({
     }
   }, [accountCostumerId, getAllAccountData]);
   return (
-    <div className="container-fluid table-responsive">
+    <div className="container-fluid ">
       <div className="row dashboard_table_main_heading"></div>
-      <div className="LeadRightSectionTable_body">
+      <div className="LeadRightSectionTable_body table-responsive">
         {/* Table */}
         <table className="table table-responsive ">
           <thead>

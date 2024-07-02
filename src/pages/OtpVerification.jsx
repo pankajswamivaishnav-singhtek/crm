@@ -15,7 +15,6 @@ import otpImg from "../images/otp_img.png";
 // Import Controller Methods
 import { otpVerification, resendOtp } from "../controller/fetchApi";
 const OtpVerification = () => {
-
   // TokenId
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
@@ -92,7 +91,7 @@ const OtpVerification = () => {
           <div className="container signup_left_container forgot_left_container">
             <div id="signup_left_mainDiv" className="forgot_left_mainDiv">
               <form onSubmit={handleSubmit}>
-                <Link to="/forgotpassword">
+                <Link to="/super-admin">
                   <IoArrowBackCircleOutline className="login_back_button" />
                 </Link>
                 <p className=" signup_text_in_signup_left_mainDiv otp_text_in_otp_left_mainDiv">

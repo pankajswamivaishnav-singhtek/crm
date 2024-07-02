@@ -33,7 +33,7 @@ const RoleAndPermission = () => {
   const [modulePermissions, setModulePermissions] = useState([]);
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-  const uid = userIdTokenData?.data?.userId;
+
   useEffect(() => {
     (async () => {
       try {
@@ -105,7 +105,7 @@ const RoleAndPermission = () => {
       await sendRoleModulePermissions(
         desiredFormat,
         tokenId,
-        uid,
+        userData?.id,
         setShowToast
       );
     } catch (error) {

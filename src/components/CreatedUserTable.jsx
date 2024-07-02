@@ -6,8 +6,8 @@ import { BsPencilSquare } from "react-icons/bs";
 
 const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
   return (
-    <div className="LeadRightSectionTable_body">
-      <table className="table table-responsive ">
+    <div className="LeadRightSectionTable_body table-responsive">
+      <table className="table  ">
         <thead>
           <tr className="table-danger dashboard_section1_tableHead_tr">
             <th scope="col">{tblHead.firstHead}</th>
@@ -46,7 +46,7 @@ const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
             ))
           ) : (
             <tr>
-              <td colSpan="6">No dara at this time</td>
+              <td colSpan="6">No users at this time</td>
             </tr>
           )}
         </tbody>

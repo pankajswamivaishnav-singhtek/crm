@@ -58,6 +58,7 @@ const Signup = () => {
 
     validationSchema: signupFormSchema,
     onSubmit: async (values, { resetForm }) => {
+      console.log("submit token", tokenId);
       if (errors.confirmPassword) {
         setShowToast({ success: true, message: "password must match" });
       }

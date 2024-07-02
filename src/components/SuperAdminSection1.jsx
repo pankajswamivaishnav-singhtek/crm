@@ -11,7 +11,6 @@ import { MdAssignmentTurnedIn } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
 
 const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
-  console.log("ttotledd", allRoles);
   return (
     <div className="super_admin_first_div ">
       <div className="dashboard_username_div ">
@@ -37,9 +36,9 @@ const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
         </div>
       </div>
       {/* Cards Div */}
-      <div className="super_admin_first_section_cards_div row row-cols-3">
+      <div className="super_admin_first_section_cards_div row row-cols-xl-3 ">
         {/* first Card */}
-        <div className="super_admin_first_section_single_card col super_admin_first_section_first_card">
+        <div className="super_admin_first_section_single_card col  super_admin_first_section_first_card">
           <div className="super_admin_first_section_card_icon_div">
             {
               <SiGoogleads className="dashboard_card_icon super_admin_first_section_firstCard_icon" />
@@ -47,17 +46,17 @@ const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
           </div>
           <div className="super_admin_first_section_text_div">
             <p className="super_admin_first_section_card_text">
-              <Link className="super_admin_first_section_card_link" to="/deals">
+              <Link className="super_admin_first_section_card_link">
                 Total Leads
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">
-              {totalLeads}
+              {totalLeads != null || undefined ? totalLeads : "0"}
             </p>
           </div>
         </div>
         {/* Second Card */}
-        <div className="super_admin_first_section_single_card col super_admin_first_section_second_card">
+        <div className="super_admin_first_section_single_card col  super_admin_first_section_second_card">
           <div className="super_admin_first_section_card_icon_div">
             {
               <MdAdminPanelSettings className="dashboard_card_icon super_admin_first_section_secondCard_icon" />
@@ -70,12 +69,12 @@ const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">
-              {allRoles?.ADMIN}
+              {allRoles?.ADMIN || "0"}
             </p>
           </div>
         </div>
         {/* Third Card */}
-        <div className="super_admin_first_section_single_card col super_admin_first_section_third_card">
+        <div className="super_admin_first_section_single_card col  super_admin_first_section_third_card">
           <div className="super_admin_first_section_card_icon_div">
             {
               <MdAssignmentTurnedIn className="dashboard_card_icon super_admin_first_section_thirdCard_icon" />
@@ -88,12 +87,12 @@ const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">
-              {allRoles.PROJECTMANAGER}
+              {allRoles?.PROJECTMANAGER || "0"}
             </p>
           </div>
         </div>
         {/* Fourth Card */}
-        <div className="super_admin_first_section_single_card col super_admin_first_section_fourth_card">
+        <div className="super_admin_first_section_single_card col  super_admin_first_section_fourth_card">
           <div className="super_admin_first_section_card_icon_div">
             {
               <MdAssignmentAdd className="dashboard_card_icon super_admin_first_section_fourthCard_icon" />
@@ -106,7 +105,7 @@ const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
               </Link>
             </p>
             <p className="super_admin_first_section_card_number">
-              {allRoles?.SALESEXECUTIVE}
+              {allRoles?.SALESEXECUTIVE || "0"}
             </p>
           </div>
         </div>
