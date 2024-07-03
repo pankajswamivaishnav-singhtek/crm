@@ -26,6 +26,7 @@ import {
   GET_TOTAL_LEADS_URL,
   GET_TOTAL_ROLES_URL,
   // Leads Url
+  ASSIGN_LEADS_URL,
   CREATE_LEAD_URL,
   GET_SINGLE_LEAD_URL,
   DELETE_LEADS_URL,
@@ -716,7 +717,6 @@ export const rejectedLeads = async (leadId, setShowToast, tokenId) => {
 // Delete Leads
 export const deleteLeads = async (leadId, setShowToast, tokenId) => {
   try {
-    console.log("chal gya lead delete", tokenId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
@@ -834,6 +834,32 @@ export const uploadLeads = async (file, setShowToast, tokenId) => {
   } catch (error) {
     const message = error?.response?.data;
     console.log(message);
+  }
+};
+
+// Assign Leads Api
+export const assignLeads = async (tokenId, userId, leadId) => {
+  try {
+    console.log(
+      `tokenId in api : ${tokenId} , adminId : ${userId}, leadCostumerId : ${leadId}`
+    );
+    console.log("array data", leadId);
+
+    const response = await axios.post(
+      `${ASSIGN_LEADS_URL}userId=${userId}&leadsId=${leadId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
+    console.log("assign leads response: ", response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    const message = error.response.data;
+    return message;
   }
 };
 

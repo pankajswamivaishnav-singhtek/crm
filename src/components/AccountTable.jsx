@@ -9,7 +9,6 @@ const AccountTable = ({
   getAllAccountData,
   accountCostumerId,
   setAccountCostumerId,
-  data,
 }) => {
   const [isMasterChecked, setIsMasterChecked] = useState(false);
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
@@ -41,6 +40,7 @@ const AccountTable = ({
       setIsMasterChecked(false);
     }
   }, [accountCostumerId, getAllAccountData]);
+ 
   return (
     <div className="container-fluid ">
       <div className="row dashboard_table_main_heading"></div>

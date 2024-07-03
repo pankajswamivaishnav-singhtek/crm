@@ -1,0 +1,21 @@
+/* Super Admin Assign */
+.assign_lead_table1_btn {
+  width: 100px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px;
+  background-color: rgba(88, 105, 255, 1);
+  border: 1px solid rgba(221, 221, 221, 1);
+  box-shadow: 2px 3px 18px 0px rgba(147, 130, 254, 0.12);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  margin-top: 20px;
+}
+
+.assign_leads_table {
+  border: 1px solid silver;
+}

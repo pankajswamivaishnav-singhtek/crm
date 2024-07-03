@@ -5,12 +5,7 @@ import leadIdContext from "../../pages/LeadIdContext";
 import { FaRegEye } from "react-icons/fa";
 import { HiPencilSquare } from "react-icons/hi2";
 
-const LeadsRightSectionTable = ({
-  tblHead,
-  redirectLink,
-  getAllLeadData,
-  data,
-}) => {
+const LeadsRightSectionTable = ({ tblHead, redirectLink, getAllLeadData }) => {
   // Get leadCostumerId From LeadSection Table for delete Data From Table
   const { leadCostumerId, setLeadCostumerId } = useContext(leadIdContext) || []; //--- here used empty array because when id is undefined when do not cause error
   const [isMasterChecked, setIsMasterChecked] = useState(false);

@@ -21,6 +21,7 @@ import {
 } from "../controller/fetchApi";
 // Components
 import UpdateLead from "../pages/dashboardPages/UpdateLead";
+import AssignLeads from "./AssignLeads";
 const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   // Start Toast -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -230,6 +231,15 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
               >
                 <MdVerified className="leads_verify_btn_icon" />
                 Verify Leads
+              </button>
+            </div>
+            <div
+              className="dashboard_leads_action_btn_div dashboard_leads_assign_div"
+              data-bs-toggle="modal"
+              data-bs-target="#assignLeadsModal"
+            >
+              <button className="dashboard_section1_table_edit_button dashboard_leads_assign_btn">
+                Assign
               </button>
             </div>
             <div className="dashboard_leads_action_btn_div">
@@ -456,6 +466,44 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                     onClick={handleUploadLeads}
                   >
                     Upload
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+        {/*Assign Leads Modal */}
+        <>
+          <div
+            className="modal fade modal-xl "
+            id="assignLeadsModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex={-1}
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header w-100">
+                  <span className="fw-bold">Users</span>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div className="modal-body">
+                  <AssignLeads />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
                   </button>
                 </div>
               </div>

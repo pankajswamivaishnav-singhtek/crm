@@ -63,21 +63,7 @@ const Login = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
-  // Login With Google
-  // const [userData, setUserData] = useState();
-  // const loginUserWithGoogle = useCallback(async () => {
-  //   const response = await loginUserThroughGoogle(userData, setShowToast);
-  //   if (response?.data?.status === 200) {
-  //     navigate("/dashboard");
-  //   }
-  //   console.log(response);
-  // }, [userData, navigate]);
-
-  // useEffect(() => {
-  //   loginUserWithGoogle();
-  // }, [userData, loginUserWithGoogle]);
-
+  
   return (
     <div className="container-fluid signup_body_div">
       <div className="row">

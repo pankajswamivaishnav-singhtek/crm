@@ -40,6 +40,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Get Current User Details
   const [getCurrentUserData, setCurrentUserData] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const roles = userIdTokenData?.data?.roleAndPermissions?.roles[0];
   const tokenId = userIdTokenData?.data?.token;
   const uid = userIdTokenData?.data?.userId;
   //  Get Current User Data
@@ -287,7 +288,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                     {getCurrentUserData?.fullName}
                   </span>
                   <br />
-                  <span className="dashboard_navbar_panel">Admin Panel</span>
+                  <span className="dashboard_navbar_panel">{roles?.role}</span>
                 </div>
               </li>
               <li

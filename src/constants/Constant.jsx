@@ -43,6 +43,7 @@ export const VERIFY_LEADS_URL = `${BASE_URL}/leadInfo/verifyLead?leads=`;
 export const UNVERIFIED_LEADS_URL = `${BASE_URL}/leadInfo/rejectLead?leads=`;
 export const DOWNLOAD_LEADS_URL = `${BASE_URL}/leadInfo/downloadLeads`;
 export const UPLOAD_LEADS_URL = `${BASE_URL}/leadInfo/uploadLead`;
+export const ASSIGN_LEADS_URL = `${BASE_URL}/assignLead/assignLeadToUser?`;
 // Contact Congiguration url
 export const CREATE_CONTACT_URL = `${BASE_URL}/contact/saveContact`;
 export const GET_ALL_CONTACT_URL = `${BASE_URL}/contact/getAllContact?page=`;
