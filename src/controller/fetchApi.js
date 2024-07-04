@@ -16,7 +16,6 @@ import {
   GET_CURRENT_USER_URL,
   UPDATE_PROFILE_URL,
   UPLOAD_USER_IMG_URL,
-
   // Super Admin Url
   GET_ALL_ROLES,
   GET_ALL_MODULE,
@@ -36,6 +35,15 @@ import {
   UNVERIFIED_LEADS_URL,
   DOWNLOAD_LEADS_URL,
   UPLOAD_LEADS_URL,
+  // Dropdowns
+  LEAD_STATUS_URL,
+  LEAD_SERVICES_URL,
+  LEAD_SOURCE_URL,
+  DEAL_STAGES_URL,
+  TASK_STATUS_URL,
+  CALL_RELATED_URL,
+  CALL_PURPOSE_URL,
+  CALL_RESULT_URL,
   // Contact Url
   CREATE_CONTACT_URL,
   GET_SINGLE_CONTACT_URL,
@@ -640,6 +648,7 @@ export const getAllLeadByFilter = async (filters, tokenId) => {
       GET_ALL_LEAD_URL_BY_FILTER + queryString,
       config
     );
+
     const finalResponse = response?.data?.data;
     return finalResponse;
   } catch (error) {}
@@ -858,6 +867,149 @@ export const assignLeads = async (tokenId, userId, leadId) => {
     return response;
   } catch (error) {
     console.log(error);
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// ************* Dropdowns Api ****************
+
+// Lead Status API
+export const leadStatusDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(LEAD_STATUS_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Lead Services API
+export const leadServicesDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(LEAD_SERVICES_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Lead Sources API
+export const leadSourcesDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(LEAD_SOURCE_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Lead Stages API
+export const dealStagesDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(DEAL_STAGES_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Lead Stages API
+export const taskStatusDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(TASK_STATUS_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Call Related API
+export const callRelatedDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(CALL_RELATED_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Call Purspose API
+export const callPurposeDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(CALL_PURPOSE_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
+    const message = error.response.data;
+    return message;
+  }
+};
+
+// Call Result API
+export const callResultsDropdowns = async (tokenId) => {
+  try {
+    const response = await axios.get(CALL_RESULT_URL, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("call result", response);
+    if (response?.status === 200 || 204) {
+      return response?.data?.data;
+    }
+  } catch (error) {
     const message = error.response.data;
     return message;
   }
@@ -1780,7 +1932,8 @@ export const getAllScheduleCall = async (pageNo, tokenId) => {
     }
   } catch (error) {
     const message = error?.response?.data;
-    console.log(message);
+    console.log("Error Found GetAllSchedule Call In Fetch Api", message);
+    console.log(error);
   }
 };
 

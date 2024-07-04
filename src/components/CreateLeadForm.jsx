@@ -13,7 +13,7 @@ import { FaLandmarkFlag } from "react-icons/fa6";
 import { registerSchema } from "../schema/FormValidation";
 // Controller Api Methods
 import { createLead } from "../controller/fetchApi";
-const CreateLeadForm = () => {
+const CreateLeadForm = ({ leadStatus, leadServices, leadSource }) => {
   // Get TokenId And User Id
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
@@ -85,6 +85,7 @@ const CreateLeadForm = () => {
     const { name } = e.target;
     setFieldTouched(name, true);
   };
+  console.log("Lead Source", leadSource);
   return (
     <div className="create_lead_form_main_div">
       <form onSubmit={handleSubmit}>
@@ -259,12 +260,13 @@ const CreateLeadForm = () => {
                 )} */}
                 Select Lead Source
               </option>
-              <option value="web-download">Web Download</option>
-              <option value="web-search">Web Search</option>
-              <option value="advertisement">Advertisement</option>
-              <option value="employee-referral">Employee Referral</option>
-              <option value="external-source">External Source</option>
-              <option value="others">Others</option>
+              {leadSource && leadSource?.length > 0
+                ? leadSource.map((source) => (
+                    <option key={source.id} value={source.value}>
+                      {source.leadSource}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.leadSource && errors.leadSource && (
               <small className="errorMessage">{errors.leadSource}</small>
@@ -295,9 +297,15 @@ const CreateLeadForm = () => {
               </option>
 
               {/* <option value="lead">Select Lead Status</option> */}
-              <option value="lead">Lead</option>
-              <option value="contacted">Contacted</option>
-              <option value="deal">Deal</option>
+              {leadStatus && leadStatus?.length > 0
+                ? leadStatus?.map((lead) => (
+                    <option key={lead.id} value={lead.value}>
+                      {lead.leadSource}
+                    </option>
+                  ))
+                : ""}
+              {/* <option value="contacted">Contacted</option>
+              <option value="deal">Deal</option> */}
             </select>
             {touched.leadStatus && errors.leadStatus && (
               <small className="errorMessage">{errors.leadStatus}</small>
@@ -329,26 +337,13 @@ const CreateLeadForm = () => {
               </option>
 
               {/* <option value="lead">Select Lead Status</option> */}
-              <option value="lead">Development</option>
-              <option value="contacted">IOS App Development</option>
-              <option value="deal">On Demand E-wallet</option>
-              <option value="deal">Matlab Software Purchase</option>
-              <option value="deal">Services</option>
-              <option value="deal">Earning Website Service</option>
-              <option value="deal">Jewellery Software</option>
-              <option value="deal">Hybrid Mobile Apps Development</option>
-              <option value="deal">Php Laravel Development</option>
-              <option value="deal">Restaurrant POS Software</option>
-              <option value="deal">Cloud Computing Services</option>
-              <option value="deal">Development Services</option>
-              <option value="deal">Pagarbook Software</option>
-              <option value="deal">Sports Data Api Development</option>
-              <option value="deal">Earning App</option>
-              <option value="deal">E-Commerce Bazar</option>
-              <option value="deal">Software Development Services</option>
-              <option value="deal">Cross Plateform Development</option>
-              <option value="deal">Digital Menu For Restuarants</option>
-              <option value="deal">Bangarpete Chats Franchise</option>
+              {leadServices && leadServices?.length > 0
+                ? leadServices?.map((services) => (
+                    <option key={services.id} value={services.leadSoruce}>
+                      {services.leadSoruce}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.leadService && errors.leadService && (
               <small className="errorMessage">{errors.leadService}</small>

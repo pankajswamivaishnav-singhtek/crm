@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-// React Icons
-// import { PiDotsThreeCircleVertical } from "react-icons/pi";
-// import { BsPencil, BsTrash } from "react-icons/bs";
 
 // Controller Api's --js data
 import { monthlyMeetings } from "../../controller/fetchApi";

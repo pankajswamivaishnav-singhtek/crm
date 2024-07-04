@@ -7,7 +7,7 @@ const AssignLeadTableAdmin = ({
   adminId,
   setAdminId,
 }) => {
-  const { leadCostumerId, setLeadCostumerId } = useContext(leadIdContext) || [];
+  const { leadCostumerId } = useContext(leadIdContext) || [];
   const [isMasterChecked, setIsMasterChecked] = useState(false);
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
   const handleCheckboxChange = (assignUserId) => {
@@ -68,8 +68,9 @@ const AssignLeadTableAdmin = ({
                       id="cbx-29"
                       type="checkbox"
                       defaultValue=""
-                      onClick={handleMasterCheckboxChange}
+                      // onClick={handleMasterCheckboxChange}
                       checked={isMasterChecked}
+                      onChange={handleMasterCheckboxChange}
                     />
                     <label htmlFor="cbx-29" />
                     <svg width={15} height={14} viewBox="0 0 15 14" fill="none">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
 // React Icon
@@ -10,7 +10,7 @@ import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { DealFormSchema } from "../../schema/FormValidation";
 // Controller Methods & Api
-import { createDeal } from "../../controller/fetchApi";
+import { createDeal, dealStagesDropdowns } from "../../controller/fetchApi";
 const CreateDeal = () => {
   // Get Lead Id
   const location = useLocation();
@@ -73,6 +73,21 @@ const CreateDeal = () => {
     const { name } = e.target;
     setFieldTouched(name, true);
   };
+
+  // Deal Stages Dropdown
+  const [dealStage, setDealSatge] = useState();
+  const getdealStagesDropdown = useCallback(async () => {
+    try {
+      const dealStagesDropdown = await dealStagesDropdowns(tokenId);
+      setDealSatge(dealStagesDropdown);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId]);
+
+  useEffect(() => {
+    getdealStagesDropdown();
+  }, [getdealStagesDropdown]);
   return (
     <div className="create_lead_form_main_div dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -197,20 +212,15 @@ const CreateDeal = () => {
                 ) : (
                   "Qualification"
                 )} */}
-                Qualification
+                Choose Stage
               </option>
-              <option value="need-analysis">Need Analysis</option>
-              <option value="value-proposition">Value Proposition</option>
-              <option value="identify-decision-maker">
-                Identify Decision Maker
-              </option>
-              <option value="proposal">Proposal</option>
-              <option value="negotitation">Negotitation</option>
-              <option value="won">Closed Won </option>
-              <option value="lost">Closed Lost </option>
-              <option value="lost-to-compition">
-                Closed Lost To Compition
-              </option>
+              {dealStage && dealStage?.length > 0
+                ? dealStage.map((dealStage) => (
+                    <option key={dealStage?.id} value={dealStage?.value}>
+                      {dealStage?.stage}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.stage && errors.stage && (
               <small className="errorMessage">{errors.stage}</small>

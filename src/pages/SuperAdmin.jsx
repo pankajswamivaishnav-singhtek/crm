@@ -22,7 +22,9 @@ const SuperAdmin = () => {
     try {
       const result = await getAllUsersMadeByAdmin(tokenId);
       setAlluser(result);
-    } catch (error) {}
+    } catch (error) {
+      console.log("Not Get All Users", error);
+    }
   }, [setAlluser]);
 
   // Get Total Leads

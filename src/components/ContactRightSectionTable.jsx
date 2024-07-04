@@ -57,8 +57,9 @@ const ContactRightSectionTable = ({
                     <input
                       id="cbx-29"
                       type="checkbox"
-                      onClick={handleMasterCheckboxChange}
+                      // onClick={handleMasterCheckboxChange}
                       checked={isMasterChecked}
+                      onChange={handleMasterCheckboxChange}
                     />
                     <label htmlFor="cbx-29" />
                     <svg width={15} height={14} viewBox="0 0 15 14" fill="none">
@@ -101,7 +102,7 @@ const ContactRightSectionTable = ({
             </tr>
           </thead>
           <tbody className="dashboard_section1_tableBody ">
-            {getAllContactData && getAllContactData?.content ? (
+            {getAllContactData && getAllContactData?.content?.length > 0 ? (
               getAllContactData?.content?.map((data) => (
                 <tr
                   key={data.id}

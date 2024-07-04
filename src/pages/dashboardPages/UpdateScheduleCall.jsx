@@ -12,9 +12,8 @@ import { FaTreeCity } from "react-icons/fa6";
 import { updateScheduleCall } from "../../controller/fetchApi";
 // Get TokenId and Uid
 const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
-
 const tokenId = userIdTokenData?.data?.token;
+const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
 
 const UpdateScheduleCall = ({
   scheduleCallCostumerId,
@@ -62,20 +61,21 @@ const UpdateScheduleCall = ({
     if (defaultValue) {
       formik.setValues({
         ...formik.values,
-        callTo: defaultValue.callTo,
-        relatedTo: defaultValue.relatedTo,
-        callType: defaultValue.callType,
-        callStatus: defaultValue.callStatus,
-        callStartTime: defaultValue.callStartTime,
-        callOwner: defaultValue.callOwner,
-        leadId: defaultValue.leadId,
-        subject: defaultValue.subject,
-        reminder: defaultValue.reminder,
-        callPurpose: defaultValue.callPurpose,
-        callAgenda: defaultValue.callAgenda,
+        callTo: defaultValue?.callTo,
+        relatedTo: defaultValue?.relatedTo,
+        callType: defaultValue?.callType,
+        callStatus: defaultValue?.callStatus,
+        callStartTime: defaultValue?.callStartTime,
+        callOwner: defaultValue?.callOwner,
+        leadId: defaultValue?.leadId,
+        subject: defaultValue?.subject,
+        reminder: defaultValue?.reminder,
+        callPurpose: defaultValue?.callPurpose,
+        callAgenda: defaultValue?.callAgenda,
         // set other fields similarly
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValue]);
 
   return (
@@ -84,12 +84,13 @@ const UpdateScheduleCall = ({
         {/* User Account Information */}
         <div className="row">
           <p className="create_lead_section2_company_info">Call Information</p>
+          {/* Call TO */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callTo">Call To</label>
             <select
               id="callTo"
               className="form-control"
-              value={formik.values.callTo}
+              value={formik.values.callTo ? formik.values.callTo : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callTo"
@@ -106,12 +107,13 @@ const UpdateScheduleCall = ({
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Related To */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="relatedTo">Related To</label>
             <select
               id="relatedTo"
               className="form-control"
-              value={formik.values.relatedTo}
+              value={formik.values.relatedTo ? formik.values.relatedTo : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="relatedTo"
@@ -136,12 +138,13 @@ const UpdateScheduleCall = ({
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Call Type */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callType">Call Type</label>
             <select
               id="callType"
               className="form-control"
-              value={formik.values.callType}
+              value={formik.values.callType ? formik.values.callType : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callType"
@@ -159,13 +162,14 @@ const UpdateScheduleCall = ({
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Outgoing Call Status */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callStatus">Outgoing Call Status</label>
             <input
               type="text"
               id="callStatus"
               className="form-control create_lead_form_input"
-              value={formik.values.callStatus}
+              value={formik.values.callStatus ? formik.values.callStatus : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callStatus"
@@ -177,13 +181,16 @@ const UpdateScheduleCall = ({
             />
             <HiOutlinePhoneOutgoing className="create_lead_input_icon" />
           </div>
+          {/* Call Start Time */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callStartTime">Call Start Time</label>
             <input
               type="datetime-local"
               id="callStartTime"
               className="form-control create_lead_form_input"
-              value={formik.values.callStartTime}
+              value={
+                formik.values.callStartTime ? formik.values.callStartTime : ""
+              }
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callStartTime"
@@ -194,13 +201,14 @@ const UpdateScheduleCall = ({
               }
             />
           </div>
+          {/* Call Owner */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="callOwner">Call Owner</label>
             <input
               type="text"
               id="callOwner"
               className="form-control create_lead_form_input"
-              value={formik.values.callOwner}
+              value={formik.values.callOwner ? formik.values.callOwner : " "}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callOwner"
@@ -212,13 +220,14 @@ const UpdateScheduleCall = ({
             />
             <FaUserTie className="create_lead_input_icon" />
           </div>
+          {/* Subject */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="accountNumber">Subject</label>
             <input
               type="subject"
               id="subject"
               className="form-control create_lead_form_input"
-              value={formik.values.subject}
+              value={formik.values.subject ? formik.values.subject : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="subject"
@@ -230,12 +239,13 @@ const UpdateScheduleCall = ({
             />
             <MdOutlineBook className="create_lead_input_icon" />
           </div>
+          {/* Reminder */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="reminder">Reminder</label>
             <select
               id="reminder"
               className="form-control"
-              value={formik.values.reminder}
+              value={formik.values.reminder ? formik.values.reminder : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="reminder"
@@ -254,6 +264,7 @@ const UpdateScheduleCall = ({
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Lead iD */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadId">
               Lead Id <span className="required_sign">*</span>
@@ -262,7 +273,7 @@ const UpdateScheduleCall = ({
               type="tel"
               id="leadId"
               className="form-control create_lead_form_input"
-              value={formik.values.leadId}
+              value={formik.values.leadId ? formik.values.reminder : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="leadId"
@@ -284,7 +295,7 @@ const UpdateScheduleCall = ({
             <select
               id="callPurpose"
               className="form-control"
-              value={formik.values.callPurpose}
+              value={formik.values.callPurpose ? formik.values.callPurpose : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callPurpose"
@@ -311,7 +322,7 @@ const UpdateScheduleCall = ({
               type="text"
               id="callAgenda"
               className="form-control create_lead_form_input"
-              value={formik.values.callAgenda}
+              value={formik.values.callAgenda ? formik.values.callAgenda : ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callAgenda"

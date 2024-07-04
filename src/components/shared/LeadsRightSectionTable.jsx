@@ -62,13 +62,6 @@ const LeadsRightSectionTable = ({ tblHead, redirectLink, getAllLeadData }) => {
           <thead>
             <tr className="table-danger dashboard_section1_tableHead_tr">
               <th scope="col">
-                {/* <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue=""
-                  id="flexCheckIndeterminate"
-                  onClick={handleMasterCheckboxChange}
-                /> */}
                 <div className="wrap-check-29">
                   <div className="cbx">
                     <input

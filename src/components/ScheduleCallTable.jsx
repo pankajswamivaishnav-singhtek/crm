@@ -59,9 +59,11 @@ const ScheduleCallTable = ({
                   <div className="cbx">
                     <input
                       id="cbx-29"
+                      defaultValue=""
                       type="checkbox"
                       onClick={handleMasterCheckboxChange}
                       checked={isMasterChecked}
+                      // onChange={handleMasterCheckboxChange}
                     />
                     <label htmlFor="cbx-29" />
                     <svg width={15} height={14} viewBox="0 0 15 14" fill="none">

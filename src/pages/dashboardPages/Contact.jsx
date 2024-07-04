@@ -127,22 +127,22 @@ const Contact = () => {
                     </button>
                   </li> */}
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDeleteContact(contactCostumerId)}
                     >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDowloadContacts()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Contacts
-                    </button>
+                    </span>
                   </li>
                 </ul>
               </button>

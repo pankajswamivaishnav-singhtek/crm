@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
 // React Icon
@@ -11,7 +11,12 @@ import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { LogCallSchema } from "../../schema/FormValidation";
 // Controller Api Methods
-import { createLogCall } from "../../controller/fetchApi";
+import {
+  createLogCall,
+  callRelatedDropdowns,
+  callPurposeDropdowns,
+  callResultsDropdowns,
+} from "../../controller/fetchApi";
 const LogCall = () => {
   // Get Lead Id
   const location = useLocation();
@@ -30,6 +35,40 @@ const LogCall = () => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
+
+  // Related To
+  const [relatedTo, setRelatedTo] = useState();
+  const getCallRelatedDropdowns = useCallback(async () => {
+    try {
+      const callRelatedDropdown = await callRelatedDropdowns(tokenId);
+      setRelatedTo(callRelatedDropdown);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId]);
+
+  // Purpose
+  const [callPurpose, setCallPurpose] = useState();
+  const getCallPurposeDropdowns = useCallback(async () => {
+    try {
+      const callRelatedDropdown = await callPurposeDropdowns(tokenId);
+      setCallPurpose(callRelatedDropdown);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId]);
+
+  // Result
+  const [callResult, setCallResult] = useState();
+  const getCallResultDropdown = useCallback(async () => {
+    try {
+      const callResultDropdown = await callResultsDropdowns(tokenId);
+      setCallResult(callResultDropdown);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId]);
+
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -67,8 +106,10 @@ const LogCall = () => {
     const dd = String(today.getDate()).padStart(2, "0");
     const hh = String(today.getHours()).padStart(2, "0");
     setCurrentDateTime(`${yyyy}-${mm}-${dd}T${hh}:00`);
-  }, []);
-
+    getCallRelatedDropdowns();
+    getCallPurposeDropdowns();
+    getCallResultDropdown();
+  }, [getCallRelatedDropdowns, getCallPurposeDropdowns, getCallResultDropdown]);
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -142,16 +183,13 @@ const LogCall = () => {
                 )} */}
                 Related to
               </option>
-              <option value="account">Account</option>
-              <option value="deal">Deal</option>
-              <option value="project">Project</option>
-              <option value="quote">Quote</option>
-              <option value="sales-order">Sales Order</option>
-              <option value="purchase-order">Purchase Order</option>
-              <option value="invoice">Invoice</option>
-              <option value="campaing">Campaing</option>
-              <option value="vendor">Vendor</option>
-              <option value="case">Case</option>
+              {relatedTo && relatedTo?.length > 0
+                ? relatedTo.map((item) => (
+                    <option key={item?.id} value={item?.value}>
+                      {item?.relatedTo}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.relatedTo && errors.relatedTo && (
               <small className="errorMessage">{errors.relatedTo}</small>
@@ -308,12 +346,13 @@ const LogCall = () => {
                 )} */}
                 None
               </option>
-              <option value="prospecting">Prospecting</option>
-              <option value="administrative">Administrative</option>
-              <option value="negotitation">Negotitation</option>
-              <option value="demo">Demo</option>
-              <option value="project">Project</option>
-              <option value="desk">Desk</option>
+              {callPurpose && callPurpose?.length > 0
+                ? callPurpose.map((item) => (
+                    <option key={item?.id} value={item?.value}>
+                      {item?.callPurpose}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.callPurpose && errors.callPurpose && (
               <small className="errorMessage">{errors.callPurpose}</small>
@@ -359,12 +398,13 @@ const LogCall = () => {
                 )} */}
                 Result Type
               </option>
-              <option value="interested">Interested</option>
-              <option value="not-interested">Not Interested</option>
-              <option value="no-response">No Response/Buy</option>
-              <option value="requested-info">Requested More Info</option>
-              <option value="requested-call-back">Requested Call Back</option>
-              <option value="invalid-number">Invalid Number</option>
+              {callResult && callResult?.length > 0
+                ? callResult.map((item) => (
+                    <option key={item?.id} value={item?.value}>
+                      {item?.callResult}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.callResult && errors.callResult && (
               <small className="errorMessage">{errors.callResult}</small>

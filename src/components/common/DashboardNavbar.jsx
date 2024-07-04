@@ -297,29 +297,27 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
               >
                 <RiArrowDropDownLine className="dashboard_navbar_drop_icon" />
                 <ul className="dropdown-menu navbar_dropdown_menu">
-                  <Link className="text-decoration-none">
-                    <li
-                      data-bs-toggle="modal"
-                      data-bs-target="#updateProfileModal"
+                  <li
+                    data-bs-toggle="modal"
+                    data-bs-target="#updateProfileModal"
+                  >
+                    <a className="dropdown-item" href="/#">
+                      <CgProfile className="me-1 navbar_dropdown_icon" />
+                      Update Profile
+                    </a>
+                  </li>
+                  {/* </Link> */}
+                  <li>
+                    <a
+                      className="dropdown-item"
+                      href="/signin"
+                      onClick={logoutUserSubmit}
                     >
-                      <a className="dropdown-item" href="/#">
-                        <CgProfile className="me-1 navbar_dropdown_icon" />
-                        Update Profile
-                      </a>
-                    </li>
-                  </Link>
-                  <Link className="text-decoration-none">
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="/signin"
-                        onClick={logoutUserSubmit}
-                      >
-                        <BiLogOutCircle className="me-2 navbar_dropdown_icon" />
-                        Logout
-                      </a>
-                    </li>
-                  </Link>
+                      <BiLogOutCircle className="me-2 navbar_dropdown_icon" />
+                      Logout
+                    </a>
+                  </li>
+                  {/* </Link> */}
                 </ul>
               </li>
             </ul>

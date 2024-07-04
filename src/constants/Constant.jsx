@@ -66,6 +66,16 @@ export const DELETE_DEALS_URL = `${BASE_URL}/deals/deleteMultipleByDealId?dealsI
 export const UPDATE_SINGLE_DEAL_URL = `${BASE_URL}/deals/updateDealById?dealId=`;
 export const DOWNLOAD_DEAL_URL = `${BASE_URL}/deals/downloadDeals`;
 export const UPLOAD_DEAL_URL = `${BASE_URL}/deals/uploadDeal`;
+
+// Dropdowns Configurations Url
+export const LEAD_STATUS_URL = `${BASE_URL}/drop/getAllLeadStatus`;
+export const LEAD_SERVICES_URL = `${BASE_URL}/drop/getAllLeadService`;
+export const LEAD_SOURCE_URL = `${BASE_URL}/drop/getAllLeadSource`;
+export const DEAL_STAGES_URL = `${BASE_URL}/drop/getAllStages`;
+export const TASK_STATUS_URL = `${BASE_URL}/drop/getAllStatus`;
+export const CALL_RELATED_URL = `${BASE_URL}/drop/getCallRelatedTo`;
+export const CALL_PURPOSE_URL = `${BASE_URL}/drop/getCallPurpose`;
+export const CALL_RESULT_URL = `${BASE_URL}/drop/getCallResult`;
 // Task Configuration Url
 export const CREATE_TASK_URL = `${BASE_URL}/tasks/addTask`;
 export const GET_ALL_TASK_URL = `${BASE_URL}/tasks/getAllTasks?`;

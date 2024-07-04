@@ -254,7 +254,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                   aria-labelledby="editDeleteDropdown"
                 >
                   <li data-bs-toggle="modal" data-bs-target="#updateLeadModal">
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => {
                         handleUpdateLead();
@@ -262,32 +262,32 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                     >
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDeleteLead(leadCostumerId)}
                     >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
-                    </button>
+                    </span>
                   </li>
                   <li data-bs-toggle="modal" data-bs-target="#fileUploadModal">
-                    <button className="dropdown-item">
+                    <span className="dropdown-item">
                       <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
                       Upload Leads
-                    </button>
+                    </span>
                   </li>
 
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDownloadLeads()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Leads
-                    </button>
+                    </span>
                   </li>
                 </ul>
               </button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
 // React Icon
@@ -10,7 +10,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 // CSS
 import "../../styles/dashboardCss/createTask.css";
 // Controller Methods
-import { createTask } from "../../controller/fetchApi";
+import { createTask, taskStatusDropdowns } from "../../controller/fetchApi";
 const CreateTask = () => {
   // Get Lead Id
   const location = useLocation();
@@ -74,6 +74,22 @@ const CreateTask = () => {
     const { name } = e.target;
     setFieldTouched(name, true);
   };
+
+  // Task Status Dropdown
+  const [taskStatus, setTaskStatus] = useState();
+  const getTaskStatusDropdown = useCallback(async () => {
+    try {
+      const taskStatusDropdown = await taskStatusDropdowns(tokenId);
+      setTaskStatus(taskStatusDropdown);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId]);
+
+  useEffect(() => {
+    getTaskStatusDropdown();
+  }, [getTaskStatusDropdown]);
+
   return (
     <div className="container-fluid dashboard_create_lead_main_container">
       <form onSubmit={handleSubmit}>
@@ -216,11 +232,13 @@ const CreateTask = () => {
                 )} */}
                 Select Status
               </option>
-              <option value="not-started">Not Started</option>
-              <option value="deffered">Deffered</option>
-              <option value="in-progress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="waiting-for-input">Waiting For Input</option>
+              {taskStatus && taskStatus?.length > 0
+                ? taskStatus.map((status) => (
+                    <option key={status.id} value={status.value}>
+                      {status.status}
+                    </option>
+                  ))
+                : ""}
             </select>
             {touched.status && errors.status && (
               <small className="errorMessage">{errors.status}</small>
