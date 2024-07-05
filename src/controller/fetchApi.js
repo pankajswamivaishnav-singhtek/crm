@@ -21,9 +21,11 @@ import {
   GET_ALL_MODULE,
   GET_MODULE_PERMISSIONS,
   SEND_ROLE_MODULE_PERMISSIONS,
+  UPDATE_ROLE_PERMISSIONS,
   CREATE_USERS_URL,
   GET_TOTAL_LEADS_URL,
   GET_TOTAL_ROLES_URL,
+  SINGLE_USER_PERMISSION_URL,
   // Leads Url
   ASSIGN_LEADS_URL,
   CREATE_LEAD_URL,
@@ -426,6 +428,29 @@ export const sendRoleModulePermissions = async (
   }
 };
 
+// Update Roles & Permissions
+export const updateRoleModulePermissions = async (
+  formData,
+  tokenId,
+  uid,
+  setShowToast
+) => {
+  try {
+    const response = await axios.put(UPDATE_ROLE_PERMISSIONS + uid, formData, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    setShowToast({
+      success: true,
+      message: "Update Role & Permission Successfully",
+    });
+    console.log("Update Role And Modules", response);
+  } catch (error) {
+    console.log("Error updating Role And Modules", error);
+  }
+};
+
 // Get All User Who Made Super Admin
 export const getAllUsersMadeByAdmin = async (tokenId) => {
   try {
@@ -474,6 +499,24 @@ export const getTotalRoles = async (tokenId) => {
   } catch (error) {
     const message = error?.response?.data;
     console.log("Error not get total roles on super admin: " + message);
+  }
+};
+
+// Get Single User Permission
+export const getSingleUserPermission = async (userId, tokenId) => {
+  try {
+    const response = await axios.get(SINGLE_USER_PERMISSION_URL + userId, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    console.log("single user permissions", response);
+    if (response?.status === 200) {
+      return response?.data;
+    }
+  } catch (error) {
+    const message = error?.response?.data;
+    console.log("Error not get single user permission: " + message);
   }
 };
 

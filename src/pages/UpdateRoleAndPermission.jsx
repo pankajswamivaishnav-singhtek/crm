@@ -7,10 +7,11 @@ import {
   getRoles,
   getModules,
   getModulePermissions,
-  sendRoleModulePermissions,
+  updateRoleModulePermissions,
 } from "../controller/fetchApi";
 
-const RoleAndPermission = () => {
+const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
+  console.log("defaultValue", defaultValue);
   // Toast
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
@@ -33,7 +34,6 @@ const RoleAndPermission = () => {
   const [modulePermissions, setModulePermissions] = useState([]);
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-
   useEffect(() => {
     (async () => {
       try {
@@ -48,11 +48,13 @@ const RoleAndPermission = () => {
   }, [tokenId]);
 
   // handleRoleChecks
-  const [selectedRolesId, setSelectedRoleId] = useState();
+  const [selectedRolesId, setSelectedRoleId] = useState(
+    defaultValue?.roles[0]?.id
+  );
   const handleRoleChecks = (id) => {
     setSelectedRoleId(id);
   };
-
+  console.log("role id", selectedRolesId);
   // handlePermissionChecks
   const [selectedModulePermissions, setSelectedModulePermissions] = useState(
     {}
@@ -102,7 +104,7 @@ const RoleAndPermission = () => {
         modulePermissions: modulePermissions,
       };
       // Log the desired format as a string
-      await sendRoleModulePermissions(
+      await updateRoleModulePermissions(
         desiredFormat,
         tokenId,
         userData?.id,
@@ -128,12 +130,13 @@ const RoleAndPermission = () => {
       return newState;
     });
   };
+
   return (
     <div className="role_and_permission p-3">
       {/* Heading */}
       <div className="role_and_permission_heading dashboard_username_div">
-        <p className="dashboard_user_name">{`Username : ${userData?.firstName} ${userData?.lastName}`}</p>
-        <p className="dashboard_user_name2">{`User Id : ${userData?.id}`}</p>
+        <p className="dashboard_user_name">{`Username : ${currentUser?.firstName} ${currentUser?.lastName}`}</p>
+        <p className="dashboard_user_name2">{`User Id : ${currentUser?.id}`}</p>
       </div>
       <form onSubmit={handleSubmit}>
         {/* Roles */}
@@ -149,10 +152,12 @@ const RoleAndPermission = () => {
                   <input
                     className="form-check-input"
                     type="checkbox"
-                    defaultValue=""
                     id={data?.id}
                     name={data?.role + data?.id}
-                    // checked={selectedRolesId?.includes(data?.id)}
+                    defaultChecked={
+                      defaultValue?.roles?.length &&
+                      defaultValue?.roles[0]?.role.includes(data?.role)
+                    }
                     value={data?.id}
                     onChange={() => {
                       handleRoleChecks(data?.id);
@@ -221,6 +226,7 @@ const RoleAndPermission = () => {
                             permissionData?.id
                           ) || false
                         }
+                        // defaultChecked={true}
                         value={permissionData?.id}
                         onChange={(e) => handlePermissionChecks(e, data.id)}
                       />
@@ -271,4 +277,4 @@ const RoleAndPermission = () => {
   );
 };
 
-export default RoleAndPermission;
+export default UpdateRoleAndPermission;

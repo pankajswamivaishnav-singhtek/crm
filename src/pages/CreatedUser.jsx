@@ -76,6 +76,7 @@ const CreatedUser = () => {
               firstHead: "Sr. No",
               secondHead: "Name",
               thirdHead: "Email",
+              seventhHead: "Role",
               fourthHead: "Contact",
               fifthHead: "Id",
               sixthHead: "Give Permission",

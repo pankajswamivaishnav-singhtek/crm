@@ -1,4 +1,4 @@
-export const BASE_URL = "http://192.168.1.20:8080";
+export const BASE_URL = "http://192.168.1.87:8080";
 // export const BASE_URL = "http://192.168.1.2:9090";
 // export const BASE_URL = "http://66.85.140.154:2234";
 
@@ -17,7 +17,6 @@ export const RESET_PASSWORD = `${BASE_URL}/auth/resetPassword?uid=`;
 export const UPDATE_PROFILE_URL = `${BASE_URL}/user/updateProfile`;
 export const UPLOAD_USER_IMG_URL = `${BASE_URL}/user/uploadUserImage`;
 export const GET_IMG_URL = `${BASE_URL}/profile/getUserImage`;
-
 // Super Admin Configuration Url
 export const GET_ALL_ROLES = `${BASE_URL}/roleAndPermission/getAllRole`;
 export const GET_ALL_MODULE = `${BASE_URL}/roleAndPermission/getAllModule`;
@@ -26,6 +25,8 @@ export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assig
 export const CREATE_USERS_URL = `${BASE_URL}/super/getAllUser`;
 export const GET_TOTAL_LEADS_URL = `${BASE_URL}/super/getAllLeads`;
 export const GET_TOTAL_ROLES_URL = `${BASE_URL}/super/getTotalRoles`;
+export const SINGLE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/getAllRoleModuleAndPermission?userId=`
+export const UPDATE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/updateRoleModulePermission?userId=`
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
@@ -44,6 +45,7 @@ export const UNVERIFIED_LEADS_URL = `${BASE_URL}/leadInfo/rejectLead?leads=`;
 export const DOWNLOAD_LEADS_URL = `${BASE_URL}/leadInfo/downloadLeads`;
 export const UPLOAD_LEADS_URL = `${BASE_URL}/leadInfo/uploadLead`;
 export const ASSIGN_LEADS_URL = `${BASE_URL}/assignLead/assignLeadToUser?`;
+export const UPDATE_ROLE_PERMISSIONS = `${BASE_URL}/roleAndPermission/updateRoleModulePermission`;
 // Contact Congiguration url
 export const CREATE_CONTACT_URL = `${BASE_URL}/contact/saveContact`;
 export const GET_ALL_CONTACT_URL = `${BASE_URL}/contact/getAllContact?page=`;
@@ -66,7 +68,6 @@ export const DELETE_DEALS_URL = `${BASE_URL}/deals/deleteMultipleByDealId?dealsI
 export const UPDATE_SINGLE_DEAL_URL = `${BASE_URL}/deals/updateDealById?dealId=`;
 export const DOWNLOAD_DEAL_URL = `${BASE_URL}/deals/downloadDeals`;
 export const UPLOAD_DEAL_URL = `${BASE_URL}/deals/uploadDeal`;
-
 // Dropdowns Configurations Url
 export const LEAD_STATUS_URL = `${BASE_URL}/drop/getAllLeadStatus`;
 export const LEAD_SERVICES_URL = `${BASE_URL}/drop/getAllLeadService`;
