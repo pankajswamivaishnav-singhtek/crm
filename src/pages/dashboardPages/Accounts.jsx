@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-// React Icons
+// Import React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { TbFileDownload } from "react-icons/tb";
-// Components
+// Import Components
 import AccountTable from "../../components/AccountTable";
 import UpdateAccount from "../dashboardPages/UpdateAccount";
-// Controllers Api Methods
+// Import api function from controller
 import {
   getAllAccount,
   downloadAccount,
   getSingleAccount,
   deleteAccount,
 } from "../../controller/fetchApi";
-// React Router Dom
+// Import Instance from React Router Dom
 import { Link } from "react-router-dom";
 const Accounts = () => {
-  // Start Toast -------
+  // Start Toast Code -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
     setTimeout(() => {
@@ -31,7 +31,7 @@ const Accounts = () => {
   }
   // Set Account Costumer Id  to send table
   const [accountCostumerId, setAccountCostumerId] = useState([]);
-  // User Id And Token
+  // Get User details from local storage
   const [pageNo, setPageNo] = useState(0);
   const accountId = JSON.parse(localStorage.getItem("accountId"));
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
@@ -39,7 +39,7 @@ const Accounts = () => {
   const tokenId = userIdTokenData?.data?.token;
   const [getAllAccountData, setAllAccountData] = useState([]);
 
-  // Pagination Function ------
+  // Pagination Function Code------
   const [pageRangeStart, setPageRangeStart] = useState(0);
   const totalPages = getAllAccount?.totalPages || 1;
   const pagesToShow = 6;

@@ -5,14 +5,14 @@ import "../../styles/dashboardCss/leadCostumerDetails.css";
 import { MdVerified } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
 
-// Controllers Api Methods
+// Import api function from controller
 import {
   getSingleLead,
   verifyLeads,
   rejectedLeads,
 } from "../../controller/fetchApi";
 const LeadCostumerDetails = () => {
-  // Start Toast -------
+  // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
     setTimeout(() => {
@@ -24,7 +24,7 @@ const LeadCostumerDetails = () => {
     hideToast();
   }
 
-  // Get TokenID & UserUd & LeadId
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("leadId"));
   const leadId = userIdTokenData;
   const userTokenData = JSON.parse(localStorage.getItem("user"));

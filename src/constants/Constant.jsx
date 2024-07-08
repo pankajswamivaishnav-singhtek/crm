@@ -1,5 +1,5 @@
-export const BASE_URL = "http://192.168.1.87:8080";
-// export const BASE_URL = "http://192.168.1.2:9090";
+// export const BASE_URL = "http://192.168.1.87:8080";
+export const BASE_URL = "http://192.168.91.241:8080";
 // export const BASE_URL = "http://66.85.140.154:2234";
 
 // Signup User endpoints
@@ -25,8 +25,8 @@ export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assig
 export const CREATE_USERS_URL = `${BASE_URL}/super/getAllUser`;
 export const GET_TOTAL_LEADS_URL = `${BASE_URL}/super/getAllLeads`;
 export const GET_TOTAL_ROLES_URL = `${BASE_URL}/super/getTotalRoles`;
-export const SINGLE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/getAllRoleModuleAndPermission?userId=`
-export const UPDATE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/updateRoleModulePermission?userId=`
+export const SINGLE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/getAllRoleModuleAndPermission?userId=`;
+export const UPDATE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/updateRoleModulePermission?userId=`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
@@ -45,7 +45,6 @@ export const UNVERIFIED_LEADS_URL = `${BASE_URL}/leadInfo/rejectLead?leads=`;
 export const DOWNLOAD_LEADS_URL = `${BASE_URL}/leadInfo/downloadLeads`;
 export const UPLOAD_LEADS_URL = `${BASE_URL}/leadInfo/uploadLead`;
 export const ASSIGN_LEADS_URL = `${BASE_URL}/assignLead/assignLeadToUser?`;
-export const UPDATE_ROLE_PERMISSIONS = `${BASE_URL}/roleAndPermission/updateRoleModulePermission`;
 // Contact Congiguration url
 export const CREATE_CONTACT_URL = `${BASE_URL}/contact/saveContact`;
 export const GET_ALL_CONTACT_URL = `${BASE_URL}/contact/getAllContact?page=`;

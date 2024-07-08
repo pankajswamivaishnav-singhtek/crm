@@ -97,9 +97,18 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
 
   // User Permissions from localStorage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const permission = userIdTokenData?.data?.roleAndPermissions?.modules;
+  const permission =
+    userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
   const roles = userIdTokenData?.data?.roleAndPermissions?.roles[0];
+  // Get Module Array From Local Storage Data
+  let moduleArray = [];
+  for (let i of permission) {
+    moduleArray.push(i.module);
+  }
 
+  console.log("Permissions: " + JSON.stringify(permission));
+  console.log("Permissions: " + permission.includes("Calls"));
+  console.log("Lengths: " + moduleArray);
   return (
     <>
       {
@@ -155,9 +164,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       </Link>
                     </li>
                     {/* User Item */}
-                    {(roles?.role === "SUPERADMIN" ||
-                      roles?.role === "ADMIN" ||
-                      roles?.role === "PROJECTMANAGER") && (
+                    {roles?.role === "SUPERADMIN" && (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -171,7 +178,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     )}
 
                     {/* Leads Item */}
-                    {permission?.includes("Leads") ? (
+                    {moduleArray?.includes("Leads") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -186,7 +193,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Contact Item */}
-                    {permission?.includes("Contact") ? (
+                    {moduleArray?.includes("Contact") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -201,7 +208,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Calls Item */}
-                    {permission?.includes("Calls") ? (
+                    {moduleArray?.includes("Calls") ? (
                       <li className="nav-item sidebar_navItems dropdown ">
                         <Link
                           className="Link-button"
@@ -254,7 +261,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     )}
 
                     {/* Meetings Item */}
-                    {permission?.includes("Meeting") ? (
+                    {moduleArray?.includes("Meeting") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -269,7 +276,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Deals Item */}
-                    {permission?.includes("Deal") ? (
+                    {moduleArray?.includes("Deal") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -285,7 +292,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     )}
 
                     {/* Accounts Item */}
-                    {permission?.includes("Account") ? (
+                    {moduleArray?.includes("Account") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -300,7 +307,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Task Item */}
-                    {permission?.includes("Task") ? (
+                    {moduleArray?.includes("Task") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"

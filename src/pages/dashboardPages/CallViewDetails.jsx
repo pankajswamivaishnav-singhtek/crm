@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// controller Methods
+// Import api function from controller
 import { getSingleScheduleCall } from "../../controller/fetchApi";
 const CallViewDetails = () => {
   const [getSingleScheduleCallData, setSingleScheduleCallData] = useState([]);

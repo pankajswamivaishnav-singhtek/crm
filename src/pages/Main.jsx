@@ -22,26 +22,24 @@ const Main = ({ isSidebar, setIsSidebar, loading, setLoading }) => {
 
   return (
     <>
-      <>
-        <DashboardNavbar
-          setIsSidebar={setIsSidebar}
-          setShowSidebarSmallScreen={setShowSidebarSmallScreen}
-        />
-        <div className="d-flex main_dashboard_sidebar_main_div">
-          <div className="main_dashboard_sidebar_outlet left_dashboard_outlet">
-            {isSidebar && (
-              <DashboardSidebar
-                showSidebarSmallScreen={showSidebarSmallScreen}
-                setIsSidebar={setIsSidebar}
-              />
-            )}
-            {/* <DashboardSidebar /> */}
-          </div>
-          <div className="main_dashboard_sidebar_outlet right_dashboard_outlet">
-            {loading ? <Loader /> : <Outlet />}
-          </div>
+      <DashboardNavbar
+        setIsSidebar={setIsSidebar}
+        setShowSidebarSmallScreen={setShowSidebarSmallScreen}
+      />
+      <div className="d-flex main_dashboard_sidebar_main_div">
+        <div className="main_dashboard_sidebar_outlet left_dashboard_outlet">
+          {isSidebar && (
+            <DashboardSidebar
+              showSidebarSmallScreen={showSidebarSmallScreen}
+              setIsSidebar={setIsSidebar}
+            />
+          )}
+          {/* <DashboardSidebar /> */}
         </div>
-      </>
+        <div className="main_dashboard_sidebar_outlet right_dashboard_outlet">
+          {loading ? <Loader /> : <Outlet />}
+        </div>
+      </div>
     </>
   );
 };

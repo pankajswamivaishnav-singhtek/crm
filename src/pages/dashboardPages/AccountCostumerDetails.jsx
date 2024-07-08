@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-// CSS
+// Import CSS
 import "../../styles/dashboardCss/accountCostumerDetails.css";
-// Controller Api Methods
+// Import api function from controller
 import { getSingleAccount } from "../../controller/fetchApi";
 const AccountCostumerDetails = () => {
-  // Get AccountId & TokenId
+  // Get User details from local storage
   const [getSingleAccountData, setSingleAccountData] = useState([]);
   const accountId = JSON.parse(localStorage.getItem("accountId"));
   const userTokenData = JSON.parse(localStorage.getItem("user"));

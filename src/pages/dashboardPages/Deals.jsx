@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 // CSS
 import "../../styles/dashboardCss/calls.css";
-// React Icons
+//Import React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 // Components
 import DealsTable from "../../components/DealsTable";
 import UpdateDeal from "./UpdateDeal";
-// Controller Methods Api
+// Import api function from controller
 import {
   getAllDeal,
   deleteDeals,
@@ -22,7 +22,7 @@ import {
   uploadDeals,
 } from "../../controller/fetchApi";
 const Deals = () => {
-  // Start Toast -------
+  // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
     setTimeout(() => {
@@ -35,7 +35,7 @@ const Deals = () => {
   }
   const [dealCostumerId, setDealCostumerId] = useState([]);
 
-  // User Id And Token ----
+  // Get User details from local storage
   const [pageNo, setPageNo] = useState(0);
   const [getAllDealsData, setAllDealsData] = useState([]);
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));

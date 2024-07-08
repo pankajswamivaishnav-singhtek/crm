@@ -14,6 +14,7 @@ const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
   const tokenId = userIdTokenData?.data?.token;
   // Update Role And Permissions
   const [defaultValue, setDefaultValue] = useState();
+  console.log("deafult Value kkk", defaultValue);
   const [currentUser, setCurrentUser] = useState();
   const handleUpdateRoleAndPermission = async (user) => {
     try {
@@ -21,7 +22,7 @@ const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
         user?.id,
         tokenId
       );
-      setCurrentUser(user)
+      setCurrentUser(user);
       setDefaultValue(roleAndPermissions);
     } catch (error) {
       console.log("Created User Update getModulePermissions :", error);

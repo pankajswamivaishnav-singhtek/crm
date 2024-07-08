@@ -338,14 +338,7 @@ const LogCall = () => {
               onBlur={handleBlur}
               name="callPurpose"
             >
-              <option value="">
-                {/* {touched.callPurpose && errors.callPurpose ? (
-                  <p className="text-danger">{errors.callPurpose}</p>
-                ) : (
-                  "None"
-                )} */}
-                None
-              </option>
+              <option value="">None</option>
               {callPurpose && callPurpose?.length > 0
                 ? callPurpose.map((item) => (
                     <option key={item?.id} value={item?.value}>

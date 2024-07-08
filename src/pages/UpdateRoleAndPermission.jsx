@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 // CSS
 import "../styles/roleAndPermission.css";
 // Controllers
@@ -11,10 +11,11 @@ import {
 } from "../controller/fetchApi";
 
 const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
-  console.log("defaultValue", defaultValue);
-  // Toast
+  // Get User Data From user page for permissions
+  // const location = useLocation();
+  // const userData = location?.state?.userData;
+  // Toast Code Start -----
   const [showToast, setShowToast] = useState(false);
-  // Function to hide the toast after 3 seconds
   const hideToast = () => {
     setTimeout(() => {
       setShowToast(false);
@@ -23,38 +24,30 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
   if (showToast) {
     hideToast();
   }
-
-  // Get User Data From user page for permissions
-  const location = useLocation();
-  const userData = location?.state?.userData;
-
-  // const userData = location.state?.userData;
+  // Roles , Modules & Permissions import for UI purposes
   const [roles, setRoles] = useState();
   const [module, setModules] = useState([]);
   const [modulePermissions, setModulePermissions] = useState([]);
+  // Get User Details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await getRoles(tokenId);
-        const moduleResponse = await getModules(tokenId);
-        const modulePermissionsResponse = await getModulePermissions(tokenId);
-        setRoles(response);
-        setModules(moduleResponse);
-        setModulePermissions(modulePermissionsResponse);
-      } catch (error) {}
-    })();
-  }, [tokenId]);
+  // Initial Permissions Convert Desired Formate
+  const transformDefaultValue = (data) => {
+    const transformed = {};
+    data?.roles[0].modules.forEach((module) => {
+      transformed[module.id] = module.permissions.map((permission, index) =>
+        parseInt(index + 1)
+      );
+    });
+    return transformed;
+  };
+  const initialPermissions = transformDefaultValue(defaultValue);
 
   // handleRoleChecks
-  const [selectedRolesId, setSelectedRoleId] = useState(
-    defaultValue?.roles[0]?.id
-  );
+  const [selectedRolesId, setSelectedRoleId] = useState(0);
   const handleRoleChecks = (id) => {
     setSelectedRoleId(id);
   };
-  console.log("role id", selectedRolesId);
   // handlePermissionChecks
   const [selectedModulePermissions, setSelectedModulePermissions] = useState(
     {}
@@ -81,6 +74,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
       return newState;
     });
   };
+
   // Submit Form
   const handleSubmit = async (event) => {
     try {
@@ -97,17 +91,20 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
           permissionIds: selectedModulePermissions[moduleId],
         };
       });
+
       // Construct the desired output object
       const desiredFormat = {
         roleId: selectedRolesId,
         moduleIds: modulesIdArray,
         modulePermissions: modulePermissions,
       };
+
+      console.log("desired format", desiredFormat);
       // Log the desired format as a string
       await updateRoleModulePermissions(
         desiredFormat,
         tokenId,
-        userData?.id,
+        currentUser?.id,
         setShowToast
       );
     } catch (error) {
@@ -115,7 +112,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
     }
   };
 
-  // handleCheckAllPermissions
+  // handleCheckAllPermissions Select All btn
   const handleCheckAllPermissions = (event, moduleId) => {
     let isSelected = event.target.checked;
     setSelectedModulePermissions((prevState) => {
@@ -126,10 +123,24 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
       } else {
         delete newState[moduleId];
       }
-      console.log(JSON.stringify(newState));
       return newState;
     });
   };
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getRoles(tokenId);
+        const moduleResponse = await getModules(tokenId);
+        const modulePermissionsResponse = await getModulePermissions(tokenId);
+        setRoles(response);
+        setModules(moduleResponse);
+        setModulePermissions(modulePermissionsResponse);
+        // set inital permission and roles
+        setSelectedModulePermissions(initialPermissions);
+        setSelectedRoleId(defaultValue?.userId);
+      } catch (error) {}
+    })();
+  }, [tokenId, defaultValue]);
 
   return (
     <div className="role_and_permission p-3">
@@ -156,7 +167,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
                     name={data?.role + data?.id}
                     defaultChecked={
                       defaultValue?.roles?.length &&
-                      defaultValue?.roles[0]?.role.includes(data?.role)
+                      defaultValue?.roles[0]?.role?.includes(data?.role)
                     }
                     value={data?.id}
                     onChange={() => {
@@ -224,11 +235,20 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
                         checked={
                           selectedModulePermissions[data.id]?.includes(
                             permissionData?.id
-                          ) || false
+                          )
+
+                          // ||
+                          // defaultValue?.roles[0]?.modules.some(
+                          //   (item) =>
+                          //     item.module === data.module &&
+                          //     item.permissions.includes(
+                          //       permissionData?.permission
+                          //     )
+                          // )
                         }
                         // defaultChecked={true}
                         value={permissionData?.id}
-                        onChange={(e) => handlePermissionChecks(e, data.id)}
+                        onChange={(e) => handlePermissionChecks(e, data?.id)}
                       />
                       <label
                         className="form-check-label"

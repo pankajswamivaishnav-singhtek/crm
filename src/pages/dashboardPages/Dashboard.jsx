@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useEffect } from "react";
-// CSS
+//Import CSS
 import "../../styles/dashboardCss/dashboard.css";
 // Import Component
 import DashboardSection1 from "../../components/DashboardSection1";
 import DashboardSection2 from "../../components/DashboardSection2";
 import DashboardSection3 from "../../components/DashboardSection3";
-// Import Controller Methods
+// Import api function from controller
 import { getCurrentUser } from "../../controller/fetchApi";
 
 const Dashboard = () => {
   const [getCurrentUserData, setCurrentUserData] = useState();
-  // User Id & Token ID
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
 

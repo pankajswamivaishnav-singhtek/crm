@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-// React Router Dom
+//Import React Router Dom
 import { Routes, Route } from "react-router-dom";
 import ResetPassword from "../pages/ResetPassword";
 
@@ -42,7 +42,7 @@ import UpdateProfile from "../pages/UpdateProfile";
 import CreatedUser from "../pages/CreatedUser";
 import RoleAndPermission from "../pages/RoleAndPermission";
 
-// Validation Route
+//Import Validation Route
 import ValidateRoute from "./ValidateRoute";
 import ErrorPage from "../pages/ErrorPage";
 
@@ -53,9 +53,7 @@ const AllRoutes = () => {
     const handleResize = () => {
       setIsSidebar(window.innerWidth > 425);
     };
-
     window.addEventListener("resize", handleResize);
-
     // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);

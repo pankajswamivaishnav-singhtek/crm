@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
-// React Icon
+//Import React Icon
 import { MdAdminPanelSettings } from "react-icons/md";
 import { FaUserTie } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
@@ -9,13 +9,13 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { DealFormSchema } from "../../schema/FormValidation";
-// Controller Methods & Api
+// Import api function from controller
 import { createDeal, dealStagesDropdowns } from "../../controller/fetchApi";
 const CreateDeal = () => {
   // Get Lead Id
   const location = useLocation();
   const leadId = location.state?.leadId;
-  // Toast
+  // Start Toast Code -------
   const [showToast, setShowToast] = useState(false);
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
@@ -26,7 +26,7 @@ const CreateDeal = () => {
   if (showToast) {
     hideToast();
   }
-  // Get TokenId and Uid
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;

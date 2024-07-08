@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
-// React Icon
+// Import React Icon
 import { MdEmail } from "react-icons/md";
 import { FaPhone } from "react-icons/fa6";
 import { BsBuildingsFill } from "react-icons/bs";
 import { FaTreeCity } from "react-icons/fa6";
 import { ContactFormSchema } from "../../schema/FormValidation";
-// Controllers Methods
+// Import api function from controller
 import { createContact } from "../../controller/fetchApi";
 const CreateContact = () => {
   // Get LeadId
   const location = useLocation();
-  const leadId = location.state?.leadId; // Use optional chaining to avoid errors
-  // Toast
+  const leadId = location.state?.leadId;
+  // Start Toast Code -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
@@ -25,7 +25,7 @@ const CreateContact = () => {
     hideToast();
   }
 
-  // Get TokenId and Uid
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
@@ -73,9 +73,6 @@ const CreateContact = () => {
           <p className="create_lead_section2_company_info mt-3">
             Company Details
           </p>
-          {/* <p className="mx-2 dashboard_leadView_details_heading_second">
-            Lead Id : LI-{data}
-          </p> */}
         </div>
         {/* Company Information */}
         <div className="row">

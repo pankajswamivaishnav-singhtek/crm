@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-// CSS
+// Import CSS
 import "../../styles/dashboardCss/calls.css";
-// React Icons
+//Import Instance from React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
@@ -10,7 +10,7 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 import LogCallTable from "../../components/LogCallTable";
 
-// Controller Method
+// Import api function from controller
 import {
   getAllLogCall,
   deleteLogCall,
@@ -20,7 +20,7 @@ import {
 } from "../../controller/fetchApi";
 import UpdateLogCall from "./UpdateLogCall";
 const CallLogs = () => {
-  // Start Toast -------
+  // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
     setTimeout(() => {
@@ -36,7 +36,7 @@ const CallLogs = () => {
   const [pageNo, setPageNo] = useState(0);
   const [logCallCostumerId, setLogCallCostumerId] = useState([]);
   const [getAllLogCallData, setAllLogCallData] = useState([]);
-  // Get Uid and Tokenid Who Saved In Cookie
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const logCallId = JSON.parse(localStorage.getItem("logCallId"));
   const tokenId = userIdTokenData?.data?.token;
@@ -110,7 +110,7 @@ const CallLogs = () => {
       console.log("Error fetching updated data", error);
     }
   };
-  // Pagination Function ------
+  // Pagination Function Code------
   const [pageRangeStart, setPageRangeStart] = useState(0);
   const totalPages = getAllLogCallData?.totalPages || 1;
   const pagesToShow = 6;
@@ -251,7 +251,7 @@ const CallLogs = () => {
               fifthHead: "Status",
               sixthHead: "View",
               seventhHead: "Action",
-              eighthHead:"Lead Id"
+              eighthHead: "Lead Id",
             }}
             redirectLink="/log-call-details"
             getAllLogCallData={getAllLogCallData}

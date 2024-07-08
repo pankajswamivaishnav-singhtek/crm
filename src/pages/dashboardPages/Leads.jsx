@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import leadIdContext from "../LeadIdContext";
-// CSS
+//Import CSS
 import "../../styles/dashboardCss/leads.css";
-// Components
+//Import Components
 import FilterSidebar from "../../components/LeadsLeftSection";
 import LeadsRightSection from "../../components/LeadsRightSection";
 
@@ -23,10 +23,6 @@ const loadFilterState = () => {
 };
 
 const Leads = () => {
-  // const [filterData, setFilterData] = useState({
-  //   unverified: true,
-  // });
-
   // Function to load filter state from localStorage
   const [filterData, setFilterData] = useState(loadFilterState);
 
@@ -54,7 +50,6 @@ const Leads = () => {
             />
           </leadIdContext.Provider>
         </div>
-        
       </div>
     </div>
   );

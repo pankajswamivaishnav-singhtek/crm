@@ -21,7 +21,7 @@ import {
   GET_ALL_MODULE,
   GET_MODULE_PERMISSIONS,
   SEND_ROLE_MODULE_PERMISSIONS,
-  UPDATE_ROLE_PERMISSIONS,
+  UPDATE_USER_PERMISSION_URL,
   CREATE_USERS_URL,
   GET_TOTAL_LEADS_URL,
   GET_TOTAL_ROLES_URL,
@@ -436,11 +436,15 @@ export const updateRoleModulePermissions = async (
   setShowToast
 ) => {
   try {
-    const response = await axios.put(UPDATE_ROLE_PERMISSIONS + uid, formData, {
-      headers: {
-        Authorization: `Bearer ${tokenId}`,
-      },
-    });
+    const response = await axios.put(
+      UPDATE_USER_PERMISSION_URL + uid,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      }
+    );
     setShowToast({
       success: true,
       message: "Update Role & Permission Successfully",

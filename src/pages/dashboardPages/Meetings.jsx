@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-// React Icons
+//Import React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
@@ -7,18 +7,18 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 import MeetingTable from "../../components/MeetingTable";
 import UpdateMeeting from "./UpdateMeeting";
-// Controller Methods
-import { getAllMeetings, getSingleMeeting } from "../../controller/fetchApi";
-// React Router Dom
-import { Link } from "react-router-dom";
-// Controller Methods
+// Import api function from controller
 import {
+  getAllMeetings,
+  getSingleMeeting,
   deleteMeetings,
   downloadMeetings,
   uploadMeetings,
 } from "../../controller/fetchApi";
+// React Router Dom
+import { Link } from "react-router-dom";
 const Meetings = () => {
-  // Start Toast -------
+  // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
@@ -31,7 +31,7 @@ const Meetings = () => {
     hideToast();
   }
   const [meetCostumerId, setMeetCostumerId] = useState([]);
-  // User Id And Token ----
+   // Get User details from local storage
   const [pageNo, setPageNo] = useState(0);
   const [getAllMeetingData, setAllMeetingData] = useState([]);
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
@@ -221,9 +221,9 @@ const Meetings = () => {
               secondHead: "Host",
               thirdHead: "Date",
               fourthHead: "Location",
-              fifthHead:"View",
-              sixthHead:"Deals Action",
-              seventhHead:"Lead Id"
+              fifthHead: "View",
+              sixthHead: "Deals Action",
+              seventhHead: "Lead Id",
             }}
             redirectLink="/meetings-details"
             getAllMeetingData={getAllMeetingData}

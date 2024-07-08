@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { useLocation } from "react-router-dom";
-// React Icon
+//Import React Icon
 import { MdOutlineSubtitles } from "react-icons/md";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaChalkboardUser } from "react-icons/fa6";
 import { MdAdd } from "react-icons/md";
 import { MeetingFormSchema } from "../../schema/FormValidation";
 import { FaTreeCity } from "react-icons/fa6";
-// CSS
+//Import CSS
 import "../../styles/dashboardCss/createMeeting.css";
+// Import api function from controller
 import { getContacts, createMeeting } from "../../controller/fetchApi";
 const CreateMeeting = () => {
   // Get LeadId
@@ -17,7 +18,7 @@ const CreateMeeting = () => {
   const leadId = location.state?.leadId;
   // For Particiapnts
   const [getAllContactData, setAllContactData] = useState([]);
-  // Get Uid and Tokenid Who Saved In Cookie
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
@@ -33,7 +34,7 @@ const CreateMeeting = () => {
     })();
   }, [tokenId]);
 
-  // Toast Manage State
+  // Start Toast Code -------
   const [showToast, setShowToast] = useState(false);
   const [loading, setLoading] = useState(false);
   // Function to hide the toast after 3 seconds

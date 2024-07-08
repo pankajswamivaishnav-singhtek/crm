@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-// CSS
+// Import CSS
 import "../../styles/dashboardCss/calls.css";
-// React Icons
+//Import React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
@@ -20,7 +20,7 @@ import {
 } from "../../controller/fetchApi";
 import UpdateScheduleCall from "./UpdateScheduleCall";
 const Calls = () => {
-  // Start Toast -------
+  // Start Toast Code -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
     setTimeout(() => {
@@ -36,7 +36,7 @@ const Calls = () => {
   const [pageNo, setPageNo] = useState(0);
   const [scheduleCallCostumerId, setScheduleCallCostumerId] = useState([]);
   const [getAllScheduleCallData, setAllScheduleCallData] = useState([]);
-  // Get Uid and Tokenid Who Saved In Cookie
+   // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
   const tokenId = userIdTokenData?.data?.token;

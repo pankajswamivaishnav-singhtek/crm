@@ -32,7 +32,7 @@ const Contact = () => {
   const [contactCostumerId, setContactCostumerId] = useState([]);
   const [getAllContactData, setAllContactData] = useState([]);
 
-  // Get Uid and Tokenid Who Saved In Cookie
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
@@ -68,7 +68,7 @@ const Contact = () => {
       console.log("Contact Downloaded:", error);
     }
   };
-  // Pagination Function ------
+  // Pagination Function Code------
   const [pageRangeStart, setPageRangeStart] = useState(0);
   const totalPages = getAllContactData?.totalPages || 1;
   const pagesToShow = 6;
@@ -120,12 +120,6 @@ const Contact = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  {/* <li>
-                    <button className="dropdown-item">
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </button>
-                  </li> */}
                   <li>
                     <span
                       className="dropdown-item"

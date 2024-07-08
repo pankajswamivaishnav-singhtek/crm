@@ -16,8 +16,14 @@ const ValidateRoute = ({ children, requiredRoles, requiredModule }) => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const user = userIdTokenData?.data;
   const token = user?.token;
-  const moduels = userIdTokenData?.data?.roleAndPermissions?.modules;
+  const permission =
+    userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
   const roles = userIdTokenData?.data?.roleAndPermissions?.roles[0];
+  // Get Module Array From Local Storage Data
+  let moduleArray = [];
+  for (let i of permission) {
+    moduleArray.push(i.module);
+  }
   if (!token) {
     return <Navigate to="/login" />;
   }
@@ -26,7 +32,7 @@ const ValidateRoute = ({ children, requiredRoles, requiredModule }) => {
     return <Navigate to="/error-page" />;
   }
 
-  if (requiredModule && !moduels.includes(requiredModule)) {
+  if (requiredModule && !moduleArray.includes(requiredModule)) {
     return <Navigate to="/error-page" />;
   }
 
