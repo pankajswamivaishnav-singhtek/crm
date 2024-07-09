@@ -9,17 +9,19 @@ import { FcBusinessman } from "react-icons/fc";
 import { FcFeedback } from "react-icons/fc";
 import { FcCellPhone } from "react-icons/fc";
 import { FcManager } from "react-icons/fc";
-// import { FcGoogle } from "react-icons/fc";
+// Redux Toolkit
+import { useDispatch } from "react-redux";
+import { setUserData } from "../app/slices";
 
 // React Router Dom
 import { Link, useNavigate } from "react-router-dom";
-// Imags
-// import orLogin from "../images/orLogin.jpg";
-// import signupImg from "../images/signup_img.png";
+
 // Import Api Function
 import { signupUser } from "../controller/fetchApi";
 
+// Main Component Function
 const Signup = () => {
+  const dispatch = useDispatch();
   // TokenId
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
@@ -63,12 +65,14 @@ const Signup = () => {
         setShowToast({ success: true, message: "password must match" });
       }
       console.log("-----", values);
-      navigate("/otpverification", {
-        state: {
+      navigate("/otpverification");
+      // Set Data in redux store
+      dispatch(
+        setUserData({
           email: values.email,
           name: `${values.firstName} ${values.lastName}`,
-        },
-      });
+        })
+      );
       await signupUser(values, setShowToast, tokenId);
 
       resetForm();

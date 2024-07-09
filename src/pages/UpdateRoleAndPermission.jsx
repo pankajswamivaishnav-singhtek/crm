@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useLocation } from "react-router-dom";
-// CSS
+// Import CSS
 import "../styles/roleAndPermission.css";
 // Controllers
 import {

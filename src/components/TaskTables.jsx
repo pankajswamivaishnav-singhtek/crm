@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 import { HiPencilSquare } from "react-icons/hi2";
+
+// Main Components -------
 const TaskTables = ({
   tblHead,
   redirectLink,
@@ -42,6 +44,7 @@ const TaskTables = ({
       setIsMasterChecked(false);
     }
   }, [taskCostumerId, getAllTaskData]);
+
   return (
     <div className="container-fluid ">
       <div className="row dashboard_table_main_heading"></div>

@@ -54,7 +54,7 @@ const SuperAdmin = () => {
     getTotalLeads();
     getAllRoles();
   }, [getAllUser]);
-
+  console.log("get all users", getAllUsers);
   return (
     <div className="super_admin_div p-3">
       <SuperAdminSection1 totalLeads={totalLeads} allRoles={allRoles} />

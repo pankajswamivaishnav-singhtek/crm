@@ -124,6 +124,7 @@ const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header w-100">
+                <span className="fw-bold">Create Employees</span>
                 <button
                   type="button"
                   className="btn-close"

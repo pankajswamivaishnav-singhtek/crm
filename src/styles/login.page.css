@@ -51,6 +51,20 @@
   color: #808080;
 }
 
+.loginPageErrorMessage {
+  color: red;
+  font-size: small;
+  font-weight: 600;
+  position: absolute;
+  top: 90%;
+  left: 1%;
+  transform: translateY(5px); /* Adjust spacing as needed */
+  white-space: nowrap;
+}
+.loginPageMainDiv {
+  margin: 25px 0;
+}
+
 @media screen and (max-width: 768px) {
   .login_page_input {
     width: 35vw;

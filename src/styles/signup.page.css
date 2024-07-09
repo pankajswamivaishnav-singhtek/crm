@@ -168,10 +168,10 @@
   text-align: center;
   color: #ff7006;
 }
-.signup_input_form::placeholder {
+/* .signup_input_form::placeholder {
   color: red;
   font-size: small;
-}
+} */
 
 .cpasswordErrorPara {
   margin-top: -17px;

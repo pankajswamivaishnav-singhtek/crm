@@ -31,7 +31,7 @@ const SuperAdminSection2 = ({ getAllUsers }) => {
                     <td>{index + 1}</td>
                     <td>{`${user?.firstName} ${user?.lastName}`}</td>
                     <td>{user?.email}</td>
-                    <td>{user?.role}</td>
+                    <td>{user?.role || "Not Assigned"}</td>
                     <td>{user?.id}</td>
                     <td className="text-center">
                       <FaRegEye className="fs-3 super_admin_section2_table_icon" />

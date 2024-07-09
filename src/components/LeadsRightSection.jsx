@@ -22,6 +22,7 @@ import {
 // Components
 import UpdateLead from "../pages/dashboardPages/UpdateLead";
 import AssignLeads from "./AssignLeads";
+
 const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   // Start Toast -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
@@ -94,6 +95,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
     };
     try {
       const res = await getAllLeadByFilter(filter, tokenId);
+
       setAllLeadsData(res);
     } catch (error) {
       console.log(error);

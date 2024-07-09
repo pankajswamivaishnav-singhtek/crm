@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 // css
 import "../styles/signup.page.css";
 import "../styles/forgot.page.css";
@@ -10,16 +10,18 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 // Formik
 import { useFormik } from "formik";
 import { otpVerificationSchema } from "../schema/FormValidation";
+// Get User Data From Redux Toolkit Store
+import { useSelector } from "react-redux";
 // Images
 import otpImg from "../images/otp_img.png";
 // Import Controller Methods
 import { otpVerification, resendOtp } from "../controller/fetchApi";
 const OtpVerification = () => {
+  const userData = useSelector((state) => state.userData.user);
   // TokenId
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-
-  // Toast
+  // Import Toast Code
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Function to hide the toast after 3 seconds
   const hideToast = () => {
@@ -30,13 +32,12 @@ const OtpVerification = () => {
   if (showToast) {
     hideToast();
   }
-
   const navigate = useNavigate();
   // Get Name & Email From Signup
-  const location = useLocation();
-  const [gmail, setGmail] = useState();
-  const [newName, setName] = useState();
-  const { email, name } = location.state || {};
+
+  const [gmail, setGmail] = useState("");
+  const [name, setName] = useState("");
+
   // Form Handle & Validations
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -64,24 +65,21 @@ const OtpVerification = () => {
         console.log("verifySuccessFully", verifySuccessFully?.data?.status);
         if (verifySuccessFully?.data?.status === 200) {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/super-admin");
           }, 1000);
         }
         resetForm();
       },
     });
   //  Resend Otp Function
-  const resendOtpAgain = async (email, name) => {
-    console.log("Email", email);
-    setGmail(email);
-    setName(name);
-    await resendOtp(email);
+  const resendOtpAgain = async () => {
+    await resendOtp(gmail);
   };
 
   useEffect(() => {
-    setGmail(email);
-    setName(name);
-  }, [email, name]);
+    setGmail(userData.email);
+    setName(userData.name);
+  }, [gmail, name, userData]);
 
   return (
     <div className="container-fluid signup_body_div">
@@ -98,9 +96,7 @@ const OtpVerification = () => {
                   OTP Verification
                 </p>
                 <div className="otp_verification_small_text">
-                  <small>{`${name || newName} please check ${
-                    email || gmail
-                  } Email`}</small>
+                  <small>{`${name} please check ${gmail} Email`}</small>
                 </div>
                 <div className="formGroup">
                   {/* Otp Verification */}
@@ -174,7 +170,7 @@ const OtpVerification = () => {
               <div>
                 <Link
                   className="resend_otp_text_link"
-                  onClick={() => resendOtpAgain(email, name)}
+                  onClick={() => resendOtpAgain()}
                 >
                   <p id="resend_otp_text">Resend Code</p>
                 </Link>

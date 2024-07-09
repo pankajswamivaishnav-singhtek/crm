@@ -85,7 +85,7 @@ const CreateLeadForm = ({ leadStatus, leadServices, leadSource }) => {
     const { name } = e.target;
     setFieldTouched(name, true);
   };
-  console.log("Lead Source", leadSource);
+  
   return (
     <div className="create_lead_form_main_div">
       <form onSubmit={handleSubmit}>

@@ -41,22 +41,30 @@ const Login = () => {
   }
 
   // Form Handle & Validations
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        email: "",
-        password: "",
-      },
+  const {
+    values,
+    errors,
+    touched,
 
-      validationSchema: loginFormSchema,
-      onSubmit: async (values, { resetForm }) => {
-        const loginSuccessFully = await loginUser(values, setShowToast);
-        if (loginSuccessFully.data.status === 200) {
-          navigate("/dashboard");
-        }
-        resetForm();
-      },
-    });
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldTouched,
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    validationSchema: loginFormSchema,
+    onSubmit: async (values, { resetForm }) => {
+      const loginSuccessFully = await loginUser(values, setShowToast);
+      if (loginSuccessFully.data.status === 200) {
+        navigate("/dashboard");
+      }
+      resetForm();
+    },
+  });
 
   // Show & Hide Password
   const [showPassword, setShowPassword] = useState(true);
@@ -64,6 +72,11 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setFieldTouched(name, true);
+  };
   return (
     <div className="container-fluid signup_body_div">
       <div className="row">
@@ -78,8 +91,8 @@ const Login = () => {
                 <p className=" signup_text_in_signup_left_mainDiv">Log in</p>
                 <div className="formGroup">
                   {/* Email */}
-                  <div className="signup_input_div">
-                    <div className="mb-3 position-relative">
+                  <div className="signup_input_div loginPageMainDiv">
+                    <div className="mb-3 position-relative ">
                       <label
                         htmlFor="exampleFormControlInput1"
                         className="form-label signup_div_input"
@@ -95,20 +108,22 @@ const Login = () => {
                         }`}
                         id="exampleFormControlInput1"
                         name="email"
-                        placeholder={
-                          touched.email && errors.email
-                            ? errors.email
-                            : "email@example.com"
-                        }
+                        placeholder="John@example.com"
                         value={values.email}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         onBlur={handleBlur}
                       />
+                      {touched.email && errors.email && (
+                        <small className="loginPageErrorMessage">
+                          {errors.email}
+                        </small>
+                      )}
                       <FcFeedback className="signup_input_icons" />
                     </div>
                   </div>
                   {/*Password */}
-                  <div className="signup_input_div">
+                  <div className="signup_input_div loginPageMainDiv">
                     <div className="mb-3 position-relative">
                       <label
                         htmlFor="exampleFormControlInput2"
@@ -133,8 +148,16 @@ const Login = () => {
                         name="password"
                         value={values.password}
                         onChange={handleChange}
+                        onFocus={handleFocus}
                         onBlur={handleBlur}
                       />
+                      {/* Error Message */}
+                      {touched.password && errors.password && (
+                        <small className="loginPageErrorMessage">
+                          {errors.password}
+                        </small>
+                      )}
+                      {/* Show Unshow functionlity */}
                       {showPassword ? (
                         <p
                           className="signup_input_icons"

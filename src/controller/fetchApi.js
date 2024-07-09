@@ -109,7 +109,7 @@ import axios from "axios";
 // Signup User Post Api
 export const signupUser = async (userData, setShowToast, tokenId) => {
   try {
-    console.log("Token jaant ka shab ka", tokenId);
+    console.log("signup user", userData);
     const response = await axios.post(
       SIGNUP_USER,
       {
@@ -141,6 +141,7 @@ export const signupUser = async (userData, setShowToast, tokenId) => {
 // OTP Verification Post Api
 export const otpVerification = async (userData, setShowToast, tokenId) => {
   try {
+    console.log("userData", userData);
     const response = await axios.post(
       OTP_VERIFICATION_URL,
       {
@@ -697,6 +698,7 @@ export const getAllLeadByFilter = async (filters, tokenId) => {
     );
 
     const finalResponse = response?.data?.data;
+    
     return finalResponse;
   } catch (error) {}
 };

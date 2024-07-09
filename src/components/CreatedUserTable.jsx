@@ -14,7 +14,7 @@ const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
   const tokenId = userIdTokenData?.data?.token;
   // Update Role And Permissions
   const [defaultValue, setDefaultValue] = useState();
-  console.log("deafult Value kkk", defaultValue);
+
   const [currentUser, setCurrentUser] = useState();
   const handleUpdateRoleAndPermission = async (user) => {
     try {
@@ -43,7 +43,9 @@ const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
             <th scope="col" className="text-center">
               {tblHead.seventhHead}
             </th>
-            <th scope="col">{tblHead.fourthHead}</th>
+            <th scope="col" className="text-center">
+              {tblHead.fourthHead}
+            </th>
             <th scope="col">{tblHead.fifthHead}</th>
             <th scope="col" className="text-center">
               {tblHead.sixthHead}
@@ -58,8 +60,8 @@ const CreatedUserTable = ({ tblHead, data, redirectLink }) => {
                 <td>{index + 1}</td>
                 <td className="text-center">{`${user?.firstName}  ${user?.lastName}`}</td>
                 <td className="text-center">{user?.email}</td>
-                <td className="text-center">{user?.role}</td>
-                <td>{user?.mobile}</td>
+                <td className="text-center">{user?.role || "Not Assigned"}</td>
+                <td className="text-center">{user?.mobile}</td>
                 <td>{user?.id}</td>
                 <td className="text-center">
                   <Link

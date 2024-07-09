@@ -98,17 +98,16 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
   // User Permissions from localStorage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const permission =
-    userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
+    userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules || [];
   const roles = userIdTokenData?.data?.roleAndPermissions?.roles[0];
   // Get Module Array From Local Storage Data
   let moduleArray = [];
-  for (let i of permission) {
-    moduleArray.push(i.module);
+  if (Array.isArray(permission)) {
+    for (let i of permission) {
+      moduleArray.push(i.module);
+    }
   }
 
-  console.log("Permissions: " + JSON.stringify(permission));
-  console.log("Permissions: " + permission.includes("Calls"));
-  console.log("Lengths: " + moduleArray);
   return (
     <>
       {
