@@ -34,15 +34,20 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
   // Initial Permissions Convert Desired Formate
   const transformDefaultValue = (data) => {
     const transformed = {};
-    data?.roles[0].modules.forEach((module) => {
-      transformed[module.id] = module.permissions.map((permission, index) =>
-        parseInt(index + 1)
+    data?.roles[0]?.modules.forEach((module) => {
+      transformed[module.id] = module.permissions.map(
+        (permission, index) => index + 1
       );
     });
     return transformed;
   };
   const initialPermissions = transformDefaultValue(defaultValue);
-
+  useEffect(() => {
+    // set inital permission and roles
+    setSelectedModulePermissions(initialPermissions);
+    setSelectedRoleId(defaultValue?.roles[0]?.id);
+  }, [defaultValue]);
+  console.log("initialPermissions", initialPermissions);
   // handleRoleChecks
   const [selectedRolesId, setSelectedRoleId] = useState(0);
   const handleRoleChecks = (id) => {
@@ -52,6 +57,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
   const [selectedModulePermissions, setSelectedModulePermissions] = useState(
     {}
   );
+  console.log("setSelectedModulePermissions", selectedModulePermissions);
   const handlePermissionChecks = (event, moduleId) => {
     let isSelected = event.target.checked;
     let value = parseInt(event.target.value);
@@ -135,12 +141,9 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
         setRoles(response);
         setModules(moduleResponse);
         setModulePermissions(modulePermissionsResponse);
-        // set inital permission and roles
-        setSelectedModulePermissions(initialPermissions);
-        setSelectedRoleId(defaultValue?.userId);
       } catch (error) {}
     })();
-  }, [tokenId, defaultValue]);
+  }, [tokenId]);
 
   return (
     <div className="role_and_permission p-3">

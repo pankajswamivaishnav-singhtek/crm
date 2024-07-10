@@ -1,5 +1,5 @@
 // export const BASE_URL = "http://192.168.1.87:8080";
-export const BASE_URL = "http://192.168.1.35:8080";
+export const BASE_URL = "http://192.168.1.24:8080";
 // export const BASE_URL = "http://66.85.140.154:2234";
 
 // Signup User endpoints
@@ -23,6 +23,7 @@ export const GET_ALL_MODULE = `${BASE_URL}/roleAndPermission/getAllModule`;
 export const GET_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/getAllPermission`;
 export const SEND_ROLE_MODULE_PERMISSIONS = `${BASE_URL}/roleAndPermission/assignRoleModulePermission?userId=`;
 export const CREATE_USERS_URL = `${BASE_URL}/super/getAllUser`;
+export const DELETE_USERS_URL = `${BASE_URL}/signup/deleteUser?userId=`;
 export const GET_TOTAL_LEADS_URL = `${BASE_URL}/super/getAllLeads`;
 export const GET_TOTAL_ROLES_URL = `${BASE_URL}/super/getTotalRoles`;
 export const SINGLE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/getAllRoleModuleAndPermission?userId=`;

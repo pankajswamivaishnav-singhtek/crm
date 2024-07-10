@@ -79,9 +79,11 @@ const CreatedUser = () => {
               seventhHead: "Role",
               fourthHead: "Contact",
               fifthHead: "Id",
-              sixthHead: "Give Permission",
+              sixthHead: "Permissions",
+              eighthHead: "Action",
             }}
             data={getAllUsers}
+            getAllUser={getAllUser}
             redirectLink="/role&permission"
           />
         </div>

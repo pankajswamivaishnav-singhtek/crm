@@ -137,7 +137,6 @@
   .super_admin_first_section_card_text {
     font-size: large;
   }
-  
 }
 
 @media screen and (max-width: 425px) {
@@ -287,4 +286,10 @@
 /* User Modal */
 .super_admin_create_user_modal {
   padding: 0 !important;
+}
+
+/* Created User */
+.created_user_table_action_delete {
+  color: rgb(255, 58, 58);
+  cursor: pointer;
 }

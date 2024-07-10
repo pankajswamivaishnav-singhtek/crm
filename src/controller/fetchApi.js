@@ -23,6 +23,7 @@ import {
   SEND_ROLE_MODULE_PERMISSIONS,
   UPDATE_USER_PERMISSION_URL,
   CREATE_USERS_URL,
+  DELETE_USERS_URL,
   GET_TOTAL_LEADS_URL,
   GET_TOTAL_ROLES_URL,
   SINGLE_USER_PERMISSION_URL,
@@ -157,7 +158,7 @@ export const otpVerification = async (userData, setShowToast, tokenId) => {
     // Set Data In Local Storage
     if (response?.data?.status === 200) {
       setShowToast({ success: true, message: "signup successfully" });
-      localStorage.setItem("user", JSON.stringify(response.data));
+      localStorage.setItem("users", JSON.stringify(response.data));
     } else {
       setShowToast({
         success: true,
@@ -437,6 +438,7 @@ export const updateRoleModulePermissions = async (
   setShowToast
 ) => {
   try {
+    console.log("forma data hai", formData);
     const response = await axios.put(
       UPDATE_USER_PERMISSION_URL + uid,
       formData,
@@ -450,7 +452,7 @@ export const updateRoleModulePermissions = async (
       success: true,
       message: "Update Role & Permission Successfully",
     });
-    console.log("Update Role And Modules", response);
+    return response;
   } catch (error) {
     console.log("Error updating Role And Modules", error);
   }
@@ -470,6 +472,24 @@ export const getAllUsersMadeByAdmin = async (tokenId) => {
   } catch (error) {
     const message = error?.response?.data;
     console.log("Error do not get all users by made admin", message);
+  }
+};
+
+// Delete User By Admin
+export const deleteUserByAdmin = async (tokenId, uid, setShowToast) => {
+  try {
+    const response = await axios.delete(DELETE_USERS_URL + uid, {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    });
+    if (response?.data.status === 200) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Delete User Successfully." });
+      return response;
+    }
+  } catch (error) {
+    console.log("Did not delete user", error);
   }
 };
 
@@ -578,7 +598,7 @@ export const monthlyClosingDeals = async (uid, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     };
-    const response = await axios.get(MONTHLY_CLOSING_DEALS_URL + uid, config);
+    const response = await axios.get(MONTHLY_CLOSING_DEALS_URL, config);
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -660,9 +680,9 @@ export const createLead = async (userData, uid, setShowToast, tokenId) => {
         state: userData.state,
         country: userData.country,
         description: userData.description,
-        user: {
-          id: uid,
-        },
+        // user: {
+        //   id: uid,
+        // },
       },
       config
     );
@@ -698,7 +718,7 @@ export const getAllLeadByFilter = async (filters, tokenId) => {
     );
 
     const finalResponse = response?.data?.data;
-    
+
     return finalResponse;
   } catch (error) {}
 };

@@ -6,7 +6,7 @@ import "../styles/otpVerification.page.css";
 // React Icons
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 // React Router Dom
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Formik
 import { useFormik } from "formik";
 import { otpVerificationSchema } from "../schema/FormValidation";
@@ -33,8 +33,7 @@ const OtpVerification = () => {
     hideToast();
   }
   const navigate = useNavigate();
-  // Get Name & Email From Signup
-
+  // Get Name & Email From Redux Store
   const [gmail, setGmail] = useState("");
   const [name, setName] = useState("");
 
@@ -62,12 +61,14 @@ const OtpVerification = () => {
           setShowToast,
           tokenId
         );
-        console.log("verifySuccessFully", verifySuccessFully?.data?.status);
-        if (verifySuccessFully?.data?.status === 200) {
-          setTimeout(() => {
-            navigate("/super-admin");
-          }, 1000);
-        }
+        console.log("verifySuccessFully", verifySuccessFully);
+        navigate("/super-admin");
+        // if (verifySuccessFully?.data?.status === 200) {
+        //   navigate("/super-admin");
+        // setTimeout(() => {
+        //   navigate("/super-admin");
+        // }, 1000);
+        // }
         resetForm();
       },
     });

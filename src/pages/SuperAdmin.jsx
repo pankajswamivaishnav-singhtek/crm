@@ -8,7 +8,6 @@ import "../styles/superAdmin.css";
 
 // Controller Methods
 import {
-  getAllUsersMadeByAdmin,
   getTotalLeadsInSuperAdmin,
   getTotalRoles,
 } from "../controller/fetchApi";
@@ -16,17 +15,6 @@ import {
 const userIdTokenData = JSON.parse(localStorage.getItem("user"));
 const tokenId = userIdTokenData?.data?.token;
 const SuperAdmin = () => {
-  //  Get All Users Api
-  const [getAllUsers, setAlluser] = useState();
-  const getAllUser = useCallback(async () => {
-    try {
-      const result = await getAllUsersMadeByAdmin(tokenId);
-      setAlluser(result);
-    } catch (error) {
-      console.log("Not Get All Users", error);
-    }
-  }, [setAlluser]);
-
   // Get Total Leads
   const [totalLeads, setTotalLeads] = useState();
   const getTotalLeads = async () => {
@@ -50,15 +38,14 @@ const SuperAdmin = () => {
   };
 
   useEffect(() => {
-    getAllUser();
     getTotalLeads();
     getAllRoles();
-  }, [getAllUser]);
-  console.log("get all users", getAllUsers);
+  }, []);
+
   return (
     <div className="super_admin_div p-3">
       <SuperAdminSection1 totalLeads={totalLeads} allRoles={allRoles} />
-      <SuperAdminSection2 getAllUsers={getAllUsers} />
+      <SuperAdminSection2 />
     </div>
   );
 };

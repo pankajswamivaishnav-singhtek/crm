@@ -76,7 +76,8 @@ const DashboardSection3 = () => {
             <Loader2 />
           ) : (
             <tbody className="dashboard_section1_tableBody">
-              {monthlyClosingDealsData && monthlyClosingDealsData.length > 0 ? (
+              {Array.isArray(monthlyClosingDealsData) &&
+              monthlyClosingDealsData.length > 0 ? (
                 monthlyClosingDealsData.map((meeting, index) => (
                   <tr key={index}>
                     <td>{meeting.dealOwner}</td>

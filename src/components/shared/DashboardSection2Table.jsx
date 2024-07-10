@@ -77,15 +77,15 @@ const DashboardSection2Table = () => {
             <Loader2 />
           ) : (
             <tbody className="dashboard_section1_tableBody">
-              {monthlyTaskData && monthlyTaskData?.length > 0 ? (
+              {Array.isArray(monthlyTaskData) && monthlyTaskData?.length > 0 ? (
                 monthlyTaskData?.map((deal, index) => (
                   <tr key={index}>
-                    <td>{deal.contact}</td>
-                    <td>{deal.subject}</td>
-                    <td>{deal.priority}</td>
-                    <td>{deal.dueDate}</td>
-                    <td className={getStatusClassName(deal.status)}>
-                      {deal.status}
+                    <td>{deal?.contact}</td>
+                    <td>{deal?.subject}</td>
+                    <td>{deal?.priority}</td>
+                    <td>{deal?.dueDate}</td>
+                    <td className={getStatusClassName(deal?.status)}>
+                      {deal?.status}
                     </td>
                   </tr>
                 ))

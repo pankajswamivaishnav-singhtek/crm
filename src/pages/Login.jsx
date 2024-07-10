@@ -59,7 +59,17 @@ const Login = () => {
     validationSchema: loginFormSchema,
     onSubmit: async (values, { resetForm }) => {
       const loginSuccessFully = await loginUser(values, setShowToast);
-      if (loginSuccessFully.data.status === 200) {
+      console.log(
+        "Login Successfully",
+        loginSuccessFully?.data?.data?.roleAndPermissions?.roles[0]?.role
+      );
+      if (
+        loginSuccessFully.data.status === 200 &&
+        loginSuccessFully?.data?.data?.roleAndPermissions?.roles[0]?.role ===
+          "SUPERADMIN"
+      ) {
+        navigate("/super-admin");
+      } else {
         navigate("/dashboard");
       }
       resetForm();
@@ -223,7 +233,7 @@ const Login = () => {
                   />
                 </div> */}
                 {/* Don't Have a account */}
-                <div>
+                {/* <div>
                   <p className="signup_already_have_account_text">
                     Don't have an account? &nbsp;
                     <span>
@@ -235,7 +245,7 @@ const Login = () => {
                       </Link>
                     </span>
                   </p>
-                </div>
+                </div> */}
               </form>
               {/* Toast */}
               {showToast.message && (
