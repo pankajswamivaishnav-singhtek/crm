@@ -241,23 +241,26 @@ const CreateMeeting = () => {
               id="participantsCollapse"
               className="collapse create_meeting_collapseDiv"
             >
-              {getAllContactData?.map((option) => (
-                <div key={option.id} className="form-check">
-                  <input
-                    type="checkbox"
-                    id={option.id}
-                    className="form-check-input"
-                    value={option.companyEmail}
-                    // checked={values.participants.includes(option.id)}
-                    // onChange={() => handleCheckboxToggle(option.id)}
-                    checked={values.participants.includes(option.companyEmail)}
-                    onChange={() => handleCheckboxToggle(option.companyEmail)}
-                  />
-                  <label htmlFor={option.value} className="form-check-label">
-                    {option.companyName}
-                  </label>
-                </div>
-              ))}
+              {Array.isArray(getAllContactData) &&
+                getAllContactData?.map((option) => (
+                  <div key={option.id} className="form-check">
+                    <input
+                      type="checkbox"
+                      id={option.id}
+                      className="form-check-input"
+                      value={option.companyEmail}
+                      // checked={values.participants.includes(option.id)}
+                      // onChange={() => handleCheckboxToggle(option.id)}
+                      checked={values.participants.includes(
+                        option.companyEmail
+                      )}
+                      onChange={() => handleCheckboxToggle(option.companyEmail)}
+                    />
+                    <label htmlFor={option.value} className="form-check-label">
+                      {option.companyName}
+                    </label>
+                  </div>
+                ))}
             </div>
           </div>
         </div>

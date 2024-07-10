@@ -497,7 +497,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                   />
                 </div>
                 <div className="modal-body">
-                  <AssignLeads />
+                  <AssignLeads getLeadsData={getLeadsData} />
                 </div>
                 <div className="modal-footer">
                   <button

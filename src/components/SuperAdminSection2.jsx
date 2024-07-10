@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
 // React Icons
 import { FaRegEye } from "react-icons/fa";
 import { TiUserDelete } from "react-icons/ti";
@@ -79,7 +80,9 @@ const SuperAdminSection2 = () => {
                     <td>{user?.role || "Not Assigned"}</td>
                     <td>{user?.id}</td>
                     <td className="text-center">
-                      <FaRegEye className="fs-3 super_admin_section2_table_icon" />
+                      <Link to="/dashboard" state={{ userId: user?.id }}>
+                        <FaRegEye className="fs-3 super_admin_section2_table_icon" />
+                      </Link>
                     </td>
                     <td className="text-center">
                       <TiUserDelete

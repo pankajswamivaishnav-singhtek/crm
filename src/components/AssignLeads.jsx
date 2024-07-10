@@ -4,7 +4,7 @@ import "../styles/dashboardCss/assignLeads.css";
 // Import Shared Components Tables
 import { getAllUsersMadeByAdmin } from "../controller/fetchApi";
 import AssignLeadTableAdmin from "./shared/AssignLeadTableAdmin";
-const AssignLeads = () => {
+const AssignLeads = ({getLeadsData}) => {
   // TokenId
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
@@ -36,6 +36,7 @@ const AssignLeads = () => {
         getAllAdminsData={getAllAdminsData}
         adminId={adminId}
         setAdminId={setAdminId}
+        getLeadsData={getLeadsData}
       />
     </div>
   );

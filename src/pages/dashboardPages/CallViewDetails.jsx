@@ -36,7 +36,7 @@ const CallViewDetails = () => {
                         Call To
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callTo}
+                        {getSingleScheduleCallData?.callTo}
                       </td>
                     </tr>
                   </tbody>
@@ -53,7 +53,7 @@ const CallViewDetails = () => {
                         Related To
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.relatedTo}
+                        {getSingleScheduleCallData?.relatedTo}
                       </td>
                     </tr>
                   </tbody>
@@ -70,7 +70,7 @@ const CallViewDetails = () => {
                         Call Type
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callType}
+                        {getSingleScheduleCallData?.callType}
                       </td>
                     </tr>
                   </tbody>
@@ -87,7 +87,7 @@ const CallViewDetails = () => {
                         Call Status
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callStatus}
+                        {getSingleScheduleCallData?.callStatus}
                       </td>
                     </tr>
                   </tbody>
@@ -104,7 +104,7 @@ const CallViewDetails = () => {
                         Call Start Time
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callStartTime}
+                        {getSingleScheduleCallData?.callStartTime}
                       </td>
                     </tr>
                   </tbody>
@@ -121,7 +121,7 @@ const CallViewDetails = () => {
                         Call Owner
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callOwner}
+                        {getSingleScheduleCallData?.callOwner}
                       </td>
                     </tr>
                   </tbody>
@@ -138,7 +138,7 @@ const CallViewDetails = () => {
                         Subject
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.subject}
+                        {getSingleScheduleCallData?.subject}
                       </td>
                     </tr>
                   </tbody>
@@ -155,7 +155,7 @@ const CallViewDetails = () => {
                         reminder
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.reminder}
+                        {getSingleScheduleCallData?.reminder}
                       </td>
                     </tr>
                   </tbody>
@@ -186,7 +186,7 @@ const CallViewDetails = () => {
                         Call Purpose
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callPurpose}
+                        {getSingleScheduleCallData?.callPurpose}
                       </td>
                     </tr>
                   </tbody>
@@ -203,7 +203,7 @@ const CallViewDetails = () => {
                         Call Agenda
                       </th>
                       <td className="lead_view_details_table_td">
-                        {getSingleScheduleCallData.callAgenda}
+                        {getSingleScheduleCallData?.callAgenda}
                       </td>
                     </tr>
                   </tbody>

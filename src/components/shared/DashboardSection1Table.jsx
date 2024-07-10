@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
-
+import { useLocation } from "react-router-dom";
 // Controller Api's --js data
 import { monthlyMeetings } from "../../controller/fetchApi";
 import Loader2 from "../../pages/Loader2";
 // Token
 const DashboardSection1Table = () => {
+  // Get Specific User Id who see the dashboard
+  const location = useLocation();
+  const userId = location.state?.userId;
+  console.log("userId: " + userId);
+
   const [loading, setLoading] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
+  console.log("token1", tokenId);
   const [monthlyMeetingsData, setMonthlyMeetingsData] = useState([]);
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const result = await monthlyMeetings(uid, tokenId);
+        console.log("token2", tokenId);
+        const result = await monthlyMeetings(userId, tokenId);
         if (result === null || result === undefined) {
           setMonthlyMeetingsData();
           setLoading(false);
@@ -28,7 +34,7 @@ const DashboardSection1Table = () => {
         setLoading(false);
       }
     })();
-  }, [uid, tokenId]);
+  }, [tokenId]);
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
       <div className="row dashboard_table_main_heading">

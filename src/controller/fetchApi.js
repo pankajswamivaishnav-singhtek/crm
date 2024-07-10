@@ -550,12 +550,21 @@ export const getSingleUserPermission = async (userId, tokenId) => {
 // Meeting This Month Get Api
 export const monthlyMeetings = async (uid, tokenId) => {
   try {
+    console.log("tokenId sss", tokenId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
     };
-    const response = await axios.get(MONHTLY_MEETINGS_URL + uid, config);
+    let response;
+    if (uid) {
+      response = await axios.get(
+        `${MONHTLY_MEETINGS_URL}?userId=` + uid,
+        config
+      );
+    } else {
+      response = await axios.get(MONHTLY_MEETINGS_URL, config);
+    }
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -916,7 +925,7 @@ export const uploadLeads = async (file, setShowToast, tokenId) => {
 };
 
 // Assign Leads Api
-export const assignLeads = async (tokenId, userId, leadId) => {
+export const assignLeads = async (tokenId, userId, leadId, setShowToast) => {
   try {
     console.log(
       `tokenId in api : ${tokenId} , adminId : ${userId}, leadCostumerId : ${leadId}`
@@ -933,7 +942,11 @@ export const assignLeads = async (tokenId, userId, leadId) => {
       }
     );
     console.log("assign leads response: ", response);
-    return response;
+    if (response?.data?.status === 200) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Leads Assign Successfully." });
+      return response;
+    }
   } catch (error) {
     console.log(error);
     const message = error.response.data;

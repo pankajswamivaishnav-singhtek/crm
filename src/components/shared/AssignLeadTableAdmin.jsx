@@ -6,16 +6,30 @@ const AssignLeadTableAdmin = ({
   getAllAdminsData,
   adminId,
   setAdminId,
+  getLeadsData,
 }) => {
+  // Start Toast Code-------
+  const [showToast, setShowToast] = useState({ success: false, message: "" });
+  const hideToast = () => {
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
+
+  if (showToast) {
+    hideToast();
+  }
   const { leadCostumerId } = useContext(leadIdContext) || [];
   const [isMasterChecked, setIsMasterChecked] = useState(false);
   // Handle Single Check Box For Single Updateion And Id get and send Start ------
   const handleCheckboxChange = (assignUserId) => {
     const isSelected = adminId.includes(assignUserId);
+    console.log(
+      `isSelected = ${isSelected}, assignUserId = ${assignUserId}, adminId = ${adminId}`
+    );
     if (isSelected) {
       setAdminId(adminId.filter((id) => id !== assignUserId));
     } else {
-      console.log("else mein hai error", assignUserId);
       setAdminId([...adminId, assignUserId]);
     }
   };
@@ -46,12 +60,17 @@ const AssignLeadTableAdmin = ({
   // Send Assign Leads data
   const handleAssignLeads = async () => {
     try {
-      console.log(
-        `tokenId : ${tokenId} , adminId : ${adminId}, leadCostumerId : ${leadCostumerId}`
+      const result = await assignLeads(
+        tokenId,
+        adminId,
+        leadCostumerId,
+        setShowToast
       );
-      const result = await assignLeads(tokenId, adminId, leadCostumerId);
+      getLeadsData();
       console.log("result: " + result);
-    } catch (error) {}
+    } catch (error) {
+      console.log("Found Error On Assign Lead Table", error);
+    }
   };
   return (
     <div className="container-fluid ">
@@ -158,6 +177,27 @@ const AssignLeadTableAdmin = ({
           </button>
         </div>
       </div>
+      {/* Toast */}
+      {showToast.message && (
+        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
+          <div
+            className="toast show create_lead_toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header create_lead_toast_header">
+              <strong className="me-auto">Form Submitted Successfully</strong>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowToast({ success: false, message: "" })}
+              />
+            </div>
+            <div className="toast-body">{showToast.message}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

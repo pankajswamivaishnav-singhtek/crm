@@ -29,7 +29,7 @@ export const GET_TOTAL_ROLES_URL = `${BASE_URL}/super/getTotalRoles`;
 export const SINGLE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/getAllRoleModuleAndPermission?userId=`;
 export const UPDATE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/updateRoleModulePermission?userId=`;
 // Dashboard configuration Api
-export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth?userId=`;
+export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth`;
 export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
 export const MONTHLY_CLOSING_DEALS_URL = `${BASE_URL}/deals/dealClosingThisMonth?userId=`;
 export const PIPELINE_DEALS_URL = `${BASE_URL}/deals/countOfDealByStage?userId=`;
