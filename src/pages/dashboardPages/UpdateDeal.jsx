@@ -92,7 +92,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="dealOwner"
               className="form-control create_lead_form_input"
-              value={formik.values.dealOwner}
+              value={formik.values.dealOwner || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="dealOwner"
@@ -109,7 +109,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="dealName"
               className="form-control create_lead_form_input"
-              value={formik.values.dealName}
+              value={formik.values.dealName || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="dealName"
@@ -126,7 +126,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="amount"
               className="form-control create_lead_form_input"
-              value={formik.values.amount}
+              value={formik.values.amount || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="amount"
@@ -143,14 +143,14 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="date"
               id="closingDate"
               className="form-control create_lead_form_input"
-              value={formik.values.closingDate}
+              value={formik.values.closingDate || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="closingDate"
             />
             {formik.touched.closingDate && formik.errors.closingDate && (
               <small className="errorMessage">
-                {formik.errors.closingDate}
+                {formik.errors.closingDate || ""}
               </small>
             )}
           </div>
@@ -160,7 +160,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="accountName"
               className="form-control create_lead_form_input"
-              value={formik.values.accountName}
+              value={formik.values.accountName || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="accountName"
@@ -178,7 +178,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="stage"
               className="form-control"
-              value={formik.values.stage}
+              value={formik.values.stage || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="stage"
@@ -214,7 +214,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="type"
               className="form-control"
-              value={formik.values.type}
+              value={formik.values.type || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="type"
@@ -241,7 +241,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="nextStep"
               className="form-control create_lead_form_input"
-              value={formik.values.nextStep}
+              value={formik.values.nextStep || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="nextStep"
@@ -258,7 +258,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="expectedRevenue"
               className="form-control create_lead_form_input"
-              value={formik.values.expectedRevenue}
+              value={formik.values.expectedRevenue || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="expectedRevenue"
@@ -277,7 +277,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="leadSource"
               className="form-control"
-              value={formik.values.leadSource}
+              value={formik.values.leadSource || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="leadSource"
@@ -307,7 +307,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="campaignSource"
               className="form-control create_lead_form_input"
-              value={formik.values.campaignSource}
+              value={formik.values.campaignSource || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="campaignSource"
@@ -326,7 +326,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="contactName"
               className="form-control create_lead_form_input"
-              value={formik.values.contactName}
+              value={formik.values.contactName || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="contactName"
@@ -347,7 +347,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="leadId"
               className="form-control create_lead_form_input"
-              value={formik.values.leadId}
+              value={formik.values.leadId || ""}
               onChange={formik.handleChange}
               onFocus={formik.handleFocus}
               onBlur={formik.handleBlur}
@@ -375,7 +375,7 @@ const UpdateDeal = ({ dealCostumerId, defaultValue, onUpdateSuccess }) => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={formik.values.description}
+              value={formik.values.description || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="description"

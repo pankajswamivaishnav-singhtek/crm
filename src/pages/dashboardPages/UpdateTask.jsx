@@ -85,7 +85,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="taskOwner"
               className="form-control create_lead_form_input"
-              value={formik.values.taskOwner}
+              value={formik.values.taskOwner || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="taskOwner"
@@ -103,7 +103,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="taskSubject"
               className="form-control create_lead_form_input"
-              value={formik.values.taskSubject}
+              value={formik.values.taskSubject || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="taskSubject"
@@ -121,7 +121,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
               type="date"
               id="dueDate"
               className="form-control create_lead_form_input"
-              value={formik.values.dueDate}
+              value={formik.values.dueDate || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="dueDate"
@@ -138,7 +138,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="contact"
               className="form-control create_lead_form_input"
-              value={formik.values.contact}
+              value={formik.values.contact || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="contact"
@@ -155,7 +155,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="accountType"
               className="form-control"
-              value={formik.values.accountType}
+              value={formik.values.accountType || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="accountType"
@@ -179,7 +179,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="status"
               className="form-control"
-              value={formik.values.status}
+              value={formik.values.status || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="status"
@@ -204,7 +204,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="priority"
               className="form-control"
-              value={formik.values.priority}
+              value={formik.values.priority || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="priority"
@@ -230,7 +230,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="leadId"
               className="form-control create_lead_form_input"
-              value={formik.values.leadId}
+              value={formik.values.leadId || ""}
               onChange={formik.handleChange}
               onFocus={formik.handleFocus}
               onBlur={formik.handleBlur}
@@ -267,7 +267,7 @@ const UpdateTask = ({ taskCostumerId, defaultValue, onUpdateSuccess }) => {
                     type="datetime-local"
                     id="reminderDateTime"
                     name="reminderDateTime"
-                    value={formik.values.dateTime}
+                    value={formik.values.dateTime || ""}
                     // onChange={(e) => setDateTime(e.target.value)}
                     onChange={formik.handleChange}
                     // value={reminderTime}

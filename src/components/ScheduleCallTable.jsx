@@ -61,7 +61,7 @@ const ScheduleCallTable = ({
                       id="cbx-29"
                       defaultValue=""
                       type="checkbox"
-                      onClick={handleMasterCheckboxChange}
+                      onChange={handleMasterCheckboxChange}
                       checked={isMasterChecked}
                       // onChange={handleMasterCheckboxChange}
                     />

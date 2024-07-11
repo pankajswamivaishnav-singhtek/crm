@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 // Controller Methods
 import { monthlyClosingDeals } from "../controller/fetchApi";
 import Loader2 from "../pages/Loader2";
 const DashboardSection3 = () => {
+  // Get Specific User Id who see the dashboard
+  const location = useLocation();
+  const userId = location.state?.userId;
   const [loading, setLoading] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   const [monthlyClosingDealsData, setMonthlyClosingDealsData] = useState([]);
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const result = await monthlyClosingDeals(uid, tokenId);
+        const result = await monthlyClosingDeals(userId, tokenId);
         if (result === null || result === undefined) {
           setMonthlyClosingDealsData();
           setLoading(false);
@@ -29,7 +32,7 @@ const DashboardSection3 = () => {
     // monthlyMeetings(uid, tokenId).then((res) => {
     //   setMonthlyMeetingsData(res);
     // });
-  }, [uid, tokenId]);
+  }, [userId, tokenId]);
 
   // Function to return the class name based on Stage
   const getStatusClassName = (stage) => {

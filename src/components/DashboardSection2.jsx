@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // Shared Component
 import DashboardSection2Table from "./shared/DashboardSection2Table";
-
+import { useLocation } from "react-router-dom";
 // Chart
 import DonutChart from "./shared/DonutChart";
 
@@ -9,16 +9,18 @@ import DonutChart from "./shared/DonutChart";
 import { pipelineDeals } from "../controller/fetchApi";
 import Loader2 from "../pages/Loader2";
 const DashboardSection2 = () => {
+  // Get Specific User Id who see the dashboard
+  const location = useLocation();
+  const userId = location.state?.userId;
   const [loading, setLoading] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   const [pipelineDealsData, setPipelineDealsData] = useState([]);
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const result = await pipelineDeals(uid, tokenId);
+        const result = await pipelineDeals(userId, tokenId);
         if (result === null || result === undefined) {
           setPipelineDealsData();
           setLoading(false);
@@ -32,7 +34,7 @@ const DashboardSection2 = () => {
         setLoading(false);
       }
     })();
-  }, [uid, tokenId]);
+  }, [userId, tokenId]);
   return (
     <div className="row dashboard_row1">
       {/* Dashboard Section 2 table */}

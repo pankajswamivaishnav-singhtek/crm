@@ -9,7 +9,8 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 import LogCallTable from "../../components/LogCallTable";
-
+// Import Toast
+import Toast from "../../components/Toast";
 // Import api function from controller
 import {
   getAllLogCall,
@@ -22,15 +23,6 @@ import UpdateLogCall from "./UpdateLogCall";
 const CallLogs = () => {
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-
-  if (showToast) {
-    hideToast();
-  }
 
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
@@ -105,7 +97,10 @@ const CallLogs = () => {
   };
   const handleUpdateSuccess = async () => {
     try {
+      console.log("get log call dta function");
       await getLogCallData();
+      await getLogCallData();
+      console.log("again call");
     } catch (error) {
       console.log("Error fetching updated data", error);
     }
@@ -166,41 +161,41 @@ const CallLogs = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#updateLogCallModal"
                   >
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleUpdateLogCall()}
                     >
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDeleteLogCall(logCallCostumerId)}
                     >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       data-bs-toggle="modal"
                       data-bs-target="#fileUploadModal"
                     >
                       <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
                       Upload Calls
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDownloadLogCalls()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Calls
-                    </button>
+                    </span>
                   </li>
                 </ul>
               </button>
@@ -410,27 +405,7 @@ const CallLogs = () => {
             </div>
           </div>
         </>
-        {/* Toast */}
-        {showToast.message && (
-          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-            <div
-              className="toast show create_lead_toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div className="toast-header create_lead_toast_header">
-                <strong className="me-auto">Form Submitted Successfully</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowToast({ success: false, message: "" })}
-                />
-              </div>
-              <div className="toast-body">{showToast.message}</div>
-            </div>
-          </div>
-        )}
+        <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>
   );

@@ -19,7 +19,6 @@ const FilterSidebar = ({ setFilterData }) => {
         rejected: savedFilter.rejected || false,
       },
       onSubmit: async (values, { resetForm }) => {
-        console.log("filter Value on submit", values);
         setFilterData(values);
         // resetForm();
       },

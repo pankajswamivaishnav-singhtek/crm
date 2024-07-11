@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-
+import { useLocation } from "react-router-dom";
 // Controller Api's --js data
 import { monthlyTask } from "../../controller/fetchApi";
 import Loader2 from "../../pages/Loader2";
 const DashboardSection2Table = () => {
+  // Get Specific User Id who see the dashboard
+  const location = useLocation();
+  const userId = location.state?.userId;
   const [loading, setLoading] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
-  const uid = userIdTokenData?.data?.userId;
   const tokenId = userIdTokenData?.data?.token;
   const [monthlyTaskData, setMonthlyTaskData] = useState([]);
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const result = await monthlyTask(uid, tokenId);
+        const result = await monthlyTask(userId, tokenId);
         if (result === null || result === undefined) {
           setMonthlyTaskData();
           setLoading(false);
@@ -30,7 +32,7 @@ const DashboardSection2Table = () => {
     // monthlyMeetings(uid, tokenId).then((res) => {
     //   setMonthlyMeetingsData(res);
     // });
-  }, [uid, tokenId]);
+  }, [userId, tokenId]);
   // useEffect(() => {
   //   monthlyTask(uid, tokenId).then((res) => {
   //     setMonthlyTaskData(res);

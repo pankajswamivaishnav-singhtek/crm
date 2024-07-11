@@ -9,6 +9,8 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaTreeCity } from "react-icons/fa6";
 // Schema
 import { DealFormSchema } from "../../schema/FormValidation";
+// Import Toast
+import Toast from "../../components/Toast";
 // Import api function from controller
 import { createDeal, dealStagesDropdowns } from "../../controller/fetchApi";
 const CreateDeal = () => {
@@ -425,27 +427,7 @@ const CreateDeal = () => {
           </button>
         </div>
       </form>
-      {/* Toast */}
-      {showToast && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-          <div
-            className="toast show create_lead_toast"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header create_lead_toast_header">
-              <strong className="me-auto">Form Submitted Successfully</strong>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => setShowToast({ success: false, message: "" })}
-              />
-            </div>
-            <div className="toast-body">{showToast.message}</div>
-          </div>
-        </div>
-      )}
+      <Toast showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 };

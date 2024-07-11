@@ -125,7 +125,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="host"
               className="form-control create_lead_form_input"
-              value={formik.values.host}
+              value={formik.values.host || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="host"
@@ -143,7 +143,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="title"
               className="form-control create_lead_form_input"
-              value={formik.values.title}
+              value={formik.values.title || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="title"
@@ -161,7 +161,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="address"
               className="form-control create_lead_form_input"
-              value={formik.values.address}
+              value={formik.values.address || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="address"
@@ -205,7 +205,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
               id="date"
               min={currentDate}
               className="form-control create_lead_form_input"
-              value={formik.values.date}
+              value={formik.values.date || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               onFocus={formik.handleFocus}
@@ -223,7 +223,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="leadId"
               className="form-control create_lead_form_input"
-              value={formik.values.leadId}
+              value={formik.values.leadId || ""}
               onChange={formik.handleChange}
               onFocus={formik.handleFocus}
               onBlur={formik.handleBlur}
@@ -255,7 +255,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
                     type="checkbox"
                     id={option.id}
                     className="form-check-input"
-                    value={option.companyEmail}
+                    value={option.companyEmail || ""}
                     // checked={formik.values.participants.includes(option.id)}
                     // onChange={() => handleCheckboxToggle(option.id)}
                     checked={formik?.values?.participants?.includes(
@@ -264,7 +264,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
                     onChange={() => handleCheckboxToggle(option.companyEmail)}
                   />
                   <label htmlFor={option.value} className="form-check-label">
-                    {option.companyName}
+                    {option.companyName || ""}
                   </label>
                 </div>
               ))}
@@ -283,7 +283,7 @@ const UpdateMeeting = ({ meetCostumerId, defaultValue, onUpdateSuccess }) => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={formik.values.description}
+              value={formik.values.description || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="description"

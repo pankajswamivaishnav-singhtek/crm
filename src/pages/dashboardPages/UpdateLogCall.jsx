@@ -84,7 +84,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="callTo"
               className="form-control"
-              value={formik.values.callTo}
+              value={formik.values.callTo || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callTo"
@@ -106,7 +106,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="relatedTo"
               className="form-control"
-              value={formik.values.relatedTo}
+              value={formik.values.relatedTo || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="relatedTo"
@@ -136,7 +136,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="callType"
               className="form-control"
-              value={formik.values.callType}
+              value={formik.values.callType || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callType"
@@ -148,9 +148,9 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
                   "Call type "
                 )}
               </option>
-              <option value="account">outbound</option>
-              <option value="deal">inbound</option>
-              <option value="project">missed</option>
+              <option value="outbound">outbound</option>
+              <option value="inbound">inbound</option>
+              <option value="missed">missed</option>
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
@@ -160,7 +160,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="callStatus"
               className="form-control create_lead_form_input"
-              value={formik.values.callStatus}
+              value={formik.values.callStatus || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callStatus"
@@ -178,7 +178,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               type="datetime-local"
               id="callStartTime"
               className="form-control create_lead_form_input"
-              value={formik.values.callStartTime}
+              value={formik.values.callStartTime || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callStartTime"
@@ -195,7 +195,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="callDuration"
               className="form-control create_lead_form_input"
-              value={formik.values.callDuration}
+              value={formik.values.callDuration || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callDuration"
@@ -213,7 +213,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               type="subject"
               id="subject"
               className="form-control create_lead_form_input"
-              value={formik.values.subject}
+              value={formik.values.subject || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="subject"
@@ -233,7 +233,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               type="tel"
               id="leadId"
               className="form-control create_lead_form_input"
-              value={formik.values.leadId}
+              value={formik.values.leadId || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="leadId"
@@ -255,7 +255,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="callPurpose"
               className="form-control"
-              value={formik.values.callPurpose}
+              value={formik.values.callPurpose || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callPurpose"
@@ -282,7 +282,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
               type="text"
               id="callAgenda"
               className="form-control create_lead_form_input"
-              value={formik.values.callAgenda}
+              value={formik.values.callAgenda || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callAgenda"
@@ -299,7 +299,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
             <select
               id="callResult"
               className="form-control"
-              value={formik.values.callResult}
+              value={formik.values.callResult || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="callResult"
@@ -333,7 +333,7 @@ const UpdateLogCall = ({ logCostumerId, defaultValue, onUpdateSuccess }) => {
             <textarea
               id="description"
               className="form-control create_lead_form_input"
-              value={formik.values.description}
+              value={formik.values.description || ""}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="description"

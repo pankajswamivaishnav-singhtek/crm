@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
+// import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // Shared
 import ReportLineChart2 from "./shared/ReportLineChart2";
-const ReportDealSection = ({ getDealsDoneData, setDealBy }) => {
-  const [selectedValue, setSelectedValue] = useState("month");
-  setDealBy(selectedValue);
+const ReportDealSection = ({ getDealsDoneData, dealBy, setDealBy }) => {
+  // const [selectedValue, setSelectedValue] = useState("month");
+  // setDealBy(selectedValue);
   const handleItemClick = (value) => {
     setDealBy(value);
-    setSelectedValue(value);
+    // setSelectedValue(value);
   };
   const labels =
-    selectedValue === "year"
+    // selectedValue === "year"
+    dealBy === "year"
       ? [2024, 2025, 2026, 2027, 2028, 2029, 2030]
       : [
           "January",
@@ -30,7 +32,8 @@ const ReportDealSection = ({ getDealsDoneData, setDealBy }) => {
   const data = {
     labels: labels,
     datasets:
-      selectedValue === "year"
+      // selectedValue === "year"
+      dealBy === "year"
         ? [
             {
               label: "Total Deals",

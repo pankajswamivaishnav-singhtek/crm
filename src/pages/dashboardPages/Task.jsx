@@ -7,6 +7,8 @@ import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 import TaskTables from "../../components/TaskTables";
 import UpdateTask from "../dashboardPages/UpdateTask";
+// Import Toast
+import Toast from "../../components/Toast";
 // React Router Dom
 import { Link } from "react-router-dom";
 // Controller Method Api
@@ -163,7 +165,7 @@ const Task = () => {
                   aria-labelledby="editDeleteDropdown"
                 >
                   <li data-bs-toggle="modal" data-bs-target="#updateTaskModal">
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => {
                         handleUpdateTask();
@@ -171,31 +173,31 @@ const Task = () => {
                     >
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDeleteTask(taskCostumerId)}
                     >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
-                    </button>
+                    </span>
                   </li>
                   <li data-bs-toggle="modal" data-bs-target="#fileUploadModal">
-                    <button className="dropdown-item">
+                    <span className="dropdown-item">
                       <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
                       Upload Task
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDownloadTasks()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Task
-                    </button>
+                    </span>
                   </li>
                 </ul>
               </button>
@@ -221,9 +223,9 @@ const Task = () => {
               thirdHead: "Contact",
               fourthHead: "Subject",
               fifthHead: "Status",
-              sixthHead:"View",
-              seventhHead:"Action",
-              eighthHead:"Lead Id"
+              sixthHead: "View",
+              seventhHead: "Action",
+              eighthHead: "Lead Id",
             }}
             redirectLink="/task-details"
             getAllTaskData={getAllTaskData}
@@ -382,27 +384,7 @@ const Task = () => {
             </div>
           </div>
         </>
-        {/* Toast */}
-        {showToast.message && (
-          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-            <div
-              className="toast show create_lead_toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div className="toast-header create_lead_toast_header">
-                <strong className="me-auto">Form Submitted Successfully</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowToast({ success: false, message: "" })}
-                />
-              </div>
-              <div className="toast-body">{showToast.message}</div>
-            </div>
-          </div>
-        )}
+        <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>
   );

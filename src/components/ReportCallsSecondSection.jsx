@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 // Shared
 import ReportCallPieChart from "./shared/ReportCallPieChart";
-const ReportCallsSecondSection = ({ getCallsDoneData, setCallBy }) => {
-  const [selectedValue, setSelectedValue] = useState("month");
+const ReportCallsSecondSection = ({ getCallsDoneData, callBy, setCallBy }) => {
+  // const [selectedValue, setSelectedValue] = useState("month");
 
-  setCallBy(selectedValue);
+  // setCallBy(selectedValue);
   const handleItemClick = (value) => {
-    setSelectedValue(value);
+    setCallBy(value);
+    // setSelectedValue(value);
   };
 
   const data = {
@@ -23,7 +24,8 @@ const ReportCallsSecondSection = ({ getCallsDoneData, setCallBy }) => {
       {
         label: "My Call Data",
         data:
-          selectedValue === "year"
+          // selectedValue === "year"
+          callBy === "year"
             ? [
                 getCallsDoneData?.["not-interested"] || 0,
                 getCallsDoneData?.["requested-info"] || 0,

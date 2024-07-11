@@ -13,21 +13,15 @@ import { accountFormSchema } from "../../schema/FormValidation";
 import { FaTreeCity } from "react-icons/fa6";
 // Controller Api Methods
 import { createAccount } from "../../controller/fetchApi";
+// Import Toast
+import Toast from "../../components/Toast";
 const CreateAccount = () => {
   // Get Lead Id
   const location = useLocation();
   const leadId = location.state?.leadId;
   // Toast
   const [showToast, setShowToast] = useState(false);
-  // Function to hide the toast after 3 seconds
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-  if (showToast) {
-    hideToast();
-  }
+
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
@@ -665,27 +659,7 @@ const CreateAccount = () => {
             </button>
           </div>
         </form>
-        {/* Toast */}
-        {showToast.message && (
-          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-            <div
-              className="toast show create_lead_toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div className="toast-header create_lead_toast_header">
-                <strong className="me-auto">Form Submitted Successfully</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowToast({ success: false, message: "" })}
-                />
-              </div>
-              <div className="toast-body">{showToast.message}</div>
-            </div>
-          </div>
-        )}
+        <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>
   );

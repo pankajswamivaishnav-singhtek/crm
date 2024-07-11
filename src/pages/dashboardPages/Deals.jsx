@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 // Components
 import DealsTable from "../../components/DealsTable";
 import UpdateDeal from "./UpdateDeal";
+// Import Toast
+import Toast from "../../components/Toast";
 // Import api function from controller
 import {
   getAllDeal,
@@ -24,17 +26,8 @@ import {
 const Deals = () => {
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
 
-  if (showToast) {
-    hideToast();
-  }
   const [dealCostumerId, setDealCostumerId] = useState([]);
-
   // Get User details from local storage
   const [pageNo, setPageNo] = useState(0);
   const [getAllDealsData, setAllDealsData] = useState([]);
@@ -97,13 +90,10 @@ const Deals = () => {
   // Handle Upload File start ----
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileChange = (event) => {
-    console.log("Selected ");
     setSelectedFile(event.target.files[0]);
   };
   const handleUploadDeals = async () => {
-    console.log("Start handle leads");
     if (selectedFile) {
-      console.log("file selected: " + selectedFile);
       try {
         await uploadDeals(selectedFile, setShowToast, tokenId);
         if (uploadDeals) {
@@ -166,16 +156,16 @@ const Deals = () => {
                   aria-labelledby="editDeleteDropdown"
                 >
                   <li data-bs-toggle="modal" data-bs-target="#updateDealModal">
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleUpdateDeal()}
                     >
                       <BsPencil className="dashboard_section1_table_editBtn" />
                       Edit
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => {
                         handleDeleteDeals(dealCostumerId);
@@ -183,22 +173,22 @@ const Deals = () => {
                     >
                       <BsTrash className="dashboard_section1_table_deleteBtn" />
                       Delete
-                    </button>
+                    </span>
                   </li>
                   <li data-bs-toggle="modal" data-bs-target="#fileUploadModal">
-                    <button className="dropdown-item">
+                    <span className="dropdown-item">
                       <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
                       Upload Deals
-                    </button>
+                    </span>
                   </li>
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDownloadDeals()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Deals
-                    </button>
+                    </span>
                   </li>
                 </ul>
               </button>
@@ -386,27 +376,7 @@ const Deals = () => {
             </div>
           </div>
         </>
-        {/* Toast */}
-        {showToast.message && (
-          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-            <div
-              className="toast show create_lead_toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div className="toast-header create_lead_toast_header">
-                <strong className="me-auto">Form Submitted Successfully</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowToast({ success: false, message: "" })}
-                />
-              </div>
-              <div className="toast-body">{showToast.message}</div>
-            </div>
-          </div>
-        )}
+        <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>
   );

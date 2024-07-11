@@ -9,6 +9,8 @@ import { TaskFormSchema } from "../../schema/FormValidation";
 import { MdKeyboardArrowDown } from "react-icons/md";
 // CSS
 import "../../styles/dashboardCss/createTask.css";
+// Import Toast
+import Toast from "../../components/Toast";
 // Controller Methods
 import { createTask, taskStatusDropdowns } from "../../controller/fetchApi";
 const CreateTask = () => {
@@ -17,14 +19,7 @@ const CreateTask = () => {
   const leadId = location.state?.leadId;
   // Toast
   const [showToast, setShowToast] = useState(false);
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-  if (showToast) {
-    hideToast();
-  }
+
   // Get TokenId and Uid
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const uid = userIdTokenData?.data?.userId;
@@ -365,27 +360,7 @@ const CreateTask = () => {
           </button>
         </div>
       </form>
-      {/* Toast */}
-      {showToast && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-          <div
-            className="toast show create_lead_toast"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header create_lead_toast_header">
-              <strong className="me-auto">Form Submitted Successfully</strong>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => setShowToast({ success: false, message: "" })}
-              />
-            </div>
-            <div className="toast-body">{showToast.message}</div>
-          </div>
-        </div>
-      )}
+      <Toast showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 };

@@ -110,7 +110,6 @@ import axios from "axios";
 // Signup User Post Api
 export const signupUser = async (userData, setShowToast, tokenId) => {
   try {
-    console.log("signup user", userData);
     const response = await axios.post(
       SIGNUP_USER,
       {
@@ -438,7 +437,6 @@ export const updateRoleModulePermissions = async (
   setShowToast
 ) => {
   try {
-    console.log("forma data hai", formData);
     const response = await axios.put(
       UPDATE_USER_PERMISSION_URL + uid,
       formData,
@@ -535,7 +533,7 @@ export const getSingleUserPermission = async (userId, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("single user permissions", response);
+
     if (response?.status === 200) {
       return response?.data;
     }
@@ -550,7 +548,6 @@ export const getSingleUserPermission = async (userId, tokenId) => {
 // Meeting This Month Get Api
 export const monthlyMeetings = async (uid, tokenId) => {
   try {
-    console.log("tokenId sss", tokenId);
     let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
@@ -586,7 +583,12 @@ export const monthlyTask = async (uid, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     };
-    const response = await axios.get(MONTHLY_TASK_URL + uid, config);
+    let response;
+    if (uid) {
+      response = await axios.get(`${MONTHLY_TASK_URL}?userId=` + uid, config);
+    } else {
+      response = await axios.get(MONTHLY_TASK_URL, config);
+    }
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -623,11 +625,21 @@ export const monthlyClosingDeals = async (uid, tokenId) => {
 // Pipeline Deals Get Api
 export const pipelineDeals = async (uid, tokenId) => {
   try {
-    const response = await axios.get(PIPELINE_DEALS_URL + uid, {
-      headers: {
-        Authorization: `Bearer ${tokenId}`,
-      },
-    });
+    let response;
+    if (uid) {
+      response = await axios.get(`${PIPELINE_DEALS_URL}?userId=` + uid, {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      });
+    } else {
+      response = await axios.get(PIPELINE_DEALS_URL, {
+        headers: {
+          Authorization: `Bearer ${tokenId}`,
+        },
+      });
+    }
+
     const finalResponse = response?.data?.data;
     if (finalResponse) {
       return finalResponse;
@@ -810,7 +822,7 @@ export const deleteLeads = async (leadId, setShowToast, tokenId) => {
       },
     };
     const response = await axios.delete(DELETE_LEADS_URL + [leadId], config);
-    console.log("response deleted", response);
+
     if (response?.data?.status === 200) {
       // Show success message in toast
       setShowToast({ success: true, message: "Delete Successfully." });
@@ -894,7 +906,6 @@ export const downloadLeads = async (setShowToast, tokenId) => {
       // Show success message in toast
       setShowToast({ success: true, message: "Download Successfully." });
     }
-
     // return response;
   } catch (error) {
     const message = error?.response?.data;
@@ -905,7 +916,6 @@ export const downloadLeads = async (setShowToast, tokenId) => {
 // Upload Leads Post Api
 export const uploadLeads = async (file, setShowToast, tokenId) => {
   try {
-    console.log("Enter upload leads");
     const formData = new FormData();
     formData.append("file", file);
     const response = await axios.post(UPLOAD_LEADS_URL, formData, {
@@ -914,7 +924,6 @@ export const uploadLeads = async (file, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("upload success", response);
     if (response) {
       setShowToast({ success: true, message: "Upload Successfully." });
     }
@@ -1495,7 +1504,6 @@ export const getSingleDeal = async (dealId, tokenId) => {
 // Delete Deals Delete Api
 export const deleteDeals = async (dealId, setShowToast, tokenId) => {
   try {
-    console.log("Enter Delete Deals");
     const response = await axios.delete(DELETE_DEALS_URL + [dealId], {
       headers: {
         Authorization: `Bearer ${tokenId}`,
@@ -1564,7 +1572,6 @@ export const downloadDeal = async (setShowToast, tokenId) => {
 // Upload Deal post Api
 export const uploadDeals = async (file, setShowToast, tokenId) => {
   try {
-    console.log("Enter upload leads");
     const formData = new FormData();
     formData.append("file", file);
     const response = await axios.post(UPLOAD_DEAL_URL, formData, {
@@ -1573,7 +1580,6 @@ export const uploadDeals = async (file, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("upload success", response);
     if (response) {
       setShowToast({ success: true, message: "Upload Successfully." });
     }
@@ -2112,7 +2118,6 @@ export const deleteLogCall = async (callId, setShowToast, tokenId) => {
 // Upload Schedule Call
 export const uploadScheduleCalls = async (file, setShowToast, tokenId) => {
   try {
-    console.log("Enter upload leads", file);
     const formData = new FormData();
     formData.append("file", file);
     const response = await axios.post(UPLOAD_SCHEDULE_CALL_URL, formData, {
@@ -2121,7 +2126,6 @@ export const uploadScheduleCalls = async (file, setShowToast, tokenId) => {
         Authorization: `Bearer ${tokenId}`,
       },
     });
-    console.log("upload success", response);
     if (response) {
       setShowToast({ success: true, message: "Upload Successfully." });
     }

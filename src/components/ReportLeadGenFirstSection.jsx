@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ReportLineChart from "./shared/ReportLineChart";
-const ReportLeadGenFirstSection = ({ getGenratedLeadsData, setLeadBy }) => {
-  const [selectedValue, setSelectedValue] = useState("month");
-  setLeadBy(selectedValue);
+const ReportLeadGenFirstSection = ({
+  getGenratedLeadsData,
+  leadBy,
+  setLeadBy,
+}) => {
+  // const [selectedValue, setSelectedValue] = useState("month");
+  // setLeadBy(selectedValue);
   const handleItemClick = (value) => {
     setLeadBy(value);
-    setSelectedValue(value);
+    // setSelectedValue(value);
   };
 
   const labels =
-    selectedValue === "year"
+    // selectedValue === "year"
+    leadBy === "year"
       ? [2024, 2025, 2026, 2027, 2028, 2029, 2030]
       : [
           "January",
@@ -29,7 +34,8 @@ const ReportLeadGenFirstSection = ({ getGenratedLeadsData, setLeadBy }) => {
   const data = {
     labels: labels,
     datasets:
-      selectedValue === "year"
+      // selectedValue === "year"
+      leadBy === "year"
         ? [
             {
               label: "Total Leads",

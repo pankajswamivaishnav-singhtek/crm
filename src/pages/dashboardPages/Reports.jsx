@@ -17,7 +17,7 @@ const Reports = () => {
   const tokenId = userIdTokenData?.data?.token;
   // Get Genrated Leads Data
   const [getGenratedLeadsData, setGenratedLeadsData] = useState();
-  const [leadBy, setLeadBy] = useState();
+  const [leadBy, setLeadBy] = useState("month");
   const allGenratedLeads = useCallback(async () => {
     try {
       const res = await getGenratedLeads(tokenId, leadBy);
@@ -29,7 +29,7 @@ const Reports = () => {
 
   // Get Deals Done Data
   const [getDealsDoneData, setDealsDoneData] = useState();
-  const [dealBy, setDealBy] = useState();
+  const [dealBy, setDealBy] = useState("month");
   const allDealsDone = useCallback(async () => {
     try {
       const res = await getDealsDone(tokenId, dealBy);
@@ -41,7 +41,7 @@ const Reports = () => {
 
   // Get Calls Done Data
   const [getCallsDoneData, setCallsDoneData] = useState();
-  const [callBy, setCallBy] = useState();
+  const [callBy, setCallBy] = useState("month");
   const allCallsDone = useCallback(async () => {
     try {
       const res = await getCallsDone(tokenId, callBy);
@@ -63,6 +63,7 @@ const Reports = () => {
       <div className="account_view_details_Row">
         <ReportLeadGenFirstSection
           getGenratedLeadsData={getGenratedLeadsData}
+          leadBy={leadBy}
           setLeadBy={setLeadBy}
         />
       </div>
@@ -72,11 +73,13 @@ const Reports = () => {
           {/* Left Column Call Chart*/}
           <ReportCallsSecondSection
             getCallsDoneData={getCallsDoneData}
+            callBy={callBy}
             setCallBy={setCallBy}
           />
           {/* Right Column Deals Chart */}
           <ReportDealSection
             getDealsDoneData={getDealsDoneData}
+            dealBy={dealBy}
             setDealBy={setDealBy}
           />
         </div>

@@ -9,7 +9,8 @@ import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
 import ScheduleCallTable from "../../components/ScheduleCallTable";
-
+// Import Toast
+import Toast from "../../components/Toast";
 // Controller Methods
 import {
   getAllScheduleCall,
@@ -22,21 +23,12 @@ import UpdateScheduleCall from "./UpdateScheduleCall";
 const Calls = () => {
   // Start Toast Code -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-
-  if (showToast) {
-    hideToast();
-  }
 
   // Set Contact Costumer Id in main Conntact.jsx
   const [pageNo, setPageNo] = useState(0);
   const [scheduleCallCostumerId, setScheduleCallCostumerId] = useState([]);
   const [getAllScheduleCallData, setAllScheduleCallData] = useState([]);
-   // Get User details from local storage
+  // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const scheduleCallId = JSON.parse(localStorage.getItem("scheduleCallId"));
   const tokenId = userIdTokenData?.data?.token;
@@ -74,13 +66,10 @@ const Calls = () => {
   // Handle Upload File start ----
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileChange = (event) => {
-    console.log("Selected ");
     setSelectedFile(event.target.files[0]);
   };
   const handleUploadScheduleCalls = async () => {
-    console.log("Start handle leads");
     if (selectedFile) {
-      console.log("file selected: " + selectedFile);
       try {
         await uploadScheduleCalls(selectedFile, setShowToast, tokenId);
         getScheduleCallData();
@@ -432,26 +421,7 @@ const Calls = () => {
           </div>
         </>
         {/* Toast */}
-        {showToast.message && (
-          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-            <div
-              className="toast show create_lead_toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div className="toast-header create_lead_toast_header">
-                <strong className="me-auto">Form Submitted Successfully</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowToast({ success: false, message: "" })}
-                />
-              </div>
-              <div className="toast-body">{showToast.message}</div>
-            </div>
-          </div>
-        )}
+        <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>
   );

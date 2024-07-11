@@ -24,7 +24,7 @@ import UpdateLead from "../pages/dashboardPages/UpdateLead";
 import AssignLeads from "./AssignLeads";
 
 const LeadsRightSection = ({ leadCostumerId, filterData }) => {
-  // Start Toast -------
+  // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
     setTimeout(() => {
@@ -35,7 +35,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   if (showToast) {
     hideToast();
   }
-  // Start End   -------
 
   // Set PageNo to getAllLead Api
   const [pageNo, setPageNo] = useState(0);
@@ -119,7 +118,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
       await deleteLeads(leadCostumerId, setShowToast, tokenId);
       if (deleteLeads) {
         getLeadsData();
-        console.log("delete Successfully LeadRightSection", deleteLeads);
       }
     } catch (error) {
       const errorMessage = error.message;
@@ -168,13 +166,10 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   // Handle Upload File start ----
   const [selectedFile, setSelectedFile] = useState(null);
   const handleFileChange = (event) => {
-    console.log("Selected ");
     setSelectedFile(event.target.files[0]);
   };
   const handleUploadLeads = async () => {
-    console.log("Start handle leads");
     if (selectedFile) {
-      console.log("file selected: " + selectedFile);
       try {
         await uploadLeads(selectedFile, setShowToast, tokenId);
         if (uploadLeads) {

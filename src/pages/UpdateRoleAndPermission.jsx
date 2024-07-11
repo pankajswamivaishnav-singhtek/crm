@@ -47,7 +47,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
     setSelectedModulePermissions(initialPermissions);
     setSelectedRoleId(defaultValue?.roles[0]?.id);
   }, [defaultValue]);
-  console.log("initialPermissions", initialPermissions);
+
   // handleRoleChecks
   const [selectedRolesId, setSelectedRoleId] = useState(0);
   const handleRoleChecks = (id) => {
@@ -57,7 +57,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
   const [selectedModulePermissions, setSelectedModulePermissions] = useState(
     {}
   );
-  console.log("setSelectedModulePermissions", selectedModulePermissions);
+
   const handlePermissionChecks = (event, moduleId) => {
     let isSelected = event.target.checked;
     let value = parseInt(event.target.value);
@@ -105,7 +105,6 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
         modulePermissions: modulePermissions,
       };
 
-      console.log("desired format", desiredFormat);
       // Log the desired format as a string
       await updateRoleModulePermissions(
         desiredFormat,

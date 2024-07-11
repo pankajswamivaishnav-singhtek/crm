@@ -30,9 +30,9 @@ export const SINGLE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/getAllR
 export const UPDATE_USER_PERMISSION_URL = `${BASE_URL}/roleAndPermission/updateRoleModulePermission?userId=`;
 // Dashboard configuration Api
 export const MONHTLY_MEETINGS_URL = `${BASE_URL}/meet/byMonth`;
-export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth?userId=`;
-export const MONTHLY_CLOSING_DEALS_URL = `${BASE_URL}/deals/dealClosingThisMonth?userId=`;
-export const PIPELINE_DEALS_URL = `${BASE_URL}/deals/countOfDealByStage?userId=`;
+export const MONTHLY_TASK_URL = `${BASE_URL}/tasks/byMonth`;
+export const MONTHLY_CLOSING_DEALS_URL = `${BASE_URL}/deals/dealClosingThisMonth`;
+export const PIPELINE_DEALS_URL = `${BASE_URL}/deals/countOfDealByStage`;
 export const GET_CURRENT_USER_URL = `${BASE_URL}/dashboard/getCurrentUser`;
 // Leads Configuration Url
 export const CREATE_LEAD_URL = `${BASE_URL}/leadInfo/saveLeadInfo`;

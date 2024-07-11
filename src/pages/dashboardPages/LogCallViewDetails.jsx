@@ -11,6 +11,7 @@ const LogCallViewDetails = () => {
       setSingleLogCallData(res);
     });
   }, [logCallId, tokenId]);
+
   return (
     <div className="container-fluid account_view_details_main_container">
       {/* Log Call Information */}
@@ -20,7 +21,7 @@ const LogCallViewDetails = () => {
         </h3>
         {getSingleLogCallData?.leadId && (
           <p className="mx-2 dashboard_leadView_details_heading_second">
-            Lead Id : LI-{getSingleLogCallData.leadId}
+            Lead Id : LI-{getSingleLogCallData?.leadId}
           </p>
         )}
         <div className="row">
@@ -168,7 +169,7 @@ const LogCallViewDetails = () => {
                         Call Purpose
                       </th>
                       <td className="lead_view_details_table_td">
-                        Singhtek IT Jaipur
+                        {getSingleLogCallData?.callPurpose}
                       </td>
                     </tr>
                   </tbody>
@@ -185,7 +186,7 @@ const LogCallViewDetails = () => {
                         Call Agenda
                       </th>
                       <td className="lead_view_details_table_td">
-                        +917073272146
+                        {getSingleLogCallData?.callAgenda}
                       </td>
                     </tr>
                   </tbody>
@@ -202,7 +203,7 @@ const LogCallViewDetails = () => {
                         Call Result
                       </th>
                       <td className="lead_view_details_table_td">
-                        +917073272146
+                        {getSingleLogCallData?.callResult}
                       </td>
                     </tr>
                   </tbody>

@@ -56,8 +56,8 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   // Get Current Day & Time
   const getCurrentDayMeetings = (meetings) => {
     const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
-    return meetings.filter((meeting) => {
-      const meetingDate = new Date(meeting.date).toISOString().split("T")[0];
+    return meetings?.filter((meeting) => {
+      const meetingDate = new Date(meeting?.date).toISOString().split("T")[0];
       return meetingDate === today;
     });
   };

@@ -8,18 +8,14 @@ const DashboardSection1Table = () => {
   // Get Specific User Id who see the dashboard
   const location = useLocation();
   const userId = location.state?.userId;
-  console.log("userId: " + userId);
-
   const [loading, setLoading] = useState();
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
-  console.log("token1", tokenId);
   const [monthlyMeetingsData, setMonthlyMeetingsData] = useState([]);
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        console.log("token2", tokenId);
         const result = await monthlyMeetings(userId, tokenId);
         if (result === null || result === undefined) {
           setMonthlyMeetingsData();
@@ -34,7 +30,7 @@ const DashboardSection1Table = () => {
         setLoading(false);
       }
     })();
-  }, [tokenId]);
+  }, [userId, tokenId]);
   return (
     <div className="container dashboard_table_mainDiv table-responsive">
       <div className="row dashboard_table_main_heading">
