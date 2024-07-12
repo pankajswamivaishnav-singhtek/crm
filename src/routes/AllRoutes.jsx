@@ -146,7 +146,7 @@ const AllRoutes = () => {
         <Route
           path="/contact"
           element={
-            <ValidateRoute requiredModule="Contact">
+            <ValidateRoute requiredModule="Contacts">
               <Contact loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -173,7 +173,7 @@ const AllRoutes = () => {
         <Route
           path="/accounts"
           element={
-            <ValidateRoute requiredModule="Account">
+            <ValidateRoute requiredModule="Accounts">
               <Accounts loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -200,7 +200,7 @@ const AllRoutes = () => {
         <Route
           path="/tasks"
           element={
-            <ValidateRoute requiredModule="Task">
+            <ValidateRoute requiredModule="Tasks">
               <Task loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -224,7 +224,7 @@ const AllRoutes = () => {
         <Route
           path="/meetings"
           element={
-            <ValidateRoute requiredModule="Meeting">
+            <ValidateRoute requiredModule="Meetings">
               <Meetings loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }
@@ -296,7 +296,7 @@ const AllRoutes = () => {
         <Route
           path="/deals"
           element={
-            <ValidateRoute requiredModule="Deal">
+            <ValidateRoute requiredModule="Deals">
               <Deals loading={loading} setLoading={setLoading} />
             </ValidateRoute>
           }

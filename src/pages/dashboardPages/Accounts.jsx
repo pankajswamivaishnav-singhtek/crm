@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 
 // Import React Icons
 import { MdAdd } from "react-icons/md";
@@ -10,6 +10,8 @@ import AccountTable from "../../components/AccountTable";
 import UpdateAccount from "../dashboardPages/UpdateAccount";
 // Import Toast
 import Toast from "../../components/Toast";
+// Import Permissions Context From app.js
+import permissionContext from "../PermissionsContext";
 // Import api function from controller
 import {
   getAllAccount,
@@ -20,6 +22,8 @@ import {
 // Import Instance from React Router Dom
 import { Link } from "react-router-dom";
 const Accounts = () => {
+  //  Get Account Permission'
+  const { accountsPermission } = useContext(permissionContext);
   // Start Toast Code -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   // Set Account Costumer Id  to send table
@@ -139,35 +143,42 @@ const Accounts = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateAccountModal"
-                  >
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        handleUpdateAccount();
-                      }}
+                  {/* Update Btn */}
+                  {accountsPermission?.includes("Update") ? (
+                    <li
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateAccountModal"
                     >
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => handleDeleteAccount(accountCostumerId)}
-                    >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </button>
-                  </li>
-                  {/* <li>
-                    <button className="dropdown-item">
-                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
-                      Upload Accounts
-                    </button>
-                  </li> */}
+                      <button
+                        className="dropdown-item"
+                        onClick={() => {
+                          handleUpdateAccount();
+                        }}
+                      >
+                        <BsPencil className="dashboard_section1_table_editBtn" />
+                        Edit
+                      </button>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Delete Btn */}
+                  {accountsPermission?.includes("Delete") ? (
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => handleDeleteAccount(accountCostumerId)}
+                      >
+                        <BsTrash className="dashboard_section1_table_deleteBtn" />
+                        Delete
+                      </button>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Download Btn */}
                   <li>
                     <button
                       className="dropdown-item"
@@ -180,19 +191,24 @@ const Accounts = () => {
                 </ul>
               </button>
             </div>
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link
-                  className="dashboard_leads_create_link"
-                  to="/create-account"
-                >
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Account
-                </Link>
-              </button>
-            </div>
+            {/* Create Btn */}
+            {accountsPermission?.includes("Create") ? (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link
+                    className="dashboard_leads_create_link"
+                    to="/create-account"
+                  >
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Account
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* Table Div */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 //Import React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -9,6 +9,8 @@ import MeetingTable from "../../components/MeetingTable";
 import UpdateMeeting from "./UpdateMeeting";
 // Import Toast
 import Toast from "../../components/Toast";
+// Import Context From app.js
+import permissionContext from "../PermissionsContext";
 // Import api function from controller
 import {
   getAllMeetings,
@@ -20,6 +22,8 @@ import {
 // React Router Dom
 import { Link } from "react-router-dom";
 const Meetings = () => {
+  //  Get Meetings Permissions
+  const { meetingsPermission } = useContext(permissionContext);
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
 
@@ -150,60 +154,90 @@ const Meetings = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li data-bs-toggle="modal" data-bs-target="#updateMeetModal">
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleUpdateMeet()}
-                    >
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDeleteMeetings(meetCostumerId)}
-                    >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
+                  {/* Edit Btn */}
+                  {meetingsPermission?.includes("Update") ? (
+                    <li
                       data-bs-toggle="modal"
-                      data-bs-target="#fileUploadModal"
+                      data-bs-target="#updateMeetModal"
                     >
-                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
-                      Upload Meetings
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDownloadMeetings()}
-                    >
-                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
-                      Download Meetings
-                    </span>
-                  </li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleUpdateMeet()}
+                      >
+                        <BsPencil className="dashboard_section1_table_editBtn" />
+                        Edit
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Delete Btn */}
+                  {meetingsPermission?.includes("Delete") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDeleteMeetings(meetCostumerId)}
+                      >
+                        <BsTrash className="dashboard_section1_table_deleteBtn" />
+                        Delete
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Upload Btn */}
+                  {meetingsPermission?.includes("Upload") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#fileUploadModal"
+                      >
+                        <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                        Upload Meetings
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Download Btn */}
+                  {meetingsPermission?.includes("Download") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDownloadMeetings()}
+                      >
+                        <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                        Download Meetings
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </button>
             </div>
-
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link
-                  className="dashboard_leads_create_link"
-                  to="/create-meeting"
-                >
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Meeting
-                </Link>
-              </button>
-            </div>
+            {/* Create Btn */}
+            {meetingsPermission?.includes("Create") ? (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link
+                    className="dashboard_leads_create_link"
+                    to="/create-meeting"
+                  >
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Meeting
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* Table Div */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -10,6 +10,7 @@ import { TbFileDownload } from "react-icons/tb";
 
 // React Router Dom
 import { Link } from "react-router-dom";
+import permissionContext from "../pages/PermissionsContext";
 // Controllers Api Methods
 import {
   getAllLeadByFilter,
@@ -24,6 +25,9 @@ import UpdateLead from "../pages/dashboardPages/UpdateLead";
 import AssignLeads from "./AssignLeads";
 
 const LeadsRightSection = ({ leadCostumerId, filterData }) => {
+  // Get lead permission From app.js
+  const { leadsPermission } = useContext(permissionContext);
+  console.log("lead permission", leadsPermission);
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {
@@ -43,6 +47,66 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
   const [getAllLeadData, setAllLeadsData] = useState([]);
+
+  // // Permissions Get From Local Storage
+  // let leadsPermission;
+  // let contactPermission;
+  // let meetingPermission;
+  // let dealPermission;
+  // let accountPermission;
+  // let callLogPermission;
+  // let scheduleCallPermission;
+  // let taskPermission;
+
+  // const modules = userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
+  // const leadPermissions = modules.find((data) => data.module === "Leads");
+  // const contactPermissions = modules.find((data) => data.module === "Contact");
+  // const meetingPermissions = modules.find((data) => data.module === "Meeting");
+  // const dealPermissions = modules.find((data) => data.module === "Deal");
+  // const accountPermissions = modules.find((data) => data.module === "Account");
+  // const callLogPermissions = modules.find((data) => data.module === "CallLog");
+  // const scheduleCallPermissions = modules.find(
+  //   (data) => data.module === "ScheduleCall"
+  // );
+  // let tasksPermissions = modules.find((data) => data.module === "Task");
+  // leadsPermission = leadPermissions.permissions;
+  // contactPermission = contactPermissions.permissions;
+  // meetingPermission = meetingPermissions.permissions;
+  // dealPermission = dealPermissions.permissions;
+  // accountPermission = accountPermissions.permissions;
+  // callLogPermission = callLogPermissions.permissions;
+  // scheduleCallPermission = scheduleCallPermissions.permissions;
+  // tasksPermissions = tasksPermissions.permissions;
+
+  // Permissions Get From Local Storage
+  // const permissions = {
+  //   leadsPermission: null,
+  //   contactsPermission: null,
+  //   meetingsPermission: null,
+  //   dealsPermission: null,
+  //   accountsPermission: null,
+  //   callsPermission: null,
+  //   tasksPermission: null,
+  // };
+
+  // const modules = userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
+
+  // modules?.forEach((module) => {
+  //   const moduleName = module.module.toLowerCase() + "Permission";
+  //   if (permissions.hasOwnProperty(moduleName)) {
+  //     permissions[moduleName] = module.permissions;
+  //   }
+  // });
+
+  // const {
+  //   leadsPermission,
+  //   contactsPermission,
+  //   meetingsPermission,
+  //   dealsPermission,
+  //   accountsPermission,
+  //   callsPermission,
+  //   tasksPermission,
+  // } = permissions;
 
   //  Get All Leads Data
   // const getLeadsData = useCallback(async () => {
@@ -250,55 +314,84 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li data-bs-toggle="modal" data-bs-target="#updateLeadModal">
-                    <span
-                      className="dropdown-item"
-                      onClick={() => {
-                        handleUpdateLead();
-                      }}
+                  {leadsPermission?.includes("Update") ? (
+                    <li
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateLeadModal"
                     >
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDeleteLead(leadCostumerId)}
+                      <span
+                        className="dropdown-item"
+                        onClick={() => {
+                          handleUpdateLead();
+                        }}
+                      >
+                        <BsPencil className="dashboard_section1_table_editBtn" />
+                        Edit
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                  {/* Delete Btn */}
+                  {leadsPermission?.includes("Delete") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDeleteLead(leadCostumerId)}
+                      >
+                        <BsTrash className="dashboard_section1_table_deleteBtn" />
+                        Delete
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                  {/* Upload Btn */}
+                  {leadsPermission?.includes("Upload") ? (
+                    <li
+                      data-bs-toggle="modal"
+                      data-bs-target="#fileUploadModal"
                     >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </span>
-                  </li>
-                  <li data-bs-toggle="modal" data-bs-target="#fileUploadModal">
-                    <span className="dropdown-item">
-                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
-                      Upload Leads
-                    </span>
-                  </li>
-
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDownloadLeads()}
-                    >
-                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
-                      Download Leads
-                    </span>
-                  </li>
+                      <span className="dropdown-item">
+                        <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                        Upload Leads
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                  {/* Download Btn */}
+                  {leadsPermission?.includes("Download") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDownloadLeads()}
+                      >
+                        <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                        Download Leads
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </button>
             </div>
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link className="dashboard_leads_create_link" to="/create-lead">
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Leads
-                </Link>
-              </button>
-            </div>
+            {leadsPermission?.includes("Create") && (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link
+                    className="dashboard_leads_create_link"
+                    to="/create-lead"
+                  >
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Leads
+                  </Link>
+                </button>
+              </div>
+            )}
           </div>
         </div>
         {/* Table Div */}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 // Import CSS
 import "../../styles/dashboardCss/calls.css";
@@ -11,6 +11,8 @@ import { TbFileDownload } from "react-icons/tb";
 import LogCallTable from "../../components/LogCallTable";
 // Import Toast
 import Toast from "../../components/Toast";
+// Import Permissions Context
+import permissionContext from "../PermissionsContext";
 // Import api function from controller
 import {
   getAllLogCall,
@@ -21,6 +23,8 @@ import {
 } from "../../controller/fetchApi";
 import UpdateLogCall from "./UpdateLogCall";
 const CallLogs = () => {
+  // Log Calls Permissions From Apps
+  const { callsPermission } = useContext(permissionContext);
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
 
@@ -157,82 +161,87 @@ const CallLogs = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateLogCallModal"
-                  >
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleUpdateLogCall()}
-                    >
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDeleteLogCall(logCallCostumerId)}
-                    >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
+                  {/* Update Btn */}
+                  {callsPermission?.includes("Update") ? (
+                    <li
                       data-bs-toggle="modal"
-                      data-bs-target="#fileUploadModal"
+                      data-bs-target="#updateLogCallModal"
                     >
-                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
-                      Upload Calls
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDownloadLogCalls()}
-                    >
-                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
-                      Download Calls
-                    </span>
-                  </li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleUpdateLogCall()}
+                      >
+                        <BsPencil className="dashboard_section1_table_editBtn" />
+                        Edit
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Delete Btn */}
+                  {callsPermission?.includes("Delete") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDeleteLogCall(logCallCostumerId)}
+                      >
+                        <BsTrash className="dashboard_section1_table_deleteBtn" />
+                        Delete
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Upload Btn */}
+                  {callsPermission?.includes("Upload") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#fileUploadModal"
+                      >
+                        <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                        Upload Calls
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Downloads Btn */}
+                  {callsPermission?.includes("Download") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDownloadLogCalls()}
+                      >
+                        <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                        Download Calls
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </button>
             </div>
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link className="dashboard_leads_create_link" to="/log-call">
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Log Call
-                </Link>
-              </button>
-              {/* <button
-                className="dashboard_section1_table_edit_button dropdown-toggle remove_arrow_create_call_btn btn-shiny2"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <MdAdd /> Create call
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="editDeleteDropdown"
-                >
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        navigate("/log-call");
-                      }}
-                    >
-                      <MdOutlinePhonePaused className="dashboard_section1_table_deleteBtn" />
-                      Log call
-                    </button>
-                  </li>
-                </ul>
-              </button> */}
-            </div>
+            {/* Create Btn */}
+            {callsPermission?.includes("Create") ? (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link className="dashboard_leads_create_link" to="/log-call">
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Log Call
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* Table Div */}

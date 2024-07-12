@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 // CSS
 import "../../styles/dashboardCss/calls.css";
 //Import React Icons
@@ -10,6 +10,9 @@ import { TbFileDownload } from "react-icons/tb";
 
 // React Router Dom
 import { Link } from "react-router-dom";
+// Import Permission Context From app.js
+import permissionContext from "../PermissionsContext";
+
 // Components
 import DealsTable from "../../components/DealsTable";
 import UpdateDeal from "./UpdateDeal";
@@ -24,6 +27,9 @@ import {
   uploadDeals,
 } from "../../controller/fetchApi";
 const Deals = () => {
+  // Get Deals Permission
+  const { dealsPermission } = useContext(permissionContext);
+
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
 
@@ -155,54 +161,91 @@ const Deals = () => {
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
                 >
-                  <li data-bs-toggle="modal" data-bs-target="#updateDealModal">
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleUpdateDeal()}
+                  {/* Update Btn */}
+                  {dealsPermission?.includes("Update") ? (
+                    <li
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateDealModal"
                     >
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => {
-                        handleDeleteDeals(dealCostumerId);
-                      }}
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleUpdateDeal()}
+                      >
+                        <BsPencil className="dashboard_section1_table_editBtn" />
+                        Edit
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Delete Btn */}
+                  {dealsPermission?.includes("Delete") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => {
+                          handleDeleteDeals(dealCostumerId);
+                        }}
+                      >
+                        <BsTrash className="dashboard_section1_table_deleteBtn" />
+                        Delete
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Upload Btn */}
+                  {dealsPermission?.includes("Upload") ? (
+                    <li
+                      data-bs-toggle="modal"
+                      data-bs-target="#fileUploadModal"
                     >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </span>
-                  </li>
-                  <li data-bs-toggle="modal" data-bs-target="#fileUploadModal">
-                    <span className="dropdown-item">
-                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
-                      Upload Deals
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDownloadDeals()}
-                    >
-                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
-                      Download Deals
-                    </span>
-                  </li>
+                      <span className="dropdown-item">
+                        <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                        Upload Deals
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* Download Btn */}
+                  {dealsPermission?.includes("Download") ? (
+                    <li>
+                      <span
+                        className="dropdown-item"
+                        onClick={() => handleDownloadDeals()}
+                      >
+                        <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                        Download Deals
+                      </span>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </button>
             </div>
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link className="dashboard_leads_create_link" to="/create-deal">
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Deal
-                </Link>
-              </button>
-            </div>
+            {/* Create Btn */}
+            {dealsPermission?.includes("Create") ? (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link
+                    className="dashboard_leads_create_link"
+                    to="/create-deal"
+                  >
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Deal
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* Table Div */}

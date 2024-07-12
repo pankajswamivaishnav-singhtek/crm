@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 // Import CSS
 import "../../styles/dashboardCss/calls.css";
@@ -11,6 +11,8 @@ import { TbFileDownload } from "react-icons/tb";
 import ScheduleCallTable from "../../components/ScheduleCallTable";
 // Import Toast
 import Toast from "../../components/Toast";
+// Import Permission Context from app.js
+import permissionContext from "../PermissionsContext";
 // Controller Methods
 import {
   getAllScheduleCall,
@@ -21,6 +23,9 @@ import {
 } from "../../controller/fetchApi";
 import UpdateScheduleCall from "./UpdateScheduleCall";
 const Calls = () => {
+  // Calls Permissions
+  const { callsPermission } = useContext(permissionContext);
+
   // Start Toast Code -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
 
@@ -154,100 +159,90 @@ const Calls = () => {
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="editDeleteDropdown"
+                  // Update Btn
                 >
-                  <li
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateScheduleCallModal"
-                  >
-                    <button
-                      className="dropdown-item"
-                      onClick={() => handleUpdateScheduleCall()}
-                    >
-                      <BsPencil className="dashboard_section1_table_editBtn" />
-                      Edit
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() =>
-                        handleDeleteScheduleCall(scheduleCallCostumerId)
-                      }
-                    >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
+                  {" "}
+                  {callsPermission?.includes("Update") ? (
+                    <li
                       data-bs-toggle="modal"
-                      data-bs-target="#fileUploadModal"
+                      data-bs-target="#updateScheduleCallModal"
                     >
-                      <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
-                      Upload Calls
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => handleDownloadScheduleCalls()}
-                    >
-                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
-                      Download Calls
-                    </button>
-                  </li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => handleUpdateScheduleCall()}
+                      >
+                        <BsPencil className="dashboard_section1_table_editBtn" />
+                        Edit
+                      </button>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                  {/* Delete Btn */}
+                  {callsPermission?.includes("Delete") ? (
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() =>
+                          handleDeleteScheduleCall(scheduleCallCostumerId)
+                        }
+                      >
+                        <BsTrash className="dashboard_section1_table_deleteBtn" />
+                        Delete
+                      </button>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                  {/* Upload Btn */}
+                  {callsPermission?.includes("Upload") ? (
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        data-bs-toggle="modal"
+                        data-bs-target="#fileUploadModal"
+                      >
+                        <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
+                        Upload Calls
+                      </button>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                  {/* Download Btn */}
+                  {callsPermission?.includes("Download") ? (
+                    <li>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => handleDownloadScheduleCalls()}
+                      >
+                        <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                        Download Calls
+                      </button>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </button>
             </div>
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link
-                  className="dashboard_leads_create_link"
-                  to="/schedule-call"
-                >
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Schedule Call
-                </Link>
-              </button>
-              {/* <button
-                className="dashboard_section1_table_edit_button dropdown-toggle remove_arrow_create_call_btn btn-shiny2"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <MdAdd /> Create call
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="editDeleteDropdown"
-                >
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        navigate("/schedule-call");
-                      }}
-                    >
-                      <MdPermPhoneMsg className="dashboard_section1_table_editBtn" />
-                      Schedule call
-                    </button>
-                  </li>
-
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        navigate("/log-call");
-                      }}
-                    >
-                      <MdOutlinePhonePaused className="dashboard_section1_table_deleteBtn" />
-                      Log call
-                    </button>
-                  </li>
-                </ul>
-              </button> */}
-            </div>
+            {callsPermission?.includes("Create") ? (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link
+                    className="dashboard_leads_create_link"
+                    to="/schedule-call"
+                  >
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Schedule Call
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* Table */}

@@ -192,7 +192,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Contact Item */}
-                    {moduleArray?.includes("Contact") ? (
+                    {moduleArray?.includes("Contacts") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -260,7 +260,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     )}
 
                     {/* Meetings Item */}
-                    {moduleArray?.includes("Meeting") ? (
+                    {moduleArray?.includes("Meetings") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -275,7 +275,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Deals Item */}
-                    {moduleArray?.includes("Deal") ? (
+                    {moduleArray?.includes("Deals") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -291,7 +291,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                     )}
 
                     {/* Accounts Item */}
-                    {moduleArray?.includes("Account") ? (
+                    {moduleArray?.includes("Accounts") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"
@@ -306,7 +306,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                       ""
                     )}
                     {/* Task Item */}
-                    {moduleArray?.includes("Task") ? (
+                    {moduleArray?.includes("Tasks") ? (
                       <li className="nav-item sidebar_navItems">
                         <Link
                           className="Link-button"

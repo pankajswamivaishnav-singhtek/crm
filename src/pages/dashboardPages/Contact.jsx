@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -7,6 +7,8 @@ import { TbFileDownload } from "react-icons/tb";
 import ContactRightSectionTable from "../../components/ContactRightSectionTable";
 // Import Toast
 import Toast from "../../components/Toast";
+// Context
+import permissionContext from "../PermissionsContext";
 // Controller
 import {
   getAllContact,
@@ -16,6 +18,8 @@ import {
 // React Router Dom
 import { Link } from "react-router-dom";
 const Contact = () => {
+  //  Get Permission from app.js
+  const { contactsPermission } = useContext(permissionContext);
   // Start Toast -------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
 
@@ -101,52 +105,73 @@ const Contact = () => {
         {/* Btn div */}
         <div className="dashboard_leads_btn_mainDiv">
           <div className="dashboard_leads_btns_div">
-            <div className="dashboard_leads_action_btn_div">
-              <button
-                className="dashboard_section1_table_edit_button dropdown-toggle "
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Actions
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="editDeleteDropdown"
+            {contactsPermission?.includes("Delete") ||
+            contactsPermission?.includes("Download") ? (
+              <div className="dashboard_leads_action_btn_div">
+                <button
+                  className="dashboard_section1_table_edit_button dropdown-toggle "
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDeleteContact(contactCostumerId)}
-                    >
-                      <BsTrash className="dashboard_section1_table_deleteBtn" />
-                      Delete
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className="dropdown-item"
-                      onClick={() => handleDowloadContacts()}
-                    >
-                      <TbFileDownload className="dashboard_section1_table_deleteBtn" />
-                      Download Contacts
-                    </span>
-                  </li>
-                </ul>
-              </button>
-            </div>
+                  Actions
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="editDeleteDropdown"
+                  >
+                    {/* Delete Btn */}
+                    {contactsPermission?.includes("Delete") ? (
+                      <li>
+                        <span
+                          className="dropdown-item"
+                          onClick={() => handleDeleteContact(contactCostumerId)}
+                        >
+                          <BsTrash className="dashboard_section1_table_deleteBtn" />
+                          Delete
+                        </span>
+                      </li>
+                    ) : (
+                      ""
+                    )}
 
-            <div className="dashboard_leads_create_btn_div">
-              <button className="btn-shiny2">
-                <Link
-                  className="dashboard_leads_create_link"
-                  to="/create-contact"
-                >
-                  <span>
-                    <MdAdd />
-                  </span>
-                  Create Contact
-                </Link>
-              </button>
-            </div>
+                    {/* Downloads Btn*/}
+                    {contactsPermission?.includes("Download") ? (
+                      <li>
+                        <span
+                          className="dropdown-item"
+                          onClick={() => handleDowloadContacts()}
+                        >
+                          <TbFileDownload className="dashboard_section1_table_deleteBtn" />
+                          Download Contacts
+                        </span>
+                      </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/* Create Contact Btn */}
+            {contactsPermission?.includes("Create") ? (
+              <div className="dashboard_leads_create_btn_div">
+                <button className="btn-shiny2">
+                  <Link
+                    className="dashboard_leads_create_link"
+                    to="/create-contact"
+                  >
+                    <span>
+                      <MdAdd />
+                    </span>
+                    Create Contact
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* Table Div */}
