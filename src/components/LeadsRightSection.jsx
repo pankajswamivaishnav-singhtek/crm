@@ -27,7 +27,6 @@ import AssignLeads from "./AssignLeads";
 const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   // Get lead permission From app.js
   const { leadsPermission } = useContext(permissionContext);
-  console.log("lead permission", leadsPermission);
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
   const hideToast = () => {

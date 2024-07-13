@@ -59,10 +59,6 @@ const Login = () => {
     validationSchema: loginFormSchema,
     onSubmit: async (values, { resetForm }) => {
       const loginSuccessFully = await loginUser(values, setShowToast);
-      console.log(
-        "Login Successfully",
-        loginSuccessFully?.data?.data?.roleAndPermissions?.roles[0]?.role
-      );
       if (
         loginSuccessFully.data.status === 200 &&
         loginSuccessFully?.data?.data?.roleAndPermissions?.roles[0]?.role ===

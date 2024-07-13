@@ -28,16 +28,21 @@ import { logoutUser } from "../../controller/fetchApi";
 // import { googleLogout } from "@react-oauth/google";
 const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
   // Logout User
-  const logoutUserSubmit = async () => {
-    try {
-      // await logout({ logoutParams: { returnTo: window.location.origin } });
-      // googleLogout();
-      await logoutUser();
-      localStorage.clear();
-      window.location.href = "/login";
-    } catch (error) {
-      console.log(error);
-    }
+  // const logoutUserSubmit = async () => {
+  //   try {
+  //     await logoutUser();
+  //     localStorage.clear();
+  //     window.location.href = "/login";
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // Logout User Api Call
+  const logoutUserSubmit = () => {
+    logoutUser();
+    localStorage.clear();
+    window.location.href = "/login";
   };
   // Shrink Sidebar
   const [shrinkSidebar, setShrinkSidebar] = useState(false);

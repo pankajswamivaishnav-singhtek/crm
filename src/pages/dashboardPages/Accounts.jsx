@@ -149,7 +149,7 @@ const Accounts = () => {
                       data-bs-toggle="modal"
                       data-bs-target="#updateAccountModal"
                     >
-                      <button
+                      <span
                         className="dropdown-item"
                         onClick={() => {
                           handleUpdateAccount();
@@ -157,7 +157,7 @@ const Accounts = () => {
                       >
                         <BsPencil className="dashboard_section1_table_editBtn" />
                         Edit
-                      </button>
+                      </span>
                     </li>
                   ) : (
                     ""
@@ -166,13 +166,13 @@ const Accounts = () => {
                   {/* Delete Btn */}
                   {accountsPermission?.includes("Delete") ? (
                     <li>
-                      <button
+                      <span
                         className="dropdown-item"
                         onClick={() => handleDeleteAccount(accountCostumerId)}
                       >
                         <BsTrash className="dashboard_section1_table_deleteBtn" />
                         Delete
-                      </button>
+                      </span>
                     </li>
                   ) : (
                     ""
@@ -180,13 +180,13 @@ const Accounts = () => {
 
                   {/* Download Btn */}
                   <li>
-                    <button
+                    <span
                       className="dropdown-item"
                       onClick={() => handleDownloadAccounts()}
                     >
                       <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                       Download Accounts
-                    </button>
+                    </span>
                   </li>
                 </ul>
               </button>

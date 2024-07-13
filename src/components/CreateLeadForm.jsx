@@ -85,7 +85,7 @@ const CreateLeadForm = ({ leadStatus, leadServices, leadSource }) => {
     const { name } = e.target;
     setFieldTouched(name, true);
   };
-  
+
   return (
     <div className="create_lead_form_main_div">
       <form onSubmit={handleSubmit}>
@@ -198,8 +198,8 @@ const CreateLeadForm = ({ leadStatus, leadServices, leadSource }) => {
             <input
               type="tel"
               id="mobileNumber"
-              maxlength="15"
-              minlength="10"
+              maxLength="15"
+              minLength="10"
               className="form-control create_lead_form_input"
               value={values.mobileNumber}
               onChange={handleChange}
@@ -224,8 +224,8 @@ const CreateLeadForm = ({ leadStatus, leadServices, leadSource }) => {
               className="form-control create_lead_form_input"
               value={values.secondaryMobileNumber}
               onChange={handleChange}
-              maxlength="15"
-              minlength="10"
+              maxLength="15"
+              minLength="10"
               onFocus={handleFocus}
               onBlur={handleBlur}
               name="secondaryMobileNumber"
@@ -261,9 +261,9 @@ const CreateLeadForm = ({ leadStatus, leadServices, leadSource }) => {
                 Select Lead Source
               </option>
               {leadSource && leadSource?.length > 0
-                ? leadSource.map((source) => (
-                    <option key={source.id} value={source.value}>
-                      {source.leadSource}
+                ? leadSource?.map((source) => (
+                    <option key={source?.id} value={source?.value}>
+                      {source?.leadSource}
                     </option>
                   ))
                 : ""}

@@ -167,13 +167,13 @@ const Calls = () => {
                       data-bs-toggle="modal"
                       data-bs-target="#updateScheduleCallModal"
                     >
-                      <button
+                      <span
                         className="dropdown-item"
                         onClick={() => handleUpdateScheduleCall()}
                       >
                         <BsPencil className="dashboard_section1_table_editBtn" />
                         Edit
-                      </button>
+                      </span>
                     </li>
                   ) : (
                     ""
@@ -181,7 +181,7 @@ const Calls = () => {
                   {/* Delete Btn */}
                   {callsPermission?.includes("Delete") ? (
                     <li>
-                      <button
+                      <span
                         className="dropdown-item"
                         onClick={() =>
                           handleDeleteScheduleCall(scheduleCallCostumerId)
@@ -189,7 +189,7 @@ const Calls = () => {
                       >
                         <BsTrash className="dashboard_section1_table_deleteBtn" />
                         Delete
-                      </button>
+                      </span>
                     </li>
                   ) : (
                     ""
@@ -197,14 +197,14 @@ const Calls = () => {
                   {/* Upload Btn */}
                   {callsPermission?.includes("Upload") ? (
                     <li>
-                      <button
+                      <span
                         className="dropdown-item"
                         data-bs-toggle="modal"
                         data-bs-target="#fileUploadModal"
                       >
                         <MdOutlineUploadFile className="dashboard_section1_table_deleteBtn" />
                         Upload Calls
-                      </button>
+                      </span>
                     </li>
                   ) : (
                     ""
@@ -212,13 +212,13 @@ const Calls = () => {
                   {/* Download Btn */}
                   {callsPermission?.includes("Download") ? (
                     <li>
-                      <button
+                      <span
                         className="dropdown-item"
                         onClick={() => handleDownloadScheduleCalls()}
                       >
                         <TbFileDownload className="dashboard_section1_table_deleteBtn" />
                         Download Calls
-                      </button>
+                      </span>
                     </li>
                   ) : (
                     ""

@@ -11,8 +11,16 @@ import {
   leadServicesDropdowns,
   leadSourcesDropdowns,
 } from "../../controller/fetchApi";
-
+// redux toolkit dispatch
+import { useDispatch } from "react-redux";
+import {
+  setLeadStatusDropDown,
+  setLeadServicesDropDown,
+  setLeadSourcesDropDown,
+} from "../../app/slices";
 const CreateLead = () => {
+  //  Redux toolkit dispatch
+  const dispatch = useDispatch();
   // Get User details from local storage
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
@@ -21,39 +29,47 @@ const CreateLead = () => {
   const getLeadStatusDropdown = useCallback(async () => {
     try {
       const leadStatusDropdown = await leadStatusDropdowns(tokenId);
+      dispatch(setLeadStatusDropDown(leadStatusDropdown));
       setLeadStatus(leadStatusDropdown);
     } catch (error) {
       console.log(error);
     }
-  }, [tokenId]);
+  }, [tokenId, dispatch]);
   // Lead Service Dropdown
   const [leadServices, setLeadServices] = useState();
   const getLeadServicesDropdown = useCallback(async () => {
     try {
       const leadServicesDropdown = await leadServicesDropdowns(tokenId);
-
+      // Set Data In Redux Slice
+      dispatch(setLeadServicesDropDown(leadServicesDropdown));
       setLeadServices(leadServicesDropdown);
     } catch (error) {
       console.log(error);
     }
-  }, [tokenId]);
-
+  }, [tokenId, dispatch]);
   // Lead Source Dropdown
   const [leadSource, setLeadSource] = useState();
   const getLeadSourcesDropdown = useCallback(async () => {
     try {
       const leadSourcesDropdown = await leadSourcesDropdowns(tokenId);
+      // Set Data In Redux Slice
+      dispatch(setLeadSourcesDropDown(leadSourcesDropdown));
       setLeadSource(leadSourcesDropdown);
     } catch (error) {
       console.log(error);
     }
-  }, [tokenId]);
+  }, [tokenId, dispatch]);
 
   useEffect(() => {
     getLeadStatusDropdown();
     getLeadServicesDropdown();
     getLeadSourcesDropdown();
-  }, [getLeadStatusDropdown, getLeadServicesDropdown, getLeadSourcesDropdown]);
+  }, [
+    getLeadStatusDropdown,
+    getLeadServicesDropdown,
+    getLeadSourcesDropdown,
+    dispatch,
+  ]);
 
   return (
     <div className="container-fluid dashboard_create_lead_main_container">

@@ -56,7 +56,7 @@ const AccountTable = ({
                     <input
                       id="cbx-29"
                       type="checkbox"
-                      onClick={handleMasterCheckboxChange}
+                      onChange={handleMasterCheckboxChange}
                       checked={isMasterChecked}
                     />
                     <label htmlFor="cbx-29" />

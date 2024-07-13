@@ -13,8 +13,14 @@ import { FaLandmarkFlag } from "react-icons/fa6";
 import { updateRegisterSchema } from "../schema/FormValidation";
 // Controller Api Methods
 import { updateSingleLead } from "../controller/fetchApi";
+// Import Redux useSelector
+import { useSelector } from "react-redux";
 // import Context
 const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
+  // Get Lead Dropdown Data from redux store
+  const { leadStatus, leadServices, leadSources } = useSelector(
+    (state) => state.dropDown
+  );
   const userIdTokenData = JSON.parse(localStorage.getItem("user"));
   const tokenId = userIdTokenData?.data?.token;
   // Toast
@@ -207,6 +213,7 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
             />
             <FaPhone className="create_lead_input_icon" />
           </div>
+          {/* Lead Sources Drop-down */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadSource">Lead Source</label>
             <select
@@ -224,15 +231,17 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
                   "Select Lead Source"
                 )}
               </option>
-              <option value="web-download">Web Download</option>
-              <option value="web-search">Web Search</option>
-              <option value="advertisement">Advertisement</option>
-              <option value="employee-referral">Employee Referral</option>
-              <option value="external-source">External Source</option>
-              <option value="others">Others</option>
+              {leadSources && leadSources?.length > 0
+                ? leadSources?.map((source) => (
+                    <option key={source?.id} value={source?.value}>
+                      {source?.leadSource}
+                    </option>
+                  ))
+                : ""}
             </select>
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Lead Status dropDown */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="leadStatus">Lead Status</label>
             <select
@@ -251,11 +260,54 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
                 )}
               </option>
 
-              {/* <option value="lead">Select Lead Status</option> */}
-              <option value="lead">Lead</option>
-              <option value="contacted">Contacted</option>
-              <option value="deal">Deal</option>
+              {leadStatus && leadStatus?.length > 0
+                ? leadStatus?.map((lead) => (
+                    <option key={lead.id} value={lead.value}>
+                      {lead.leadSource}
+                    </option>
+                  ))
+                : ""}
             </select>
+            <MdKeyboardArrowDown className="create_lead_input_icon" />
+          </div>
+          {/* Lead Service */}
+          <div className="form-group createLeadInput col-xl-4 costum-select">
+            <label htmlFor="leadStatus">
+              Lead Service <span className="required_sign">*</span>
+            </label>
+
+            <select
+              id="leadService"
+              className="form-control"
+              value={formik.values.leadService}
+              onChange={formik.handleChange}
+              onFocus={formik.handleFocus}
+              onBlur={formik.handleBlur}
+              name="leadService"
+            >
+              <option value="">
+                {/* {touched.leadStatus && errors.leadStatus ? (
+                  <p className="text-danger">{errors.leadStatus}</p>
+                ) : (
+                  "Select Lead Status"
+                )} */}
+                Select Lead Service
+              </option>
+
+              {/* <option value="lead">Select Lead Status</option> */}
+              {leadServices && leadServices?.length > 0
+                ? leadServices?.map((services) => (
+                    <option key={services.id} value={services.leadSoruce}>
+                      {services.leadSoruce}
+                    </option>
+                  ))
+                : ""}
+            </select>
+            {formik.touched.leadService && formik.errors.leadService && (
+              <small className="errorMessage">
+                {formik.errors.leadService}
+              </small>
+            )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
         </div>
