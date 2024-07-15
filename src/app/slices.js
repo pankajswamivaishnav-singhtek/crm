@@ -21,6 +21,8 @@ const dropDownState = {
   leadStatus: "",
   leadServices: "",
   leadSources: "",
+  callRelatedTo: "",
+  callPurposeDropdown: "",
   status: "idle", // 'idle' | 'loading' |'succeeded' | 'failed'
   error: null,
 };
@@ -42,6 +44,14 @@ export const dropDownSlice = createSlice({
       state.error = null;
       state.leadSources = action.payload;
     },
+    setCallRelatedTo: (state, action) => {
+      state.error = null;
+      state.callRelatedTo = action.payload;
+    },
+    setCallPurposeDropdown: (state, action) => {
+      state.error = null;
+      state.callPurposeDropdown = action.payload;
+    },
   },
 });
 
@@ -51,6 +61,8 @@ export const {
   setLeadStatusDropDown,
   setLeadServicesDropDown,
   setLeadSourcesDropDown,
+  setCallRelatedTo,
+  setCallPurposeDropdown,
 } = dropDownSlice.actions;
 
 // Export the reducers

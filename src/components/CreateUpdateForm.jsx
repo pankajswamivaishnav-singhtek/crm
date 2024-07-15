@@ -15,6 +15,8 @@ import { updateRegisterSchema } from "../schema/FormValidation";
 import { updateSingleLead } from "../controller/fetchApi";
 // Import Redux useSelector
 import { useSelector } from "react-redux";
+// Import Toast
+import Toast from "./Toast";
 // import Context
 const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
   // Get Lead Dropdown Data from redux store
@@ -25,16 +27,7 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
   const tokenId = userIdTokenData?.data?.token;
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-  // Function to hide the toast after 3 seconds
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-
-  if (showToast) {
-    hideToast();
-  }
+  
   // Form Handle & Validations
   const formik = useFormik({
     initialValues: {
@@ -511,27 +504,7 @@ const CreateUpdateForm = ({ leadCostumerId, defaultValue, getLeadsData }) => {
           </button>
         </div>
       </form>
-      {/* Toast */}
-      {showToast.message && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-          <div
-            className="toast show create_lead_toast"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header create_lead_toast_header">
-              <strong className="me-auto">Form Submitted Successfully</strong>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => setShowToast({ success: false, message: "" })}
-              />
-            </div>
-            <div className="toast-body">{showToast.message}</div>
-          </div>
-        </div>
-      )}
+      <Toast showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 };

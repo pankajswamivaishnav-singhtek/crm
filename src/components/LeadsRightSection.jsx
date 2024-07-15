@@ -23,21 +23,13 @@ import {
 // Components
 import UpdateLead from "../pages/dashboardPages/UpdateLead";
 import AssignLeads from "./AssignLeads";
-
+// Import Toast
+import Toast from "./Toast";
 const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   // Get lead permission From app.js
   const { leadsPermission } = useContext(permissionContext);
   // Start Toast Code-------
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-
-  if (showToast) {
-    hideToast();
-  }
 
   // Set PageNo to getAllLead Api
   const [pageNo, setPageNo] = useState(0);
@@ -47,98 +39,6 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
   const tokenId = userIdTokenData?.data?.token;
   const [getAllLeadData, setAllLeadsData] = useState([]);
 
-  // // Permissions Get From Local Storage
-  // let leadsPermission;
-  // let contactPermission;
-  // let meetingPermission;
-  // let dealPermission;
-  // let accountPermission;
-  // let callLogPermission;
-  // let scheduleCallPermission;
-  // let taskPermission;
-
-  // const modules = userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
-  // const leadPermissions = modules.find((data) => data.module === "Leads");
-  // const contactPermissions = modules.find((data) => data.module === "Contact");
-  // const meetingPermissions = modules.find((data) => data.module === "Meeting");
-  // const dealPermissions = modules.find((data) => data.module === "Deal");
-  // const accountPermissions = modules.find((data) => data.module === "Account");
-  // const callLogPermissions = modules.find((data) => data.module === "CallLog");
-  // const scheduleCallPermissions = modules.find(
-  //   (data) => data.module === "ScheduleCall"
-  // );
-  // let tasksPermissions = modules.find((data) => data.module === "Task");
-  // leadsPermission = leadPermissions.permissions;
-  // contactPermission = contactPermissions.permissions;
-  // meetingPermission = meetingPermissions.permissions;
-  // dealPermission = dealPermissions.permissions;
-  // accountPermission = accountPermissions.permissions;
-  // callLogPermission = callLogPermissions.permissions;
-  // scheduleCallPermission = scheduleCallPermissions.permissions;
-  // tasksPermissions = tasksPermissions.permissions;
-
-  // Permissions Get From Local Storage
-  // const permissions = {
-  //   leadsPermission: null,
-  //   contactsPermission: null,
-  //   meetingsPermission: null,
-  //   dealsPermission: null,
-  //   accountsPermission: null,
-  //   callsPermission: null,
-  //   tasksPermission: null,
-  // };
-
-  // const modules = userIdTokenData?.data?.roleAndPermissions?.roles[0]?.modules;
-
-  // modules?.forEach((module) => {
-  //   const moduleName = module.module.toLowerCase() + "Permission";
-  //   if (permissions.hasOwnProperty(moduleName)) {
-  //     permissions[moduleName] = module.permissions;
-  //   }
-  // });
-
-  // const {
-  //   leadsPermission,
-  //   contactsPermission,
-  //   meetingsPermission,
-  //   dealsPermission,
-  //   accountsPermission,
-  //   callsPermission,
-  //   tasksPermission,
-  // } = permissions;
-
-  //  Get All Leads Data
-  // const getLeadsData = useCallback(async () => {
-  //   const filter = {
-  //     page: pageNo,
-  //     city: filterData?.cityName,
-  //     company: filterData?.companyName,
-  //     createdAt: filterData?.date,
-  //     leadOwner: filterData?.leadOwnerName,
-  //     leadType: filterData?.verified
-  //       ? "verified"
-  //       : filterData?.unverified
-  //       ? "unverified"
-  //       : "unverified",
-  //   };
-  //   try {
-  //     getAllLeadByFilter(filter, tokenId).then((res) => {
-  //       setAllLeadsData(res);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [
-  //   filterData?.cityName,
-  //   filterData?.companyName,
-  //   filterData?.date,
-  //   filterData?.leadOwnerName,
-  //   filterData?.verified,
-  //   tokenId,
-  //   filterData?.unverified,
-  //   pageNo,
-  //   setAllLeadsData,
-  // ]);
 
   const getLeadsData = useCallback(async () => {
     const filter = {
@@ -599,27 +499,7 @@ const LeadsRightSection = ({ leadCostumerId, filterData }) => {
             </div>
           </div>
         </>
-        {/* Toast */}
-        {showToast.message && (
-          <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-            <div
-              className="toast show create_lead_toast"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true"
-            >
-              <div className="toast-header create_lead_toast_header">
-                <strong className="me-auto">Form Submitted Successfully</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowToast({ success: false, message: "" })}
-                />
-              </div>
-              <div className="toast-body">{showToast.message}</div>
-            </div>
-          </div>
-        )}
+        <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>
   );

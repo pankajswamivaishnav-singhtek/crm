@@ -10,6 +10,7 @@ import { TfiAgenda } from "react-icons/tfi";
 import { FaTreeCity } from "react-icons/fa6";
 // Import Toast
 import Toast from "../../components/Toast";
+
 // Controller Api Methods
 import {
   createScheduleCall,
@@ -69,14 +70,14 @@ const ScheduleCall = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, []); //do not add dispatch because infinite loop start
 
   // Purpose
   const [callPurpose, setCallPurpose] = useState();
   const getCallPurposeDropdowns = useCallback(async () => {
     try {
-      const callRelatedDropdown = await callPurposeDropdowns(tokenId);
-      setCallPurpose(callRelatedDropdown);
+      const callPurposeDropdownsResult = await callPurposeDropdowns(tokenId);
+      setCallPurpose(callPurposeDropdownsResult);
     } catch (error) {
       console.log(error);
     }
@@ -147,6 +148,7 @@ const ScheduleCall = () => {
             )}
             <MdKeyboardArrowDown className="create_lead_input_icon" />
           </div>
+          {/* Related to */}
           <div className="form-group createLeadInput col-xl-4">
             <label htmlFor="relatedTo">
               Related To <span className="required_sign">*</span>
