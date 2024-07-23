@@ -41,6 +41,7 @@ import DealsCostumerDetails from "../pages/dashboardPages/DealsCostumerDetails";
 import UpdateProfile from "../pages/UpdateProfile";
 import CreatedUser from "../pages/CreatedUser";
 import RoleAndPermission from "../pages/RoleAndPermission";
+import LandingPage from "../pages/LandingPage";
 
 //Import Validation Route
 import ValidateRoute from "./ValidateRoute";
@@ -342,7 +343,7 @@ const AllRoutes = () => {
           </ValidateRoute>
         }
       />
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<LandingPage />} />
       {/* <Route path="/signup" element={<Signup />} /> */}
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />

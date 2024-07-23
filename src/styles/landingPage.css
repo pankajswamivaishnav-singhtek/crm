@@ -1,0 +1,400 @@
+.landingPageFirstPart {
+  height: 100vh;
+  width: 100%;
+  padding: 50px 0;
+  /* position: fixed; */
+  background-image: url(../images/landingPage.png);
+}
+
+.landingPageFirstPartLoginBtnDiv {
+  width: 1530px;
+  height: 70px;
+  background-color: #edf8ff;
+  box-shadow: 2px 3px 22px 0px #c7eaf057;
+  margin: 0 auto;
+  border-radius: 70px;
+}
+
+.landingPageFirstPartLoginBtnDivLogo {
+  position: relative;
+  left: 20px;
+  top: 10px;
+}
+
+.landingPageFirstPartLoginBtnDiv2 {
+  position: relative;
+  right: 20px;
+  top: 10px;
+}
+
+.landingPageFirstPartLoginBtn {
+  background: linear-gradient(101.13deg, #0e165a -53.88%, #1e2db4 105.8%);
+  box-shadow: 0px 3px 22px 0px #17238f42;
+  width: 141.61px;
+  height: 52px;
+  border-radius: 60px;
+  color: #ffffff;
+  border: 3px solid white;
+}
+
+.landingPageTitleDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 723.19px;
+  height: 180px;
+  position: relative;
+  top: 25%;
+  left: 30%;
+}
+
+.landingPageTitleDivIcon1 {
+  position: relative;
+  left: -45%;
+}
+.landingPageTitleDivIcon2 {
+  position: relative;
+  left: 62%;
+  top: 16%;
+}
+.landingPageTitleDivIcon3 {
+  position: relative;
+  left: 55%;
+  top: 22%;
+}
+
+.landingPageTitleDivPara {
+  font-family: Aleo;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 89.6px;
+  text-align: center;
+}
+
+.landingPageTitleDivSpan1 {
+  color: #ff6e3f;
+}
+
+.landingPageTitleDivSpan2 {
+  color: #5869ff;
+}
+
+.landingPageSlogan > p {
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: center;
+}
+
+.landingPageTryBtn {
+  width: 200.22px;
+  height: 60px;
+  background: linear-gradient(101.13deg, #0e165a -53.88%, #1e2db4 105.8%);
+  box-shadow: 0px 3px 22px 0px #17238f42;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 23.44px;
+  text-align: center;
+  border-radius: 60px;
+  color: #ffffff;
+  border: none;
+  position: relative;
+  margin-top: 40px;
+  padding: 10px;
+}
+
+/* Second Part */
+.landingPageSecondPart {
+  margin: 50px auto;
+  /* width: 1350px;
+  height: 405.49px; */
+  border-radius: 22px;
+  background-color: #ecf2ff;
+}
+
+.landingPageSecondPartHeading {
+  text-align: center;
+  padding: 20px 0 0 0;
+}
+
+.landingPageSecondPartPara {
+  text-align: center;
+  padding: 0 80px 20px 80px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+}
+
+.landingPageSecondPartPara > span {
+  font-size: x-large;
+  font-weight: bold;
+  color: #5869ff;
+}
+
+/* Third Part Our Features */
+.landingPageThirdPart {
+  margin: 100px auto;
+}
+
+.landingPageThirdPartCardIcon {
+  margin: 15px auto;
+  color: #9cbbff;
+}
+
+.landingPageThirdPartCard {
+  /* box-shadow: 5px 7px 20px 0px rgba(64, 123, 255, 0.12) !important; */
+  box-shadow: 2px 3px 12px 0px #5869ff1c;
+  border: none !important;
+}
+
+/* Fourth Part Image Our Costumer */
+.landingpageFourthPartMainDiv {
+  border-radius: 22px;
+  opacity: 1;
+  background-image: url(../images/ourCostumer.jpg);
+  position: relative;
+  margin-bottom: 100px;
+}
+
+.landingpageFourthPartMainDiv::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 22px;
+}
+
+.landingpageFourthPartMainDivHeading {
+  font-family: Roboto;
+  font-size: 45px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+  color: white;
+}
+
+.landingpageFourthPartCarouselItemHeading {
+  color: white !important;
+}
+
+.landingpageFourthPartCarouselDiv {
+  padding-top: 80px !important;
+  padding-bottom: 20px !important;
+}
+
+.landingpageFourthPartCarouselItemPara {
+  color: white !important;
+}
+
+/* Testimonial css */
+
+.costum-carousel {
+  cursor: pointer;
+}
+
+.special_text_color {
+  color: var(--special_text_color);
+  letter-spacing: var(--special_letter_spacing);
+  font-weight: 600;
+}
+
+.landingpageFourthPartCarouselDivHeading {
+  color: white;
+}
+
+.landingpageFourthPartCarouselDivHeading {
+  color: white;
+}
+
+@media screen and (max-width: 576px) {
+  .testimonial_sec {
+    background-position: bottom;
+  }
+  .landingPageTitleDivIcon1 {
+    left: -40%;
+    top: 5%;
+  }
+  .landingPageTitleDivIcon3 {
+    left: 76%;
+    top: 30%;
+  }
+  .landingPageFooterList {
+    margin: 20px 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .costum-page-testimonial-title {
+    font-size: 2.5rem !important;
+    font-weight: 400;
+  }
+  .landingPageSecondPartPara {
+    padding: 10px 0;
+  }
+  .landingpageFourthPartCarouselDiv {
+    padding-top: 40px !important;
+    padding-bottom: 20px !important;
+  }
+  .landingPageTitleDiv {
+    left: 0;
+    width: auto;
+  }
+  .landingPageTitleDivIcon3 {
+    left: 61%;
+    top: 9%;
+  }
+  .landingPageTitleDivIcon2 {
+    left: 80%;
+  }
+  .landingPageFirstPartLoginBtnDiv {
+    width: auto;
+    margin: 0 10px;
+  }
+  .landingPageFirstPart {
+    height: 60vh;
+    padding: 20px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .costum-page-testimonial-title {
+    font-size: 2.5rem !important;
+    font-weight: 400;
+  }
+  .landingPageSecondPartPara {
+    padding: 10px 0;
+  }
+  .landingpageFourthPartCarouselDiv {
+    padding-top: 40px !important;
+    padding-bottom: 20px !important;
+  }
+  .landingPageTitleDiv {
+    left: 0;
+    width: auto;
+  }
+  .landingPageTitleDivIcon3 {
+    left: 65%;
+    top: 17%;
+  }
+  .landingPageTitleDivIcon2 {
+    left: 80%;
+  }
+  .landingPageFirstPartLoginBtnDiv {
+    width: auto;
+    margin: 0 10px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .landingPageTitleDivPara {
+    font-size: 34px;
+    line-height: normal;
+  }
+  .landingPageSlogan > p {
+    font-size: 15px;
+    line-height: normal;
+  }
+  .landingPageTryBtn {
+    width: 160px;
+    height: 50px;
+    font-size: 16px;
+  }
+  .landingPageTitleDivIcon3 {
+    width: 60px;
+    left: 73%;
+    top: 17%;
+  }
+  .landingPageTitleDivIcon1 {
+    top: 0;
+    width: 12%;
+  }
+  .landingPageTitleDivIcon2 {
+    top: 9%;
+    width: 12%;
+  }
+  .landingPageFirstPartLoginBtn {
+    width: 100px;
+    height: 40px;
+  }
+  .landingPageFirstPartLoginBtnDiv2 {
+    top: 15px;
+  }
+  .landingPageFirstPartLoginBtnDivLogo {
+    width: 25%;
+    top: 16px;
+  }
+  .landingPageFirstPart {
+    height: 65vh;
+    padding: 20px 0;
+  }
+  .landingPageTryBtn {
+    margin-top: 90px;
+  }
+  .landingPageFooterList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .landingPageFooterList h3 {
+    text-align: center;
+  }
+  .landingpageFourthPartMainDivHeading {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 324px) {
+  .landingPageTryBtn {
+    margin-top: 70px;
+  }
+  .landingPageTitleDivIcon3 {
+    left: 77%;
+    top: 18%;
+  }
+  .landingPageTitleDivIcon2 {
+    top: 8%;
+  }
+  .landingpageFourthPartMainDiv {
+    background-size: cover;
+  }
+}
+
+/* Footer */
+.landingPageFooter {
+  /* height: 25vh; */
+  /* background-image: url(../images//landingPageFooter.png); */
+  background: linear-gradient(#333c8d, #3647df);
+  background-color: #333c8d;
+}
+
+/* .landingPageCrmLogo2 {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+} */
+
+.landingPageFooterUpperDiv {
+  /* padding: 20px 0 0 20px; */
+  display: flex !important;
+  justify-content: space-around;
+}
+
+.landingPageFooterList li {
+  list-style-type: none;
+  margin: 10px 0 10px 0;
+  text-align: start;
+}
+
+.landingPageLocationLink {
+  text-decoration: none;
+  color: white;
+}

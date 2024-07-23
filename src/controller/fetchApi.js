@@ -197,15 +197,15 @@ export const loginUser = async (userData, setShowToast) => {
       localStorage.setItem("user", JSON.stringify(response.data));
       // Show success message in toast
       setShowToast({ success: true, message: "Sign In successfully." });
+      return response;
     }
-    if (response.data.status === 206) {
-      setShowToast({ success: false, message: "Invalid Credentials." });
+    if (response.status === 206) {
+      setShowToast({ success: true, message: "Invalid Credentials." });
     }
-    return response;
   } catch (error) {
     const { message } = await error.response.data;
     // Show error message in toast
-    setShowToast({ success: false, message });
+    setShowToast({ success: true, message });
   }
 };
 
