@@ -10,7 +10,7 @@ import { PiBriefcaseLight } from "react-icons/pi";
 import { RiAccountPinCircleFill } from "react-icons/ri";
 import { LuNewspaper } from "react-icons/lu";
 import { HiOutlineDocumentReport } from "react-icons/hi";
-import { FaStar, FaRegStar, FaArrowLeft, FaQuoteLeft } from "react-icons/fa";
+import { FaStar, FaRegStar, FaArrowLeft } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { ImFacebook2 } from "react-icons/im";
@@ -100,99 +100,106 @@ const LandingPage = () => {
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
             {/* firstCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
+              <div className="card mx-2 landingPageThirdPartCard card-height">
                 <FaUserCircle className="fs-3 landingPageThirdPartCardIcon" />
                 <div className="card-body">
                   <h5 className="card-title text-center">User Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Easily add, remove, and manage user roles and permissions.
+                    Ensure secure and appropriate access to different parts of
+                    the CRM based on user roles.
                   </p>
                 </div>
               </div>
             </div>
             {/* secondCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
+              <div className="card mx-2 landingPageThirdPartCard card-height">
                 <SiGoogleads className="fs-3 landingPageThirdPartCardIcon" />
                 <div className="card-body">
                   <h5 className="card-title text-center">Lead Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Efficiently track, manage, and nurture potential customers.
+                    Automatically capture leads from various sources and assign
+                    them to sales reps for timely follow-ups.
                   </p>
                 </div>
               </div>
             </div>
             {/* thirdCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
-                <FaRegAddressCard className="fs-3 landingPageThirdPartCardIcon" />
+              <div className="card mx-2 landingPageThirdPartCard card-height">
+                <FaRegAddressCard className="fs-3 landingPageThirdPartCardIcon " />
                 <div className="card-body">
                   <h5 className="card-title text-center">Contact Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Store and organize all contact information in one place.
+                    Access comprehensive contact histories, interactions, and
+                    notes to maintain strong customer relationships.
                   </p>
                 </div>
               </div>
             </div>
             {/* fourthCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
-                <IoCallSharp className="fs-3 landingPageThirdPartCardIcon" />
+              <div className="card mx-2 landingPageThirdPartCard card-height">
+                <IoCallSharp className="fs-3 landingPageThirdPartCardIcon " />
                 <div className="card-body">
                   <h5 className="card-title text-center">Call Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Log, track, and manage all customer calls. Integrate with
+                    telephony systems to automate call logging and streamline
+                    communication.
                   </p>
                 </div>
               </div>
             </div>
             {/* fifthCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
-                <PiBriefcaseLight className="fs-3 landingPageThirdPartCardIcon" />
+              <div className="card mx-2 landingPageThirdPartCard card-height">
+                <PiBriefcaseLight className="fs-3 landingPageThirdPartCardIcon " />
                 <div className="card-body">
                   <h5 className="card-title text-center">Deal Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Track, manage, and optimize your sales deals. Monitor deal
+                    progress, set milestones, and forecast revenues to close
+                    more deals efficiently.
                   </p>
                 </div>
               </div>
             </div>
             {/* sixthCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
-                <RiAccountPinCircleFill className="fs-3 landingPageThirdPartCardIcon" />
+              <div className="card mx-2 landingPageThirdPartCard card-height">
+                <RiAccountPinCircleFill className="fs-3 landingPageThirdPartCardIcon " />
                 <div className="card-body">
                   <h5 className="card-title text-center">Account Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Maintain detailed records of customer accounts. View account
+                    activities, track account health, and manage customer
+                    relationships at an organizational level.
                   </p>
                 </div>
               </div>
             </div>
             {/* seventhCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
-                <LuNewspaper className="fs-3 landingPageThirdPartCardIcon" />
+              <div className="card mx-2 landingPageThirdPartCard card-height">
+                <LuNewspaper className="fs-3 landingPageThirdPartCardIcon " />
                 <div className="card-body">
                   <h5 className="card-title text-center">Task Management</h5>
                   <p className="card-text text-center">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Create, assign, and track tasks and to-dos. Ensure nothing
+                    falls through the cracks with reminders and task
+                    prioritization.
                   </p>
                 </div>
               </div>
             </div>
             {/* eighthCard */}
             <div className="col mb-4">
-              <div className="card mx-2 landingPageThirdPartCard">
-                <HiOutlineDocumentReport className="fs-3 landingPageThirdPartCardIcon" />
+              <div className="card mx-2 landingPageThirdPartCard card-height">
+                <HiOutlineDocumentReport className="fs-3 landingPageThirdPartCardIcon " />
                 <div className="card-body">
                   <h5 className="card-title text-center">Report Management</h5>
                   <p className="card-text text-center">
@@ -230,13 +237,14 @@ const LandingPage = () => {
                   <div className="row d-flex justify-content-center">
                     <div className="col-lg-8">
                       <h5 className="mb-3 landingpageFourthPartCarouselDivHeading">
-                        John Doe
+                        Rajesh Kumar
                       </h5>
                       <p className="landingpageFourthPartCarouselDivHeading">
                         <i className="fas fa-quote-left pe-2" />
-                        This is a sample testimonial content for testing
-                        purposes. It gives an idea of how the actual content
-                        will look like.
+                        This CRM has completely transformed how we manage our
+                        sales process. The lead management feature is especially
+                        useful, helping us track potential customers and
+                        increase our conversion rate by 25%
                       </p>
                     </div>
                   </div>
@@ -270,12 +278,14 @@ const LandingPage = () => {
                   <div className="row d-flex justify-content-center">
                     <div className="col-lg-8">
                       <h5 className="mb-3 landingpageFourthPartCarouselDivHeading">
-                        Jane Smith
+                        Anita Verma
                       </h5>
                       <p className=" landingpageFourthPartCarouselDivHeading">
-                        <FaQuoteLeft />
-                        Another sample testimonial to showcase the carousel
-                        functionality with multiple items.
+                        {/* <FaQuoteLeft /> */}
+                        The integration capabilities of this CRM software have
+                        been a game-changer for us. We've seamlessly connected
+                        our email marketing and call management systems, which
+                        has greatly improved our customer engagement.
                       </p>
                     </div>
                   </div>
