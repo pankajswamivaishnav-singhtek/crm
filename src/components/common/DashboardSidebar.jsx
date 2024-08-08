@@ -347,6 +347,7 @@ const DashboardSidebar = ({ showSidebarSmallScreen, setIsSidebar }) => {
                         src="https://th.bing.com/th/id/OIP.Soqtvc8GbISKlazg81TPigHaFy?w=213&h=180&c=7&r=0&o=5&pid=1.7"
                         alt="user_img"
                         className="img-fluid rounded rounded-pill d-lg-none d-block"
+                        loading="lazy"
                       />
                     </div>
                     <div className="sidebar_navbar_right_menu ">

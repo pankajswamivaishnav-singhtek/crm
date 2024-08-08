@@ -42,7 +42,8 @@ import UpdateProfile from "../pages/UpdateProfile";
 import CreatedUser from "../pages/CreatedUser";
 import RoleAndPermission from "../pages/RoleAndPermission";
 import LandingPage from "../pages/LandingPage";
-
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
 //Import Validation Route
 import ValidateRoute from "./ValidateRoute";
 import ErrorPage from "../pages/ErrorPage";
@@ -349,6 +350,8 @@ const AllRoutes = () => {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
       <Route path="/update-profile" element={<UpdateProfile />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/contact-us" element={<ContactUs />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

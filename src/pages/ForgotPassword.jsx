@@ -62,6 +62,9 @@ const ForgotPassword = () => {
       <div className="row">
         {/* Left Main Div Start*/}
         <div className="col-xl-6 col-md-6 col-sm-12">
+          <h2 className="login_logo">
+            <span>C</span>RM
+          </h2>
           <div className="container signup_left_container forgot_left_container">
             <div id="signup_left_mainDiv" className="forgot_left_mainDiv">
               <form onSubmit={handleSubmit}>
@@ -152,6 +155,7 @@ const ForgotPassword = () => {
               src={forgotPasswordImg}
               alt="forgotPassword_img"
               className="img-fluid"
+              loading="lazy"
             />
           </div>
         </div>

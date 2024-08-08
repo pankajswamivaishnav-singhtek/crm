@@ -127,12 +127,19 @@ export const signupUser = async (userData, setShowToast, tokenId) => {
         },
       }
     );
-    // Show success message in toast
-    setShowToast({ success: true, message: "Sign up successful." });
-    console.log("Signup", response);
-    return response;
+    if (response.status === 200) {
+      // Show success message in toast
+      setShowToast({ success: true, message: "Sign up successful." });
+      return response;
+    } else if (response.status === 203) {
+      // Show error message in toast
+      setShowToast({ success: false, message: response?.data?.message });
+      console.log("resss", response.status);
+      return response;
+    }
   } catch (error) {
     const { message } = error.response.data;
+    console.log("error", error);
     // Show error message in toast
     setShowToast({ success: false, message });
   }
@@ -158,13 +165,13 @@ export const otpVerification = async (userData, setShowToast, tokenId) => {
     if (response?.data?.status === 200) {
       setShowToast({ success: true, message: "signup successfully" });
       localStorage.setItem("users", JSON.stringify(response.data));
+      return response;
     } else {
       setShowToast({
         success: true,
         message: "InCorrect Otp ! Please Try Again",
       });
     }
-    return response;
   } catch (error) {
     const { message } = error.response.data;
     console.log(message);
@@ -172,15 +179,20 @@ export const otpVerification = async (userData, setShowToast, tokenId) => {
 };
 
 // Resend Otp Post Api
-export const resendOtp = async (email) => {
+export const resendOtp = async (email, setShowToast) => {
   try {
     console.log("email aaya", email);
     const response = await axios.post(RESEND_OTP_URL + email);
     console.log("resnet url", RESEND_OTP_URL + email);
-    return response;
+    if (response.status === 200) {
+      setShowToast({ success: true, message: "Resend Otp." });
+      return response;
+    } else {
+      setShowToast({ success: false, message: "Server Error." });
+    }
   } catch (error) {
-    const { message } = error.response.data;
-    console.log(message);
+    setShowToast({ success: false, message: "Server Error." });
+    console.log(error);
   }
 };
 
@@ -417,11 +429,19 @@ export const sendRoleModulePermissions = async (
         },
       }
     );
-    setShowToast({
-      success: true,
-      message: "Save Role & Permission Successfully",
-    });
-    return response;
+    if (response.status === 200) {
+      setShowToast({
+        success: true,
+        message: "Save Role & Permission Successfully",
+      });
+      return response;
+    }
+    if (response.status === 206) {
+      setShowToast({
+        success: false,
+        message: "Please Select Role OR Permissions.",
+      });
+    }
   } catch (error) {
     const message = error?.response?.data;
     console.log("Error: " + message);
@@ -776,11 +796,12 @@ export const verifyLeads = async (leadId, setShowToast, tokenId) => {
     };
     const response = await axios.post(VERIFY_LEADS_URL + leadId, {}, config);
     console.log("verified lead response", response);
-    if (response) {
+
+    if (response.status === 200 && leadId.length > 0) {
       // Show success message in toast
       setShowToast({ success: true, message: "Verify Successfully " });
+      return response;
     }
-    return response;
   } catch (error) {
     const message = error?.response?.data;
     return message;

@@ -195,7 +195,7 @@ const ResetPassword = () => {
         {/* Right Main Div */}
         <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
           <div className="signup_right_mainDiv">
-            <img src={resetImg} alt="resetPassword_img" className="img-fluid" />
+            <img src={resetImg} alt="resetPassword_img" className="img-fluid" loading="lazy"/>
           </div>
         </div>
       </div>

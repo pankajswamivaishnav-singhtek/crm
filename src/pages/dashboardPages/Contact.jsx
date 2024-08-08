@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 // React Icons
 import { MdAdd } from "react-icons/md";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsTrash } from "react-icons/bs";
 import { TbFileDownload } from "react-icons/tb";
 import ContactRightSectionTable from "../../components/ContactRightSectionTable";
@@ -17,6 +16,7 @@ import {
 } from "../../controller/fetchApi";
 // React Router Dom
 import { Link } from "react-router-dom";
+import Pagination from "../../components/Pagination";
 const Contact = () => {
   //  Get Permission from app.js
   const { contactsPermission } = useContext(permissionContext);
@@ -62,36 +62,6 @@ const Contact = () => {
       await downloadContacts(uid, setShowToast, tokenId);
     } catch (error) {
       console.log("Contact Downloaded:", error);
-    }
-  };
-  // Pagination Function Code------
-  const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllContactData?.totalPages || 1;
-  const pagesToShow = 6;
-  const handleNextPageClick = () => {
-    const newPageNo = pageNo + 1;
-    if (newPageNo < totalPages) {
-      setPageNo(newPageNo);
-      if (newPageNo >= pageRangeStart + pagesToShow) {
-        setPageRangeStart(pageRangeStart + pagesToShow);
-      }
-    }
-  };
-  const handlePreviousPageClick = () => {
-    const newPageNo = pageNo - 1;
-    if (newPageNo >= 0) {
-      setPageNo(newPageNo);
-      if (newPageNo < pageRangeStart) {
-        setPageRangeStart(pageRangeStart - pagesToShow);
-      }
-    }
-  };
-  const handlePageClick = (index) => {
-    setPageNo(index);
-    if (index >= pageRangeStart + pagesToShow) {
-      setPageRangeStart(pageRangeStart + pagesToShow);
-    } else if (index < pageRangeStart) {
-      setPageRangeStart(pageRangeStart - pagesToShow);
     }
   };
 
@@ -183,7 +153,7 @@ const Contact = () => {
               thirdHead: "Contact",
               fourthHead: "Address",
               fifthHead: "View",
-              sixthHead: "Account Action",
+              sixthHead: "Create Account",
               seventhHead: "Lead Id",
             }}
             redirectLink="/contact-details"
@@ -194,58 +164,11 @@ const Contact = () => {
           />
         </div>
         {/* Pagination Div */}
-        <div className="dashboard_leads_pagination_div">
-          <nav aria-label="...">
-            <ul className="pagination">
-              {/* Previous page button */}
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a
-                  className="page-link"
-                  href="#!"
-                  onClick={handlePreviousPageClick}
-                >
-                  <IoIosArrowBack />
-                </a>
-              </li>
-
-              {/* Render page numbers */}
-              {Array.from({ length: pagesToShow }, (_, index) => {
-                const pageIndex = pageRangeStart + index;
-                return (
-                  pageIndex < totalPages && (
-                    <li
-                      key={pageIndex}
-                      className={`page-item ${
-                        pageIndex === pageNo ? "active" : ""
-                      } dashboard_leads_pagination_pageItem`}
-                    >
-                      <a
-                        className="page-link"
-                        href="#!"
-                        onClick={() => handlePageClick(pageIndex)}
-                      >
-                        {pageIndex + 1 < 10
-                          ? `0${pageIndex + 1}`
-                          : pageIndex + 1}
-                      </a>
-                    </li>
-                  )
-                );
-              })}
-
-              {/* Next page button */}
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a
-                  className="page-link"
-                  href="#!"
-                  onClick={handleNextPageClick}
-                >
-                  <IoIosArrowForward className="btn_IoIosArrowForward" />
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <Pagination
+          data={getAllContactData}
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+        />
         <Toast showToast={showToast} setShowToast={setShowToast} />
       </div>
     </div>

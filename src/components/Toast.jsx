@@ -23,7 +23,9 @@ const Toast = ({ showToast, setShowToast }) => {
             aria-atomic="true"
           >
             <div className="toast-header create_lead_toast_header">
-              <strong className="me-auto">Form Submitted Successfully</strong>
+              <strong className="me-auto">
+                {showToast.success ? "Success" : "Error"}
+              </strong>
               <button
                 type="button"
                 className="btn-close"

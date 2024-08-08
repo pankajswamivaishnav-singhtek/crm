@@ -4,6 +4,7 @@ import "../styles/updateProfile.css";
 import { useFormik } from "formik";
 import { updateProfileFormSchema } from "../schema/FormValidation";
 import { updateProfile, uploadUserImg } from "../controller/fetchApi";
+import Toast from "../components/Toast";
 const UpdateProfile = ({ getCurrentUserData }) => {
   // Form Handle & Validations
   const formik = useFormik({
@@ -26,6 +27,13 @@ const UpdateProfile = ({ getCurrentUserData }) => {
       }
     },
   });
+
+  // Function to handle input focus
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    formik.setFieldTouched(name, true);
+  };
+
   // Toast Handling
   const [showToast, setShowToast] = useState(false);
   const hideToast = () => {
@@ -96,7 +104,8 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                     ? `http://192.168.1.5:8080${getCurrentUserData?.image}`
                     : "http://bootdey.com/img/Content/avatar/avatar1.png"
                 }
-                alt=""
+                alt="random img"
+                loading="lazy"
               />
               <div className="mb-3">
                 {/* File input */}
@@ -139,12 +148,14 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     name="userName"
-                    placeholder={
-                      formik.touched.userName && formik.errors.userName
-                        ? formik.errors.userName
-                        : null
-                    }
+                    placeholder="Enter Username"
+                    onFocus={handleFocus}
                   />
+                  {formik.touched.userName && formik.errors.userName && (
+                    <small className="text-danger">
+                      {formik.errors.userName}
+                    </small>
+                  )}
                 </div>
                 {/* Form Row*/}
                 <div className="row gx-3 mb-3">
@@ -161,12 +172,14 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       name="firstName"
-                      placeholder={
-                        formik.touched.firstName && formik.errors.firstName
-                          ? formik.errors.firstName
-                          : null
-                      }
+                      placeholder="Enter Firstname"
+                      onFocus={handleFocus}
                     />
+                    {formik.touched.firstName && formik.errors.firstName && (
+                      <small className="text-danger">
+                        {formik.errors.firstName}
+                      </small>
+                    )}
                   </div>
                   {/* Form Group (last name)*/}
                   <div className="col-md-6">
@@ -181,12 +194,14 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       name="lastName"
-                      placeholder={
-                        formik.touched.lastName && formik.errors.lastName
-                          ? formik.errors.lastName
-                          : null
-                      }
+                      placeholder="Enter Lastname"
+                      onFocus={handleFocus}
                     />
+                    {formik.touched.lastName && formik.errors.lastName && (
+                      <small className="text-danger">
+                        {formik.errors.lastName}
+                      </small>
+                    )}
                   </div>
                 </div>
                 {/* Form Row        */}
@@ -204,12 +219,14 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       name="email"
-                      placeholder={
-                        formik.touched.email && formik.errors.email
-                          ? formik.errors.email
-                          : null
-                      }
+                      placeholder="Enter Email"
+                      onFocus={handleFocus}
                     />
+                    {formik.touched.email && formik.errors.email && (
+                      <small className="text-danger">
+                        {formik.errors.email}
+                      </small>
+                    )}
                   </div>
                   {/* Form Group (location)*/}
                   <div className="col-md-6">
@@ -224,12 +241,14 @@ const UpdateProfile = ({ getCurrentUserData }) => {
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
                       name="phone"
-                      placeholder={
-                        formik.touched.phone && formik.errors.phone
-                          ? formik.errors.phone
-                          : null
-                      }
+                      placeholder="Enter Number"
+                      onFocus={handleFocus}
                     />
+                    {formik.touched.phone && formik.errors.phone && (
+                      <small className="text-danger">
+                        {formik.errors.phone}
+                      </small>
+                    )}
                   </div>
                 </div>
 
@@ -290,29 +309,7 @@ const UpdateProfile = ({ getCurrentUserData }) => {
         </div>
       </div>
       {/* Toast */}
-      {showToast.message && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-          <div
-            className="toast show create_lead_toast"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header create_lead_toast_header">
-              <strong className="me-auto">
-                {/* Form Submitted Successfully */}
-                {showToast.success ? "Success" : "Error"}
-              </strong>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => setShowToast({ success: false, message: "" })}
-              />
-            </div>
-            <div className="toast-body">{showToast.message}</div>
-          </div>
-        </div>
-      )}
+      <Toast showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 };

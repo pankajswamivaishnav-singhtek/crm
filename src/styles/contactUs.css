@@ -1,0 +1,88 @@
+.contact-us-page {
+  background-color: #f4f9ff;
+}
+.contact-us-first-part {
+  background-image: url(../images/contactUs.webp);
+  height: 50vh;
+  width: 100vw;
+  background-size: cover;
+  padding: 50px 0 0 0 !important;
+}
+
+.contact-us-page-second-part {
+  margin: 100px auto;
+}
+
+.contact-us-page-second-part > .container {
+  padding: 60px !important;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+}
+
+.contact-us-input-main-div {
+  margin: 20px 0;
+}
+
+.contact-us-input-fullName {
+  position: relative;
+  bottom: 32%;
+  left: 95%;
+}
+.contact-us-input-email {
+  position: relative;
+  bottom: 32%;
+  left: 95%;
+}
+
+.contact-us-input {
+  padding: 10px;
+  border: 1px solid silver;
+  border-radius: 10px;
+}
+
+.contact-us-input:focus {
+  outline: none;
+}
+#crm-textarea {
+  outline: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+.contact-us-term-condition > span {
+  color: #ff7006;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contact-us-form-btn {
+  background: linear-gradient(101.13deg, #101861 -53.88%, #2031c7 105.8%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+}
+
+@media screen and (max-width: 1024px)  {
+  .contact-us-input-fullName {
+    left: 82%;
+    bottom: 32%;
+  }
+  .contact-us-input-email {
+    bottom: 32%;
+    left: 85%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact-us-input-main-div {
+    margin: 0px 0;
+  }
+  .contact-us-input-fullName {
+    left: 90%;
+    bottom: 32%;
+  }
+  .contact-us-input-email {
+    bottom: 32%;
+    left: 90%;
+  }
+}

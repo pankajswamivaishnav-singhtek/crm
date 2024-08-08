@@ -280,6 +280,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
                     src="https://th.bing.com/th/id/OIP.Soqtvc8GbISKlazg81TPigHaFy?w=213&h=180&c=7&r=0&o=5&pid=1.7"
                     alt="admin_img"
                     className="img-fluid rounded-pill navbar_right_menu_img"
+                    loading="lazy"
                   />
                 </div>
               </li>

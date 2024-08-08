@@ -19,8 +19,11 @@ export const signupFormSchema = Yup.object({
 export const updateProfileFormSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
-  // email: Yup.string().email("Invalid email").required("Email is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
   userName: Yup.string().required("Username is required"),
+  phone: Yup.number()
+    .required("Phone number is required")
+    .typeError("Phone must be a number"),
 });
 
 // Login Form Schema

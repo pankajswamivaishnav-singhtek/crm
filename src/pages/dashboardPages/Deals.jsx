@@ -3,7 +3,6 @@ import React, { useState, useCallback, useEffect, useContext } from "react";
 import "../../styles/dashboardCss/calls.css";
 //Import React Icons
 import { MdAdd } from "react-icons/md";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { TbFileDownload } from "react-icons/tb";
@@ -26,6 +25,7 @@ import {
   downloadDeal,
   uploadDeals,
 } from "../../controller/fetchApi";
+import Pagination from "../../components/Pagination";
 const Deals = () => {
   // Get Deals Permission
   const { dealsPermission } = useContext(permissionContext);
@@ -108,36 +108,6 @@ const Deals = () => {
       } catch (error) {
         console.log("LeadRightSection Failed Uploading:", error);
       }
-    }
-  };
-  // Pagination Function ------
-  const [pageRangeStart, setPageRangeStart] = useState(0);
-  const totalPages = getAllDealsData?.totalPages || 1;
-  const pagesToShow = 6;
-  const handleNextPageClick = () => {
-    const newPageNo = pageNo + 1;
-    if (newPageNo < totalPages) {
-      setPageNo(newPageNo);
-      if (newPageNo >= pageRangeStart + pagesToShow) {
-        setPageRangeStart(pageRangeStart + pagesToShow);
-      }
-    }
-  };
-  const handlePreviousPageClick = () => {
-    const newPageNo = pageNo - 1;
-    if (newPageNo >= 0) {
-      setPageNo(newPageNo);
-      if (newPageNo < pageRangeStart) {
-        setPageRangeStart(pageRangeStart - pagesToShow);
-      }
-    }
-  };
-  const handlePageClick = (index) => {
-    setPageNo(index);
-    if (index >= pageRangeStart + pagesToShow) {
-      setPageRangeStart(pageRangeStart + pagesToShow);
-    } else if (index < pageRangeStart) {
-      setPageRangeStart(pageRangeStart - pagesToShow);
     }
   };
 
@@ -259,7 +229,7 @@ const Deals = () => {
               fifthHead: "Contact Name",
               sixthHead: "Stage",
               seventhHead: "View",
-              eighthHead: "Action",
+              eighthHead: "Create Account",
               ninethHead: "LeadId",
             }}
             redirectLink="/deal-details"
@@ -269,58 +239,11 @@ const Deals = () => {
           />
         </div>
         {/* Pagination Div */}
-        <div className="dashboard_leads_pagination_div">
-          <nav aria-label="...">
-            <ul className="pagination">
-              {/* Previous page button */}
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a
-                  className="page-link"
-                  href="#!"
-                  onClick={handlePreviousPageClick}
-                >
-                  <IoIosArrowBack />
-                </a>
-              </li>
-
-              {/* Render page numbers */}
-              {Array.from({ length: pagesToShow }, (_, index) => {
-                const pageIndex = pageRangeStart + index;
-                return (
-                  pageIndex < totalPages && (
-                    <li
-                      key={pageIndex}
-                      className={`page-item ${
-                        pageIndex === pageNo ? "active" : ""
-                      } dashboard_leads_pagination_pageItem`}
-                    >
-                      <a
-                        className="page-link"
-                        href="#!"
-                        onClick={() => handlePageClick(pageIndex)}
-                      >
-                        {pageIndex + 1 < 10
-                          ? `0${pageIndex + 1}`
-                          : pageIndex + 1}
-                      </a>
-                    </li>
-                  )
-                );
-              })}
-
-              {/* Next page button */}
-              <li className="page-item dashboard_leads_pagination_pageItem">
-                <a
-                  className="page-link"
-                  href="#!"
-                  onClick={handleNextPageClick}
-                >
-                  <IoIosArrowForward className="btn_IoIosArrowForward" />
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <Pagination
+          data={getAllDealsData}
+          pageNo={pageNo}
+          setPageNo={setPageNo}
+        />
         {/* File Upload Modal */}
         <>
           <div

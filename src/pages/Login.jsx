@@ -88,10 +88,13 @@ const Login = () => {
       <div className="row">
         {/* Left Main Div Start*/}
         <div className="col-xl-6 col-md-6 col-sm-12">
+          <h2 className="login_logo">
+            <span>C</span>RM
+          </h2>
           <div className="container signup_left_container login_left_container">
             <div id="signup_left_mainDiv" className="login_left_mainDiv">
               <form onSubmit={handleSubmit}>
-                <Link to="/signup">
+                <Link to="/">
                   <IoArrowBackCircleOutline className="login_back_button" />
                 </Link>
                 <p className=" signup_text_in_signup_left_mainDiv">Log in</p>
@@ -254,7 +257,7 @@ const Login = () => {
                   >
                     <div className="toast-header create_lead_toast_header">
                       <strong className="me-auto">
-                        {showToast.success ? "Success" : "Error"}
+                        {showToast.success ? "Failed" : "Error"}
                       </strong>
                       <button
                         type="button"
@@ -277,7 +280,7 @@ const Login = () => {
         {/* Right Main Div */}
         <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
           <div className="signup_right_mainDiv">
-            <img src={loginImg} alt="signin_random_img" className="img-fluid" />
+            <img src={loginImg} alt="signin_random_img" className="img-fluid" loading="lazy"/>
           </div>
         </div>
       </div>

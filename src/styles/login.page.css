@@ -2,6 +2,19 @@
   flex-direction: column;
 } */
 
+.login_logo {
+  display: inline-block;
+  position: relative;
+  top: 10%;
+  left: 45%;
+  color: #ff6e3f;
+  font-weight: bold;
+}
+
+.login_logo span {
+  color: black;
+}
+
 .login_left_mainDiv {
   display: flex;
   align-items: center;
@@ -69,11 +82,18 @@
   .login_page_input {
     width: 35vw;
   }
+  .login_logo {
+    top: 13%;
+    left: 45%;
+  }
 }
 
 @media screen and (max-width: 426px) {
   .login_page_input {
     width: 60vw;
+  }
+  .login_back_button{
+    margin: -90px 0 -40px 0;
   }
 }
 

@@ -3,7 +3,7 @@ import UpdateRoleAndPermission from "../pages/UpdateRoleAndPermission";
 // React Router
 import { Link } from "react-router-dom";
 // React Icons
-import { TfiWrite } from "react-icons/tfi";
+
 import { TiUserDelete } from "react-icons/ti";
 // Import Toast
 import Toast from "./Toast";
@@ -47,6 +47,7 @@ const CreatedUserTable = ({ tblHead, data, getAllUser, redirectLink }) => {
       console.log("user not deleted in superAdmin section 2", error);
     }
   };
+  console.log("data", data);
   return (
     <div className="LeadRightSectionTable_body table-responsive">
       <table className="table  ">
@@ -86,38 +87,45 @@ const CreatedUserTable = ({ tblHead, data, getAllUser, redirectLink }) => {
                 <td className="text-center">{user?.mobile}</td>
                 <td>{user?.id}</td>
                 <td className="text-center">
-                  <Link
-                    to={redirectLink}
-                    className="Link-button-leads"
-                    state={{ userData: user }}
-                  >
-                    <TfiWrite
-                      className="fs-4"
-                      style={{ color: "rgba(145, 155, 250, 1)" }}
-                    />
-                  </Link>
-                  &nbsp; &nbsp;
-                  <Link
-                    className="Link-button-leads"
-                    data-bs-toggle="modal"
-                    data-bs-target="#updateRoleAndPermissionModal"
-                  >
-                    <button
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={() => {
-                        handleUpdateRoleAndPermission(user);
-                      }}
+                  {user?.role == null ? (
+                    <Link
+                      to={redirectLink}
+                      className="Link-button-leads"
+                      state={{ userData: user }}
                     >
-                      Update
-                    </button>
-                    {/* <BsPencilSquare
+                      {/* <TfiWrite
+                        className="fs-4"
+                        style={{ color: "rgba(145, 155, 250, 1)" }}
+                      /> */}
+                      <button
+                        className="btn btn-outline-primary btn-sm"
+                      >
+                        Write 
+                      </button>
+                    </Link>
+                  ) : (
+                    <Link
+                      className="Link-button-leads"
+                      data-bs-toggle="modal"
+                      data-bs-target="#updateRoleAndPermissionModal"
+                    >
+                      <button
+                        className="btn btn-outline-primary btn-sm"
+                        onClick={() => {
+                          handleUpdateRoleAndPermission(user);
+                        }}
+                      >
+                        Update
+                      </button>
+                      {/* <BsPencilSquare
                       className="fs-4"
                       style={{ color: "rgba(145, 155, 250, 1)" }}
                       onClick={() => {
                         handleUpdateRoleAndPermission(user);
                       }}
                     /> */}
-                  </Link>
+                    </Link>
+                  )}
                 </td>
                 <td className="text-center">
                   <TiUserDelete

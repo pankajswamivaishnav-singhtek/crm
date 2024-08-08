@@ -9,6 +9,7 @@ import {
   getModulePermissions,
   updateRoleModulePermissions,
 } from "../controller/fetchApi";
+import Toast from "../components/Toast";
 
 const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
   // Get User Data From user page for permissions
@@ -16,14 +17,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
   // const userData = location?.state?.userData;
   // Toast Code Start -----
   const [showToast, setShowToast] = useState(false);
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-  if (showToast) {
-    hideToast();
-  }
+
   // Roles , Modules & Permissions import for UI purposes
   const [roles, setRoles] = useState();
   const [module, setModules] = useState([]);
@@ -275,26 +269,7 @@ const UpdateRoleAndPermission = ({ currentUser, defaultValue }) => {
         </div>
       </form>
       {/* Toast */}
-      {showToast && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-          <div
-            className="toast show create_lead_toast"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header create_lead_toast_header">
-              <strong className="me-auto">Form Submitted Successfully</strong>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => setShowToast({ success: false, message: "" })}
-              />
-            </div>
-            <div className="toast-body">{showToast.message}</div>
-          </div>
-        </div>
-      )}
+      <Toast showToast={showToast} setShowToast={setShowToast} />
     </div>
   );
 };

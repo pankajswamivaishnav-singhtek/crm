@@ -62,6 +62,10 @@ const OtpVerification = () => {
           tokenId
         );
         console.log("verifySuccessFully", verifySuccessFully);
+        if (verifySuccessFully.status === 200) {
+          navigate("/super-admin");
+          resetForm();
+        }
         navigate("/super-admin");
         // if (verifySuccessFully?.data?.status === 200) {
         //   navigate("/super-admin");
@@ -74,7 +78,7 @@ const OtpVerification = () => {
     });
   //  Resend Otp Function
   const resendOtpAgain = async () => {
-    await resendOtp(gmail);
+    await resendOtp(gmail, setShowToast);
   };
 
   useEffect(() => {
@@ -183,7 +187,7 @@ const OtpVerification = () => {
         {/* Right Main Div */}
         <div className="col-xl-6 col-md-6 col-sm-12 signup_right_bodyDiv">
           <div className="signup_right_mainDiv">
-            <img src={otpImg} alt="otp_img" className="img-fluid" />
+            <img src={otpImg} alt="otp_img" className="img-fluid" loading="lazy"/>
           </div>
         </div>
         {/* Toast */}

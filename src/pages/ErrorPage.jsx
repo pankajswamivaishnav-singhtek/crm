@@ -7,7 +7,7 @@ const ErrorPage = () => {
   return (
     <div className="error_404_page">
       <div className="error_div">
-        <img src={errorImg} alt="Error Img" className="img-fluid " />
+        <img src={errorImg} alt="Error Img" className="img-fluid " loading="lazy"/>
         <p className="error_page_heading">Page Not Found</p>
         <p className="error_page_text">
           <span>Oops !</span> May be search wrong url
@@ -16,7 +16,7 @@ const ErrorPage = () => {
           <Link
             // to="/dashboard"
             className="error_page_btn_link"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(-2)}
           >
             Back Home
           </Link>

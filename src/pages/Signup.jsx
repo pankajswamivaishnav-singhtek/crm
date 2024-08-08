@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 // Import Api Function
 import { signupUser } from "../controller/fetchApi";
+import Toast from "../components/Toast";
 
 // Main Component Function
 const Signup = () => {
@@ -28,16 +29,6 @@ const Signup = () => {
   const navigate = useNavigate();
   // Toast
   const [showToast, setShowToast] = useState({ success: false, message: "" });
-
-  // Function to hide the toast after 3 seconds
-  const hideToast = () => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 3000);
-  };
-  if (showToast) {
-    hideToast();
-  }
   // Form Handle & Validations
   const {
     values,
@@ -60,12 +51,9 @@ const Signup = () => {
 
     validationSchema: signupFormSchema,
     onSubmit: async (values, { resetForm }) => {
-      console.log("submit token", tokenId);
       if (errors.confirmPassword) {
         setShowToast({ success: true, message: "password must match" });
       }
-      console.log("-----", values);
-      navigate("/otpverification");
       // Set Data in redux store
       dispatch(
         setUserData({
@@ -73,9 +61,11 @@ const Signup = () => {
           name: `${values.firstName} ${values.lastName}`,
         })
       );
-      await signupUser(values, setShowToast, tokenId);
-
-      resetForm();
+      const result = await signupUser(values, setShowToast, tokenId);
+      if (result.status === 200) {
+        navigate("/otpverification");
+        resetForm();
+      }
     },
   });
   // Function to handle input focus
@@ -380,31 +370,7 @@ const Signup = () => {
                   </div>
                 </form>
                 {/* Toast */}
-                {showToast.message && (
-                  <div className="toast-container position-fixed bottom-0 end-0 p-3 ">
-                    <div
-                      className="toast show create_lead_toast"
-                      role="alert"
-                      aria-live="assertive"
-                      aria-atomic="true"
-                    >
-                      <div className="toast-header create_lead_toast_header">
-                        <strong className="me-auto">
-                          {/* Form Submitted Successfully */}
-                          {showToast.success ? "Success" : "Error"}
-                        </strong>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          onClick={() =>
-                            setShowToast({ success: false, message: "" })
-                          }
-                        />
-                      </div>
-                      <div className="toast-body">{showToast.message}</div>
-                    </div>
-                  </div>
-                )}
+                <Toast showToast={showToast} setShowToast={setShowToast} />
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@
   width: 100%;
   padding: 50px 0;
   /* position: fixed; */
-  background-image: url(../images/landingPage.png);
+  background-image: url(../images/landingPage.webp);
 }
 
 .landingPageFirstPartLoginBtnDiv {
@@ -141,6 +141,22 @@
   margin: 100px auto;
 }
 
+.costume-card {
+  box-shadow: 2px 4px 6px rgba(123, 235, 255, 0.3),
+    0 6px 8px rgba(123, 185, 255, 0.2), 0 8px 12px rgba(123, 135, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.costume-card:hover {
+  /* box-shadow: 4px 5px 16px rgba(123, 235, 255, 0.5); */
+  box-shadow: 2px 4px 6px rgba(123, 235, 255, 0.3),
+    /* Lightest shadow */ 0 6px 8px rgba(123, 185, 255, 0.2),
+    /* Medium shadow */ 0 8px 12px rgba(123, 135, 255, 0.1); /* Darkest shadow */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
 .landingPageThirdPartCardIcon {
   margin: 15px auto;
   color: #9cbbff;
@@ -156,7 +172,7 @@
 .landingpageFourthPartMainDiv {
   border-radius: 22px;
   opacity: 1;
-  background-image: url(../images/ourCostumer.jpg);
+  background-image: url(../images/ourCostumer.webp);
   position: relative;
   margin-bottom: 100px;
   background-size: cover;
@@ -173,8 +189,26 @@
   top: 0px;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 22px;
+}
+
+.overlay-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+
+.overlay-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.5);  */
+  border-radius: 22px;
+  z-index: -1; /* Place behind content */
 }
 
 .landingpageFourthPartMainDivHeading {
@@ -217,6 +251,12 @@
 
 .landingpageFourthPartCarouselDivHeading {
   color: white;
+}
+
+/* Footer */
+.Footer_links {
+  text-decoration: none;
+  color: inherit;
 }
 
 @media screen and (max-width: 576px) {
@@ -343,6 +383,7 @@
   .landingPageTryBtn {
     margin-top: 90px;
   }
+
   .landingPageFooterList {
     display: flex;
     flex-direction: column;
@@ -375,8 +416,6 @@
 
 /* Footer */
 .landingPageFooter {
-  /* height: 25vh; */
-  /* background-image: url(../images//landingPageFooter.png); */
   background: linear-gradient(#333c8d, #3647df);
   background-color: #333c8d;
 }
