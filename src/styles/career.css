@@ -1,0 +1,112 @@
+.career-page {
+  background-color: #f9fbff;
+  height: 100%;
+}
+
+.career-first-part {
+  background-image: url(../images/career.webp);
+  height: 50vh;
+  width: 100vw;
+  background-size: cover;
+  padding: 50px 0 0 0 !important;
+}
+
+.career-second-part {
+  margin: 100px auto;
+}
+
+.career-second-part-heading {
+  font-family: Roboto;
+  font-weight: 400;
+  text-align: center;
+}
+
+.career-second-part-img {
+  height: 300px;
+  padding: auto;
+}
+
+.career-second-part-para {
+  font-family: Roboto;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.career-third-part {
+  margin: 100px auto;
+}
+
+.career-page-third-part-position {
+  display: flex;
+  justify-content: space-between;
+}
+.career-page-third-part-position > p {
+  font-family: Roboto;
+  font-weight: 500;
+}
+.career-page-third-part-list {
+  font-family: Roboto;
+  font-weight: 400;
+  color: #78848d;
+}
+.career-page-third-part-btn {
+  background-color: #5e6eff;
+  border: 1px solid #d9ddfc;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-family: Roboto;
+}
+
+.career-page-third-part-card-div {
+  margin: 40px auto;
+}
+
+.career-page-third-part-card {
+  border: 1px solid #d7dbff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  background-color: #ffff;
+  font-size: small;
+  box-sizing: border-box;
+}
+.career-fourth-part {
+  margin: 0 auto 100px auto;
+}
+
+.career-fourth-part-heading {
+  font-family: Roboto;
+  font-weight: 600;
+  color: #0f0f0f;
+  text-align: center;
+}
+
+.career-fourth-part-para {
+  font-family: Roboto;
+  font-weight: 400;
+  text-align: center;
+}
+
+.career-fourth-part-card-para {
+  font-family: Roboto !important;
+  font-weight: 400 !important;
+  color: #747474;
+  font-size: small;
+}
+
+.career-fourth-part-card {
+  border: 1px solid white !important;
+  box-shadow: 2px 3px 12px 0px #5869ff1c !important;
+}
+
+.career-fourth-part-recruitment {
+  margin: 20px auto !important;
+}
+
+.career-fourth-part-card {
+  height: 20vh;
+}
+
+.career-page-fourth-part-icons {
+  color: #4471bb;
+}

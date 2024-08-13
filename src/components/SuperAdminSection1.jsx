@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Signup from "../pages/Signup";
 // import SignupForm from "../pages/SignupForm";
 // React Router
@@ -9,15 +9,36 @@ import { SiGoogleads } from "react-icons/si";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { MdAssignmentTurnedIn } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
-
+// Import api function from controller
+import { getCurrentUser } from "../controller/fetchApi";
 const SuperAdminSection1 = ({ totalLeads, allRoles }) => {
+  const [getCurrentUserData, setCurrentUserData] = useState();
+  // Get User details from local storage
+  const userIdTokenData = JSON.parse(localStorage.getItem("user"));
+  const tokenId = userIdTokenData?.data?.token;
+  const uid = null;
+  //  Get Current User Data OR Api
+  const getUser = useCallback(async () => {
+    try {
+      const res = await getCurrentUser(uid, tokenId);
+      if (res) {
+        setCurrentUserData(res);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [tokenId]);
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
+
   return (
     <div className="super_admin_first_div ">
       <div className="dashboard_username_div ">
         {/* Left Div */}
         <div className="super_admin_first_section_left_div">
-          <p className="super_admin_first_section_user_name">{`Welcome Pankaj Swami Vaishnav`}</p>
-          <p className="super_admin_first_section_user_name2">{`username pankaj@gmail.com`}</p>
+          <p className="super_admin_first_section_user_name">{`Welcome ${getCurrentUserData?.fullName}`}</p>
+          <p className="super_admin_first_section_user_name2">{`username ${getCurrentUserData?.userName}`}</p>
         </div>
         {/* Right Div */}
         <div className="dashboard_leads_create_btn_div super_admin_first_section_right_div">

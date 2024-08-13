@@ -47,7 +47,7 @@ const DashboardNavbar = ({ setIsSidebar, setShowSidebarSmallScreen }) => {
   //  Get Current User Data
   const getUser = useCallback(async () => {
     try {
-      const res = await getCurrentUser(tokenId);
+      const res = await getCurrentUser(uid, tokenId);
       setCurrentUserData(res);
     } catch (error) {
       console.log(error);

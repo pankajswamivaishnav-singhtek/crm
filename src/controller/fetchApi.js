@@ -674,15 +674,23 @@ export const pipelineDeals = async (uid, tokenId) => {
 };
 
 // Get Current User Api
-export const getCurrentUser = async function (tokenId) {
+export const getCurrentUser = async function (uid, tokenId) {
   try {
-    const response = await axios.get(GET_CURRENT_USER_URL, {
+    let config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
-    });
+    };
+    let response;
+    if (uid) {
+      response = await axios.get(
+        `${GET_CURRENT_USER_URL}?userId=` + uid,
+        config
+      );
+    } else {
+      response = await axios.get(GET_CURRENT_USER_URL, config);
+    }
     const finalResponse = response?.data?.data;
-
     return finalResponse;
   } catch (error) {
     const message = error?.response?.data;

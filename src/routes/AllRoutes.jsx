@@ -44,6 +44,7 @@ import RoleAndPermission from "../pages/RoleAndPermission";
 import LandingPage from "../pages/LandingPage";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
+import Career from "../pages/Career";
 //Import Validation Route
 import ValidateRoute from "./ValidateRoute";
 import ErrorPage from "../pages/ErrorPage";
@@ -351,6 +352,7 @@ const AllRoutes = () => {
       <Route path="/resetpassword" element={<ResetPassword />} />
       <Route path="/update-profile" element={<UpdateProfile />} />
       <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/career" element={<Career />} />
       <Route path="/contact-us" element={<ContactUs />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>

@@ -91,7 +91,9 @@ const Signup = () => {
             <div className="container signup_left_container">
               <div id="signup_left_mainDiv">
                 <form onSubmit={handleSubmit}>
-                  <p className=" signup_text_in_signup_left_mainDiv">Sign Up</p>
+                  <p className=" signup_text_in_signup_left_mainDiv">
+                    Create User
+                  </p>
                   <div className="formGroup">
                     {/* Full Name */}
                     <div className="signup_fullname_div">
@@ -339,7 +341,7 @@ const Signup = () => {
                   {/* Submit Button */}
                   <div className="signup_submit_div">
                     <button type="submit" className=" signup_submit_button">
-                      Sign Up
+                      Create
                     </button>
                   </div>
                   {/* OR LOGIN */}

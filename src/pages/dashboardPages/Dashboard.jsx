@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-
+import { useLocation } from "react-router-dom";
 //Import CSS
 import "../../styles/dashboardCss/dashboard.css";
 // Import Component
@@ -10,8 +10,9 @@ import DashboardSection3 from "../../components/DashboardSection3";
 import { getCurrentUser } from "../../controller/fetchApi";
 
 const Dashboard = () => {
-  
-
+  // Get Specific User Id who see the dashboard
+  const location = useLocation();
+  const userId = location.state?.userId;
 
   const [getCurrentUserData, setCurrentUserData] = useState();
   // Get User details from local storage
@@ -21,7 +22,7 @@ const Dashboard = () => {
   //  Get Current User Data OR Api
   const getUser = useCallback(async () => {
     try {
-      const res = await getCurrentUser(tokenId);
+      const res = await getCurrentUser(userId, tokenId);
       if (res) {
         setCurrentUserData(res);
       }
